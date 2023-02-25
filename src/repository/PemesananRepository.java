@@ -9,5 +9,5 @@ package repository;
  * @author WINDOWS 10
  */
 public class PemesananRepository {
-    
+    public PemesananRepository(){};
 }
