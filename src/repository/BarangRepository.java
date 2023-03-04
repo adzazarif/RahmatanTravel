@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repository;
-
-import entity.Jamaah;
+import entity.Barang;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,38 +13,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.Conn;
-
 /**
  *
  * @author WINDOWS 10
  */
-public class JamaahRepository implements Repository<Jamaah>{
+public class BarangRepository implements Repository<Barang>{
     private static String tableName = User.tableName;
     @Override
-    public List<Jamaah> get() {
-        String sql = "SELECT * FROM " + tableName;
-        List<Jamaah> jamaah = new ArrayList<>();
+    public List<Barang> get() {
+            String sql = "SELECT * FROM " + tableName;
+        List<Barang> barang = new ArrayList<>();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             Statement stm = koneksi.createStatement();
             ResultSet res = stm.executeQuery(sql);
             
             while(res.next()) {
-                jamaah.add(mapToEntity(res));
+                barang.add(mapToEntity(res));
             }
         } catch (SQLException e) {
         e.printStackTrace();
         }
 
-        return jamaah;
+        return barang;
     }
 
     @Override
-    public Jamaah get(Integer id) {
-         String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
-         
-         Jamaah jamaah = new Jamaah();
-         
+    public Barang get(Integer id) {
+       String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
+
+        Barang barang = new Barang();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
@@ -57,19 +54,18 @@ public class JamaahRepository implements Repository<Jamaah>{
             }
         } catch (SQLException e) {}
 
-        return jamaah;
+        return barang; 
     }
 
     @Override
-    public boolean add(Jamaah jamaah) {
-         String sql = "INSERT INTO "+ tableName +" (`nama`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES (?, ?, ?, ?)";
+    public boolean add(Barang barang) {
+         String sql = "INSERT INTO "+ tableName +" (`nama`, `stok`, `harga`) VALUES ( ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setString(1, jamaah.getNama());
-            pst.setString(2, jamaah.getJenisKelamin());
-            pst.setString(3, jamaah.getAlamat());
-            pst.setInt(4, jamaah.getNoTelp()); 
+            pst.setString(1, barang.getNama());
+            pst.setInt(2, barang.getStok());
+            pst.setInt(3, barang.getHarga());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -79,28 +75,28 @@ public class JamaahRepository implements Repository<Jamaah>{
     }
 
     @Override
-    public boolean update(Jamaah jamaah) {
-        String sql = "INSERT INTO "+ tableName +" (`nama`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES (?, ?, ?, ?)";
-         try {
-            Connection koneksi = (Connection)Conn.configDB();
+    public boolean update(Barang barang) {
+        String sql = "UPDATE "+ tableName +" SET nama = ?, stok = ?, harga = ?, password = ? WHERE id = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setString(1, jamaah.getNama());
-            pst.setString(2, jamaah.getJenisKelamin());
-            pst.setString(3, jamaah.getAlamat());
-            pst.setInt(4, jamaah.getNoTelp()); 
-            pst.execute();
+            pst.setString(1, barang.getNama());
+            pst.setInt(2, barang.getStok());
+            pst.setInt(3, barang.getHarga());
+            pst.setInt(4, barang.getId());
+            pst.executeUpdate();
             return true;
         } catch (Exception e) {
-             e.printStackTrace();
             return false;
         }
     }
 
     @Override
     public boolean delete(int id) {
-        String sql = "DELETE FROM "+ tableName +" WHERE nik = ?";
+       String sql = "DELETE FROM "+ tableName +" WHERE id = ?";
            try {
-            Connection koneksi = (Connection)Conn.configDB();
+                 Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, id);
             pst.executeUpdate();
@@ -109,14 +105,15 @@ public class JamaahRepository implements Repository<Jamaah>{
             return false;
         }
     }
-     private Jamaah mapToEntity(ResultSet result) throws SQLException {
-        Jamaah jamaah = new Jamaah(
-                result.getInt("nik"),
-                result.getString("nama"),
-                result.getString("jenis_kelamin"),
-                result.getString("alamat"),
-                result.getString("nmr_telp")
+    
+     private Barang mapToEntity(ResultSet result) throws SQLException {
+        Barang barang = new Barang(
+            result.getInt("id"),
+            result.getString("nama"),
+            result.getInt("stok"),
+            result.getInt("harga")
         );
-        return jamaah;
+
+        return barang;
         }
 }
