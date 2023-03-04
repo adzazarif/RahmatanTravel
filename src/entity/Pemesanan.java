@@ -4,27 +4,39 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
  * @author WINDOWS 10
  */
 public class Pemesanan implements Entity{
     private int id;
-    private String tanggal;
-    private String pemesanan;
+    private Date tanggal;
+    private String jenisPembayaran;
     private int totalTagihan;
     private int jumlahBayar;
     private Jamaah jamaah;
     private Paket paket;
+    public static String tableName = "pemesanan";
     public Pemesanan(){
         
     }
-    public Pemesanan(int id,Paket paket, Jamaah jamaah, String tanggal,String pemesanan,int totalTagihan, int jumlahBayar){
+    public Pemesanan(int id,Paket paket, Jamaah jamaah, Date tanggal,String jenisPembayaran,int totalTagihan, int jumlahBayar){
         this.id = id;
         this.jamaah = jamaah;
         this.paket = paket;
         this.tanggal = tanggal;
-        this.pemesanan = pemesanan;
+        this.jenisPembayaran = jenisPembayaran;
+        this.jumlahBayar = jumlahBayar;
+        this.totalTagihan = totalTagihan;
+    }
+    public Pemesanan(Paket paket, Jamaah jamaah,String jenisPembayaran, Date tanggal,int totalTagihan, int jumlahBayar){
+        this.id = id;
+        this.jamaah = jamaah;
+        this.paket = paket;
+        this.tanggal = tanggal;
+        this.jenisPembayaran = jenisPembayaran;
         this.jumlahBayar = jumlahBayar;
         this.totalTagihan = totalTagihan;
     }
@@ -49,11 +61,11 @@ public class Pemesanan implements Entity{
         return jamaah;
     }
     
-    public void setTanggal(String tanggal){
+    public void setTanggal(Date tanggal){
         this.tanggal = tanggal;
     }
-    public String getTanggal(){
-        return  this.tanggal;
+    public Date getTanggal(){
+        return  tanggal;
     }
     
     public void setTotalTagihan(int totalTagihan){
@@ -68,5 +80,12 @@ public class Pemesanan implements Entity{
     }
     public int getJumlahBayar(){
         return  this.jumlahBayar;
+    }
+    
+     public void setJenisPembayaran(String jenisPembayaran){
+        this.jenisPembayaran = jenisPembayaran;
+    }
+    public String getJenisPembayaran(){
+        return jenisPembayaran;
     }
 }

@@ -80,19 +80,22 @@ public class JamaahRepository implements Repository<Jamaah>{
 
     @Override
     public boolean update(Jamaah jamaah) {
-        String sql = "INSERT INTO "+ tableName +" (`nama`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES (?, ?, ?, ?)";
-         try {
-            Connection koneksi = (Connection)Conn.configDB();
+       
+        String sql = "UPDATE "+ tableName +" SET nama = ?, jenis_kelamin = ?, alamat = ?, no_telp = ? WHERE nik = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setString(1, jamaah.getNama());
+             pst.setString(1, jamaah.getNama());
             pst.setString(2, jamaah.getJenisKelamin());
             pst.setString(3, jamaah.getAlamat());
             pst.setInt(4, jamaah.getNoTelp()); 
-            pst.execute();
+            pst.setInt(5, jamaah.getNik());
+            pst.executeUpdate();
             return true;
         } catch (Exception e) {
-             e.printStackTrace();
             return false;
+        
         }
     }
 
