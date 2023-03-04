@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 import entity.Paket;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import util.Conn;
@@ -42,22 +44,79 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public Paket get(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
+
+        Paket paket = new Paket();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery(sql);
+
+            while(res.next()) {
+                return mapToEntity(res); 
+            }
+        } catch (SQLException e) {}
+
+        return paket;
     }
 
     @Override
-    public boolean add(Paket entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean add(Paket paket) {
+         String sql = "INSERT INTO "+ tableName +" (`menu_id`, `start`, `rentang_waktu`, `deskripsi`,`tgl_keberangkatan`,`minim_dp`,`harga`,`diskon`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+         try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, paket.getMenu().getId());
+            pst.setString(2, paket.getStart());
+            pst.setString(3, paket.getRentangWaktu());
+            pst.setString(4, paket.getDeskripsi()); 
+            pst.setDate(5, new Date(paket.getTglKeberangkatan().getTime())); 
+            pst.setInt(6, paket.getMinimDp()); 
+            pst.setInt(7, paket.getHarga());
+            pst.setInt(8, paket.getDiskon()); 
+            pst.execute();
+            return true;
+        } catch (Exception e) {
+             e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean update(Paket entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean update(Paket paket) {
+        String sql = "UPDATE "+ tableName +" SET start = ?, rentang_waktu = ?, deskripsi = ?, tgl_keberangkatan, minim_dp = ?, harga = ?, diskon = ? WHERE id = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+             pst.setString(1, paket.getStart());
+            pst.setString(2, paket.getRentangWaktu());
+            pst.setString(3, paket.getDeskripsi()); 
+            pst.setDate(4, new Date(paket.getTglKeberangkatan().getTime())); 
+            pst.setInt(5, paket.getMinimDp()); 
+            pst.setInt(6, paket.getHarga());
+            pst.setInt(7, paket.getDiskon());
+            pst.setInt(8, paket.getId());
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       String sql = "DELETE FROM "+ tableName +" WHERE id = ?";
+           try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
      private Paket mapToEntity(ResultSet result) throws SQLException {
          Paket paket = new Paket(

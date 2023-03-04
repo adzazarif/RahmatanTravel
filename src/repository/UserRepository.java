@@ -48,7 +48,6 @@ public class UserRepository implements Repository<User>{
        String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
 
         User user = new User();
-
         try {
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
@@ -83,9 +82,9 @@ public class UserRepository implements Repository<User>{
     }
 
     @Override
-    public boolean update(User usr) {
-        User user = this.get(usr.getId());
-        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ?";
+    public boolean update(User user) {
+
+        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -94,6 +93,7 @@ public class UserRepository implements Repository<User>{
             pst.setString(2, user.getUsername());
             pst.setString(3, user.getRole());
             pst.setString(4, user.getPassword());
+            pst.setInt(5, user.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -130,16 +130,19 @@ public class UserRepository implements Repository<User>{
         }
         
         public static void main(String[] args) {
-//            User usr = new User("zarif","zarif14","owner","zarif");
+//            User usr = new User(9,"bagas uppdated","ari123","employee","ari");
+            
             UserRepository user = new UserRepository();
-//            if(user.add(usr)){
-//                System.out.println("berhasil");
-//            }else{
-//                System.out.println("gagal");
-//            }
+            
+            if(user.delete(9)){
+                System.out.println("berhasil");
+            }else{
+                System.out.println("gagal");
+            }
     
-        for(User usr:user.get()){
-            System.out.println(usr.getNama());
-        }
+//        for(User usr:user.get()){
+//            System.out.print(usr.getNama()+" "+usr.getUsername());
+//            System.out.println("");
+//        }
     }
 }

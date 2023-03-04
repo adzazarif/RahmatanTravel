@@ -16,6 +16,7 @@ public class Jamaah implements Entity{
     private String alamat;
     private String noTelp;
     private int ammountJammah;
+    public static String tableName = "jamaah";
     
     public Jamaah(){
         
