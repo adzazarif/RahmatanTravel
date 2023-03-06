@@ -5,6 +5,8 @@
 package repository;
 
 import entity.Jamaah;
+import entity.Paket;
+import entity.Pemesanan;
 import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +22,7 @@ import util.Conn;
  * @author WINDOWS 10
  */
 public class JamaahRepository implements Repository<Jamaah>{
-    private static String tableName = User.tableName;
+    private static String tableName = Jamaah.tableName;
     @Override
     public List<Jamaah> get() {
         String sql = "SELECT * FROM " + tableName;
@@ -42,7 +44,7 @@ public class JamaahRepository implements Repository<Jamaah>{
 
     @Override
     public Jamaah get(Integer id) {
-         String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
+         String sql = "SELECT * FROM " + tableName + " WHERE nik = ?" ;
          
          Jamaah jamaah = new Jamaah();
          
@@ -122,4 +124,19 @@ public class JamaahRepository implements Repository<Jamaah>{
         );
         return jamaah;
         }
+     
+     public static void main(String[] args) {
+        PemesananRepository p = new PemesananRepository();
+        PaketRepository paket = new PaketRepository();
+         for(Paket pmsn:paket.get()){
+            System.out.println(pmsn.getNama());
+            System.out.println(pmsn.getId());
+            System.out.println(pmsn.getTotalMasuk());
+        }
+//        for(Pemesanan pmsn:p.get()){
+//            System.out.println(pmsn.getJamaah().getNik());
+//            System.out.println(pmsn.getId());
+//            System.out.println(pmsn.getPaket().getNama());
+//        }
+    }
 }

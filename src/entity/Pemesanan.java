@@ -32,7 +32,6 @@ public class Pemesanan implements Entity{
         this.totalTagihan = totalTagihan;
     }
     public Pemesanan(Paket paket, Jamaah jamaah,String jenisPembayaran, Date tanggal,int totalTagihan, int jumlahBayar){
-        this.id = id;
         this.jamaah = jamaah;
         this.paket = paket;
         this.tanggal = tanggal;

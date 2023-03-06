@@ -21,7 +21,8 @@ public class Paket implements Entity{
     private int harga;
     private int diskon;
     private Menu menu;
-    public static String tableName = "user";
+    private int totalMasuk;
+    public static String tableName = "master_paket";
     
     public Paket(){
         
@@ -116,5 +117,12 @@ public class Paket implements Entity{
     }
     public int getDiskon(){
         return this.diskon;
+    }
+    
+    public void setTotalMasuk(int totalMasuk){
+        this.totalMasuk = totalMasuk;
+    }
+    public int getTotalMasuk(){
+        return totalMasuk;
     }
 }

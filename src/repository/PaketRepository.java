@@ -25,7 +25,7 @@ public class PaketRepository implements Repository<Paket>{
         
     @Override
     public List<Paket> get() {
-         String sql = "SELECT * FROM " + tableName;
+         String sql = "SELECT *,SUM(pemesanan.jumlah_bayar) as total_pemasukan FROM " + tableName + " JOIN pemesanan ON master_paket.id = pemesanan.paket_id GROUP BY master_paket.nama";
         List<Paket> paket = new ArrayList<>();
         try {
              Connection koneksi = (Connection)Conn.configDB();
@@ -51,12 +51,14 @@ public class PaketRepository implements Repository<Paket>{
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             stm.setInt(1, id);
-            ResultSet res = stm.executeQuery(sql);
+            ResultSet res = stm.executeQuery();
 
             while(res.next()) {
                 return mapToEntity(res); 
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return paket;
     }
@@ -130,7 +132,7 @@ public class PaketRepository implements Repository<Paket>{
                  result.getInt("harga"),
                  result.getInt("diskon")
          );
-
+         paket.setTotalMasuk(result.getInt("total_pemasukan"));
         paket.setId(result.getInt("id"));
         return paket;
         }

@@ -41,7 +41,7 @@ public class Jamaah implements Entity{
         this.nama = nama;
     }
     public String getNama(){
-        return this.nama;
+        return nama;
     }
     
     public void setJenisKelamin(String jenisKelamin){

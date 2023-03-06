@@ -10,20 +10,22 @@ import java.util.Date;
  *
  * @author WINDOWS 10
  */
-public class DetailPemesanan {
+public class DetailPemesanan implements Entity{
     private int id;
     private Date tanggal;
     private int cicilan;
     private Pemesanan pemesanan;
+    public static String tableName = "detail_pemesanan";
     public DetailPemesanan(){
         
     }
     
-    public DetailPemesanan(int id,Date tanggal,int cicilan,Pemesanan pemesanan){
+    public DetailPemesanan(int id,Pemesanan pemesanan,Date tanggal,int cicilan){
         this.id = id;
+         this.pemesanan = pemesanan;
         this.tanggal = tanggal;
         this.cicilan = cicilan;
-        this.pemesanan = pemesanan;
+       
     }
     
     public void setId(int id){
@@ -46,4 +48,12 @@ public class DetailPemesanan {
     public int getCicilan(){
         return cicilan;
     }
+    
+    public Pemesanan getPemesanan(){
+        return pemesanan;
+    }
+    public void setPemesanan(Pemesanan pemesanan){
+        this.pemesanan = pemesanan;
+    }
+        
 }

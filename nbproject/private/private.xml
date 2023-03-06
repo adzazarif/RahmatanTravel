@@ -4,15 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/Menu.java</file>
-            <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/DetailPemesanan.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/Repository.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/JamaahRepository.java</file>
+            <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/Barang.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/PemesananRepository.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/Pemesanan.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/Jamaah.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/UserRepository.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/rahmatantravel/RahmatanTravel.java</file>
+            <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/DetailPemesananRepository.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/PaketRepository.java</file>
+            <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/BarangRepository.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/DetailPemesanan.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/entity/User.java</file>
             <file>file:/C:/Users/WINDOWS%2010/Documents/NetBeansProjects/RahmatanTravel/src/repository/MenuRepository.java</file>

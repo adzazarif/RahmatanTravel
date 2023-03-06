@@ -52,7 +52,7 @@ public class UserRepository implements Repository<User>{
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             stm.setInt(1, id);
-            ResultSet res = stm.executeQuery(sql);
+            ResultSet res = stm.executeQuery();
 
             while(res.next()) {
                 return mapToEntity(res); 
@@ -65,7 +65,7 @@ public class UserRepository implements Repository<User>{
 
     @Override
     public boolean add(User user) {
-         String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`) VALUES (?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);

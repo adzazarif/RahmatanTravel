@@ -55,7 +55,8 @@ public class PemesananRepository implements Repository<Pemesanan>{
             while(res.next()) {
                 return mapToEntity(res); 
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+        e.printStackTrace();}
 
         return pemesanan;
     }
@@ -117,12 +118,12 @@ public class PemesananRepository implements Repository<Pemesanan>{
     }
     private Pemesanan mapToEntity(ResultSet result) throws SQLException {
          Pemesanan pemesanan = new Pemesanan(
-                 new PaketRepository().get(result.getInt("id")),
-                 new JamaahRepository().get(result.getInt("id")),
-                 result.getString("jenis_pembayran"),
+                 new PaketRepository().get(result.getInt("paket_id")),
+                 new JamaahRepository().get(result.getInt("jamaah_id")),
+                 result.getString("jenis_pembayaran"),
                  result.getDate("tanggal"),
                  result.getInt("jumlah_bayar"),
-                 result.getInt("total_tagiham")
+                 result.getInt("total_tagihan")
          );
 
         pemesanan.setId(result.getInt("id"));
