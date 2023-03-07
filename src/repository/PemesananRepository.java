@@ -50,7 +50,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             stm.setInt(1, id);
-            ResultSet res = stm.executeQuery(sql);
+            ResultSet res = stm.executeQuery();
 
             while(res.next()) {
                 return mapToEntity(res); 

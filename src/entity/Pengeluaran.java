@@ -15,7 +15,8 @@ public class Pengeluaran implements Entity{
     private Paket paket;
     private Date tanggal;
     private int totalPengeluaran;
-    
+    public static String tableName = "pengeluaran";
+    public Pengeluaran(){};
     public Pengeluaran (int id, Paket paket, Date tanggal, int totalPengeluaran){
         this.id = id;
         this.paket = paket;
