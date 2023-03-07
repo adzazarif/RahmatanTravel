@@ -54,7 +54,7 @@ public class PaketRepository implements Repository<Paket>{
             ResultSet res = stm.executeQuery();
 
             while(res.next()) {
-                return mapToEntity(res); 
+                return mapToEntityGet(res); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,6 +133,23 @@ public class PaketRepository implements Repository<Paket>{
                  result.getInt("diskon")
          );
          paket.setTotalMasuk(result.getInt("total_pemasukan"));
+        paket.setId(result.getInt("id"));
+        return paket;
+        }
+     
+     private Paket mapToEntityGet(ResultSet result) throws SQLException {
+         Paket paket = new Paket(
+                 new MenuRepository().get(result.getInt("id")),
+                 result.getString("start"),
+                 result.getString("nama"),
+                 result.getString("rentang_waktu"),
+                 result.getString("deskripsi"),
+                 result.getDate("tgl_keberangkatan"),
+                 result.getInt("minim_dp"),
+                 result.getInt("harga"),
+                 result.getInt("diskon")
+         );
+        
         paket.setId(result.getInt("id"));
         return paket;
         }

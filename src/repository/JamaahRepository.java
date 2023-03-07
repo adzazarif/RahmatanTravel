@@ -52,12 +52,14 @@ public class JamaahRepository implements Repository<Jamaah>{
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             stm.setInt(1, id);
-            ResultSet res = stm.executeQuery(sql);
+            ResultSet res = stm.executeQuery();
 
             while(res.next()) {
                 return mapToEntity(res); 
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return jamaah;
     }
@@ -120,7 +122,7 @@ public class JamaahRepository implements Repository<Jamaah>{
                 result.getString("nama"),
                 result.getString("jenis_kelamin"),
                 result.getString("alamat"),
-                result.getString("nmr_telp")
+                result.getString("no_telp")
         );
         return jamaah;
         }
