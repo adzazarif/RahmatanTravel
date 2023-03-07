@@ -5,51 +5,122 @@
 package repository;
 
 import entity.DetailPengeluaran;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import util.Conn;
 
 /**
  *
  * @author WINDOWS 10
  */
 public class DetailPengeluaranRepository implements Repository<DetailPengeluaran>{
-
+    private static String tableName = DetailPengeluaran.tableName;
     @Override
     public List<DetailPengeluaran> get() {
         String sql = "SELECT * FROM " + tableName;
-        List<Pemesanan> pemesanan = new ArrayList<>();
+        List<DetailPengeluaran> detailpengeluaran = new ArrayList<>();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             Statement stm = koneksi.createStatement();
             ResultSet res = stm.executeQuery(sql);
             
             while(res.next()) {
-                pemesanan.add(mapToEntity(res));
+                detailpengeluaran.add(mapToEntity(res));
             }
         } catch (SQLException e) {
         e.printStackTrace();
         }
 
-        return pemesanan;
+        return detailpengeluaran;
     }
 
     @Override
     public DetailPengeluaran get(Integer id) {
-          String sql = "INSERT INTO "+ tableName +" (`pengeluaran_id`, `barang_id`, `jenis_pembayaran`, `banyak`, `harga`) VALUES (?, ?, ?, ?)";
+          
+        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ? WHERE pengeluaran_id = ?";  
+        
+          DetailPengeluaran detailPengeluaran = new DetailPengeluaran();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+
+            while(res.next()) {
+                return mapToEntity(res); 
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();}
+
+        return detailPengeluaran;
     }
 
     @Override
-    public boolean add(DetailPengeluaran entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean add(DetailPengeluaran detailPengeluaran) {
+        String sql = "INSERT INTO "+ tableName +" (`pengeluaran_id`, `barang_id`, `jenis_pembayaran`, `banyak`, `harga`) VALUES (?, ?, ?, ?)";
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, detailPengeluaran.getPengeluaran().getId());
+            pst.setInt(2, detailPengeluaran.getBarang().getId());
+            pst.setInt(3, detailPengeluaran.getBanyak());
+            pst.setInt(4, detailPengeluaran.getHarga()); 
+            pst.execute();
+            return true;
+        } catch (Exception e) {
+             e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean update(DetailPengeluaran entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean update(DetailPengeluaran detailPengeluaran) {
+       String sql = "UPDATE "+ tableName +" SET pengeluaran_id = ?, barang_id = ?, banyak = ?, harga = ? WHERE pengeluaran_id = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, detailPengeluaran.getPengeluaran().getId());
+            pst.setInt(2, detailPengeluaran.getBarang().getId());
+            pst.setInt(3, detailPengeluaran.getBanyak());
+            pst.setInt(4, detailPengeluaran.getHarga());
+            pst.setInt(5, detailPengeluaran.getPengeluaran().getId());
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           String sql = "DELETE FROM "+ tableName +" WHERE id = ?";
+           try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
+    private DetailPengeluaran mapToEntity(ResultSet result) throws SQLException {
+        DetailPengeluaran detailPengeluaran = new DetailPengeluaran(
+                new PengeluaranRepository().get(result.getInt("pengeluaran_id")),
+                new BarangRepository().get(result.getInt("barang_id")),
+                result.getInt("banyak"),
+                result.getInt("harga"));
+
+        return detailPengeluaran;
+        }
 }
