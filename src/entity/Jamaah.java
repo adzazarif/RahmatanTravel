@@ -16,14 +16,15 @@ public class Jamaah implements Entity{
     private String alamat;
     private String noTelp;
     private int ammountJammah;
+    private int ammountJammahMale;
+    private int ammountJammahFemale;
     public static String tableName = "jamaah";
     
     public Jamaah(){
         
     }
     
-    public Jamaah(int nik, String nama, String jenisKelamin, String alamat, String noTelp){
-        this.nik = nik;
+    public Jamaah(String nama, String jenisKelamin, String alamat, String noTelp){
         this.nama = nama;
         this.jenisKelamin = jenisKelamin;
         this.alamat = alamat;
@@ -63,5 +64,26 @@ public class Jamaah implements Entity{
     }
     public int getNoTelp(){
         return this.nik;
+    }
+    
+     public void setAmountJamaah(int amountJamaah){
+        this.ammountJammah = amountJamaah;
+    }
+    public int getAmountJamaah(){
+        return ammountJammah;
+    }
+    
+    public void setAmountJamaahMale(int amountJamaahMale){
+        this.ammountJammahMale = amountJamaahMale;
+    }
+    public int getAmountJamaahMale(){
+        return ammountJammahMale;
+    }
+    
+    public void setAmountJamaahFemale(int amountJamaahFemale){
+        this.ammountJammahFemale = amountJamaahFemale;
+    }
+    public int getAmountJamaahFemale(){
+        return ammountJammahFemale;
     }
 }

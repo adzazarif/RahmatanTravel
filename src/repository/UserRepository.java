@@ -128,20 +128,20 @@ public class UserRepository implements Repository<User>{
         return user;
         }
         
-        public static void main(String[] args) {
+//        public static void main(String[] args) {
 //            User usr = new User(9,"bagas uppdated","ari123","employee","ari");
             
-            UserRepository user = new UserRepository();
-            
-            if(user.delete(9)){
-                System.out.println("berhasil");
-            }else{
-                System.out.println("gagal");
-            }
-    
+//            UserRepository user = new UserRepository();
+//            
+//            if(user.delete(9)){
+//                System.out.println("berhasil");
+//            }else{
+//                System.out.println("gagal");
+//            }
+//    
 //        for(User usr:user.get()){
 //            System.out.print(usr.getNama()+" "+usr.getUsername());
 //            System.out.println("");
 //        }
-    }
+//    }
 }

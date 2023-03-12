@@ -116,29 +116,68 @@ public class JamaahRepository implements Repository<Jamaah>{
             return false;
         }
     }
+    public void getAmountJamaah(Jamaah jamaah){
+        try {
+        String queryCek = "SELECT COUNT(*) AS jml FROM jamaah";
+        Connection koneksi = (Connection) Conn.configDB();
+        Statement pstCek = koneksi.createStatement();
+        ResultSet res = pstCek.executeQuery(queryCek);
+        if(res.next()){
+            jamaah.setAmountJamaah(res.getInt("jml"));
+        }
+        } catch (Exception e) {
+        }
+    }
+    
+     public void getAmountJamaahMale(Jamaah jamaah){
+        try {
+        String queryCek = "SELECT COUNT(*) AS jml FROM jamaah WHERE jenis_kelamin = 'laki-laki'";
+        Connection koneksi = (Connection) Conn.configDB();
+        Statement pstCek = koneksi.createStatement();
+        ResultSet res = pstCek.executeQuery(queryCek);
+        if(res.next()){
+            jamaah.setAmountJamaahMale(res.getInt("jml"));
+        }
+        } catch (Exception e) {
+        }
+    }
+     
+      public void getAmountJamaahFemale(Jamaah jamaah){
+        try {
+        String queryCek = "SELECT COUNT(*) AS jml FROM jamaah WHERE jenis_kelamin = 'perempuan'";
+        Connection koneksi = (Connection) Conn.configDB();
+        Statement pstCek = koneksi.createStatement();
+        ResultSet res = pstCek.executeQuery(queryCek);
+        if(res.next()){
+            jamaah.setAmountJamaahFemale(res.getInt("jml"));
+        }
+        } catch (Exception e) {
+        }
+    }
      private Jamaah mapToEntity(ResultSet result) throws SQLException {
         Jamaah jamaah = new Jamaah(
-                result.getInt("nik"),
+           
                 result.getString("nama"),
                 result.getString("jenis_kelamin"),
                 result.getString("alamat"),
                 result.getString("no_telp")
         );
+        jamaah.setNik(     result.getInt("nik"));
         return jamaah;
         }
      
-     public static void main(String[] args) {
-        PemesananRepository p = new PemesananRepository();
-        PaketRepository paket = new PaketRepository();
-         for(Paket pmsn:paket.get()){
-            System.out.println(pmsn.getNama());
-            System.out.println(pmsn.getId());
-            System.out.println(pmsn.getTotalMasuk());
-        }
+//     public static void main(String[] args) {
+//        PemesananRepository p = new PemesananRepository();
+//        PaketRepository paket = new PaketRepository();
+//         for(Paket pmsn:paket.get()){
+//            System.out.println(pmsn.getNama());
+//            System.out.println(pmsn.getId());
+//            System.out.println(pmsn.getTotalMasuk());
+//        }
 //        for(Pemesanan pmsn:p.get()){
 //            System.out.println(pmsn.getJamaah().getNik());
 //            System.out.println(pmsn.getId());
 //            System.out.println(pmsn.getPaket().getNama());
 //        }
-    }
+//    }
 }

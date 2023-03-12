@@ -130,13 +130,13 @@ public class PemesananRepository implements Repository<Pemesanan>{
         return pemesanan;
         }
     
-    public static void main(String[] args) {
-        PemesananRepository pr = new PemesananRepository();
-        
-        for(Pemesanan prs:pr.get()){
-            System.out.println(prs.getId());
-            System.out.println(prs.getJamaah().getNama());
-            System.out.println(prs.getPaket().getHarga());
-        }
-    }
+//    public static void main(String[] args) {
+//        PemesananRepository pr = new PemesananRepository();
+//        
+//        for(Pemesanan prs:pr.get()){
+//            System.out.println(prs.getId());
+//            System.out.println(prs.getJamaah().getNama());
+//            System.out.println(prs.getPaket().getHarga());
+//        }
+//    }
 }
