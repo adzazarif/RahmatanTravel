@@ -71,4 +71,22 @@ public class DashboardRepository {
         }
         return total;
     }
+    
+    public String[] getDataUmrah(){
+        String[] data = new String[4];
+         String queryCek = "SELECT *, COUNT(*) AS jml FROM paket JOIN pemesanan on paket.id = pemesanan.paket_id GROUP BY pemesanan.paket_id ORDER By tgl_keberangkatan ASC LIMIT 1";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            data[0] = res.getString("nama");
+            data[1] = res.getString("tgl_keberangkatan");
+            data[2] = res.getString("harga");
+            data[3] = res.getString("jml");
+        }
+        } catch (Exception e) {
+        }
+        return data;
+    }
 }

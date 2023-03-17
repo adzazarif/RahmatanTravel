@@ -24,4 +24,11 @@ public class Date {
         LocalDate thirtyDaysAgo = LocalDate.parse(dateNow()).minusDays(30);
         return String.valueOf(thirtyDaysAgo);
     }
+     
+     public String dateFormatFull(){
+        LocalDateTime myDateObj = LocalDateTime.now();  
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("E, MMM dd yyyy ");  
+        String formattedDate = myDateObj.format(myFormatObj);  
+        return formattedDate;
+    } 
 }
