@@ -17,23 +17,23 @@ public class Pemesanan implements Entity{
     private int totalTagihan;
     private int jumlahBayar;
     private Jamaah jamaah;
-    private Paket paket;
+    private Keberangkatan keberangkatan;
     public static String tableName = "pemesanan";
     public Pemesanan(){
         
     }
-    public Pemesanan(int id,Paket paket, Jamaah jamaah, Date tanggal,String jenisPembayaran,int totalTagihan, int jumlahBayar){
+    public Pemesanan(int id,Keberangkatan keberangkatan, Jamaah jamaah, Date tanggal,String jenisPembayaran,int totalTagihan, int jumlahBayar){
         this.id = id;
         this.jamaah = jamaah;
-        this.paket = paket;
+        this.keberangkatan = keberangkatan;
         this.tanggal = tanggal;
         this.jenisPembayaran = jenisPembayaran;
         this.jumlahBayar = jumlahBayar;
         this.totalTagihan = totalTagihan;
     }
-    public Pemesanan(Paket paket, Jamaah jamaah,String jenisPembayaran, Date tanggal,int totalTagihan, int jumlahBayar){
+    public Pemesanan(Keberangkatan keberangkatan, Jamaah jamaah,String jenisPembayaran, Date tanggal,int totalTagihan, int jumlahBayar){
         this.jamaah = jamaah;
-        this.paket = paket;
+        this.keberangkatan = keberangkatan;
         this.tanggal = tanggal;
         this.jenisPembayaran = jenisPembayaran;
         this.jumlahBayar = jumlahBayar;
@@ -46,11 +46,11 @@ public class Pemesanan implements Entity{
         return  this.id;
     }
     
-    public void setPaket(Paket paket){
-        this.paket = paket;
+    public void setKeberangkatan(Keberangkatan keberangkatan){
+        this.keberangkatan = keberangkatan;
     }
-    public Paket getPaket(){
-        return paket;
+    public Keberangkatan getKeberangkatan(){
+        return keberangkatan;
     }
     
     public void setJamaah(Jamaah jamaah){

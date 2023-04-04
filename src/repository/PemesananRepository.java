@@ -40,7 +40,24 @@ public class PemesananRepository implements Repository<Pemesanan>{
 
         return pemesanan;
     }
+    public List<Pemesanan> getById(int id){
+         String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        List<Pemesanan> pemesanan = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pemesanan.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
 
+        return pemesanan;  
+    }
     @Override
     public Pemesanan get(Integer id) {
                String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
@@ -63,11 +80,11 @@ public class PemesananRepository implements Repository<Pemesanan>{
 
     @Override
     public boolean add(Pemesanan pemesanan) {
-            String sql = "INSERT INTO "+ tableName +" (`paket_id`, `jamaah_id`, `jenis_pembayaran`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`keberangkatan_id`, `jamaah_id`, `jenis_pembayaran`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setInt(1, pemesanan.getPaket().getId());
+            pst.setInt(1, pemesanan.getKeberangkatan().getId());
             pst.setInt(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
             pst.setDate(4, new Date(pemesanan.getTanggal().getTime()));
@@ -84,12 +101,12 @@ public class PemesananRepository implements Repository<Pemesanan>{
     @Override
     public boolean update(Pemesanan pemesanan) {
         
-        String sql = "UPDATE "+ tableName +" SET paket_id = ?, jamaah_id = ?, jenis_pembayaran = ?, tanggal = ?, jumlah_bayar = ?, total_tagihan = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET keberangkatan_id = ?, jamaah_id = ?, jenis_pembayaran = ?, tanggal = ?, jumlah_bayar = ?, total_tagihan = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setInt(1, pemesanan.getPaket().getId());
+            pst.setInt(1, pemesanan.getKeberangkatan().getId());
             pst.setInt(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
             pst.setDate(4, new Date(pemesanan.getTanggal().getTime()));
@@ -118,7 +135,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
     }
     private Pemesanan mapToEntity(ResultSet result) throws SQLException {
          Pemesanan pemesanan = new Pemesanan(
-                 new PaketRepository().get(result.getInt("paket_id")),
+                 new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
                  new JamaahRepository().get(result.getInt("jamaah_id")),
                  result.getString("jenis_pembayaran"),
                  result.getDate("tanggal"),

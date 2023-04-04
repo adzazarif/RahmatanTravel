@@ -16,35 +16,32 @@ public class Paket implements Entity{
     private String namaPaket;
     private String rentangWaktu;
     private String deskripsi;
-    private Date tglKeberangkatan;
     private int minimDp;
     private int harga;
     private int diskon;
-    private Menu menu;
+    String menu;
     private int totalMasuk;
     public static String tableName = "master_paket";
     
     public Paket(){
         
     }
-        public Paket(Menu menu,String start, String namaPaket,String rentangWaktu,String deskripsi,Date tgl_kebberangkatan,int minimDp, int harga, int diskon){
+        public Paket(String menu,String start, String namaPaket,String rentangWaktu,String deskripsi,int minimDp, int harga, int diskon){
         this.menu = menu;
         this.start = start;
         this.namaPaket = namaPaket;
         this.rentangWaktu = rentangWaktu;
         this.deskripsi = deskripsi;
-        this.tglKeberangkatan = tgl_kebberangkatan;
         this.minimDp = minimDp;
         this.harga = harga;
         this.diskon = diskon;
     }
-    public Paket(int paketId,String start, String namaPaket,String rentangWaktu,String deskripsi,Date tgl_kebberangkatan,int minimDp, int harga, int diskon){
+    public Paket(int paketId,String start, String namaPaket,String rentangWaktu,String deskripsi,int minimDp, int harga, int diskon){
         this.paketId = paketId;
         this.start = start;
         this.namaPaket = namaPaket;
         this.rentangWaktu = rentangWaktu;
         this.deskripsi = deskripsi;
-        this.tglKeberangkatan = tgl_kebberangkatan;
         this.minimDp = minimDp;
         this.harga = harga;
         this.diskon = diskon;
@@ -57,10 +54,10 @@ public class Paket implements Entity{
         return this.paketId;
     }
     
-    public void setMenu(Menu menu){
+    public void setMenu(String menu){
         this.menu = menu;
     }
-    public Menu getMenu(){
+    public String getMenu(){
         return menu;
     }
     public void setStart(String start){
@@ -91,12 +88,12 @@ public class Paket implements Entity{
         return this.deskripsi;
     }
     
-      public void setTglKeberangkatan(Date tglKeberangkatan){
-        this.tglKeberangkatan = tglKeberangkatan;
-    }
-    public Date getTglKeberangkatan(){
-        return this.tglKeberangkatan;
-    }
+//      public void setTglKeberangkatan(Date tglKeberangkatan){
+//        this.tglKeberangkatan = tglKeberangkatan;
+//    }
+//    public Date getTglKeberangkatan(){
+//        return this.tglKeberangkatan;
+//    }
     
     public void setMinimDp(int minimDp){
         this.minimDp = minimDp;

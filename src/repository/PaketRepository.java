@@ -65,18 +65,17 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public boolean add(Paket paket) {
-         String sql = "INSERT INTO "+ tableName +" (`menu_id`, `start`, `rentang_waktu`, `deskripsi`,`tgl_keberangkatan`,`minim_dp`,`harga`,`diskon`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+         String sql = "INSERT INTO "+ tableName +" (`menu`, `start`, `rentang_waktu`, `deskripsi`,`minim_dp`,`harga`,`diskon`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setInt(1, paket.getMenu().getId());
+            pst.setString(1, paket.getMenu());
             pst.setString(2, paket.getStart());
             pst.setString(3, paket.getRentangWaktu());
             pst.setString(4, paket.getDeskripsi()); 
-            pst.setDate(5, new Date(paket.getTglKeberangkatan().getTime())); 
-            pst.setInt(6, paket.getMinimDp()); 
-            pst.setInt(7, paket.getHarga());
-            pst.setInt(8, paket.getDiskon()); 
+            pst.setInt(5, paket.getMinimDp()); 
+            pst.setInt(6, paket.getHarga());
+            pst.setInt(7, paket.getDiskon()); 
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -87,18 +86,18 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public boolean update(Paket paket) {
-        String sql = "UPDATE "+ tableName +" SET start = ?, rentang_waktu = ?, deskripsi = ?, tgl_keberangkatan, minim_dp = ?, harga = ?, diskon = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET start = ?, rentang_waktu = ?, deskripsi = ?, tgl_keberangkatan, minim_dp = ?, harga = ?, diskon = ?, menu = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
-             pst.setString(1, paket.getStart());
+            pst.setString(1, paket.getStart());
             pst.setString(2, paket.getRentangWaktu());
             pst.setString(3, paket.getDeskripsi()); 
-            pst.setDate(4, new Date(paket.getTglKeberangkatan().getTime())); 
-            pst.setInt(5, paket.getMinimDp()); 
-            pst.setInt(6, paket.getHarga());
-            pst.setInt(7, paket.getDiskon());
+            pst.setInt(4, paket.getMinimDp()); 
+            pst.setInt(5, paket.getHarga());
+            pst.setInt(6, paket.getDiskon());
+            pst.setString(7, paket.getMenu());
             pst.setInt(8, paket.getId());
             pst.executeUpdate();
             return true;
@@ -122,12 +121,11 @@ public class PaketRepository implements Repository<Paket>{
     }
      private Paket mapToEntity(ResultSet result) throws SQLException {
          Paket paket = new Paket(
-                 new MenuRepository().get(result.getInt("id")),
+                 result.getString("menu"),
                  result.getString("start"),
                  result.getString("nama"),
                  result.getString("rentang_waktu"),
                  result.getString("deskripsi"),
-                 result.getDate("tgl_keberangkatan"),
                  result.getInt("minim_dp"),
                  result.getInt("harga"),
                  result.getInt("diskon")
@@ -139,12 +137,11 @@ public class PaketRepository implements Repository<Paket>{
      
      private Paket mapToEntityGet(ResultSet result) throws SQLException {
          Paket paket = new Paket(
-                 new MenuRepository().get(result.getInt("id")),
+                 result.getString("menu"),
                  result.getString("start"),
                  result.getString("nama"),
                  result.getString("rentang_waktu"),
                  result.getString("deskripsi"),
-                 result.getDate("tgl_keberangkatan"),
                  result.getInt("minim_dp"),
                  result.getInt("harga"),
                  result.getInt("diskon")

@@ -12,14 +12,14 @@ import java.util.Date;
  */
 public class Pengeluaran implements Entity{
     private int id;
-    private Paket paket;
+    private Keberangkatan keberangkatan;
     private Date tanggal;
     private int totalPengeluaran;
     public static String tableName = "pengeluaran";
     public Pengeluaran(){};
-    public Pengeluaran (int id, Paket paket, Date tanggal, int totalPengeluaran){
+    public Pengeluaran (int id, Keberangkatan keberangkatan, Date tanggal, int totalPengeluaran){
         this.id = id;
-        this.paket = paket;
+        this.keberangkatan = keberangkatan;
         this.tanggal = tanggal;
         this.totalPengeluaran = totalPengeluaran;
     }
@@ -31,11 +31,11 @@ public class Pengeluaran implements Entity{
         return id;
     }
     
-    public void setPaket(Paket paket){
-        this.paket = paket;
+    public void setKeberangkatan(Keberangkatan keberangkatan){
+        this.keberangkatan = keberangkatan;
     }
-    public Paket getPaket(){
-        return paket;
+    public Keberangkatan getKeberangkatan(){
+        return keberangkatan;
     }
     
     public void setTanggal(Date tanggal){

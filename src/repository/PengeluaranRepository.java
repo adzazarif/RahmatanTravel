@@ -64,12 +64,12 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
 
     @Override
     public boolean add(Pengeluaran pengeluaran) {
-             String sql = "INSERT INTO "+ tableName +" (`tanggal`, `paket_id`, `total_pengeluaran`) VALUES ( ?, ?, ?)";
+             String sql = "INSERT INTO "+ tableName +" (`tanggal`, `keberangkatan_id`, `total_pengeluaran`) VALUES ( ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setDate(1, new Date(pengeluaran.getTanggal().getTime()));
-            pst.setInt(2, pengeluaran.getPaket().getId());
+            pst.setInt(2, pengeluaran.getKeberangkatan().getId());
             pst.setInt(3, pengeluaran.getTotalPengeluaran());
             pst.execute();
             return true;
@@ -81,13 +81,13 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
 
     @Override
     public boolean update(Pengeluaran pengeluaran) {
-        String sql = "UPDATE "+ tableName +" SET tanggal = ?, paket_id = ?, total_pengeluaran = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET tanggal = ?, keberangkatan_id = ?, total_pengeluaran = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setDate(1, new Date(pengeluaran.getTanggal().getTime()));
-            pst.setInt(2, pengeluaran.getPaket().getId());
+            pst.setInt(2, pengeluaran.getKeberangkatan().getId());
             pst.setInt(3, pengeluaran.getTotalPengeluaran());
             pst.setInt(4, pengeluaran.getId());
             pst.executeUpdate();
@@ -113,9 +113,9 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
      private Pengeluaran mapToEntity(ResultSet result) throws SQLException {
         Pengeluaran pengeluaran = new Pengeluaran(
                 result.getInt("id"),
-                new PaketRepository().get(result.getInt("paket_id")),
+                new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
                 result.getDate("tanggal"),
                 result.getInt("total_pengeluaran"));
-        return pengeluaran;
+            return pengeluaran;
         }
 }
