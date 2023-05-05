@@ -1,8 +1,10 @@
 package testing;
 
 import entity.Jamaah;
+import entity.Pemesanan;
 import entity.User;
 import repository.JamaahRepository;
+import repository.PemesananRepository;
 import repository.UserRepository;
 
 public class Test {
@@ -25,21 +27,29 @@ public class Test {
 //        }
 
 //  ---------testing untuk CRUD Jamaah------------
-        Jamaah jamaah = new Jamaah("Zarif","asd","Blitar","09234234523");
-        JamaahRepository jamaahRepo = new JamaahRepository();
-        
-         if(jamaahRepo.add(jamaah)){
-            System.out.println("berhasil CRUD Jamaah");
-        }else{
-            System.out.println("gagal CRUD Jamaah");
-        }
+//        Jamaah jamaah = new Jamaah("Zarif","asd","Blitar","09234234523");
+//        JamaahRepository jamaahRepo = new JamaahRepository();
+//        
+//         if(jamaahRepo.add(jamaah)){
+//            System.out.println("berhasil CRUD Jamaah");
+//        }else{
+//            System.out.println("gagal CRUD Jamaah");
+//        }
 //        System.out.println("Data Jamaah");
 //        for(Jamaah jmh:jamaahRepo.get()){
 //            System.out.print("- "+jmh.getNama()+", "+jmh.getNik());
 //            System.out.println("");
 //        }
-        
-        
-        
+        PemesananRepository pemesanan = new PemesananRepository();
+        for(Pemesanan pem:pemesanan.get()){
+            System.out.print("id Pemesanan : "+pem.getId());
+            System.out.print("jenis Pmebayaran : "+pem.getJenisPembayaran());
+            System.out.print("status : "+pem.getStatus());
+            System.out.print("tanggal :" + pem.getTanggal());
+            System.out.print("jumlah bayar :" + pem.getJumlahBayar());
+            System.out.print("total tagiham : "+ pem.getTotalTagihan());
+            
+            System.out.println("");
+    }
     }
 }

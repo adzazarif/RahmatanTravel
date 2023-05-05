@@ -42,7 +42,7 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
 
     @Override
     public Keberangkatan get(Integer id) {
-        String sql = "SELECT * FROM "+tableName+" WHERE id = "+id;
+        String sql = "SELECT * FROM "+tableName+" WHERE id = ?";
         Keberangkatan keberangkatan = new Keberangkatan();
          
         try {

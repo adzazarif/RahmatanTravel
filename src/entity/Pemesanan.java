@@ -16,6 +16,7 @@ public class Pemesanan implements Entity{
     private String jenisPembayaran;
     private int totalTagihan;
     private int jumlahBayar;
+    private String status;
     private Jamaah jamaah;
     private Keberangkatan keberangkatan;
     public static String tableName = "pemesanan";
@@ -31,11 +32,12 @@ public class Pemesanan implements Entity{
         this.jumlahBayar = jumlahBayar;
         this.totalTagihan = totalTagihan;
     }
-    public Pemesanan(Keberangkatan keberangkatan, Jamaah jamaah,String jenisPembayaran, Date tanggal,int totalTagihan, int jumlahBayar){
+    public Pemesanan(Keberangkatan keberangkatan, Jamaah jamaah,String jenisPembayaran, String status,Date tanggal,int totalTagihan, int jumlahBayar){
         this.jamaah = jamaah;
         this.keberangkatan = keberangkatan;
         this.tanggal = tanggal;
         this.jenisPembayaran = jenisPembayaran;
+        this.status = status;
         this.jumlahBayar = jumlahBayar;
         this.totalTagihan = totalTagihan;
     }
@@ -86,5 +88,12 @@ public class Pemesanan implements Entity{
     }
     public String getJenisPembayaran(){
         return jenisPembayaran;
+    }
+    
+    public void setStatus(String Status){
+        this.status = status;
+    }
+    public String getStatus(){
+        return status;
     }
 }

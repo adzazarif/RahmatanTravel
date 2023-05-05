@@ -80,16 +80,17 @@ public class PemesananRepository implements Repository<Pemesanan>{
 
     @Override
     public boolean add(Pemesanan pemesanan) {
-            String sql = "INSERT INTO "+ tableName +" (`keberangkatan_id`, `jamaah_id`, `jenis_pembayaran`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`keberangkatan_id`, `jamaah_id`, `jenis_pembayaran`, `status`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, pemesanan.getKeberangkatan().getId());
             pst.setInt(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
-            pst.setDate(4, new Date(pemesanan.getTanggal().getTime()));
-            pst.setInt(5, pemesanan.getJumlahBayar());
-            pst.setInt(6, pemesanan.getTotalTagihan());
+            pst.setString(4, pemesanan.getStatus());
+            pst.setDate(5, new Date(pemesanan.getTanggal().getTime()));
+            pst.setInt(6, pemesanan.getJumlahBayar());
+            pst.setInt(7, pemesanan.getTotalTagihan());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -101,7 +102,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
     @Override
     public boolean update(Pemesanan pemesanan) {
         
-        String sql = "UPDATE "+ tableName +" SET keberangkatan_id = ?, jamaah_id = ?, jenis_pembayaran = ?, tanggal = ?, jumlah_bayar = ?, total_tagihan = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET keberangkatan_id = ?, jamaah_id = ?, jenis_pembayaran = ?, status = ?, tanggal = ?, jumlah_bayar = ?, total_tagihan = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -109,10 +110,11 @@ public class PemesananRepository implements Repository<Pemesanan>{
             pst.setInt(1, pemesanan.getKeberangkatan().getId());
             pst.setInt(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
-            pst.setDate(4, new Date(pemesanan.getTanggal().getTime()));
-            pst.setInt(5, pemesanan.getJumlahBayar());
-            pst.setInt(6, pemesanan.getTotalTagihan());
-            pst.setInt(7, pemesanan.getId());
+            pst.setString(4, pemesanan.getStatus());
+            pst.setDate(5, new Date(pemesanan.getTanggal().getTime()));
+            pst.setInt(6, pemesanan.getJumlahBayar());
+            pst.setInt(7, pemesanan.getTotalTagihan());
+            pst.setInt(8, pemesanan.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -138,6 +140,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
                  new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
                  new JamaahRepository().get(result.getInt("jamaah_id")),
                  result.getString("jenis_pembayaran"),
+                 result.getString("status"),
                  result.getDate("tanggal"),
                  result.getInt("jumlah_bayar"),
                  result.getInt("total_tagihan")
