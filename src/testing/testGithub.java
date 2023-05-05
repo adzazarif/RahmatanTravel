@@ -7,7 +7,6 @@ package testing;
 /**
  *
  * @author adzaz
- */
-public class testGithub {
+ */public class testGithub {
     
 }

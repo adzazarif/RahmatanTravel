@@ -9,12 +9,12 @@ package view.panel;
  *
  * @author semafie
  */
-public class panel_aboutversi extends javax.swing.JPanel {
+public class panel_mintakodeverifikasi extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanel
+     * Creates new form panel_mintakodeverifikasi
      */
-    public panel_aboutversi() {
+    public panel_mintakodeverifikasi() {
         initComponents();
     }
 
@@ -32,18 +32,18 @@ public class panel_aboutversi extends javax.swing.JPanel {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg aboutversi.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kirimkodeotp.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

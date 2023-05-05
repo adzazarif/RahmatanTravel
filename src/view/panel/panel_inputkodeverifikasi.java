@@ -9,12 +9,12 @@ package view.panel;
  *
  * @author semafie
  */
-public class panel_aboutversi extends javax.swing.JPanel {
+public class panel_inputkodeverifikasi extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanel
+     * Creates new form panel_inputkodeverifikasi
      */
-    public panel_aboutversi() {
+    public panel_inputkodeverifikasi() {
         initComponents();
     }
 
@@ -32,8 +32,8 @@ public class panel_aboutversi extends javax.swing.JPanel {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg aboutversi.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 22, -1, 491));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
