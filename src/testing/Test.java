@@ -1,8 +1,10 @@
 package testing;
 
 import entity.Jamaah;
+import entity.Paket;
 import entity.Pemesanan;
 import entity.User;
+import repository.DashboardRepository;
 import repository.JamaahRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
@@ -40,19 +42,11 @@ public class Test {
 //            System.out.print("- "+jmh.getNama()+", "+jmh.getNik());
 //            System.out.println("");
 //        }
-        PemesananRepository pemesanan = new PemesananRepository();
-        for(Pemesanan pem:pemesanan.get()){
-            System.out.print("id Pemesanan : "+pem.getId());
-            System.out.print("jenis Pmebayaran : "+pem.getJenisPembayaran());
-            System.out.print("status : "+pem.getStatus());
-            System.out.print("tanggal :" + pem.getTanggal());
-            System.out.print("jumlah bayar :" + pem.getJumlahBayar());
-            System.out.print("total tagiham : "+ pem.getTotalTagihan());
-            System.out.println("");
-            System.out.print("data jamaah" +pem.getJamaah().getNama()+","+pem.getJamaah().getAlamat()+","+pem.getJamaah().getJenisKelamin()+","+pem.getJamaah().getNik()+","+pem.getJamaah().getNoTelp());
-            System.out.println("");
-            System.out.print("data paket " + pem.getKeberangkatan().getPaket().getNama());
-            System.out.println("");
+//        
+        DashboardRepository ds = new DashboardRepository();
+        
+    for(Paket pk:ds.getOftenPaket()){
+        System.out.println("nama " + pk.getNama());
     }
     }
 }
