@@ -48,7 +48,10 @@ public class Test {
             System.out.print("tanggal :" + pem.getTanggal());
             System.out.print("jumlah bayar :" + pem.getJumlahBayar());
             System.out.print("total tagiham : "+ pem.getTotalTagihan());
-            
+            System.out.println("");
+            System.out.print("data jamaah" +pem.getJamaah().getNama()+","+pem.getJamaah().getAlamat()+","+pem.getJamaah().getJenisKelamin()+","+pem.getJamaah().getNik()+","+pem.getJamaah().getNoTelp());
+            System.out.println("");
+            System.out.print("data paket " + pem.getKeberangkatan().getPaket().getNama());
             System.out.println("");
     }
     }
