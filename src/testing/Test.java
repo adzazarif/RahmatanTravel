@@ -48,6 +48,8 @@ public class Test {
             System.out.print("tanggal :" + pem.getTanggal());
             System.out.print("jumlah bayar :" + pem.getJumlahBayar());
             System.out.print("total tagiham : "+ pem.getTotalTagihan());
+            System.out.println("");
+            System.out.print("data jamaah");
             
             System.out.println("");
     }
