@@ -5,9 +5,14 @@
 package repository;
 
 
+import entity.Paket;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import util.Conn;
 import util.Date;
 /**
@@ -89,4 +94,27 @@ public class DashboardRepository {
         }
         return data;
     }
+    
+    public List<Paket> getOftenPaket(){
+          String sql = "SELECT master_paket.nama, COUNT(pemesanan.jamaah_id) as jml FROM keberangkatan JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN pemesanan ON keberangkatan.id = pemesanan.keberangkatan_id GROUP BY master_paket.id ORDER BY jml DESC";
+        List<Paket> paket = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()) {
+                paket.add(mapToEntityGet(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return paket;
+    }
+    private Paket mapToEntityGet(ResultSet result) throws SQLException {
+         Paket paket = new Paket();
+        paket.setNamaPaket(result.getString("nama"));
+        return paket;
+        }
 }
