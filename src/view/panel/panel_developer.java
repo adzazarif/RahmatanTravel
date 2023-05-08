@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package view.panel;
-
+import view.dialog.Dialog;
 /**
  *
  * @author semafie
@@ -28,11 +28,34 @@ public class panel_developer extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        keluar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton.png"))); // NOI18N
+        keluar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                keluarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                keluarFocusLost(evt);
+            }
+        });
+        keluar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                keluarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                keluarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                keluarMouseExited(evt);
+            }
+        });
+        jPanel1.add(keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 70, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/developer information.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
@@ -41,9 +64,32 @@ public class panel_developer extends javax.swing.JPanel {
         jPanel1.setBounds(0, 0, 1024, 577);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void keluarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_keluarFocusGained
+
+    }//GEN-LAST:event_keluarFocusGained
+
+    private void keluarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_keluarFocusLost
+
+    }//GEN-LAST:event_keluarFocusLost
+
+    private void keluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseClicked
+//        closeMessage();
+        //        dispose();
+        //        this.setVisible(false);
+    }//GEN-LAST:event_keluarMouseClicked
+
+    private void keluarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseEntered
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton1.png")));
+    }//GEN-LAST:event_keluarMouseEntered
+
+    private void keluarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseExited
+        keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton.png")));
+    }//GEN-LAST:event_keluarMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel keluar;
     // End of variables declaration//GEN-END:variables
 }

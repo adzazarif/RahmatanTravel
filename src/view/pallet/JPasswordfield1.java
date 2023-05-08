@@ -193,7 +193,9 @@ public class JPasswordfield1 extends JPasswordField {
         }
         super.setText(string);
     }
-
+    public static void main(String[] args) {
+        System.out.println("apa");
+    }
   
     
 }

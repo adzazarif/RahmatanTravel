@@ -191,7 +191,7 @@ public class JTextfield extends JTextField {
         }
         super.setText(string);
     }
-
+    
   
     
 }
