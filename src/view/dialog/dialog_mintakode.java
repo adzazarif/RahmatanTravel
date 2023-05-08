@@ -25,7 +25,7 @@ public class dialog_mintakode extends Dialog {
         bg1 = new javax.swing.JLabel();
         mintakode1 = new javax.swing.JPanel();
         mintakod = new javax.swing.JLabel();
-        username = new view.pallet.JTextfield();
+        txtUsername = new view.pallet.JTextfield();
         bg22 = new javax.swing.JLabel();
         verifikasi1 = new javax.swing.JPanel();
         verifikasi = new javax.swing.JLabel();
@@ -54,8 +54,8 @@ public class dialog_mintakode extends Dialog {
         });
         mintakode1.add(mintakod, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 70));
 
-        username.setFont(new java.awt.Font("Quicksand", 0, 24)); // NOI18N
-        mintakode1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 60));
+        txtUsername.setFont(new java.awt.Font("Quicksand", 0, 24)); // NOI18N
+        mintakode1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 60));
 
         bg22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kirimkodeotp.png"))); // NOI18N
         mintakode1.add(bg22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));
@@ -174,7 +174,7 @@ public class dialog_mintakode extends Dialog {
     private javax.swing.JLabel keluar2;
     private javax.swing.JLabel mintakod;
     private javax.swing.JPanel mintakode1;
-    private view.pallet.JTextfield username;
+    private view.pallet.JTextfield txtUsername;
     private javax.swing.JLabel verifikasi;
     private javax.swing.JPanel verifikasi1;
     // End of variables declaration//GEN-END:variables
