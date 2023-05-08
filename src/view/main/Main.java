@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.swing.JPanel;
 import view.panel.Login;
-import view.panel.Login2;
 
 public class Main extends javax.swing.JFrame {
     public Main() {
