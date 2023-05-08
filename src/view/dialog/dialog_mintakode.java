@@ -119,8 +119,28 @@ public class dialog_mintakode extends Dialog {
     }//GEN-LAST:event_verifikasiMouseExited
 
     private void mintakodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mintakodMouseClicked
-    mintakode1.setVisible(false);
+ 
+    String sql = "SELECT * FROM user WHERE username = ?";
+       
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(sql);
+        pst.setString(1, txtUsername.getText());
+        ResultSet res = pst.executeQuery();
+             
+            
+            if(res.next()){
+               String email = res.getString("email");
+               System.out.println(email);
+                System.out.println("test");
+            }
+            mintakode1.setVisible(false);
     verifikasi1.setVisible(true);
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+        
+    
     }//GEN-LAST:event_mintakodMouseClicked
 
     private void keluar2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_keluar2FocusGained
