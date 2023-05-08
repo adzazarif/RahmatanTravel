@@ -3,11 +3,6 @@ package view.dialog;
 
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import util.Conn;
 public class dialog_mintakode extends Dialog {
 
     public dialog_mintakode(JFrame fram) {
@@ -15,6 +10,7 @@ public class dialog_mintakode extends Dialog {
         initComponents();
         verifikasi1.setVisible(false);
 //        mintakode1.setVisible(false);
+    
         
     }
 
@@ -25,7 +21,7 @@ public class dialog_mintakode extends Dialog {
         bg1 = new javax.swing.JLabel();
         mintakode1 = new javax.swing.JPanel();
         mintakod = new javax.swing.JLabel();
-        txtUsername = new view.pallet.JTextfield();
+        username = new view.pallet.JTextfield();
         bg22 = new javax.swing.JLabel();
         verifikasi1 = new javax.swing.JPanel();
         verifikasi = new javax.swing.JLabel();
@@ -54,8 +50,8 @@ public class dialog_mintakode extends Dialog {
         });
         mintakode1.add(mintakod, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 70));
 
-        txtUsername.setFont(new java.awt.Font("Quicksand", 0, 24)); // NOI18N
-        mintakode1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 60));
+        username.setFont(new java.awt.Font("Quicksand", 0, 24)); // NOI18N
+        mintakode1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 60));
 
         bg22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kirimkodeotp.png"))); // NOI18N
         mintakode1.add(bg22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));
@@ -123,27 +119,8 @@ public class dialog_mintakode extends Dialog {
     }//GEN-LAST:event_verifikasiMouseExited
 
     private void mintakodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mintakodMouseClicked
- 
-    String sql = "SELECT * FROM user WHERE username = ?";
-       
-        try {
-        Connection koneksi = (Connection) Conn.configDB();
-        PreparedStatement pst = koneksi.prepareStatement(sql);
-        pst.setString(1, txtUsername.getText());
-        ResultSet res = pst.executeQuery();
-             
-            
-            if(res.next()){
-               String email = res.getString("email");
-               System.out.println(email);
-            }
-//            mintakode1.setVisible(false);
-//    verifikasi1.setVisible(true);
-        } catch (Exception e) {
-             e.printStackTrace();
-        }
-        
-    
+    mintakode1.setVisible(false);
+    verifikasi1.setVisible(true);
     }//GEN-LAST:event_mintakodMouseClicked
 
     private void keluar2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_keluar2FocusGained
@@ -173,7 +150,7 @@ public class dialog_mintakode extends Dialog {
     private javax.swing.JLabel keluar2;
     private javax.swing.JLabel mintakod;
     private javax.swing.JPanel mintakode1;
-    private view.pallet.JTextfield txtUsername;
+    private view.pallet.JTextfield username;
     private javax.swing.JLabel verifikasi;
     private javax.swing.JPanel verifikasi1;
     // End of variables declaration//GEN-END:variables

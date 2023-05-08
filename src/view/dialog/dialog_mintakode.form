@@ -67,7 +67,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.pallet.JTextfield" name="txtUsername">
+        <Component class="view.pallet.JTextfield" name="username">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Quicksand" size="24" style="0"/>
