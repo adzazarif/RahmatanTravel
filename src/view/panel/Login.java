@@ -9,10 +9,10 @@ import javax.swing.SwingUtilities;
 
 //import view.dialog.hayolo;
 import view.panel.panel_aboutversi;
-import view.main.Login;
-public class Login1 extends javax.swing.JPanel {
+import view.main.Main;
+public class Login extends javax.swing.JPanel {
 
-    public Login1() {
+    public Login() {
         initComponents();
         username.setBackground(new Color(0,0,0,1));
         password.setBackground(new Color(0,0,0,1));
@@ -56,6 +56,9 @@ public class Login1 extends javax.swing.JPanel {
             }
         });
         login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 loginMouseEntered(evt);
             }
@@ -158,7 +161,7 @@ public class Login1 extends javax.swing.JPanel {
     }//GEN-LAST:event_aboutversiFocusLost
 
     private void aboutversiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutversiMouseClicked
-    Login apa1 = (Login) SwingUtilities.getWindowAncestor(this);
+    Main apa1 = (Main) SwingUtilities.getWindowAncestor(this);
         dialog_aboutversi apa = new dialog_aboutversi(apa1);
         apa.showGlass();
     
@@ -192,7 +195,7 @@ public class Login1 extends javax.swing.JPanel {
     }//GEN-LAST:event_keluarMouseExited
 
     private void keluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseClicked
-    Login apa = (Login) SwingUtilities.getWindowAncestor(this);
+    Main apa = (Main) SwingUtilities.getWindowAncestor(this);
 //        this.setVisible(false);
         apa.dispose();
     }//GEN-LAST:event_keluarMouseClicked
@@ -206,12 +209,16 @@ public class Login1 extends javax.swing.JPanel {
     }//GEN-LAST:event_lupapasswordMouseExited
 
     private void lupapasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lupapasswordMouseClicked
-  Login apa = (Login) SwingUtilities.getWindowAncestor(this);
+  Main apa = (Main) SwingUtilities.getWindowAncestor(this);
         dialog_mintakode apa2 = new dialog_mintakode(apa);
         apa2.showPopUp();
     
         
     }//GEN-LAST:event_lupapasswordMouseClicked
+
+    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
+    
+    }//GEN-LAST:event_loginMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

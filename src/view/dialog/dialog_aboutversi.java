@@ -3,7 +3,7 @@ package view.dialog;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import view.main.Login;
+import view.main.Main;
 import view.panel.panel_developer;
 import java.awt.Color;
 
