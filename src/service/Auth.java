@@ -29,4 +29,45 @@ public class Auth {
                 return false;
         }
     }
+  
+  public boolean rememberPass(int token, int id){
+      try {
+            String query = "SELECT * FROM user WHERE token ='"+ token +"' AND id ='" + id + "'";
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(query);
+            ResultSet res = pst.executeQuery();
+            if(res.next()){
+
+                return true;
+            }else{
+                  return false;
+            }
+      } catch (Exception e) {
+          return false;
+      }
+  }
+  
+  public boolean changePass(String pass, String confirmPass, int nik){
+      if(pass == confirmPass){
+         String sql = "UPDATE user SET password = ? WHERE nik = ?";
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+             pst.setString(1, pass);
+            pst.setInt(2, nik);
+            
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        
+        }
+      }else{
+          return false;
+      }
+  }
+ 
+//  public void deleteToken(){
+//      up
+//  }
 }
