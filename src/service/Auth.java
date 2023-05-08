@@ -67,7 +67,4 @@ public class Auth {
       }
   }
  
-//  public void deleteToken(){
-//      up
-//  }
 }

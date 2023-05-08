@@ -6,6 +6,8 @@ import view.dialog.dialog_aboutversi;
 import view.dialog.dialog_mintakode;
 import java.awt.Color;
 import javax.swing.SwingUtilities;
+import service.Auth;
+
 
 //import view.dialog.hayolo;
 import view.panel.panel_aboutversi;
@@ -14,14 +16,14 @@ public class Login extends javax.swing.JPanel {
 
     public Login() {
         initComponents();
-        username.setBackground(new Color(0,0,0,1));
-        password.setBackground(new Color(0,0,0,1));
-        username.setlabelText("input your username");
-        password.setlabelText("input your password");
-        username.setapa("username");
-        password.setapa("password");
-        username.setapa1("input your username");
-        password.setapa1("input your password");
+        txtUsername.setBackground(new Color(0,0,0,1));
+        txtPassword.setBackground(new Color(0,0,0,1));
+        txtUsername.setlabelText("input your username");
+        txtPassword.setlabelText("input your password");
+        txtUsername.setapa("username");
+        txtPassword.setapa("password");
+        txtUsername.setapa1("input your username");
+        txtPassword.setapa1("input your password");
 //        Panel2.setVisible(false);
 //        Panel3.setVisible(false);
     }
@@ -31,8 +33,8 @@ public class Login extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        username = new view.pallet.JTextfield();
-        password = new view.pallet.JPasswordfield1();
+        txtUsername = new view.pallet.JTextfield();
+        txtPassword = new view.pallet.JPasswordfield1();
         login = new javax.swing.JLabel();
         keluar = new javax.swing.JLabel();
         aboutversi = new javax.swing.JLabel();
@@ -43,8 +45,8 @@ public class Login extends javax.swing.JPanel {
         setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 190, 50));
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 190, -1));
+        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 190, 50));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 190, -1));
 
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/login.png"))); // NOI18N
         login.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -125,8 +127,6 @@ public class Login extends javax.swing.JPanel {
             }
         });
         jPanel1.add(lupapassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 110, 20));
-
-        gif1.setIcon(new javax.swing.ImageIcon("E:\\SEMUA FOLDER\\imam\\kuliah\\semester 2\\projek\\gambar\\gif\\KaabahAnimation.gif")); // NOI18N
         jPanel1.add(gif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 530, 490));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg login1.png"))); // NOI18N
@@ -217,7 +217,15 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_lupapasswordMouseClicked
 
     private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-    
+        String username = txtUsername.getText();
+        String pass = txtPassword.getText();
+        
+        Auth a = new Auth();
+        if(a.login(username, pass)){
+            System.out.println("berhasil login");
+        }else{
+            System.out.println("gagal login");
+        }
     }//GEN-LAST:event_loginMouseClicked
 
 
@@ -229,7 +237,7 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel login;
     private javax.swing.JLabel lupapassword;
-    private view.pallet.JPasswordfield1 password;
-    private view.pallet.JTextfield username;
+    private view.pallet.JPasswordfield1 txtPassword;
+    private view.pallet.JTextfield txtUsername;
     // End of variables declaration//GEN-END:variables
 }

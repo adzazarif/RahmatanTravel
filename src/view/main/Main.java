@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import javax.swing.JPanel;
 import view.panel.Login;
 
-
 public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
