@@ -135,11 +135,11 @@ public class dialog_mintakode extends Dialog {
     }//GEN-LAST:event_keluar2MouseClicked
 
     private void keluar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluar2MouseEntered
-        // TODO add your handling code here:
+    keluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton1.png")));
     }//GEN-LAST:event_keluar2MouseEntered
 
     private void keluar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluar2MouseExited
-        // TODO add your handling code here:
+    keluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton.png")));
     }//GEN-LAST:event_keluar2MouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
