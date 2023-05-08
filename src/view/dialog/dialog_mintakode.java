@@ -136,9 +136,10 @@ public class dialog_mintakode extends Dialog {
             if(res.next()){
                String email = res.getString("email");
                System.out.println(email);
+                System.out.println("test");
             }
-//            mintakode1.setVisible(false);
-//    verifikasi1.setVisible(true);
+            mintakode1.setVisible(false);
+    verifikasi1.setVisible(true);
         } catch (Exception e) {
              e.printStackTrace();
         }
