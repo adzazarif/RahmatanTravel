@@ -15,7 +15,7 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import view.panel.Dasboard;
 
-public class Maindasboard extends javax.swing.JFrame {
+public class maindasboard extends javax.swing.JFrame {
 
     private Menu menu = new Menu();
     private JPanel main = new JPanel();
@@ -23,7 +23,7 @@ public class Maindasboard extends javax.swing.JFrame {
     private Animator animator;
     private boolean menuShow;
 
-    public Maindasboard() {
+    public maindasboard() {
         initComponents();
         init();
     }
@@ -128,13 +128,13 @@ public class Maindasboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -156,7 +156,7 @@ public class Maindasboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Maindasboard().setVisible(true);
+                new maindasboard().setVisible(true);
             }
         });
     }

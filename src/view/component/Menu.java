@@ -28,7 +28,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.swingx.SwingXUtilities;
-import view.main.Maindasboard;
+import view.main.maindasboard;
 import view.panel.Barang;
 import view.panel.Berangkat;
 import view.panel.Dasboard;
@@ -131,13 +131,13 @@ public class Menu extends javax.swing.JPanel {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/jamaah.png")));
-       Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
        main.showform(new Jamaah());
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Dasboard.png")));
-       Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
        main.showform(new Dasboard());
     }//GEN-LAST:event_jLabel3MouseClicked
 
