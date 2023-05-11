@@ -6,6 +6,26 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.internet.MimeMessage;
+import service.TokenEmail;
 import util.Conn;
 public class dialog_mintakode extends Dialog {
 
@@ -17,7 +37,144 @@ public class dialog_mintakode extends Dialog {
     
         
     }
+    class poo{
+    private String text;
 
+    public poo() {
+        this.text = generateText();
+    }
+
+    private String generateText() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
+    }
+    
+
+    public String getText() {
+        return this.text;
+    }
+}
+private String apa1;
+    public String randomNumber(){
+    poo apa =new poo();
+    String randomNumbera = apa.getText();
+    apa1 = apa.getText();
+//        System.out.println(randomNumbera);
+    return randomNumbera;
+}
+    public String getapa(){
+        return this.apa1;
+        
+    }
+    
+    
+
+    public void kirim()throws AddressException, MessagingException {
+           String host = "smtp.gmail.com";
+    int port = 587;
+    String username = "restuimamsafii04@gmail.com";
+    String password = "syxstfevakapdhnd";
+    
+    Properties props = new Properties();
+    props.put("mail.smtp.auth","true");
+    props.put("mail.smtp.starttls.enable","true");
+    props.put("mail.smtp.host",host);
+    props.put("mail.smtp.port",port);
+    
+    Session session = Session.getInstance(props,
+            new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(username, password);
+            }
+            });
+    String from    = "restuimamsafii04@gmail.com";
+    String to      = "jadiproplayer14@gmail.com" ;
+    String subject = "Kode Veriviksi";
+    String body = randomNumber();
+
+        Message message = new MimeMessage(session);
+    message.setFrom(new InternetAddress(from));
+    message.setRecipients(Message.RecipientType.TO,
+        InternetAddress.parse(to));
+    message.setSubject(subject);
+//    message.setText(body);
+//    String html = "<html>\n" +
+//"  <head>\n" +
+//"    <meta charset=\"UTF-8\">\n" +
+//"    <title>Persegi Panjang Verifikasi</title>\n" +
+//"    <style>\n" +
+//".verification-box {\n" +
+//"      	margin-left: 30px;\n" +
+//"        background-color: #4d90fe;\n" +
+//"        border: 3px solid #4d90fe;\n" +
+//"        border-radius: 25px;\n" +
+//"        box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3);\n" +
+//"        display: inline-block;\n" +
+//"        padding: 10px;\n" +
+//"        text-align: center;\n" +
+//"        width: 180px; /* menambahkan lebar */\n" +
+//"        height:10px; /* menambahkan tinggi */\n" +
+//"        display: flex; /* menggunakan flexbox */\n" +
+//"        align-items: center; /* align items ke tengah */\n" +
+//"        justify-content: space-evenly;\n" +
+//"      }\n" +
+//"      .verification-code {\n" +
+//"      	\n" +
+//"        font-size: 32px;\n" +
+//"        font-weight: bold;\n" +
+//"        color: #ffffff;\n" +
+//"        line-height: 1;\n" +
+//"        letter-spacing: 20px;\n" +
+//"      }\n" +
+//"      .verification-heading {\n" +
+//"      	font-weight: bold;\n" +
+//"        font-family: \"Quicksand\", sans-serif;\n" +
+//"        font-size: 15px;\n" +
+//"        color: #ff0000;\n" +
+//"        margin-left: 20px;\n" +
+//"        line-height: 1;\n" +
+//"      }\n" +
+//"      .verification-heading22 {\n" +
+//"      	font-weight: bold;\n" +
+//"        font-family: \"Quicksand\", sans-serif;\n" +
+//"        font-size: 20px;\n" +
+//"        margin-left: 45px;\n" +
+//"        line-height: 1;\n" +
+//"      }\n" +
+//"      .verification-heading23 {\n" +
+//"      	font-weight: medium;\n" +
+//"        font-family: \"Quicksand\", sans-serif;\n" +
+//"        font-size: 20px;\n" +
+//"        margin-left: 10px;\n" +
+////"        line-height: 1;\n" +
+//"      }\n" +
+//"      .verification-heading24 {\n" +
+//"      	font-weight: BOLD;\n" +
+//"        font-family: \"Quicksand\", sans-serif;\n" +
+//"        font-size: 30px;\n" +
+//"        color: #be1600;\n" +
+//"        margin-left: 23px;\n" +
+//"        line-height: 1;\n" +
+//"      }\n" +
+//"    </style>\n" +
+//"  </head>\n" +
+//"  <body>\n" +
+//"  <p class=\"verification-heading\">JANGAN BERIKAN KODE OTP INI</p>\n" +
+//"  <p class=\"verification-heading22\">KEPADA SIAPAPUN</p>\n" +
+//"  <p class=\"verification-heading24\">TERMASUK DIA</p>\n" +
+//"    <div class=\"verification-box\">\n" +
+//"      <p class=\"verification-code\">"+body+"</p>\n" +
+//"    </div>\n" +
+//"    <p class=\"verification-heading23\">Tolong Inputkan Kode Beerikut</p>\n" +
+//"  </body>\n" +
+//"</html>";
+//    message.setContent(html, "text/html");
+    Transport.send(message);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,25 +281,39 @@ public class dialog_mintakode extends Dialog {
 
     private void mintakodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mintakodMouseClicked
  
-    String sql = "SELECT * FROM user WHERE username = ?";
-       
-        try {
-        Connection koneksi = (Connection) Conn.configDB();
-        PreparedStatement pst = koneksi.prepareStatement(sql);
-        pst.setString(1, txtUsername.getText());
-        ResultSet res = pst.executeQuery();
-             
             
-            if(res.next()){
-               String email = res.getString("email");
-               System.out.println(email);
-                System.out.println("test");
-            }
-            mintakode1.setVisible(false);
-    verifikasi1.setVisible(true);
-        } catch (Exception e) {
-             e.printStackTrace();
-        }
+       try {
+        kirim();
+    } catch (AddressException ex) {
+        ex.printStackTrace();
+        
+    } catch (MessagingException ex) {
+        ex.printStackTrace();
+    }
+    System.out.println(getapa());
+//    String sql = "SELECT * FROM user WHERE username = ?";
+//       
+//        try {
+//           
+//            
+//        Connection koneksi = (Connection) Conn.configDB();
+//        PreparedStatement pst = koneksi.prepareStatement(sql);
+//        pst.setString(1, txtUsername.getText());
+//        ResultSet res = pst.executeQuery();
+//             
+//            
+//            if(res.next()){
+//               String email = res.getString("email");
+//               System.out.println(email);
+//               
+//            
+//                System.out.println(getapa());
+//            }
+//            mintakode1.setVisible(false);
+//    verifikasi1.setVisible(true);
+//        } catch (Exception e) {
+//             e.printStackTrace();
+//        }
         
     
     }//GEN-LAST:event_mintakodMouseClicked

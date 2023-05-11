@@ -118,9 +118,14 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="gif1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/view/icon/KaabahAnimation.gif"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="40" width="530" height="490"/>
+              <AbsoluteConstraints x="430" y="90" width="520" height="450"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -32,6 +32,7 @@ public class Main extends javax.swing.JFrame {
 //    // penanganan kesalahan lainnya
 //}
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

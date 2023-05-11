@@ -7,6 +7,7 @@ import view.dialog.dialog_mintakode;
 import java.awt.Color;
 import javax.swing.SwingUtilities;
 import service.Auth;
+import view.main.Maindasboard;
 
 
 //import view.dialog.hayolo;
@@ -27,7 +28,7 @@ public class Login extends javax.swing.JPanel {
 //        Panel2.setVisible(false);
 //        Panel3.setVisible(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,7 +128,9 @@ public class Login extends javax.swing.JPanel {
             }
         });
         jPanel1.add(lupapassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 110, 20));
-        jPanel1.add(gif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 530, 490));
+
+        gif1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/KaabahAnimation.gif"))); // NOI18N
+        jPanel1.add(gif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 520, 450));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg login1.png"))); // NOI18N
         jPanel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -222,6 +225,8 @@ public class Login extends javax.swing.JPanel {
         
         Auth a = new Auth();
         if(a.login(username, pass)){
+            this.setVisible(false);
+            new Maindasboard().setVisible(true);
             System.out.println("berhasil login");
         }else{
             System.out.println("gagal login");
