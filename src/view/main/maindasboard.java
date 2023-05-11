@@ -86,7 +86,7 @@ public class maindasboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        body.setBackground(new java.awt.Color(255, 249, 243));
+        body.setBackground(new java.awt.Color(255, 245, 231));
 
         javax.swing.GroupLayout bodyLayout = new javax.swing.GroupLayout(body);
         body.setLayout(bodyLayout);
