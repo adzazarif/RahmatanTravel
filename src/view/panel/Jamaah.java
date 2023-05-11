@@ -6,7 +6,7 @@ package view.panel;
 
 import javax.swing.SwingUtilities;
 import view.dialog.dialog_editjamaah;
-import view.main.Maindasboard;
+import view.main.maindasboard;
 import java.awt.Color;
 /**
  *
@@ -85,13 +85,6 @@ public class Jamaah extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-            .addGap(0, 1366, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
-=======
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,12 +115,11 @@ public class Jamaah extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(74, Short.MAX_VALUE))
->>>>>>> aa1b3372253077b54ab90648ad7cfc4de4dac6d8
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-      Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+      maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_editjamaah panggiledit = new dialog_editjamaah(main);
       panggiledit.showPopUp();
     
@@ -135,8 +127,6 @@ public class Jamaah extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-=======
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -145,6 +135,5 @@ public class Jamaah extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
->>>>>>> aa1b3372253077b54ab90648ad7cfc4de4dac6d8
     // End of variables declaration//GEN-END:variables
 }
