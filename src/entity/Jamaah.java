@@ -62,8 +62,8 @@ public class Jamaah implements Entity{
     public void setNoTelp(String noTelp){
         this.noTelp = noTelp;
     }
-    public int getNoTelp(){
-        return this.nik;
+    public String getNoTelp(){
+        return this.noTelp;
     }
     
      public void setAmountJamaah(int amountJamaah){

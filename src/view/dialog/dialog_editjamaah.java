@@ -4,7 +4,9 @@
  */
 package view.dialog;
 
+import entity.Jamaah;
 import javax.swing.JFrame;
+import repository.JamaahRepository;
 
 /**
  *
@@ -30,18 +32,50 @@ public class dialog_editjamaah extends Dialog {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        txtNIK = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
+        txtNama = new javax.swing.JTextField();
+        cmbJenisKelamin = new javax.swing.JComboBox<>();
+        txtNotelp = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("jLabel2");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 180, 50));
+
+        txtNIK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNIK.setBorder(null);
+        getContentPane().add(txtNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 290, 40));
+
+        txtAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAlamat.setBorder(null);
+        getContentPane().add(txtAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 290, 40));
+
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNama.setBorder(null);
+        getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 290, 40));
+
+        cmbJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "laki-laki", "perempuan" }));
+        cmbJenisKelamin.setBorder(null);
+        getContentPane().add(cmbJenisKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 300, 40));
+
+        txtNotelp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNotelp.setBorder(null);
+        getContentPane().add(txtNotelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 290, 40));
+
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, 160, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg edit jamaah.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, -1));
@@ -53,8 +87,30 @@ public class dialog_editjamaah extends Dialog {
     closeMessage();
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        int nik = Integer.valueOf(txtNIK.getText());
+        String nama = txtNama.getText();
+        String alamat = txtAlamat.getText();
+        String noTelp = txtNotelp.getText();
+        String jenisKelamin = String.valueOf(cmbJenisKelamin.getSelectedItem());
+        Jamaah jamaah = new Jamaah(nama,jenisKelamin,alamat,noTelp);
+        jamaah.setNik(nik);
+        JamaahRepository jamaahRepo = new JamaahRepository();
+        if(jamaahRepo.update(jamaah)){
+            System.out.println("berhasil");
+        }else{
+            System.out.println("gagal");
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtNIK;
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtNotelp;
     // End of variables declaration//GEN-END:variables
 }
