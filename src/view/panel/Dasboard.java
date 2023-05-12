@@ -5,6 +5,7 @@
 package view.panel;
 
 import java.awt.Color;
+import java.awt.Container;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Dasboard extends javax.swing.JPanel {
      */
     public Dasboard() {
         initComponents();
+   
     }
 
     /**
@@ -79,7 +81,7 @@ public class Dasboard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(990, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(178, 178, 178))
+                .addContainerGap(178, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()

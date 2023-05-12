@@ -4,6 +4,8 @@
  */
 package view.panel;
 
+import java.awt.Container;
+
 /**
  *
  * @author semafie
@@ -15,6 +17,7 @@ public class Berangkat extends javax.swing.JPanel {
      */
     public Berangkat() {
         initComponents();
+            
     }
 
     /**
@@ -29,6 +32,7 @@ public class Berangkat extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
+        setOpaque(false);
 
         jLabel1.setText("Berangkat");
 
@@ -38,15 +42,15 @@ public class Berangkat extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(166, 166, 166)
-                .addComponent(jLabel1)
-                .addContainerGap(999, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(999, 999, 999))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addContainerGap(120, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

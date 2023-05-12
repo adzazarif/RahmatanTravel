@@ -9,6 +9,7 @@ import view.dialog.dialog_editjamaah;
 import view.dialog.dialog_tambahJamaah;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.awt.Container;
 /**
  *
  * @author semafie
@@ -20,6 +21,7 @@ public class Jamaah extends javax.swing.JPanel {
      */
     public Jamaah() {
         initComponents();
+
     }
 
     /**
