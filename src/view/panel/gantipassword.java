@@ -8,12 +8,12 @@ package view.panel;
  *
  * @author semafie
  */
-public class Pemesanan extends javax.swing.JPanel {
+public class gantipassword extends javax.swing.JPanel {
 
     /**
-     * Creates new form Pemesanan
+     * Creates new form gantipassword
      */
-    public Pemesanan() {
+    public gantipassword() {
         initComponents();
     }
 
@@ -26,32 +26,24 @@ public class Pemesanan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        bg = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 249, 243));
-
-        jLabel1.setText("Pemesanan");
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg lupapassword.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1)
-                .addContainerGap(975, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel bg;
     // End of variables declaration//GEN-END:variables
 }

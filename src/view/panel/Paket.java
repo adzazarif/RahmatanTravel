@@ -28,7 +28,7 @@ public class Paket extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 245, 231));
+        setBackground(new java.awt.Color(255, 249, 243));
 
         jLabel1.setText("Paket");
 
@@ -39,14 +39,14 @@ public class Paket extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(167, 167, 167)
                 .addComponent(jLabel1)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(1022, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel1)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

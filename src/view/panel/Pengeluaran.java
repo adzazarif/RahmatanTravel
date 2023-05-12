@@ -8,12 +8,12 @@ package view.panel;
  *
  * @author semafie
  */
-public class Pemesanan extends javax.swing.JPanel {
+public class Pengeluaran extends javax.swing.JPanel {
 
     /**
-     * Creates new form Pemesanan
+     * Creates new form Pengeluaran
      */
-    public Pemesanan() {
+    public Pengeluaran() {
         initComponents();
     }
 
@@ -30,21 +30,21 @@ public class Pemesanan extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 249, 243));
 
-        jLabel1.setText("Pemesanan");
+        jLabel1.setText("Pengeluaran");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(1034, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(975, Short.MAX_VALUE))
+                .addGap(118, 118, 118))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(120, 120, 120)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

@@ -28,7 +28,7 @@ public class Pegawai extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 245, 231));
+        setBackground(new java.awt.Color(255, 249, 243));
 
         jLabel1.setText("Pegawai");
 
@@ -39,14 +39,14 @@ public class Pegawai extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(174, 174, 174)
                 .addComponent(jLabel1)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(1000, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(123, 123, 123)
                 .addComponent(jLabel1)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

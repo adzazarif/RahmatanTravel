@@ -45,7 +45,7 @@ public class Jamaah extends javax.swing.JPanel {
         btnTambah = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 245, 231));
+        setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jLabel1.setText("Jamaah");

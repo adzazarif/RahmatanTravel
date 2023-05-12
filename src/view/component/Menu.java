@@ -37,6 +37,7 @@ import view.panel.Laporan;
 import view.panel.Paket;
 import view.panel.Pegawai;
 import view.panel.Pemesanan;
+import view.panel.Pengeluaran;
 
 public class Menu extends javax.swing.JPanel {
     private int roundTopLeft = 0;
@@ -99,8 +100,15 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         panel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        Pengeluaran = new javax.swing.JLabel();
+        Berangkat = new javax.swing.JLabel();
+        Paket = new javax.swing.JLabel();
+        jamaah = new javax.swing.JLabel();
+        Dasboard = new javax.swing.JLabel();
+        Barang = new javax.swing.JLabel();
+        Pemesanan = new javax.swing.JLabel();
+        Laporan = new javax.swing.JLabel();
+        Pegawai = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
@@ -109,37 +117,209 @@ public class Menu extends javax.swing.JPanel {
         panel1.setBackground(new Color(0,0,0,0));
         panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Pengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                PengeluaranMouseClicked(evt);
             }
         });
-        panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, 60));
+        panel1.add(Pengeluaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 200, 50));
 
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Berangkat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                BerangkatMouseClicked(evt);
             }
         });
-        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 60));
+        panel1.add(Berangkat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 200, 50));
 
-        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Dasboard.png"))); // NOI18N
-        panel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 510));
+        Paket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PaketMouseClicked(evt);
+            }
+        });
+        panel1.add(Paket, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 200, 50));
 
-        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 580));
+        jamaah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jamaahMouseClicked(evt);
+            }
+        });
+        panel1.add(jamaah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 200, 50));
+
+        Dasboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DasboardMouseClicked(evt);
+            }
+        });
+        panel1.add(Dasboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 200, 50));
+
+        Barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BarangMouseClicked(evt);
+            }
+        });
+        panel1.add(Barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 200, 50));
+
+        Pemesanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PemesananMouseClicked(evt);
+            }
+        });
+        panel1.add(Pemesanan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 200, 50));
+
+        Laporan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LaporanMouseClicked(evt);
+            }
+        });
+        panel1.add(Laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 200, 50));
+
+        Pegawai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PegawaiMouseClicked(evt);
+            }
+        });
+        panel1.add(Pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 200, 50));
+
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideDasboard.png"))); // NOI18N
+        panel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 200, 570));
+
+        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 580));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/jamaah.png")));
-       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main.showform(new Jamaah());
-    }//GEN-LAST:event_jLabel2MouseClicked
+    private void jamaahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jamaahMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideJamaah.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Jamaah());
+       jamaah.setVisible(false);
+       Dasboard.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_jamaahMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Dasboard.png")));
-       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main.showform(new Dasboard());
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void DasboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DasboardMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideDasboard.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Dasboard());
+       Dasboard.setVisible(false);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_DasboardMouseClicked
+
+    private void PaketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaketMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePaket.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Paket());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(false);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_PaketMouseClicked
+
+    private void BerangkatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BerangkatMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideBerangkat.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Berangkat());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(false);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_BerangkatMouseClicked
+
+    private void PengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PengeluaranMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePengeluaran.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Pengeluaran());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(false);
+    }//GEN-LAST:event_PengeluaranMouseClicked
+
+    private void BarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideBarang.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Barang());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(false);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_BarangMouseClicked
+
+    private void PemesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PemesananMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePemesanan.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Pemesanan());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(false);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_PemesananMouseClicked
+
+    private void LaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LaporanMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideLaporan.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Laporan());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(false);
+       Pegawai.setVisible(true);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_LaporanMouseClicked
+
+    private void PegawaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PegawaiMouseClicked
+       bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePegawai.png")));
+       maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Pegawai());
+       Dasboard.setVisible(true);
+       jamaah.setVisible(true);
+       Paket.setVisible(true);
+       Berangkat.setVisible(true);
+       Barang.setVisible(true);
+       Pemesanan.setVisible(true);
+       Laporan.setVisible(true);
+       Pegawai.setVisible(false);
+       Pengeluaran.setVisible(true);
+    }//GEN-LAST:event_PegawaiMouseClicked
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -217,9 +397,16 @@ public class Menu extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Barang;
+    private javax.swing.JLabel Berangkat;
+    private javax.swing.JLabel Dasboard;
+    private javax.swing.JLabel Laporan;
+    private javax.swing.JLabel Paket;
+    private javax.swing.JLabel Pegawai;
+    private javax.swing.JLabel Pemesanan;
+    private javax.swing.JLabel Pengeluaran;
     private javax.swing.JLabel bg;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jamaah;
     private javax.swing.JPanel panel1;
     // End of variables declaration//GEN-END:variables
 }
