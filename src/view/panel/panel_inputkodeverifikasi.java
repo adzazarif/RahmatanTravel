@@ -214,10 +214,7 @@ private String apa1;
             }
         });
         minta.add(mintakod, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 70));
-
-        txtUsername.setFont(new java.awt.Font("Quicksand", 0, 24)); // NOI18N
-        txtUsername.setSelectedTextColor(new java.awt.Color(51, 51, 51));
-        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 290, 60));
+        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 340, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
         minta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));

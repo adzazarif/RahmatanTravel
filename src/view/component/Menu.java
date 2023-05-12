@@ -28,7 +28,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.swingx.SwingXUtilities;
-import view.main.maindasboard;
+import view.main.Maindasboard;
 import view.panel.Barang;
 import view.panel.Berangkat;
 import view.panel.Dasboard;
@@ -99,8 +99,8 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         panel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jamaah = new javax.swing.JLabel();
+        Dasboard = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
@@ -109,37 +109,41 @@ public class Menu extends javax.swing.JPanel {
         panel1.setBackground(new Color(0,0,0,0));
         panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jamaah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jamaahMouseClicked(evt);
             }
         });
-        panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, 60));
+        panel1.add(jamaah, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, 60));
 
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Dasboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                DasboardMouseClicked(evt);
             }
         });
-        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 60));
+        panel1.add(Dasboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 60));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Dasboard.png"))); // NOI18N
         panel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 510));
 
-        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 580));
+        add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 580));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jamaahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jamaahMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/jamaah.png")));
-       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main.showform(new Jamaah());
-    }//GEN-LAST:event_jLabel2MouseClicked
+       Maindasboard main1 =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Jamaah());
+       jamaah.setVisible(false);
+       Dasboard.setVisible(true);
+    }//GEN-LAST:event_jamaahMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void DasboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DasboardMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Dasboard.png")));
-       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main.showform(new Dasboard());
-    }//GEN-LAST:event_jLabel3MouseClicked
+       Maindasboard main1 =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+       main1.showform(new Dasboard());
+       Dasboard.setVisible(false);
+       jamaah.setVisible(true);
+    }//GEN-LAST:event_DasboardMouseClicked
 
     @Override
     protected void paintComponent(Graphics grphcs) {
@@ -217,9 +221,9 @@ public class Menu extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Dasboard;
     private javax.swing.JLabel bg;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jamaah;
     private javax.swing.JPanel panel1;
     // End of variables declaration//GEN-END:variables
 }

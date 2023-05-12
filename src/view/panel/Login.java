@@ -236,7 +236,7 @@ parent.setComponentZOrder(this, 0);
         Auth a = new Auth();
         if(a.login(username, pass)){
             this.setVisible(false);
-            new maindasboard().setVisible(true);
+            new Maindasboard().setVisible(true);
             System.out.println("berhasil login");
         }else{
             System.out.println("gagal login");

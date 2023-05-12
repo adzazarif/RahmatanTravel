@@ -7,7 +7,7 @@ package view.panel;
 import javax.swing.SwingUtilities;
 import view.dialog.dialog_editjamaah;
 import view.dialog.dialog_tambahJamaah;
-import view.main.maindasboard;
+import view.main.Maindasboard;
 import java.awt.Color;
 /**
  *
@@ -177,20 +177,20 @@ public class Jamaah extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-      maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+      Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_editjamaah panggiledit = new dialog_editjamaah(main);
       panggiledit.showPopUp();
     
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_editjamaah panggiledit = new dialog_editjamaah(main);
       panggiledit.showPopUp();
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_tambahJamaah panggilTambah = new dialog_tambahJamaah(main);
       panggilTambah.showPopUp();
     }//GEN-LAST:event_btnTambahMouseClicked
