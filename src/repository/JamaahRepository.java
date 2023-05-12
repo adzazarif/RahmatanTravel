@@ -73,7 +73,7 @@ public class JamaahRepository implements Repository<Jamaah>{
             pst.setString(1, jamaah.getNama());
             pst.setString(2, jamaah.getJenisKelamin());
             pst.setString(3, jamaah.getAlamat());
-            pst.setInt(4, jamaah.getNoTelp()); 
+            pst.setString(4, jamaah.getNoTelp()); 
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -93,7 +93,7 @@ public class JamaahRepository implements Repository<Jamaah>{
              pst.setString(1, jamaah.getNama());
             pst.setString(2, jamaah.getJenisKelamin());
             pst.setString(3, jamaah.getAlamat());
-            pst.setInt(4, jamaah.getNoTelp()); 
+            pst.setString(4, jamaah.getNoTelp()); 
             pst.setInt(5, jamaah.getNik());
             pst.executeUpdate();
             return true;
