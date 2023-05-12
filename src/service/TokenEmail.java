@@ -63,7 +63,7 @@ public class TokenEmail {
             }
             });
     String from    = "restuimamsafii04@gmail.com";
-    String to      = "jadiproplayer14@gmail.com";
+    String to      = "restuimamsafii04@gmail.com";
     String subject = "Kode Verifikasi";
     String body = "test";
 

@@ -5,8 +5,10 @@ import java.awt.BorderLayout;
 import view.dialog.dialog_aboutversi;
 import view.dialog.dialog_mintakode;
 import java.awt.Color;
+import java.awt.Container;
 import javax.swing.SwingUtilities;
 import service.Auth;
+import view.component.GlassPanePopup;
 import view.main.Maindasboard;
 
 
@@ -17,6 +19,7 @@ public class Login extends javax.swing.JPanel {
 
     public Login() {
         initComponents();
+        
         txtUsername.setBackground(new Color(0,0,0,1));
         txtPassword.setBackground(new Color(0,0,0,1));
         txtUsername.setlabelText("input your username");
@@ -165,7 +168,7 @@ public class Login extends javax.swing.JPanel {
 
     private void aboutversiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutversiMouseClicked
     Main apa1 = (Main) SwingUtilities.getWindowAncestor(this);
-        dialog_aboutversi apa = new dialog_aboutversi(apa1);
+        dialog_mintakode apa = new dialog_mintakode(apa1);
         apa.showGlass();
     
         apa.showPopUpNonGlass();
@@ -212,9 +215,16 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_lupapasswordMouseExited
 
     private void lupapasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lupapasswordMouseClicked
-  Main apa = (Main) SwingUtilities.getWindowAncestor(this);
-        dialog_mintakode apa2 = new dialog_mintakode(apa);
-        apa2.showPopUp();
+        
+        
+        Container parent = this.getParent();
+
+// Mendapatkan index saat ini dari panel dalam parent container
+int currentIndex = parent.getComponentZOrder(this);
+
+// Memindahkan panel ke index terbawah (indeks 0)
+parent.setComponentZOrder(this, 0);
+        GlassPanePopup.showPopup(new panel_inputkodeverifikasi());
     
         
     }//GEN-LAST:event_lupapasswordMouseClicked

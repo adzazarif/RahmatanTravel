@@ -6,6 +6,8 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import view.component.GlassPanePopup;
 import view.panel.Login;
 
 public class Main extends javax.swing.JFrame {
@@ -15,6 +17,7 @@ public class Main extends javax.swing.JFrame {
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 35, 35));
         setLocationRelativeTo(this);
         
+        GlassPanePopup.install(this);
     }
     public void panggillogin(){
         
