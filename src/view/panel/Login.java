@@ -9,7 +9,7 @@ import java.awt.Container;
 import javax.swing.SwingUtilities;
 import service.Auth;
 import view.component.GlassPanePopup;
-import view.main.Maindasboard;
+import view.main.maindasboard;
 
 
 //import view.dialog.hayolo;
@@ -236,7 +236,7 @@ parent.setComponentZOrder(this, 0);
         Auth a = new Auth();
         if(a.login(username, pass)){
             this.setVisible(false);
-            new Maindasboard().setVisible(true);
+            new maindasboard().setVisible(true);
             System.out.println("berhasil login");
         }else{
             System.out.println("gagal login");

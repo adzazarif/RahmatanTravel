@@ -7,7 +7,7 @@ package view.panel;
 import javax.swing.SwingUtilities;
 import view.dialog.dialog_editjamaah;
 import view.dialog.dialog_tambahJamaah;
-import view.main.Maindasboard;
+import view.main.maindasboard;
 import java.awt.Color;
 /**
  *
@@ -45,7 +45,7 @@ public class Jamaah extends javax.swing.JPanel {
         btnTambah = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 245, 231));
+        setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jLabel1.setText("Jamaah");
@@ -177,20 +177,20 @@ public class Jamaah extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-      Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+      maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_editjamaah panggiledit = new dialog_editjamaah(main);
       panggiledit.showPopUp();
     
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_editjamaah panggiledit = new dialog_editjamaah(main);
       panggiledit.showPopUp();
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
-        Maindasboard main =(Maindasboard)SwingUtilities.getWindowAncestor(this);
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_tambahJamaah panggilTambah = new dialog_tambahJamaah(main);
       panggilTambah.showPopUp();
     }//GEN-LAST:event_btnTambahMouseClicked

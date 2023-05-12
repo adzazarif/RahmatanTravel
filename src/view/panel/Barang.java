@@ -28,7 +28,8 @@ public class Barang extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 245, 231));
+        setBackground(new java.awt.Color(255, 249, 243));
+        setPreferredSize(new java.awt.Dimension(1218, 768));
 
         jLabel1.setText("Barang");
 
@@ -39,14 +40,14 @@ public class Barang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
                 .addComponent(jLabel1)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(999, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
