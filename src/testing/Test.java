@@ -8,6 +8,7 @@ import repository.DashboardRepository;
 import repository.JamaahRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
+import service.Auth;
 
 public class Test {
     public static void main(String[] args) {
@@ -43,10 +44,11 @@ public class Test {
 //            System.out.println("");
 //        }
 //        
-        DashboardRepository ds = new DashboardRepository();
+//        DashboardRepository ds = new DashboardRepository();
+//        
+//    for(Paket pk:ds.getOftenPaket()){
+//        System.out.println("nama " + pk.getNama());
+//    }
         
-    for(Paket pk:ds.getOftenPaket()){
-        System.out.println("nama " + pk.getNama());
-    }
     }
 }
