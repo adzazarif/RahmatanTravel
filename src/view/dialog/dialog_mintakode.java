@@ -25,16 +25,19 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.internet.MimeMessage;
+import javax.swing.SwingUtilities;
+import service.Auth;
 import service.TokenEmail;
 import util.Conn;
+import view.main.maindasboard;
 public class dialog_mintakode extends Dialog {
-
+    
     public dialog_mintakode(JFrame fram) {
         super(fram);
         initComponents();
         
-    
-        
+        validasiBerhasil.setVisible(false);
+        validasiSalah.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -42,10 +45,16 @@ public class dialog_mintakode extends Dialog {
     private void initComponents() {
 
         bg1 = new javax.swing.JLabel();
+        validasiBerhasil = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        validasiSalah = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         verifikasi1 = new javax.swing.JPanel();
         verifikasi = new javax.swing.JLabel();
         keluar2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKode = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
 
         bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
@@ -53,11 +62,44 @@ public class dialog_mintakode extends Dialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        validasiBerhasil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        validasiBerhasil.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi berhasil.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        validasiBerhasil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
+
+        getContentPane().add(validasiBerhasil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
+
+        validasiSalah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi salah token.png"))); // NOI18N
+        jLabel3.setText("jLabel2");
+        validasiSalah.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
+
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        validasiSalah.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 130, 40));
+
+        getContentPane().add(validasiSalah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
+
         verifikasi1.setBackground(new Color(0,0,0,0));
         verifikasi1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         verifikasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/verifikasi.png"))); // NOI18N
         verifikasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verifikasiMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 verifikasiMouseEntered(evt);
             }
@@ -88,12 +130,12 @@ public class dialog_mintakode extends Dialog {
             }
         });
         verifikasi1.add(keluar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
-        verifikasi1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 330, 60));
+        verifikasi1.add(txtKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 330, 60));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
         verifikasi1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
-        getContentPane().add(verifikasi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));
+        getContentPane().add(verifikasi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 450, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,11 +168,53 @@ public class dialog_mintakode extends Dialog {
     keluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/silangbutton.png")));
     }//GEN-LAST:event_keluar2MouseExited
 
+    private void verifikasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verifikasiMouseClicked
+        String token = txtKode.getText();
+        Auth a = new Auth();
+         String queryCek = "SELECT token FROM user WHERE username = ?";
+         String username = a.username;
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        pst.setString(1, username);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            if(txtKode.getText().equals(res.getString("token"))){
+             
+                a.hapusToken(username);
+                a.username = "";
+                verifikasi1.setVisible(false);
+                validasiBerhasil.setVisible(true);
+            }else{
+               verifikasi1.setVisible(false);
+                validasiSalah.setVisible(true);
+            }
+        }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_verifikasiMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        validasiSalah.setVisible(false);
+        verifikasi1.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        validasiBerhasil.setVisible(false);
+        verifikasi1.setVisible(true);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel keluar2;
+    private javax.swing.JTextField txtKode;
+    private javax.swing.JPanel validasiBerhasil;
+    private javax.swing.JPanel validasiSalah;
     private javax.swing.JLabel verifikasi;
     private javax.swing.JPanel verifikasi1;
     // End of variables declaration//GEN-END:variables

@@ -13,6 +13,7 @@ import util.Conn;
  * @author WINDOWS 10
  */
 public class Auth {
+    public static String username ;
   public boolean login(String username, String pass){
         try {
             String query = "SELECT * FROM user WHERE username ='"+ username +"' AND password ='" + pass + "'";
@@ -46,7 +47,40 @@ public class Auth {
           return false;
       }
   }
-  
+  public void kirimTokenDB(String Username, String token){
+       String sql = "UPDATE user SET token = ? WHERE username = ?";
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+             
+            pst.setString(1, token);
+            pst.setString(2, Username);
+            
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+  }
+  public void hapusToken(String username){
+      String token = "";
+      
+      String sql = "UPDATE user SET token = ? WHERE username = ?";
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setString(1, token);
+             pst.setString(2, username);
+            
+            
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+  }
   public boolean changePass(String pass, String confirmPass, int nik){
       if(pass == confirmPass){
          String sql = "UPDATE user SET password = ? WHERE nik = ?";

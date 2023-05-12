@@ -29,6 +29,7 @@ import view.component.GlassPanePopup;
 import view.dialog.dialog_mintakode;
 import view.main.Main;
 import java.awt.Color;
+import service.Auth;
 
 
 
@@ -64,7 +65,7 @@ private String apa1;
     return randomNumbera;
 }
     public String getapa(){
-        return this.apa1;
+        return apa1;
         
     }
 
@@ -226,8 +227,12 @@ private String apa1;
     }// </editor-fold>//GEN-END:initComponents
 
     private void mintakodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mintakodMouseClicked
-
+        Auth at = new Auth();
+        
+        
             String sql = "SELECT * FROM user WHERE username = ?";
+            
+
         
                 try {
             
@@ -241,9 +246,13 @@ private String apa1;
                         if(res.next()){
                                email = res.getString("email");
                                System.out.println(email);
-                               kirim();
-                               System.out.println(getapa());
                                
+                               kirim();
+                               at.username = txtUsername.getText();
+                               
+                               String token = getapa();
+                               at.kirimTokenDB(txtUsername.getText(), token);
+                                System.out.println(token);      
                                
                             }
                         
