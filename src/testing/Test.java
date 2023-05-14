@@ -6,6 +6,7 @@ import entity.Pemesanan;
 import entity.User;
 import repository.DashboardRepository;
 import repository.JamaahRepository;
+import repository.PaketRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
 import service.Auth;
@@ -49,6 +50,15 @@ public class Test {
 //    for(Paket pk:ds.getOftenPaket()){
 //        System.out.println("nama " + pk.getNama());
 //    }
+        
+PaketRepository paketRepo = new PaketRepository();
+    
+     
+    for(Paket p:paketRepo.getByid(1)){
+        System.out.println(p.getNama());
+        System.out.println(p.getDeskripsi());
+    }
+     
         
     }
 }

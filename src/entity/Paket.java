@@ -11,6 +11,7 @@ import java.util.Date;
  * @author WINDOWS 10
  */
 public class Paket implements Entity{
+    public int id;
     private int paketId;
     private String start;
     private String namaPaket;
@@ -19,28 +20,27 @@ public class Paket implements Entity{
     private int minimDp;
     private int harga;
     private int diskon;
-    String menu;
+    private String menu;
     private int totalMasuk;
     public static String tableName = "master_paket";
     
     public Paket(){
         
     }
-        public Paket(String menu,String start, String namaPaket,String rentangWaktu,String deskripsi,int minimDp, int harga, int diskon){
+        public Paket(String menu, String start, String namaPaket,String deskripsi,int minimDp, int harga, int diskon){
         this.menu = menu;
         this.start = start;
         this.namaPaket = namaPaket;
-        this.rentangWaktu = rentangWaktu;
         this.deskripsi = deskripsi;
         this.minimDp = minimDp;
         this.harga = harga;
         this.diskon = diskon;
     }
-    public Paket(int paketId,String start, String namaPaket,String rentangWaktu,String deskripsi,int minimDp, int harga, int diskon){
+    public Paket(int paketId,String menu ,String start, String namaPaket,String deskripsi,int minimDp, int harga, int diskon){
         this.paketId = paketId;
+        this.menu = menu;
         this.start = start;
         this.namaPaket = namaPaket;
-        this.rentangWaktu = rentangWaktu;
         this.deskripsi = deskripsi;
         this.minimDp = minimDp;
         this.harga = harga;

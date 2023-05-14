@@ -7,21 +7,33 @@ package view.dialog;
 import entity.Jamaah;
 import javax.swing.JFrame;
 import repository.JamaahRepository;
+import view.panel.JamaahForm;
 
 /**
  *
  * @author semafie
  */
 public class dialog_editjamaah extends Dialog {
-
+    JamaahRepository jamaahRepo = new JamaahRepository();
+    private int NIK = JamaahForm.idJamaah;
     /**
      * Creates new form dialog_editjamaah
      */
     public dialog_editjamaah(JFrame fram) {
         super(fram);
         initComponents();
+        setValue();
     }
-
+    
+    public void setValue(){
+        for(Jamaah jm:jamaahRepo.getById(NIK)){
+            txtAlamat.setText(jm.getAlamat());
+            txtNIK.setText(String.valueOf(jm.getNik()));
+            txtNama.setText(jm.getNama());
+            txtNotelp.setText(jm.getNoTelp());
+            cmbJenisKelamin.setSelectedItem(jm.getJenisKelamin());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,23 +62,25 @@ public class dialog_editjamaah extends Dialog {
         });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 180, 50));
 
-        txtNIK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNIK.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNIK.setBorder(null);
+        txtNIK.setEnabled(false);
         getContentPane().add(txtNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 290, 40));
 
-        txtAlamat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAlamat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtAlamat.setBorder(null);
         getContentPane().add(txtAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 290, 40));
 
-        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNama.setBorder(null);
         getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 290, 40));
 
+        cmbJenisKelamin.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         cmbJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "laki-laki", "perempuan" }));
         cmbJenisKelamin.setBorder(null);
         getContentPane().add(cmbJenisKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 300, 40));
 
-        txtNotelp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNotelp.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNotelp.setBorder(null);
         getContentPane().add(txtNotelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 290, 40));
 

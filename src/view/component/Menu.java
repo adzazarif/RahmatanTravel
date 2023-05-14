@@ -30,11 +30,11 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.swingx.SwingXUtilities;
 import view.main.maindasboard;
 import view.panel.Barang;
-import view.panel.Berangkat;
 import view.panel.Dasboard;
-import view.panel.Jamaah;
+import view.panel.JamaahForm;
+import view.panel.Keberangkatan;
 import view.panel.Laporan;
-import view.panel.Paket;
+import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.Pemesanan;
 import view.panel.Pengeluaran;
@@ -111,7 +111,7 @@ public class Menu extends javax.swing.JPanel {
         Pegawai = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 249, 243));
+        setBackground(new Color(0,0,0,0));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel1.setBackground(new Color(0,0,0,0));
@@ -189,7 +189,7 @@ public class Menu extends javax.swing.JPanel {
     private void jamaahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jamaahMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideJamaah.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Jamaah());
+       main1.showform(new JamaahForm());
        jamaah.setVisible(false);
        Dasboard.setVisible(true);
        Paket.setVisible(true);
@@ -219,7 +219,7 @@ public class Menu extends javax.swing.JPanel {
     private void PaketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaketMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePaket.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Paket());
+       main1.showform(new PaketForm());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(false);
@@ -234,7 +234,7 @@ public class Menu extends javax.swing.JPanel {
     private void BerangkatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BerangkatMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideBerangkat.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Berangkat());
+       main1.showform(new Keberangkatan());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(true);
