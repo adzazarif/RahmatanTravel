@@ -267,9 +267,10 @@ public class JamaahForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        if(jamaahRepo.delete(jamaah.getNik())){
+        if(jamaahRepo.delete(idJamaah)){
             System.out.println("Berhasil di delete");
             load_table();
+            setAmount();
         }else{
             System.out.println("gagal");
         }
