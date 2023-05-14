@@ -5,6 +5,7 @@ import view.model.ModelMenu;
 import view.swing.MenuItem;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -199,6 +200,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+       
     }//GEN-LAST:event_jamaahMouseClicked
 
     private void DasboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DasboardMouseClicked
@@ -214,6 +216,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+
     }//GEN-LAST:event_DasboardMouseClicked
 
     private void PaketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaketMouseClicked
@@ -244,6 +247,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+       
     }//GEN-LAST:event_BerangkatMouseClicked
 
     private void PengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PengeluaranMouseClicked
@@ -259,6 +263,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(false);
+       
     }//GEN-LAST:event_PengeluaranMouseClicked
 
     private void BarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangMouseClicked
@@ -274,6 +279,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+       
     }//GEN-LAST:event_BarangMouseClicked
 
     private void PemesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PemesananMouseClicked
@@ -289,6 +295,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(true);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+       
     }//GEN-LAST:event_PemesananMouseClicked
 
     private void LaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LaporanMouseClicked
@@ -304,6 +311,7 @@ public class Menu extends javax.swing.JPanel {
        Laporan.setVisible(false);
        Pegawai.setVisible(true);
        Pengeluaran.setVisible(true);
+       
     }//GEN-LAST:event_LaporanMouseClicked
 
     private void PegawaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PegawaiMouseClicked

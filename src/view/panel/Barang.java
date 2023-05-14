@@ -19,6 +19,7 @@ public class Barang extends javax.swing.JPanel {
      */
     public Barang() {
         initComponents();
+                
     }
 
     /**
