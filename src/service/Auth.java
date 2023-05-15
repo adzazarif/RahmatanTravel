@@ -81,24 +81,23 @@ public class Auth {
         
         }
   }
-  public boolean changePass(String pass, String confirmPass, int nik){
-      if(pass == confirmPass){
-         String sql = "UPDATE user SET password = ? WHERE nik = ?";
+  public boolean changePass(String pass, String confirmPass, String username){
+
+         String sql = "UPDATE user SET password = ? WHERE username = ?";
         try {
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
              pst.setString(1, pass);
-            pst.setInt(2, nik);
+            pst.setString(2, username);
             
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         
         }
-      }else{
-          return false;
-      }
+      
   }
  
 }

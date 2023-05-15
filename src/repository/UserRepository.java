@@ -42,6 +42,25 @@ public class UserRepository implements Repository<User>{
         return user;
     }
 
+     public List<User> getById(Integer id) {
+        String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        List<User> user = new ArrayList<>();
+        try {
+                  Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                user.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return user;
+    }
+     
     @Override
     public User get(Integer id) {
        String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
@@ -64,7 +83,7 @@ public class UserRepository implements Repository<User>{
 
     @Override
     public boolean add(User user) {
-            String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`,`email`,`alamat`,`no_telp`,`foto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
@@ -72,6 +91,10 @@ public class UserRepository implements Repository<User>{
             pst.setString(2, user.getUsername());
             pst.setString(3, user.getRole());
             pst.setString(4, user.getPassword()); 
+            pst.setString(5, user.getEmail()); 
+            pst.setString(6, user.getAlamat()); 
+            pst.setString(7, user.getNoTelp()); 
+            pst.setString(8, user.getFoto()); 
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -83,7 +106,7 @@ public class UserRepository implements Repository<User>{
     @Override
     public boolean update(User user) {
 
-        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ?, email = ?, alamat = ?, no_telp = ?, foto = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -92,7 +115,11 @@ public class UserRepository implements Repository<User>{
             pst.setString(2, user.getUsername());
             pst.setString(3, user.getRole());
             pst.setString(4, user.getPassword());
-            pst.setInt(5, user.getId());
+            pst.setString(5, user.getEmail());
+            pst.setString(6, user.getAlamat());
+            pst.setString(7, user.getNoTelp());
+            pst.setString(8, user.getFoto());
+            pst.setInt(9, user.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -117,11 +144,14 @@ public class UserRepository implements Repository<User>{
     
         private User mapToEntity(ResultSet result) throws SQLException {
         User user = new User(
-            result.getInt("id"),
             result.getString("nama"),
             result.getString("username"),
             result.getString("password"),
-            result.getString("role")
+            result.getString("role"),
+            result.getString("email"),
+            result.getString("alamat"),
+            result.getString("no_telp"),
+            result.getString("foto")
         );
 
         user.setId(result.getInt("id"));

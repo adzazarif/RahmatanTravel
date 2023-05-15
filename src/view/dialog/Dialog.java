@@ -86,7 +86,8 @@ public class Dialog extends JDialog {
     
     public void closeMessage() {
         startAnimator(false);
-        
+        revalidate();
+        repaint();
     }
    
     

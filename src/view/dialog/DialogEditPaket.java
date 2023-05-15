@@ -16,6 +16,7 @@ import view.panel.PaketForm;
 public class DialogEditPaket extends Dialog {
     PaketRepository paketRepo = new PaketRepository();
     Paket pkt = new Paket();
+    PaketForm pf = new PaketForm();
     private int id = PaketForm.id;
     /**
      * Creates new form DialogEditPaket
@@ -177,14 +178,18 @@ public class DialogEditPaket extends Dialog {
         
         Paket paket = new Paket(id, menu, start, nama, desc, minimDp, harga, diskon);
         boolean edit = paketRepo.update(paket);
+        
         if(edit){
             System.out.println("Berhasil");
-            PaketForm pf = new PaketForm();
-            pf.refreshTable();
             closeMessage();
+            pf.load_table();
+            pf.test();
+            
+            
         }else{
             System.out.println("gagal");
         }
+        
     }//GEN-LAST:event_btnEditMouseClicked
 
 

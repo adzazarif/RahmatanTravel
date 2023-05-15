@@ -31,7 +31,8 @@ import service.TokenEmail;
 import util.Conn;
 import view.main.maindasboard;
 public class dialog_mintakode extends Dialog {
-    
+    Auth a = new Auth();
+    private String username = a.username;
     public dialog_mintakode(JFrame fram) {
         super(fram);
         initComponents();
@@ -48,14 +49,19 @@ public class dialog_mintakode extends Dialog {
         validasiBerhasil = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        validasiSalah = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         verifikasi1 = new javax.swing.JPanel();
         verifikasi = new javax.swing.JLabel();
         keluar2 = new javax.swing.JLabel();
         txtKode = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
+        validasiSalah = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        changePass = new javax.swing.JPanel();
+        txtRepeatPass = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
+        btnChange = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
 
@@ -76,21 +82,6 @@ public class dialog_mintakode extends Dialog {
         validasiBerhasil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
 
         getContentPane().add(validasiBerhasil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
-
-        validasiSalah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi salah token.png"))); // NOI18N
-        jLabel3.setText("jLabel2");
-        validasiSalah.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
-
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        validasiSalah.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 130, 40));
-
-        getContentPane().add(validasiSalah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
 
         verifikasi1.setBackground(new Color(0,0,0,0));
         verifikasi1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,6 +128,43 @@ public class dialog_mintakode extends Dialog {
 
         getContentPane().add(verifikasi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 450, 480));
 
+        validasiSalah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi salah token.png"))); // NOI18N
+        jLabel3.setText("jLabel2");
+        validasiSalah.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
+
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        validasiSalah.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 130, 40));
+
+        getContentPane().add(validasiSalah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
+
+        changePass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtRepeatPass.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtRepeatPass.setBorder(null);
+        changePass.add(txtRepeatPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 282, 270, 40));
+
+        txtPass.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtPass.setBorder(null);
+        changePass.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 158, 270, 40));
+
+        btnChange.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnChangeMouseClicked(evt);
+            }
+        });
+        changePass.add(btnChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 370, 60));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/ganti pass.png"))); // NOI18N
+        changePass.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));
+
+        getContentPane().add(changePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 450, 480));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -170,9 +198,9 @@ public class dialog_mintakode extends Dialog {
 
     private void verifikasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verifikasiMouseClicked
         String token = txtKode.getText();
-        Auth a = new Auth();
+        
          String queryCek = "SELECT token FROM user WHERE username = ?";
-         String username = a.username;
+         
         try {
         Connection koneksi = (Connection) Conn.configDB();
         PreparedStatement pst = koneksi.prepareStatement(queryCek);
@@ -184,9 +212,11 @@ public class dialog_mintakode extends Dialog {
                 a.hapusToken(username);
                 a.username = "";
                 verifikasi1.setVisible(false);
+                changePass.setVisible(false);
                 validasiBerhasil.setVisible(true);
             }else{
                verifikasi1.setVisible(false);
+               changePass.setVisible(false);
                 validasiSalah.setVisible(true);
             }
         }
@@ -196,23 +226,48 @@ public class dialog_mintakode extends Dialog {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         validasiSalah.setVisible(false);
+        changePass.setVisible(false);
         verifikasi1.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         validasiBerhasil.setVisible(false);
-        verifikasi1.setVisible(true);
+        verifikasi1.setVisible(false);
+        changePass.setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void btnChangeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeMouseClicked
+        String pass = txtPass.getText();
+        String repeatPass = txtRepeatPass.getText();
+        if(pass.equals(repeatPass)){
+              boolean changePassword = a.changePass(pass, repeatPass, username);
+        if(changePassword){
+            System.out.println("berhasil");
+            closeMessage();
+        }else{
+            System.out.println("gagal");
+        }
+        }else{
+            System.out.println("Tidak sama");
+        }
+      
+        
+    }//GEN-LAST:event_btnChangeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
     private javax.swing.JLabel bg1;
+    private javax.swing.JLabel btnChange;
+    private javax.swing.JPanel changePass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel keluar2;
     private javax.swing.JTextField txtKode;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtRepeatPass;
     private javax.swing.JPanel validasiBerhasil;
     private javax.swing.JPanel validasiSalah;
     private javax.swing.JLabel verifikasi;
