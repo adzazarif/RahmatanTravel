@@ -13,11 +13,22 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import view.component.Menu1;
+import view.event.EventMenuSelected;
+import view.model.ModelMenu1;
+import view.panel.BarangForm;
+import view.panel.Berangkat;
 import view.panel.Dasboard;
+import view.panel.JamaahForm;
+import view.panel.Laporan;
+import view.panel.PaketForm;
+import view.panel.Pegawai;
+import view.panel.Pemesanan;
+import view.panel.Pengeluaran;
 
 public class maindasboard extends javax.swing.JFrame {
 
-    private Menu menu = new Menu();
+    private Menu1 menu = new Menu1();
     private JPanel main = new JPanel();
     private MigLayout layout;
     private Animator animator;
@@ -34,7 +45,40 @@ public class maindasboard extends javax.swing.JFrame {
         main.setOpaque(false);
         main.setLayout(new BorderLayout());
         menu.setBorder(BorderFactory.createEmptyBorder(0, 5, 30, 30));
-        
+        menu.setEvent(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                System.out.println(index);
+                if(index == 0){
+                    showform(new Dasboard());
+                } else if(index == 1) {
+                    showform(new JamaahForm());
+                }else if(index == 2){
+                    showform(new PaketForm());
+                }else if(index ==3){
+                    showform(new Berangkat());
+                }else if(index == 4){
+                    showform(new BarangForm());
+                }else if(index == 5){
+                    showform(new Pemesanan());
+                }else if(index == 6){
+                    showform(new Pegawai());
+                }else if(index == 7){
+                    showform(new Pengeluaran());
+                }else if(index == 8){
+                    showform(new Laporan());
+                }
+            }
+        });
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")),new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")),new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")),new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")),new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/barang2.png")),new ImageIcon(getClass().getResource("/view/icon/barang1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")),new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")),new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")),new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")),new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
         menu.addEventMenu(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -44,16 +88,16 @@ public class maindasboard extends javax.swing.JFrame {
             }
         });
 
-        body.add(menu, "w 73!");
+        body.add(menu, "w 79!");
         body.add(main, "w 100%");
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
                 double width;
                 if (menuShow) {
-                    width = 73 + (150 * (1f - fraction));
+                    width = 79 + (150 * (1f - fraction));
                 } else {
-                    width = 73 + (150 * fraction);
+                    width = 79 + (150 * fraction);
                 }
                 layout.setComponentConstraints(menu, "w " + width + "!");
                 body.revalidate();

@@ -30,10 +30,10 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.swingx.SwingXUtilities;
 import view.main.maindasboard;
-import view.panel.Barang;
+import view.panel.BarangForm;
 import view.panel.Dasboard;
 import view.panel.JamaahForm;
-import view.panel.Keberangkatan;
+import view.panel.KeberangkatanForm;
 import view.panel.Laporan;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
@@ -237,7 +237,7 @@ public class Menu extends javax.swing.JPanel {
     private void BerangkatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BerangkatMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideBerangkat.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Keberangkatan());
+       main1.showform(new KeberangkatanForm());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(true);
@@ -269,7 +269,7 @@ public class Menu extends javax.swing.JPanel {
     private void BarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarangMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideBarang.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Barang());
+       main1.showform(new BarangForm());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(true);

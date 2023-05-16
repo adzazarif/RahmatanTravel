@@ -20,12 +20,14 @@ public class User implements Entity{
     private String alamat;
     private String noTelp;
     private String foto;
+    private String jenisKelamin;
+    private int idCard;
     
     
     public User(){
         
     }
-     public User(String nama,String username,String role,String pass,String email, String alamat, String noTelp, String foto){
+     public User(String nama,String username,String role,String pass,String email, String alamat, String noTelp, String foto, String jeniskelamin, int idcard){
         this.nama = nama;
         this.username = username;
         this.password = pass;
@@ -34,7 +36,8 @@ public class User implements Entity{
         this.alamat = alamat;
         this.noTelp = noTelp;
         this.foto = foto;
-        
+        this.jenisKelamin = jeniskelamin;
+        this.idCard = idcard;
     }
     public User(int id,String nama,String username,String role,String pass){
         this.id = id;
@@ -50,6 +53,13 @@ public class User implements Entity{
     }
     public int getId(){
         return this.id;
+    }
+    
+      public void setIdCard(int idCard){
+        this.idCard = idCard;
+    }
+    public int getICard(){
+        return idCard;
     }
     
      public void setNama(String nama){
@@ -106,5 +116,12 @@ public class User implements Entity{
     }
     public String getFoto(){
         return foto;
+    }
+    
+      public void setJenisKelamin(String jenisKelamin){
+        this.jenisKelamin = jenisKelamin;
+    }
+    public String getJenisKelamin(){
+        return jenisKelamin;
     }
 }

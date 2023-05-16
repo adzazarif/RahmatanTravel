@@ -40,11 +40,11 @@ public class DialogTambahPegawai extends Dialog {
 
         txtEmail = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
+        txtIdcard = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
         txtNotelp = new javax.swing.JTextField();
         txtNama = new javax.swing.JTextField();
         cmbJenisKelamin = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAlamat = new javax.swing.JTextArea();
         btnTambahFoto = new javax.swing.JLabel();
         btnSimpan = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
@@ -64,6 +64,16 @@ public class DialogTambahPegawai extends Dialog {
         txtUsername.setBorder(null);
         getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 290, 40));
 
+        txtIdcard.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtIdcard.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdcard.setBorder(null);
+        getContentPane().add(txtIdcard, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 290, 50));
+
+        txtAlamat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtAlamat.setForeground(new java.awt.Color(0, 0, 0));
+        txtAlamat.setBorder(null);
+        getContentPane().add(txtAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 310, 290, 50));
+
         txtNotelp.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNotelp.setForeground(new java.awt.Color(0, 0, 0));
         txtNotelp.setBorder(null);
@@ -78,16 +88,7 @@ public class DialogTambahPegawai extends Dialog {
         cmbJenisKelamin.setForeground(new java.awt.Color(0, 0, 0));
         cmbJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "laki-laki", "perempuan" }));
         cmbJenisKelamin.setBorder(null);
-        getContentPane().add(cmbJenisKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 300, 50));
-
-        txtAlamat.setColumns(20);
-        txtAlamat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        txtAlamat.setForeground(new java.awt.Color(0, 0, 0));
-        txtAlamat.setRows(5);
-        txtAlamat.setBorder(null);
-        jScrollPane1.setViewportView(txtAlamat);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 230, 280, 120));
+        getContentPane().add(cmbJenisKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 226, 300, 50));
 
         btnTambahFoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,6 +137,7 @@ public class DialogTambahPegawai extends Dialog {
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
         String nama = txtNama.getText();
+        int idCard = Integer.valueOf(txtIdcard.getText());
         String role = "employee";
         String pass = "12345678";
         String noTelp = txtNotelp.getText();
@@ -156,7 +158,7 @@ public class DialogTambahPegawai extends Dialog {
             fileAkhir = new File(newpath+"/"+txtUsername.getText()+"."+ext);
             System.out.println(fileAkhir);
             
-            User user = new User(nama, username, role, pass, email, alamat, noTelp, fileAkhir.toString());
+            User user = new User(nama, username, role, pass, email, alamat, noTelp, fileAkhir.toString(), jenisKelamin, idCard);
             if(userRepo.add(user)){
                 System.out.println("Berhasil");
                 Files.copy(fileAwal.toPath(), fileAkhir.toPath());
@@ -175,11 +177,11 @@ public class DialogTambahPegawai extends Dialog {
     private javax.swing.JLabel btnTambahFoto;
     private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblId;
-    private javax.swing.JTextArea txtAlamat;
+    private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIdcard;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNotelp;
     private javax.swing.JTextField txtUsername;

@@ -83,7 +83,7 @@ public class UserRepository implements Repository<User>{
 
     @Override
     public boolean add(User user) {
-            String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`,`email`,`alamat`,`no_telp`,`foto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`nama`, `username`, `role`, `password`,`email`,`alamat`,`no_telp`,`foto`,`jenis_kelamin`,`id_card`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
@@ -95,6 +95,8 @@ public class UserRepository implements Repository<User>{
             pst.setString(6, user.getAlamat()); 
             pst.setString(7, user.getNoTelp()); 
             pst.setString(8, user.getFoto()); 
+            pst.setString(9, user.getJenisKelamin()); 
+            pst.setInt(10, user.getICard());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -106,7 +108,7 @@ public class UserRepository implements Repository<User>{
     @Override
     public boolean update(User user) {
 
-        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ?, email = ?, alamat = ?, no_telp = ?, foto = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ?, email = ?, alamat = ?, no_telp = ?, foto = ?, jenis_kelamin = ?, id_card = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -119,7 +121,9 @@ public class UserRepository implements Repository<User>{
             pst.setString(6, user.getAlamat());
             pst.setString(7, user.getNoTelp());
             pst.setString(8, user.getFoto());
-            pst.setInt(9, user.getId());
+            pst.setString(9, user.getJenisKelamin());
+            pst.setInt(10, user.getICard());
+            pst.setInt(11, user.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -151,7 +155,9 @@ public class UserRepository implements Repository<User>{
             result.getString("email"),
             result.getString("alamat"),
             result.getString("no_telp"),
-            result.getString("foto")
+            result.getString("foto"),
+            result.getString("jenis_kelamin"),
+             result.getInt("id_card")
         );
 
         user.setId(result.getInt("id"));

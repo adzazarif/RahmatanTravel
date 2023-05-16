@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.UserRepository;
 import view.dialog.DialogEditPaket;
+import view.dialog.DialogEditPegawai;
 import view.dialog.DialogTambahPegawai;
 /**
  *
@@ -67,6 +68,7 @@ public class Pegawai extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         btnTambah = new javax.swing.JLabel();
         btnHapus = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -112,6 +114,13 @@ public class Pegawai extends javax.swing.JPanel {
             }
         });
         jPanel3.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 130, 40));
+
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 130, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 50));
@@ -202,8 +211,16 @@ public class Pegawai extends javax.swing.JPanel {
         id = Integer.valueOf(idd);
     }//GEN-LAST:event_tableMouseClicked
 
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+      DialogEditPegawai editPegawai = new DialogEditPegawai(main);
+      editPegawai.showPopUp();
+      load_table();
+    }//GEN-LAST:event_btnEditMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnHapus;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
