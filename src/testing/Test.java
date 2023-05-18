@@ -1,11 +1,14 @@
 package testing;
 
 import entity.Jamaah;
+import entity.Keberangkatan;
 import entity.Paket;
 import entity.Pemesanan;
 import entity.User;
+import java.util.Date;
 import repository.DashboardRepository;
 import repository.JamaahRepository;
+import repository.KeberangkatanRepository;
 import repository.PaketRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
@@ -54,11 +57,29 @@ public class Test {
 PaketRepository paketRepo = new PaketRepository();
     
      
-    for(Paket p:paketRepo.getByid(1)){
-        System.out.println(p.getNama());
-        System.out.println(p.getDeskripsi());
-    }
+//    for(Paket p:paketRepo.getByid(1)){
+//        System.out.println(p.getNama());
+//        System.out.println(p.getDeskripsi());
+//    }
      
+//        Paket p = new Paket();
+//        Date d = new Date();
+//        Keberangkatan kb = new Keberangkatan(p, d);
+//        KeberangkatanRepository kbr = new KeberangkatanRepository();
+//        kbr.add(kb);
+
+//    String str = "";
+//    String kalimat2 = "null,asd,asd";
+////    String kept = kalimat2.substring( 0, kalimat2.indexOf(","));
+//String [] twoStringArray= kalimat2.split(",", 2); //the main line
+//System.out.println("String befor comma = "+twoStringArray[0]);//abc
         
+    
+        KeberangkatanRepository kbr = new KeberangkatanRepository();
+        for(Keberangkatan k:kbr.getByMenu("umrah")){
+            System.out.println(k.getId());
+            
+            System.out.println(k.getTanggal());
+        }
     }
 }

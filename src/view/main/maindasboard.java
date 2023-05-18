@@ -17,13 +17,13 @@ import view.component.Menu1;
 import view.event.EventMenuSelected;
 import view.model.ModelMenu1;
 import view.panel.BarangForm;
-import view.panel.Berangkat;
 import view.panel.Dasboard;
 import view.panel.JamaahForm;
+import view.panel.KeberangkatanForm;
 import view.panel.Laporan;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
-import view.panel.Pemesanan;
+import view.panel.PemesananForm;
 import view.panel.Pengeluaran;
 
 public class maindasboard extends javax.swing.JFrame {
@@ -49,36 +49,36 @@ public class maindasboard extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 System.out.println(index);
-                if(index == 0){
+                if (index == 0) {
                     showform(new Dasboard());
-                } else if(index == 1) {
+                } else if (index == 1) {
                     showform(new JamaahForm());
-                }else if(index == 2){
+                } else if (index == 2) {
                     showform(new PaketForm());
-                }else if(index ==3){
-                    showform(new Berangkat());
-                }else if(index == 4){
+                } else if (index == 3) {
+                    showform(new KeberangkatanForm());
+                } else if (index == 4) {
                     showform(new BarangForm());
-                }else if(index == 5){
-                    showform(new Pemesanan());
-                }else if(index == 6){
+                } else if (index == 5) {
+                    showform(new PemesananForm());
+                } else if (index == 6) {
                     showform(new Pegawai());
-                }else if(index == 7){
+                } else if (index == 7) {
                     showform(new Pengeluaran());
-                }else if(index == 8){
+                } else if (index == 8) {
                     showform(new Laporan());
                 }
             }
         });
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")),new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")),new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")),new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")),new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/barang2.png")),new ImageIcon(getClass().getResource("/view/icon/barang1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")),new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")),new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")),new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")),new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")), new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")), new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")), new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")), new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/barang2.png")), new ImageIcon(getClass().getResource("/view/icon/barang1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")), new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
         menu.addEventMenu(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -114,13 +114,15 @@ public class maindasboard extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         showform(new Dasboard());
     }
-    public void showform (Component com){
+
+    public void showform(Component com) {
         main.removeAll();
         main.add(com);
         main.revalidate();
         main.repaint();
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -182,7 +184,7 @@ public class maindasboard extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(maindasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-       
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

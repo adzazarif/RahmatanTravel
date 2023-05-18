@@ -32,7 +32,24 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
             Statement stm = koneksi.createStatement();
             ResultSet res = stm.executeQuery(sql);
             
-            if(res.next()){
+            while(res.next()){
+                keberangkatan.add(mapToEntity(res));
+            }
+        } catch (Exception e) {
+        }
+        return keberangkatan;
+    }
+    
+      public List<Keberangkatan> getById(int id) {
+        String sql = "SELECT * FROM "+tableName+" WHERE id = ?";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            while(res.next()){
                 keberangkatan.add(mapToEntity(res));
             }
         } catch (Exception e) {
@@ -40,6 +57,25 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         return keberangkatan;
     }
 
+    public List<Keberangkatan> getByMenu(String menu) {
+        String sql = "SELECT * FROM "+tableName+" LEFT JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE menu = ? ORDER BY tanggal DESC";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setString(1, menu);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()){
+                keberangkatan.add(mapToEntity(res));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return keberangkatan;
+    }
+    
     @Override
     public Keberangkatan get(Integer id) {
         String sql = "SELECT * FROM "+tableName+" WHERE id = ?";

@@ -7,10 +7,6 @@ package view.panel;
 import java.awt.Color;
 import java.awt.Container;
 
-/**
- *
- * @author semafie
- */
 public class Dasboard extends javax.swing.JPanel {
 
     /**

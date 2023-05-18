@@ -12,12 +12,12 @@ import java.awt.Color;
  *
  * @author adzaz
  */
-public class Pemesanan extends javax.swing.JPanel {
+public class PemesananForm extends javax.swing.JPanel {
 
     /**
      * Creates new form Pemesanan
      */
-    public Pemesanan() {
+    public PemesananForm() {
         initComponents();
     }
 

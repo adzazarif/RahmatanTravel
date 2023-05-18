@@ -4,22 +4,59 @@
  */
 package view.panel;
 
+import entity.Jamaah;
+import entity.Keberangkatan;
 import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+import repository.KeberangkatanRepository;
+import view.dialog.DialogDetailKeberangkatan;
+import view.dialog.DialogEditKeberangkatan;
+import view.dialog.DialogTambahKeberangkatan;
 /**
  *
  * @author adzaz
  */
 public class KeberangkatanForm extends javax.swing.JPanel {
-
+    KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
+    public static int id;
+    private String menuActive = "umrah";
     /**
      * Creates new form Keberangkatan
      */
     public KeberangkatanForm() {
         initComponents();
+        load_table();
     }
+    
+     public void load_table(){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");      
+            model.addColumn("id");
+            model.addColumn("Nama");
+            model.addColumn("Tanggal");
+                       
+            int no = 1;
+           
+           try {
+             for(Keberangkatan res:keberangkatanRepo.getByMenu(menuActive)){
+                model.addRow(new Object[]{
+                    no++,
+                    res.getId(),
+                    res.getPaket().getNama(),
+                    res.getTanggal(),
+                    
+                });
+           }
+            table.setModel(model);
+       
+         } catch (Exception e) {
+               e.printStackTrace();
+         }
+        
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,10 +71,22 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnTambah = new javax.swing.JLabel();
+        btnHapus = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JLabel();
+        btnDetail = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        btnMenuWisata = new javax.swing.JLabel();
+        btnMenuUmrah = new javax.swing.JLabel();
+        btnMenuHaji = new javax.swing.JLabel();
+        lblMenu = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
+
+        jPanel1.setBackground(new Color(0,0,0,0));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/title keberangkatan.png"))); // NOI18N
 
@@ -66,19 +115,93 @@ public class KeberangkatanForm extends javax.swing.JPanel {
                 btnTambahMouseClicked(evt);
             }
         });
-        jPanel2.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 60));
+        jPanel2.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 150, 60));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button tambah.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 160, 50));
+        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 140, 50));
+
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 140, 50));
+
+        btnDetail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDetailMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 60));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 610, 50));
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table);
+
+        jPanel3.setBackground(new Color(0,0,0,0));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenuWisata.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuWisataMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnMenuWisata, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 130, 30));
+
+        btnMenuUmrah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuUmrahMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnMenuUmrah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 30));
+
+        btnMenuHaji.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuHajiMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnMenuHaji, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 130, 30));
+
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu umrah.png"))); // NOI18N
+        jPanel3.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(1067, 1067, 1067)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(129, 129, 129))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                        .addGap(259, 259, 259)))
+                .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -87,24 +210,89 @@ public class KeberangkatanForm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(431, 431, 431))
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-        DialogTambahPaket tambahPaket = new DialogTambahPaket(main);
-        tambahPaket.showPopUp();
+        DialogTambahKeberangkatan tambahKeberangkatan = new DialogTambahKeberangkatan(main);
+        tambahKeberangkatan.showPopUp();
+        load_table();
     }//GEN-LAST:event_btnTambahMouseClicked
+
+    private void btnMenuHajiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuHajiMouseClicked
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu haji.png")));
+        menuActive = "haji";
+        load_table();
+    }//GEN-LAST:event_btnMenuHajiMouseClicked
+
+    private void btnMenuWisataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuWisataMouseClicked
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu wisata.png")));
+        menuActive = "wisata halal";
+        load_table();
+    }//GEN-LAST:event_btnMenuWisataMouseClicked
+
+    private void btnMenuUmrahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuUmrahMouseClicked
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu umrah.png")));
+        menuActive = "umrah";
+        load_table();
+    }//GEN-LAST:event_btnMenuUmrahMouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        int baris = table.rowAtPoint(evt.getPoint());
+        String ids = table.getValueAt(baris, 1).toString();
+        id = Integer.valueOf(ids);
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogEditKeberangkatan editKeberangkatan= new DialogEditKeberangkatan(main);
+        editKeberangkatan.showPopUp();
+        load_table();
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
+        boolean delete = keberangkatanRepo.delete(id);
+        if(delete){
+            System.out.println("berhasil");
+            load_table();
+        }else{
+            System.out.println("Berhasil");
+        }
+    }//GEN-LAST:event_btnHapusMouseClicked
+
+    private void btnDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogDetailKeberangkatan detailKeberangkatan= new DialogDetailKeberangkatan(main);
+        detailKeberangkatan.showPopUp();
+        load_table();
+    }//GEN-LAST:event_btnDetailMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnDetail;
+    private javax.swing.JLabel btnEdit;
+    private javax.swing.JLabel btnHapus;
+    private javax.swing.JLabel btnMenuHaji;
+    private javax.swing.JLabel btnMenuUmrah;
+    private javax.swing.JLabel btnMenuWisata;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMenu;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

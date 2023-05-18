@@ -59,6 +59,25 @@ public class PaketRepository implements Repository<Paket>{
 
         return paket;
     }
+       
+      public List<Paket> getByMenu(String menu) {
+         String sql = "SELECT * FROM " + tableName + " WHERE menu = ?";
+        List<Paket> paket = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setString(1, menu);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                paket.add(mapToEntityGet(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return paket;
+    }
 
     @Override
     public Paket get(Integer id) {

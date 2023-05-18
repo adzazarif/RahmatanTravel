@@ -12,10 +12,7 @@ import view.main.maindasboard;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.JamaahRepository;
-/**
- *
- * @author semafie
- */
+
 public class JamaahForm extends javax.swing.JPanel {
     public static int idJamaah;
     JamaahRepository jamaahRepo = new JamaahRepository();
@@ -276,7 +273,7 @@ public class JamaahForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-         int baris = table.rowAtPoint(evt.getPoint());
+        int baris = table.rowAtPoint(evt.getPoint());
         String NIK = table.getValueAt(baris, 1).toString();
         idJamaah = Integer.valueOf(NIK);
         
