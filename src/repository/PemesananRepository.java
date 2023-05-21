@@ -78,6 +78,25 @@ public class PemesananRepository implements Repository<Pemesanan>{
         return pemesanan;  
     }
     
+     public List<Pemesanan> getByIdJamaah(int idJamaah){
+         String sql = "SELECT * FROM " + tableName + " WHERE jamaah_id = ?";
+        List<Pemesanan> pemesanan = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, idJamaah);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pemesanan.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pemesanan;  
+    }
+    
     @Override
     public Pemesanan get(Integer id) {
                String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
@@ -100,7 +119,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
 
     @Override
     public boolean add(Pemesanan pemesanan) {
-            String sql = "INSERT INTO "+ tableName +" (`keberangkatan_id`, `jamaah_id`, `jenis_pembayaran`, `status`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO "+ tableName +" (`keberangkatan_id`, `jamaah_id`, `jenis_pembayaran`, `status`, `tanggal`, `jumlah_bayar`, `total_tagihan`) VALUES (?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);

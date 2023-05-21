@@ -68,18 +68,18 @@ PaketRepository paketRepo = new PaketRepository();
 //        KeberangkatanRepository kbr = new KeberangkatanRepository();
 //        kbr.add(kb);
 
-//    String str = "";
-//    String kalimat2 = "null,asd,asd";
-////    String kept = kalimat2.substring( 0, kalimat2.indexOf(","));
-//String [] twoStringArray= kalimat2.split(",", 2); //the main line
-//System.out.println("String befor comma = "+twoStringArray[0]);//abc
+    String str = "";
+    String kalimat2 = "null asd,112";
+//    String kept = kalimat2.substring( 0, kalimat2.indexOf(","));
+String [] twoStringArray= kalimat2.split(",", 2); //the main line
+System.out.println("String befor comma = "+twoStringArray[1]);//abc
         
     
-        KeberangkatanRepository kbr = new KeberangkatanRepository();
-        for(Keberangkatan k:kbr.getByMenu("umrah")){
-            System.out.println(k.getId());
-            
-            System.out.println(k.getTanggal());
-        }
+//        KeberangkatanRepository kbr = new KeberangkatanRepository();
+//        for(Keberangkatan k:kbr.getByMenu("umrah")){
+//            System.out.println(k.getId());
+//            
+//            System.out.println(k.getTanggal());
+//        }
     }
 }

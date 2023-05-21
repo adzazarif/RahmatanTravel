@@ -84,10 +84,11 @@ public class DialogEditKeberangkatan extends Dialog {
         lblNama = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
         btnBatal = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
 
-        date.setNextFocusableComponent(txtDate);
+        date.setDateFormat("yyyy-MM-dd");
+        date.setTextRefernce(txtDate);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -158,10 +159,10 @@ public class DialogEditKeberangkatan extends Dialog {
             }
         });
         getContentPane().add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 510, 180, 40));
-        getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/edit keberangkatan.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 934, -1));
+        getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

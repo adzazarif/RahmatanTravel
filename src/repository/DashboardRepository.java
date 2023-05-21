@@ -14,13 +14,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.Conn;
-import util.Date;
+import util.DateUtil;
 /**
  *
  * @author WINDOWS 10
  */
 public class DashboardRepository {
-    Date date = new Date();
+    DateUtil date = new DateUtil();
     public int getIncomePerDay(){
         int total = 0;
         String queryCek = "SELECT SUM(jumlah_bayar) AS jml FROM pemesanan WHERE tanggal = ?";

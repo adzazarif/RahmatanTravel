@@ -48,7 +48,6 @@ public class maindasboard extends javax.swing.JFrame {
         menu.setEvent(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                System.out.println(index);
                 if (index == 0) {
                     showform(new Dasboard());
                 } else if (index == 1) {

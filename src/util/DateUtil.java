@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author WINDOWS 10
  */
-public class Date {
+public class DateUtil {
     public String dateNow(){
         LocalDateTime myDateObj = LocalDateTime.now();   
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
