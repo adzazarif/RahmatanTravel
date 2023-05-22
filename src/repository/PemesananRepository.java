@@ -160,6 +160,23 @@ public class PemesananRepository implements Repository<Pemesanan>{
             return false;
         }
     }
+    
+    public boolean updateStatus(String status, int id) {
+        
+        String sql = "UPDATE "+ tableName +" SET status = ? WHERE id = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setString(1, status);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Override
     public boolean delete(int id) {

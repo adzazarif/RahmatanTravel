@@ -16,12 +16,13 @@ public class DetailPemesanan implements Entity{
     private int cicilan;
     private Pemesanan pemesanan;
     public static String tableName = "detail_pemesanan";
+    
     public DetailPemesanan(){
         
     }
     
-    public DetailPemesanan(int id,Pemesanan pemesanan,Date tanggal,int cicilan){
-        this.id = id;
+    public DetailPemesanan(Pemesanan pemesanan,Date tanggal,int cicilan){
+        
          this.pemesanan = pemesanan;
         this.tanggal = tanggal;
         this.cicilan = cicilan;

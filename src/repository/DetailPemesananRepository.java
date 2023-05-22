@@ -35,6 +35,25 @@ public class DetailPemesananRepository implements Repository<DetailPemesanan>{
 
         return detailpemesanan;
     }
+    
+    public List<DetailPemesanan> getById(Integer id) {
+         String sql = "SELECT * FROM " + tableName + " WHERE pemesanan_id = ?";
+        List<DetailPemesanan> detailpemesanan = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                detailpemesanan.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return detailpemesanan;
+    }
 
     @Override
     public DetailPemesanan get(Integer id) {
@@ -106,12 +125,11 @@ public class DetailPemesananRepository implements Repository<DetailPemesanan>{
     }
     private DetailPemesanan mapToEntity(ResultSet result) throws SQLException {
         DetailPemesanan detailpemesanan = new DetailPemesanan(
-                result.getInt("id"),
                 new PemesananRepository().get(result.getInt("pemesanan_id")),
                 new Date(result.getDate("tanggal").getTime()),
                 result.getInt("cicilan")
         );
-
+        detailpemesanan.setId(result.getInt("id"));
         return detailpemesanan;
         }
 }

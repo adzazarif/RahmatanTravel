@@ -7,7 +7,9 @@ package view.dialog;
 import entity.Jamaah;
 import entity.Keberangkatan;
 import entity.Pemesanan;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import repository.JamaahRepository;
@@ -40,6 +42,7 @@ public class DialogEditPemesanan extends Dialog {
     private void setValue (){
         for(Pemesanan pm:pemesananRepo.getById(id)){
             lblId.setText(String.valueOf(id));
+            lblTotalBayar.setText(String.valueOf(pm.getJumlahBayar()));
             cmbMenu.setSelectedItem(pm.getKeberangkatan().getPaket().getMenu());
             cmbPembayaran.setSelectedItem(pm.getJenisPembayaran());
             cmbJamaah.setSelectedItem(pm.getJamaah().getNama()+ " ,"+pm.getJamaah().getNik());
@@ -73,6 +76,7 @@ public class DialogEditPemesanan extends Dialog {
         lblNik = new javax.swing.JLabel();
         lblAlamat = new javax.swing.JLabel();
         lblDiskon = new javax.swing.JLabel();
+        lblTotalBayar = new javax.swing.JLabel();
         lblPaket = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         lblBerangkat = new javax.swing.JLabel();
@@ -118,6 +122,10 @@ public class DialogEditPemesanan extends Dialog {
         lblDiskon.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblDiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 585, 320, 50));
 
+        lblTotalBayar.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        lblTotalBayar.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(lblTotalBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 320, 40));
+
         lblPaket.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblPaket.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 320, 50));
@@ -130,7 +138,7 @@ public class DialogEditPemesanan extends Dialog {
         lblBerangkat.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblBerangkat, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 362, 320, 50));
 
-        cmbPembayaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilih--", "Cash", "Talangan" }));
+        cmbPembayaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilih--", "cash", "talangan" }));
         cmbPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPembayaranActionPerformed(evt);
@@ -199,7 +207,7 @@ public class DialogEditPemesanan extends Dialog {
         getContentPane().add(lblHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 435, 320, 50));
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "lunas", "belum lunas" }));
-        getContentPane().add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 280, 40));
+        getContentPane().add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 280, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/edit pemesanan.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1299, -1));
@@ -208,42 +216,35 @@ public class DialogEditPemesanan extends Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPembayaranActionPerformed
-
+        if(cmbPembayaran.getSelectedItem().equals("cash")){
+            cmbStatus.setEnabled(false);
+        }
     }//GEN-LAST:event_cmbPembayaranActionPerformed
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
-//        try {
-//            String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
-//            
-//            int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
-//            String status = "";
-//            if(jenisPembayaran.equals("Cash")){
-//
-//                if(bayar >= totalTagihan){
-//                    status = "lunas";
-//                }else{
-//                    status = "belum lunas";
-//                }
-//            }else if(jenisPembayaran.equals("Talangan")){
-//                status = "belum lunas";
-//            }
-//
-//            String date = lblDate.getText();
-//            Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-//            int idJamaah = Integer.parseInt(lblNik.getText());
-//            Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
-//            Jamaah jamaah = new JamaahRepository().get(idJamaah);
-//            Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihan, bayar);
-//
-//            boolean tambah = pemesananRepo.add(pemesanan);
-//            if(tambah){
-//                System.out.println("Berhasil");
-//                closeMessage();
-//            }else{
-//                System.out.println("Gagal");
-//            }
-//        } catch (Exception e) {
-//        }
+        try {
+            String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
+            int id = Integer.parseInt(lblId.getText());
+            int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
+            String status = String.valueOf(cmbStatus.getSelectedItem());
+            int bayar = Integer.valueOf(lblTotalBayar.getText());
+            String date = lblDate.getText();
+            String tgl = String.valueOf(cmbStatus.getSelectedItem());            
+            Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
+            int idJamaah = Integer.parseInt(lblNik.getText());
+            Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
+            Jamaah jamaah = new JamaahRepository().get(idJamaah);
+            Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihan, bayar);
+            pemesanan.setId(id);
+            boolean tambah = pemesananRepo.update(pemesanan);
+            if(tambah){
+                System.out.println("Berhasil");
+                closeMessage();
+            }else{
+                System.out.println("Gagal");
+            }
+        } catch (Exception e) {
+        }
 
     }//GEN-LAST:event_btnTambahMouseClicked
 
@@ -331,6 +332,7 @@ public class DialogEditPemesanan extends Dialog {
     private javax.swing.JLabel lblNik;
     private javax.swing.JLabel lblNoHp;
     private javax.swing.JLabel lblPaket;
+    private javax.swing.JLabel lblTotalBayar;
     private javax.swing.JLabel lblTotalHarga;
     private javax.swing.JLabel lblTotalOrang;
     private javax.swing.JLabel lblTotalPesan;

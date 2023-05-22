@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.PemesananRepository;
 import view.dialog.DialogEditPemesanan;
+import view.dialog.DialogTambahCicilan;
 import view.dialog.DialogTambahPemesanan;
 import static view.panel.KeberangkatanForm.id;
 /**
@@ -78,6 +79,7 @@ public class PemesananForm extends javax.swing.JPanel {
         btnTambah = new javax.swing.JLabel();
         btnEdit = new javax.swing.JLabel();
         btnHapus = new javax.swing.JLabel();
+        btnTambahCicilan = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -124,6 +126,13 @@ public class PemesananForm extends javax.swing.JPanel {
         });
         jPanel2.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 150, 60));
         jPanel2.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 140, 70));
+
+        btnTambahCicilan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTambahCicilanMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnTambahCicilan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 600, 50));
@@ -210,11 +219,19 @@ public class PemesananForm extends javax.swing.JPanel {
         load_table();
     }//GEN-LAST:event_btnEditMouseClicked
 
+    private void btnTambahCicilanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahCicilanMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogTambahCicilan tambahCicilan = new DialogTambahCicilan(main);
+        tambahCicilan.showPopUp();
+        load_table();
+    }//GEN-LAST:event_btnTambahCicilanMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnHapus;
     private javax.swing.JLabel btnTambah;
+    private javax.swing.JLabel btnTambahCicilan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

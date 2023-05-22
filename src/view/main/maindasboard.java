@@ -24,7 +24,7 @@ import view.panel.Laporan;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.PemesananForm;
-import view.panel.Pengeluaran;
+import view.panel.PengeluaranForm;
 
 public class maindasboard extends javax.swing.JFrame {
 
@@ -63,7 +63,7 @@ public class maindasboard extends javax.swing.JFrame {
                 } else if (index == 6) {
                     showform(new Pegawai());
                 } else if (index == 7) {
-                    showform(new Pengeluaran());
+                    showform(new PengeluaranForm());
                 } else if (index == 8) {
                     showform(new Laporan());
                 }

@@ -38,7 +38,7 @@ import view.panel.Laporan;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.PemesananForm;
-import view.panel.Pengeluaran;
+import view.panel.PengeluaranForm;
 
 public class Menu extends javax.swing.JPanel {
     private int roundTopLeft = 0;
@@ -253,7 +253,7 @@ public class Menu extends javax.swing.JPanel {
     private void PengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PengeluaranMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sidePengeluaran.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Pengeluaran());
+       main1.showform(new PengeluaranForm());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(true);
