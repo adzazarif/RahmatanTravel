@@ -40,6 +40,25 @@ public class PengeluaranOperasionalRepository implements Repository<PengeluaranO
 
         return pengeluaranOperasional;
     }
+    
+      public List<PengeluaranOperasional> getById(Integer id) {
+             String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        List<PengeluaranOperasional> pengeluaranOperasional = new ArrayList<>();
+        try {
+           Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pengeluaranOperasional.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pengeluaranOperasional;
+    }
 
     @Override
     public PengeluaranOperasional get(Integer id) {

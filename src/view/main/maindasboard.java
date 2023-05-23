@@ -47,6 +47,8 @@ public class maindasboard extends javax.swing.JFrame {
         menu.setBorder(BorderFactory.createEmptyBorder(0, 5, 30, 30));
         menu.setEvent(new EventMenuSelected() {
             @Override
+            
+            
             public void selected(int index) {
                 if (index == 0) {
                     showform(new Dasboard());
