@@ -15,13 +15,18 @@ public class Pengeluaran implements Entity{
     private Keberangkatan keberangkatan;
     private Date tanggal;
     private int totalPengeluaran;
+    private int hargaTiketPesawat;
+    private int hargaHotel;
+    private int hargaLainLain;
     public static String tableName = "pengeluaran";
     public Pengeluaran(){};
-    public Pengeluaran (int id, Keberangkatan keberangkatan, Date tanggal, int totalPengeluaran){
-        this.id = id;
+    public Pengeluaran (Keberangkatan keberangkatan, Date tanggal,int hargaPesawat,int hargaHotel,int hargaLain, int totalPengeluaran){
         this.keberangkatan = keberangkatan;
         this.tanggal = tanggal;
         this.totalPengeluaran = totalPengeluaran;
+        this.hargaHotel = hargaHotel;
+        this.hargaLainLain = hargaLain;
+        this.hargaTiketPesawat = hargaPesawat;
     }
     
     public void setId(int id){
@@ -50,5 +55,26 @@ public class Pengeluaran implements Entity{
     }
     public int getTotalPengeluaran(){
         return totalPengeluaran;
+    }
+    
+    public void setHargaPesawat(int hargaPesawat){
+        this.hargaTiketPesawat = hargaPesawat;
+    }
+    public int getHargaPesawat(){
+        return hargaTiketPesawat;
+    }
+    
+      public void setHargaHotel(int hargaHotel){
+        this.hargaHotel = hargaHotel;
+    }
+    public int getHargaHotel(){
+        return hargaHotel;
+    }
+    
+      public void setHargaLainLain(int hargaLainLain){
+        this.hargaLainLain = hargaLainLain;
+    }
+    public int getHargaLainLain(){
+        return hargaLainLain;
     }
 }

@@ -18,7 +18,7 @@ import util.Conn;
  * @author WINDOWS 10
  */
 public class BarangRepository implements Repository<Barang>{
-    private static String tableName = User.tableName;
+    private static String tableName = Barang.tableName;
     @Override
     public List<Barang> get() {
             String sql = "SELECT * FROM " + tableName;
@@ -37,6 +37,26 @@ public class BarangRepository implements Repository<Barang>{
 
         return barang;
     }
+    
+     public List<Barang> getById(Integer id) {
+            String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        List<Barang> barang = new ArrayList<>();
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                barang.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+            System.out.println("salah");
+        e.printStackTrace();
+        }
+
+        return barang;
+    }
 
     @Override
     public Barang get(Integer id) {
@@ -47,7 +67,7 @@ public class BarangRepository implements Repository<Barang>{
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             stm.setInt(1, id);
-            ResultSet res = stm.executeQuery(sql);
+            ResultSet res = stm.executeQuery();
 
             while(res.next()) {
                 return mapToEntity(res); 

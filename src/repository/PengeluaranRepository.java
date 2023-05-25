@@ -64,13 +64,16 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
 
     @Override
     public boolean add(Pengeluaran pengeluaran) {
-             String sql = "INSERT INTO "+ tableName +" (`tanggal`, `keberangkatan_id`, `total_pengeluaran`) VALUES ( ?, ?, ?)";
+             String sql = "INSERT INTO "+ tableName +" (`tanggal`, `keberangkatan_id`, `total_pengeluaran`,`harga_tiket_pesawat`,`harga_hotel`,`lain_lain`) VALUES ( ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setDate(1, new Date(pengeluaran.getTanggal().getTime()));
             pst.setInt(2, pengeluaran.getKeberangkatan().getId());
             pst.setInt(3, pengeluaran.getTotalPengeluaran());
+            pst.setInt(4, pengeluaran.getHargaPesawat());
+            pst.setInt(5, pengeluaran.getHargaHotel());
+            pst.setInt(6, pengeluaran.getHargaLainLain());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -110,12 +113,34 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
             return false;
         }
     }
+    
+     public List<Pengeluaran> getLastId() {
+          String sql = "SELECT * FROM " + tableName + " ORDER BY id DESC";
+        List<Pengeluaran> pengeluaran = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            if(res.next()) {
+                pengeluaran.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pengeluaran;
+    }
      private Pengeluaran mapToEntity(ResultSet result) throws SQLException {
         Pengeluaran pengeluaran = new Pengeluaran(
-                result.getInt("id"),
                 new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
-                result.getDate("tanggal"),
-                result.getInt("total_pengeluaran"));
+                result.getDate("tanggal"),    
+                result.getInt("harga_tiket_pesawat"),
+                result.getInt("harga_hotel"),
+                result.getInt("lain_lain"),
+                result.getInt("total_pengeluaran")
+        );
+        pengeluaran.setId(result.getInt("id"));
             return pengeluaran;
         }
 }

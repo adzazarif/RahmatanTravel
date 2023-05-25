@@ -45,9 +45,9 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
     @Override
     public DetailPengeluaran get(Integer id) {
           
-        String sql = "UPDATE "+ tableName +" SET nama = ?, username = ?, role = ?, password = ? WHERE pengeluaran_id = ?";  
-        
-          DetailPengeluaran detailPengeluaran = new DetailPengeluaran();
+          String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
+
+        DetailPengeluaran pengeluaran = new DetailPengeluaran();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
@@ -60,12 +60,12 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
         } catch (SQLException e) {
         e.printStackTrace();}
 
-        return detailPengeluaran;
+        return pengeluaran;
     }
 
     @Override
     public boolean add(DetailPengeluaran detailPengeluaran) {
-        String sql = "INSERT INTO "+ tableName +" (`pengeluaran_id`, `barang_id`, `jenis_pembayaran`, `banyak`, `harga`) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO "+ tableName +" (`pengeluaran_id`, `barang_id`, `banyak`, `harga`) VALUES (?, ?, ?, ?)";
         try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);

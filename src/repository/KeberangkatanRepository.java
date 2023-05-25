@@ -5,6 +5,7 @@
 package repository;
 
 import entity.Keberangkatan;
+import entity.Pemesanan;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -76,6 +77,23 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         return keberangkatan;
     }
     
+    public List<Keberangkatan> getPemesananNull() {
+        String sql = "SELECT * FROM "+tableName+" LEFT JOIN pengeluaran ON keberangkatan.id = pengeluaran.keberangkatan_id WHERE pengeluaran.total_pengeluaran IS NULL";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+
+            ResultSet res = stm.executeQuery();
+            while(res.next()){
+                keberangkatan.add(mapToEntityJoin(res));
+                
+            }
+        } catch (Exception e) {
+        }
+        return keberangkatan;
+    }
     @Override
     public Keberangkatan get(Integer id) {
         String sql = "SELECT * FROM "+tableName+" WHERE id = ?";
@@ -150,5 +168,27 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         keberangkatan.setId(result.getInt("id"));
         return keberangkatan;
     }
+    
+     private Keberangkatan mapToEntityJoin(ResultSet result)throws SQLException{
+        Keberangkatan keberangkatan = new Keberangkatan(
+                new PaketRepository().get(result.getInt("paket_id")),
+                result.getDate("tanggal"));
+        keberangkatan.setId(result.getInt("keberangkatan.id"));
+        return keberangkatan;
+    }
+//    private Pemesanan MapToEntity(ResultSet result)throws SQLException{
+//        Pemesanan pemesanan = new Pemesanan(
+//                new KeberangkatanRepository().get(result.getInt("Keberangkatan_id")),
+//                new JamaahRepository().get(result.getInt("jamaah_id")),
+//                result.getString("jenis_pembayaran"),
+//                result.getString("status"),
+//                result.getDate("tanggal"),
+//                result.getInt("total_tagihan"),
+//                result.getInt("jumlah_bayar"));
+//        pemesanan.setId(result.getInt("pemesanan.id"));
+//        return pemesanan;
+//    }
+    
+    
     
 }

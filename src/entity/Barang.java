@@ -16,6 +16,7 @@ public class Barang implements Entity{
     private int stok;
     private int harga;
     private int ammountBarang;
+    private int subTotal;
     
     public Barang(){
         
@@ -25,6 +26,13 @@ public class Barang implements Entity{
         this.nama = nama;
         this.stok = stok;
         this.harga = harga;
+    }
+    public Barang(int id, String nama,int stok,int harga, int subTotal){
+        this.id = id;
+        this.nama = nama;
+        this.stok = stok;
+        this.harga = harga;
+        this.subTotal = subTotal;
     }
     public void setId(int id){
         this.id = id;
@@ -52,5 +60,11 @@ public class Barang implements Entity{
     }
     public int getHarga(){
         return this.harga;
+    }
+    public void setSubTotal(int subDiskon){
+        this.subTotal = subTotal;
+    }
+    public int getSubTotal(){
+        return this.subTotal;
     }
 }

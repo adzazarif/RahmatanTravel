@@ -4,6 +4,7 @@
  */
 package view.panel;
 
+import entity.Keberangkatan;
 import entity.Pemesanan;
 import entity.PengeluaranOperasional;
 import javax.swing.SwingUtilities;
@@ -11,25 +12,34 @@ import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import repository.KeberangkatanRepository;
 import repository.PengeluaranOperasionalRepository;
 import view.dialog.DialogEditPengeluaranOperasional;
+import view.dialog.DialogPengeluaranProduksi;
 import view.dialog.DialogTambahPengeluaranOperasional;
 /**
  *
  * @author adzaz
  */
 public class PengeluaranForm extends javax.swing.JPanel {
+    private String pilihan = "operasional";
     public static int id;
     PengeluaranOperasionalRepository pengeluaranOperasionalRepo = new PengeluaranOperasionalRepository();
+    KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     /**
      * Creates new form Pengeluaran
      */
     public PengeluaranForm() {
         initComponents();
-        load_table();
+        if(pilihan.equals("operasional")){
+                    loadTableOperasional();
+        }else if(pilihan.equals("produksi")){
+            
+        }
     }
     
-         public void load_table(){
+        
+         public void loadTableOperasional(){
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("No");      
             model.addColumn("Id");      
@@ -59,6 +69,31 @@ public class PengeluaranForm extends javax.swing.JPanel {
          }
     }
 
+         public void loadTableProduksi(){
+             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");      
+            model.addColumn("id");
+            model.addColumn("Nama");
+            model.addColumn("Tanggal");
+            model.addColumn("Total pengeluran");
+            int no = 1;
+           
+           try {
+             for(Keberangkatan res:keberangkatanRepo.get()){
+                model.addRow(new Object[]{
+                    no++,
+                    res.getId(),
+                    res.getPaket().getNama(),
+                    res.getTanggal(),
+                    "s",
+                });
+           }
+            table.setModel(model);
+       
+         } catch (Exception e) {
+               e.printStackTrace();
+         }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,10 +108,13 @@ public class PengeluaranForm extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         btnEdit = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        btnHapus = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        btnOperasional1 = new javax.swing.JLabel();
+        btnProduksi1 = new javax.swing.JLabel();
+        lblPilihan1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -119,13 +157,12 @@ public class PengeluaranForm extends javax.swing.JPanel {
         });
         jPanel2.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 160, 60));
 
-        jLabel3.setText("jLabel3");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                btnHapusMouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 50));
+        jPanel2.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 140, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 50));
@@ -148,6 +185,20 @@ public class PengeluaranForm extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
+        btnOperasional1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOperasional1MouseClicked(evt);
+            }
+        });
+
+        btnProduksi1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProduksi1MouseClicked(evt);
+            }
+        });
+
+        lblPilihan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/pilihan pengeluaran operasional.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,9 +207,16 @@ public class PengeluaranForm extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 2, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnOperasional1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnProduksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPilihan1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,19 +226,31 @@ public class PengeluaranForm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOperasional1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProduksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPilihan1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+
+    if(pilihan.equals("operasional")){
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         DialogTambahPengeluaranOperasional tambahPengeluaranOPerasional = new DialogTambahPengeluaranOperasional(main);
         tambahPengeluaranOPerasional.showPopUp();
-        load_table();
+        loadTableOperasional();
+    }else if(pilihan.equals("produksi")){
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogPengeluaranProduksi  tambahPengeluaranProduksi = new DialogPengeluaranProduksi(main);
+        tambahPengeluaranProduksi.showPopUp();
+        loadTableOperasional();
+    }
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -194,23 +264,40 @@ public class PengeluaranForm extends javax.swing.JPanel {
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         DialogEditPengeluaranOperasional EditPengeluaranOPerasional = new DialogEditPengeluaranOperasional(main);
         EditPengeluaranOPerasional.showPopUp();
-        load_table();
+        loadTableOperasional();
     }//GEN-LAST:event_btnEditMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_btnHapusMouseClicked
+
+    private void btnProduksi1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProduksi1MouseClicked
+    lblPilihan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/pilihan pengeluaran produksi.png")));
+    pilihan = "produksi";
+    id = 0;
+    loadTableProduksi();
+    }//GEN-LAST:event_btnProduksi1MouseClicked
+
+    private void btnOperasional1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOperasional1MouseClicked
+        lblPilihan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/pilihan pengeluaran operasional.png")));
+        pilihan = "operasional";
+        id = 0;
+        loadTableOperasional();
+    }//GEN-LAST:event_btnOperasional1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEdit;
+    private javax.swing.JLabel btnHapus;
+    private javax.swing.JLabel btnOperasional1;
+    private javax.swing.JLabel btnProduksi1;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPilihan1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
