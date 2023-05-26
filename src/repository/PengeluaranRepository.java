@@ -42,6 +42,44 @@ public class PengeluaranRepository implements Repository<Pengeluaran> {
         return pengeluaran;
     }
 
+     public List<Pengeluaran> getById(Integer id) {
+          String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        List<Pengeluaran> pengeluaran = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pengeluaran.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pengeluaran;
+    }
+    
+    public List<Pengeluaran> getByIdKeberangkatan(Integer id) {
+          String sql = "SELECT * FROM " + tableName + " WHERE keberangkatan_id = ?";
+        List<Pengeluaran> pengeluaran = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pengeluaran.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pengeluaran;
+    }
+    
     @Override
     public Pengeluaran get(Integer id) {
           String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;

@@ -6,6 +6,7 @@ package view.panel;
 
 import entity.Keberangkatan;
 import entity.Pemesanan;
+import entity.Pengeluaran;
 import entity.PengeluaranOperasional;
 import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
@@ -14,7 +15,9 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.KeberangkatanRepository;
 import repository.PengeluaranOperasionalRepository;
+import repository.PengeluaranRepository;
 import view.dialog.DialogEditPengeluaranOperasional;
+import view.dialog.DialogEditPengeluaranProduksi;
 import view.dialog.DialogPengeluaranProduksi;
 import view.dialog.DialogTambahPengeluaranOperasional;
 /**
@@ -23,8 +26,11 @@ import view.dialog.DialogTambahPengeluaranOperasional;
  */
 public class PengeluaranForm extends javax.swing.JPanel {
     private String pilihan = "operasional";
+    public static int totalPengeluaran;
     public static int id;
+    public static int idKeberangkatan;
     PengeluaranOperasionalRepository pengeluaranOperasionalRepo = new PengeluaranOperasionalRepository();
+    PengeluaranRepository pengeluaranRepo = new PengeluaranRepository();
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     /**
      * Creates new form Pengeluaran
@@ -74,18 +80,21 @@ public class PengeluaranForm extends javax.swing.JPanel {
             model.addColumn("No");      
             model.addColumn("id");
             model.addColumn("Nama");
-            model.addColumn("Tanggal");
+            model.addColumn("Tanggal Keberangkatan");
+            model.addColumn("Tanggal Pengeluaran");
             model.addColumn("Total pengeluran");
             int no = 1;
            
            try {
-             for(Keberangkatan res:keberangkatanRepo.get()){
+             for(Pengeluaran res:pengeluaranRepo.get()){
                 model.addRow(new Object[]{
                     no++,
                     res.getId(),
-                    res.getPaket().getNama(),
+                    res.getKeberangkatan().getPaket().getNama(),
+                    res.getKeberangkatan().getTanggal(),
                     res.getTanggal(),
-                    "s",
+                    res.getTotalPengeluaran()
+                   
                 });
            }
             table.setModel(model);
@@ -257,14 +266,33 @@ public class PengeluaranForm extends javax.swing.JPanel {
         int baris = table.rowAtPoint(evt.getPoint());
         String ids = table.getValueAt(baris, 1).toString();
         id = Integer.valueOf(ids);
-      
+        if(pilihan.equals("produksi")){
+            String totalPengeluar = table.getValueAt(baris, 5).toString();
+            totalPengeluaran = Integer.parseInt(totalPengeluar);
+            for(Pengeluaran p:pengeluaranRepo.getById(id)){
+                idKeberangkatan = p.getKeberangkatan().getId();
+                
+            }
+        }
+        System.out.println(idKeberangkatan);
+        System.out.println(id);
+        System.out.println(totalPengeluaran);
     }//GEN-LAST:event_tableMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        
+         if(pilihan.equals("operasional")){
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         DialogEditPengeluaranOperasional EditPengeluaranOPerasional = new DialogEditPengeluaranOperasional(main);
         EditPengeluaranOPerasional.showPopUp();
         loadTableOperasional();
+        loadTableOperasional();
+    }else if(pilihan.equals("produksi")){
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+             DialogEditPengeluaranProduksi edirPengeluaranProduksi = new DialogEditPengeluaranProduksi(main);
+        edirPengeluaranProduksi.showPopUp();
+        loadTableOperasional();
+    }
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked

@@ -20,7 +20,7 @@ import view.panel.BarangForm;
 import view.panel.Dasboard;
 import view.panel.JamaahForm;
 import view.panel.KeberangkatanForm;
-import view.panel.Laporan;
+import view.panel.LaporanForm;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.PemesananForm;
@@ -67,7 +67,7 @@ public class maindasboard extends javax.swing.JFrame {
                 } else if (index == 7) {
                     showform(new PengeluaranForm());
                 } else if (index == 8) {
-                    showform(new Laporan());
+                    showform(new LaporanForm());
                 }
             }
         });

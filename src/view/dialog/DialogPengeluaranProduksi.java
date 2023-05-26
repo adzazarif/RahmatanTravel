@@ -81,8 +81,9 @@ public class DialogPengeluaranProduksi extends Dialog {
                     res.getSubTotal(),
                     
            });
-            table.setModel(model);
+            
     }
+           table.setModel(model);
         } catch (Exception e) {
         }
     }
@@ -390,16 +391,16 @@ public class DialogPengeluaranProduksi extends Dialog {
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         try {
         if(totalPengeluaranOpersional >= totalPemasukan){
-            System.out.println("bangkrut");
+            System.out.println("bangkrut Cook!!!!");
         }else{
             String tgl = lblDate.getText();
         Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
         Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
-        Pengeluaran pengeluaran = new Pengeluaran(keberangkatan, tanggal, subHargaPesawat, subHargaHotel, subHargaLainLain, totalPemasukan);
+        Pengeluaran pengeluaran = new Pengeluaran(keberangkatan, tanggal, subHargaPesawat, subHargaHotel, subHargaLainLain, totalPengeluaranOpersional);
         boolean tambah = pengeluaranRepo.add(pengeluaran);
         
         if(tambah){
-            System.out.println("berhasil tambah pengeluaran");
+            System.out.println("Alhamdulillah iso");
             int idPengeluaran = 0;
             for(Pengeluaran p:pengeluaranRepo.getLastId()){
                 idPengeluaran = p.getId();
@@ -411,16 +412,17 @@ public class DialogPengeluaranProduksi extends Dialog {
                         p, b, i.getStok(), i.getSubTotal());
                 boolean tambahDetail = detailPengeluaranRepo.add(detailPengeluran);
                 if(tambahDetail){
-                    System.out.println("Berhasil tambah detail");
+                    System.out.println("Allhamdulillah sukses");
                 }else{
-                    System.out.println("Gagal tambah detail");
+                    System.out.println("Gagal Teros marine kapan");
                 }
             }
         }else{
-            System.out.println("Gagal tambah pengeluaran");
+            System.out.println("Eror terus Asuuuuu!!");
         }
         }
         } catch (Exception e) {
+            System.out.println("Ojo eror teros babiii");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnTambahMouseClicked

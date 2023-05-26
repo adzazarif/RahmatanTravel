@@ -9,6 +9,7 @@ package entity;
  * @author WINDOWS 10
  */
 public class DetailPengeluaran implements Entity{
+    private int id;
     private Barang barang;
     private Pengeluaran pengeluaran;
     private int banyak;
@@ -23,6 +24,7 @@ public class DetailPengeluaran implements Entity{
         this.banyak = banyak;
         this.harga = harga;
     }
+    
      public void setBarang(Barang barang){
         this.barang = barang;
     }
@@ -49,5 +51,12 @@ public class DetailPengeluaran implements Entity{
     }
     public int getHarga(){
         return harga;
+    }
+    
+       public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return id;
     }
 }

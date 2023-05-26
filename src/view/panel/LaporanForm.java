@@ -12,12 +12,12 @@ import java.awt.Color;
  *
  * @author adzaz
  */
-public class Laporan extends javax.swing.JPanel {
+public class LaporanForm extends javax.swing.JPanel {
 
     /**
      * Creates new form Laporan
      */
-    public Laporan() {
+    public LaporanForm() {
         initComponents();
     }
 

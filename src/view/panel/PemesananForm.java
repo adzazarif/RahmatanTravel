@@ -209,7 +209,6 @@ public class PemesananForm extends javax.swing.JPanel {
         int baris = table.rowAtPoint(evt.getPoint());
         String ids = table.getValueAt(baris, 1).toString();
         id = Integer.valueOf(ids);
-        System.out.println(id);
     }//GEN-LAST:event_tableMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked

@@ -41,6 +41,25 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
 
         return detailpengeluaran;
     }
+    
+    public List<DetailPengeluaran> getById(Integer id) {
+        String sql = "SELECT * FROM " + tableName + " WHERE pengeluaran_id = ?";
+        List<DetailPengeluaran> detailpengeluaran = new ArrayList<>();
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                detailpengeluaran.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return detailpengeluaran;
+    }
 
     @Override
     public DetailPengeluaran get(Integer id) {
@@ -120,7 +139,7 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
                 new BarangRepository().get(result.getInt("barang_id")),
                 result.getInt("banyak"),
                 result.getInt("harga"));
-
+        detailPengeluaran.setId(result.getInt("id"));
         return detailPengeluaran;
         }
 }

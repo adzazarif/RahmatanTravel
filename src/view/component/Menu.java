@@ -34,7 +34,7 @@ import view.panel.BarangForm;
 import view.panel.Dasboard;
 import view.panel.JamaahForm;
 import view.panel.KeberangkatanForm;
-import view.panel.Laporan;
+import view.panel.LaporanForm;
 import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.PemesananForm;
@@ -301,7 +301,7 @@ public class Menu extends javax.swing.JPanel {
     private void LaporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LaporanMouseClicked
        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/sideLaporan.png")));
        maindasboard main1 =(maindasboard)SwingUtilities.getWindowAncestor(this);
-       main1.showform(new Laporan());
+       main1.showform(new LaporanForm());
        Dasboard.setVisible(true);
        jamaah.setVisible(true);
        Paket.setVisible(true);
