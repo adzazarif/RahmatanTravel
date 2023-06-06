@@ -168,7 +168,7 @@ public class Login extends javax.swing.JPanel {
 
     private void aboutversiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutversiMouseClicked
     Main apa1 = (Main) SwingUtilities.getWindowAncestor(this);
-        dialog_mintakode apa = new dialog_mintakode(apa1);
+        dialog_aboutversi apa = new dialog_aboutversi(apa1);
         apa.showGlass();
     
         apa.showPopUpNonGlass();

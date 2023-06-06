@@ -4,30 +4,38 @@
  */
 package testing;
 
-import chart.ModelPolarAreaChart;
+import com.raven.chart.ModelChart;
+import data.DataChartBar;
 import java.awt.Color;
+import repository.LaporanRepository;
 
 /**
  *
  * @author adzaz
  */
-public class NewJFrame extends javax.swing.JFrame {
-
+public class NewJFrame1 extends javax.swing.JFrame {
+    LaporanRepository laporanRepo = new LaporanRepository();
     /**
-     * Creates new form NewJFrame
+     * Creates new form NewJFrame1
      */
-    public NewJFrame() {
+    public NewJFrame1() {
         initComponents();
-        getContentPane().setBackground(new Color(255, 255, 255));
-        test();
-    }
-    public void test(){
-         polarAreaChart.addItem(new ModelPolarAreaChart(new Color(52, 148, 203), "Coke", 60));
-        polarAreaChart.addItem(new ModelPolarAreaChart(new Color(175, 67, 237), "Fanta", 50));
-        polarAreaChart.addItem(new ModelPolarAreaChart(new Color(87, 218, 137), "Vital", 30));
-        polarAreaChart.start();
+        setChartBar();
+   
     }
 
+    public void setChartBar(){
+        chart.addLegend("pemasukan", new Color(245, 189, 135));
+        chart.addLegend("pengeluaran", new Color(135, 189, 245));
+        chart.addLegend("laba bersih", new Color(189, 135, 245));
+        chart.addLegend("laba kotor", new Color(139, 229, 222));
+  
+        for(DataChartBar res:laporanRepo.getChartStats()){
+            System.out.println(res.getPemasukan());
+            chart.addData(new ModelChart(res.getMonth(), new double[]{res.getPemasukan(), res.getPengeluaran(),res.getLabaBersih(),res.getLabaKotor()}));
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,8 +45,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateChooser1 = new com.raven.datechooser.DateChooser();
-        polarAreaChart = new chart.PolarAreaChart();
+        chart = new com.raven.chart.Chart();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,22 +53,17 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(dateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(polarAreaChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(343, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(polarAreaChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addGap(16, 16, 16)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,26 +86,25 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new NewJFrame1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.datechooser.DateChooser dateChooser1;
-    private chart.PolarAreaChart polarAreaChart;
+    private com.raven.chart.Chart chart;
     // End of variables declaration//GEN-END:variables
 }

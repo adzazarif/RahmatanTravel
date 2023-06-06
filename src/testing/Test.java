@@ -1,5 +1,6 @@
 package testing;
 
+import data.DataChartLine;
 import entity.Jamaah;
 import entity.Keberangkatan;
 import entity.Paket;
@@ -9,6 +10,7 @@ import java.util.Date;
 import repository.DashboardRepository;
 import repository.JamaahRepository;
 import repository.KeberangkatanRepository;
+import repository.LaporanRepository;
 import repository.PaketRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
@@ -69,13 +71,13 @@ PaketRepository paketRepo = new PaketRepository();
 //        kbr.add(kb);
 
 //    String str = "";
-    String kalimat2 = "null asd,112,Stok = 123h";
+//    String kalimat2 = "null asd,112,Stok = 123h";
 //    String kept = kalimat2.substring( 0, kalimat2.indexOf(","));
-String [] twoStringArray= kalimat2.split(",", 2); //the main line
-System.out.println("String befor comma = "+twoStringArray[0]);//abc
-        
-String [] twoStringArrays= kalimat2.split("= ", 0); //the main line
-System.out.println("String before same = "+twoStringArrays[0]);//abc
+//String [] twoStringArray= kalimat2.split(",", 2); //the main line
+//System.out.println("String befor comma = "+twoStringArray[0]);//abc
+//        
+//String [] twoStringArrays= kalimat2.split("= ", 0); //the main line
+//System.out.println("String before same = "+twoStringArrays[0]);//abc
     
 //        KeberangkatanRepository kbr = new KeberangkatanRepository();
 //        for(Keberangkatan k:kbr.getByMenu("umrah")){
@@ -83,5 +85,15 @@ System.out.println("String before same = "+twoStringArrays[0]);//abc
 //            
 //            System.out.println(k.getTanggal());
 //        }
+
+
+        LaporanRepository laporanRepo = new LaporanRepository();
+//        int totalUmrah = laporanRepo.getCountJamaahByMenu("umrah");
+//        System.out.println(totalUmrah);
+    for(DataChartLine r:laporanRepo.getChartLine()){
+        System.out.println(r.getMonth());
+        System.out.println(r.getAmounthHaji());
+        System.out.println(r.getAmounthUmrah());
+    }
     }
 }
