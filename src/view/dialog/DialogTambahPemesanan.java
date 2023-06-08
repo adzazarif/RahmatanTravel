@@ -4,19 +4,34 @@
  */
 package view.dialog;
 
+import com.barcodelib.barcode.Linear;
 import entity.Jamaah;
 import entity.Keberangkatan;
 import entity.Paket;
 import entity.Pemesanan;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import java.util.List;
 import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import repository.JamaahRepository;
 import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
+import util.Conn;
 import util.DateUtil;
 
 /**
@@ -38,6 +53,23 @@ public class DialogTambahPemesanan extends Dialog {
         initComponents();
         fillComboBoxJamaah();
         setDate();
+    }
+     public void generate() {
+        int kd_transaksi = pemesananRepo.getIdLast();
+        String query = "SELECT * FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik WHERE pemesanan.id = "+kd_transaksi;
+        String path = "D:/RahmatanTravel/src/report/NotaPemesanan.jrxml";
+
+        try {
+              Connection koneksi = (Connection) Conn.configDB();
+            Statement pstCek = koneksi.createStatement();
+            ResultSet res = pstCek.executeQuery(query);
+            JasperDesign design = JRXmlLoader.load(path);
+            JasperReport jr = JasperCompileManager.compileReport(design);
+            JRResultSetDataSource rsDataSource = new JRResultSetDataSource(res);
+            JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap<>(), rsDataSource);
+
+            JasperViewer.viewReport(jp);
+        } catch(Exception e) { e.printStackTrace(); }
     }
 
     private void setDate(){
@@ -280,11 +312,26 @@ public class DialogTambahPemesanan extends Dialog {
         boolean tambah = pemesananRepo.add(pemesanan);
         if(tambah){
             System.out.println("Berhasil");
+            int idLast = pemesananRepo.getIdLast();
+            String newpath = "src/UploadBarcode";
+            File directory = new File(newpath);
+            if(!directory.exists()){
+                directory.mkdir();
+            }
+             Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128B);
+            barcode.setData(String.valueOf(idLast));
+            barcode.setI(11.0f);
+            String name = "pms"+idLast;
+            barcode.renderBarcode("D:/RahmatanTravel/src/UploadBarcode/"+name+".png");
+            System.out.println("berhasil cetak barcode");
+            generate();
             closeMessage();
         }else{
             System.out.println("Gagal");
         }
         } catch (Exception e) {
+            System.out.println(e);
         }
         
     }//GEN-LAST:event_btnTambahMouseClicked

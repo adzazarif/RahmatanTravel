@@ -40,6 +40,9 @@ public class LaporanForm extends javax.swing.JPanel {
         setChart();
         setChartBar();
         setChartLine();
+        panelTable.setVisible(false);
+        panelKeuntungan.setVisible(false);
+        panelPengeluaran.setVisible(false);
     }
  public void setChartBar(){
         chartBar.addLegend("pemasukan", new Color(245, 189, 135));
@@ -187,8 +190,7 @@ public class LaporanForm extends javax.swing.JPanel {
      public void loadTableKeuntunganBersih(){
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("No");      
-            model.addColumn("Nama Paket");
-            model.addColumn("Tanggal Keberangkatan");
+            model.addColumn("Bulan");
             model.addColumn("Pemasukan");
             model.addColumn("Pengeluaran");
             model.addColumn("Keuntungan");           
@@ -197,15 +199,14 @@ public class LaporanForm extends javax.swing.JPanel {
            try{
             int no = 1;        
 
-        String sql = "SELECT master_paket.nama, keberangkatan.tanggal, SUM(pemesanan.jumlah_bayar) as pemasukann, pengeluaran.total_pengeluaran + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional WHERE MONTH('2023-06-02') = 6) AS pengeluarann, (SUM(pemesanan.jumlah_bayar) - pengeluaran.total_pengeluaran - (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional WHERE MONTH('2023-06-02') = 6)) AS laba_kotor FROM `keberangkatan` JOIN pemesanan ON keberangkatan.id = pemesanan.keberangkatan_id JOIN pengeluaran ON keberangkatan.id = pengeluaran.keberangkatan_id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE MONTH('2023-06-02') = 6" ;
+        String sql = "SELECT DATE_FORMAT(pemesanan.tanggal, '%M') AS month, keberangkatan.tanggal, SUM(pemesanan.jumlah_bayar) as pemasukann, pengeluaran.total_pengeluaran + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional ) AS pengeluarann, (SUM(pemesanan.jumlah_bayar) - pengeluaran.total_pengeluaran - (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional )) AS laba_bersih FROM `keberangkatan` JOIN pemesanan ON keberangkatan.id = pemesanan.keberangkatan_id JOIN pengeluaran ON keberangkatan.id = pengeluaran.keberangkatan_id JOIN master_paket ON keberangkatan.paket_id = master_paket.id GROUP BY YEAR(pemesanan.tanggal), MONTH(pemesanan.tanggal)" ;
         Connection koneksi = (Connection)Conn.configDB();
         Statement stm = koneksi.createStatement();
         ResultSet res = stm.executeQuery(sql);
             while(res.next()){
                 model.addRow(new Object[]{
               no++,
-                    res.getString("nama"), 
-                    res.getString("tanggal"),
+                    res.getString("month"),
                     res.getString("pemasukann"), 
                     res.getString("pengeluarann"),
                     res.getString("laba_bersih")
@@ -260,7 +261,18 @@ public class LaporanForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel4 = new javax.swing.JPanel();
+        panelPengeluaran = new javax.swing.JPanel();
+        btnOperasional = new javax.swing.JLabel();
+        btnProduksi = new javax.swing.JLabel();
+        lblIconOpsiPengeluaran = new javax.swing.JLabel();
+        panelKeuntungan = new javax.swing.JPanel();
+        btnLabaBersih = new javax.swing.JLabel();
+        btnLabaKotor = new javax.swing.JLabel();
+        lblIconOpsiKeuntungan = new javax.swing.JLabel();
+        panelTable = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        panelGrafik = new javax.swing.JPanel();
         chart1 = new chart.PolarAreaChart();
         chartBar = new com.raven.chart.Chart();
         panelShadow3 = new raven.panel.PanelShadow();
@@ -273,140 +285,24 @@ public class LaporanForm extends javax.swing.JPanel {
         btnPemasukan = new javax.swing.JLabel();
         btnGrafik = new javax.swing.JLabel();
         iconPilihan = new javax.swing.JLabel();
-        panelPengeluaran = new javax.swing.JPanel();
-        btnOperasional = new javax.swing.JLabel();
-        btnProduksi = new javax.swing.JLabel();
-        lblIconOpsiPengeluaran = new javax.swing.JLabel();
-        panelKeuntungan = new javax.swing.JPanel();
-        btnLabaBersih = new javax.swing.JLabel();
-        btnLabaKotor = new javax.swing.JLabel();
-        lblIconOpsiKeuntungan = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setLayout(null);
 
-        panelShadow3.setBackground(new java.awt.Color(34, 59, 69));
-        panelShadow3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelShadow3.setColorGradient(new java.awt.Color(17, 38, 47));
-
-        chartLine.setForeground(new java.awt.Color(237, 237, 237));
-        chartLine.setFillColor(true);
-
-        javax.swing.GroupLayout panelShadow3Layout = new javax.swing.GroupLayout(panelShadow3);
-        panelShadow3.setLayout(panelShadow3Layout);
-        panelShadow3Layout.setHorizontalGroup(
-            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chartLine, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelShadow3Layout.setVerticalGroup(
-            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chartLine, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chartBar, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(303, 303, 303))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chartBar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        add(jPanel4);
-        jPanel4.setBounds(30, 220, 1280, 540);
-
-        jPanel1.setBackground(new Color(0,0,0,0));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/title laporan.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(741, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        add(jPanel1);
-        jPanel1.setBounds(0, 6, 0, 0);
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(jPanel3);
-        jPanel3.setBounds(1605, 307, 0, 0);
-
-        btnKeuntungan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnKeuntunganMouseClicked(evt);
-            }
-        });
-        add(btnKeuntungan);
-        btnKeuntungan.setBounds(470, 178, 140, 30);
-
-        btnPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPengeluaranMouseClicked(evt);
-            }
-        });
-        add(btnPengeluaran);
-        btnPengeluaran.setBounds(320, 178, 150, 30);
-
-        btnPemasukan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPemasukanMouseClicked(evt);
-            }
-        });
-        add(btnPemasukan);
-        btnPemasukan.setBounds(170, 178, 150, 30);
-
-        btnGrafik.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGrafikMouseClicked(evt);
-            }
-        });
-        add(btnGrafik);
-        btnGrafik.setBounds(20, 178, 150, 30);
-
-        iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan grafik.png"))); // NOI18N
-        add(iconPilihan);
-        iconPilihan.setBounds(20, 178, 588, 28);
-
         panelPengeluaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnOperasional.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOperasionalMouseClicked(evt);
+            }
+        });
         panelPengeluaran.add(btnOperasional, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+
+        btnProduksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProduksiMouseClicked(evt);
+            }
+        });
         panelPengeluaran.add(btnProduksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 140, 30));
 
         lblIconOpsiPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/pilihan pengeluaran operasional.png"))); // NOI18N
@@ -448,40 +344,163 @@ public class LaporanForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(table);
+        jScrollPane2.setViewportView(table);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1278, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelTableLayout = new javax.swing.GroupLayout(panelTable);
+        panelTable.setLayout(panelTableLayout);
+        panelTableLayout.setHorizontalGroup(
+            panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTableLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(871, Short.MAX_VALUE))
+        );
+        panelTableLayout.setVerticalGroup(
+            panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTableLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        add(panelTable);
+        panelTable.setBounds(20, 260, 1500, 500);
+
+        panelShadow3.setBackground(new java.awt.Color(34, 59, 69));
+        panelShadow3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelShadow3.setColorGradient(new java.awt.Color(17, 38, 47));
+
+        chartLine.setForeground(new java.awt.Color(237, 237, 237));
+        chartLine.setFillColor(true);
+
+        javax.swing.GroupLayout panelShadow3Layout = new javax.swing.GroupLayout(panelShadow3);
+        panelShadow3.setLayout(panelShadow3Layout);
+        panelShadow3Layout.setHorizontalGroup(
+            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chartLine, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelShadow3Layout.setVerticalGroup(
+            panelShadow3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chartLine, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelGrafikLayout = new javax.swing.GroupLayout(panelGrafik);
+        panelGrafik.setLayout(panelGrafikLayout);
+        panelGrafikLayout.setHorizontalGroup(
+            panelGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGrafikLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chartBar, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(303, 303, 303))
+        );
+        panelGrafikLayout.setVerticalGroup(
+            panelGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGrafikLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chartBar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGrafikLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        add(panelGrafik);
+        panelGrafik.setBounds(30, 220, 1280, 540);
+
+        jPanel1.setBackground(new Color(0,0,0,0));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/title laporan.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(741, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(546, 546, 546)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
-        add(jPanel2);
-        jPanel2.setBounds(20, 260, 1500, 500);
+        add(jPanel1);
+        jPanel1.setBounds(0, 6, 1157, 160);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jPanel3);
+        jPanel3.setBounds(1605, 307, 0, 0);
+
+        btnKeuntungan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnKeuntunganMouseClicked(evt);
+            }
+        });
+        add(btnKeuntungan);
+        btnKeuntungan.setBounds(470, 178, 140, 30);
+
+        btnPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPengeluaranMouseClicked(evt);
+            }
+        });
+        add(btnPengeluaran);
+        btnPengeluaran.setBounds(320, 178, 150, 30);
+
+        btnPemasukan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPemasukanMouseClicked(evt);
+            }
+        });
+        add(btnPemasukan);
+        btnPemasukan.setBounds(170, 178, 150, 30);
+
+        btnGrafik.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGrafikMouseClicked(evt);
+            }
+        });
+        add(btnGrafik);
+        btnGrafik.setBounds(20, 178, 150, 30);
+
+        iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan grafik.png"))); // NOI18N
+        add(iconPilihan);
+        iconPilihan.setBounds(20, 178, 588, 28);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKeuntunganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeuntunganMouseClicked
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan keuntungan.png")));
         pilihan = "keuntungan";
+        panelGrafik.setVisible(false);
+        loadTableKeuntunganBersih();
+        panelTable.setVisible(true);
         panelKeuntungan.setVisible(true);
         panelPengeluaran.setVisible(false);
-        loadTableKeuntunganBersih();
+        
     }//GEN-LAST:event_btnKeuntunganMouseClicked
 
     private void btnPengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPengeluaranMouseClicked
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan pengeluaran.png")));
         pilihan = "pengeluaran";
+        panelGrafik.setVisible(false);
+        loadTableOperasional();
+        panelTable.setVisible(true);
         panelPengeluaran.setVisible(true);
         panelKeuntungan.setVisible(false);
 
@@ -490,23 +509,49 @@ public class LaporanForm extends javax.swing.JPanel {
     private void btnPemasukanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPemasukanMouseClicked
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan pemasukan.png")));
         pilihan = "masukan";
-
+        panelGrafik.setVisible(false);
+        loadTablePemasukan();
+        panelTable.setVisible(true);
+        panelPengeluaran.setVisible(false);
+        panelKeuntungan.setVisible(false);
     }//GEN-LAST:event_btnPemasukanMouseClicked
 
     private void btnGrafikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrafikMouseClicked
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan grafik.png")));
         pilihan = "grafik";
+        panelTable.setVisible(false);
+        panelGrafik.setVisible(true);
+        panelPengeluaran.setVisible(false);
+        panelKeuntungan.setVisible(false);
     }//GEN-LAST:event_btnGrafikMouseClicked
 
     private void btnLabaBersihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLabaBersihMouseClicked
         lblIconOpsiKeuntungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/opsi keuntungan laba bersih.png")));
         loadTableKeuntunganBersih();
+        panelGrafik.setVisible(false);
+        panelTable.setVisible(true);
     }//GEN-LAST:event_btnLabaBersihMouseClicked
 
     private void btnLabaKotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLabaKotorMouseClicked
         lblIconOpsiKeuntungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/opsi keuntungan laba kotor.png")));
         loadTableKeuntunganKotor();
+        panelGrafik.setVisible(false);
+        panelTable.setVisible(true);
     }//GEN-LAST:event_btnLabaKotorMouseClicked
+
+    private void btnOperasionalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOperasionalMouseClicked
+         lblIconOpsiPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/opsi pengeluaran operasional.png")));
+        loadTableOperasional();
+        panelGrafik.setVisible(false);
+        panelTable.setVisible(true);
+    }//GEN-LAST:event_btnOperasionalMouseClicked
+
+    private void btnProduksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProduksiMouseClicked
+          lblIconOpsiPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/opsi pengeluaran produksi.png")));
+        loadTableProduksi();
+        panelGrafik.setVisible(false);
+        panelTable.setVisible(true);
+    }//GEN-LAST:event_btnProduksiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -524,15 +569,15 @@ public class LaporanForm extends javax.swing.JPanel {
     private javax.swing.JLabel iconPilihan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblIconOpsiKeuntungan;
     private javax.swing.JLabel lblIconOpsiPengeluaran;
+    private javax.swing.JPanel panelGrafik;
     private javax.swing.JPanel panelKeuntungan;
     private javax.swing.JPanel panelPengeluaran;
     private raven.panel.PanelShadow panelShadow3;
+    private javax.swing.JPanel panelTable;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

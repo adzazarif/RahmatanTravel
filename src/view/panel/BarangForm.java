@@ -4,24 +4,50 @@
  */
 package view.panel;
 
+import entity.Barang;
+import entity.PengeluaranOperasional;
 import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+import repository.BarangRepository;
 /**
  *
  * @author semafie
  */
 public class BarangForm extends javax.swing.JPanel {
-
+    BarangRepository barangRepo = new BarangRepository();
     /**
      * Creates new form Barang
      */
     public BarangForm() {
         initComponents();
-                
+        loadTableStok();
     }
-
+    
+     public void loadTableStok(){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Stok");
+            model.addColumn("Harga");
+         
+        
+           try {
+             for(Barang res:barangRepo.get()){
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getNama(),
+                    res.getStok(),
+                    res.getHarga(),
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,8 +60,19 @@ public class BarangForm extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnTambah = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnTambah = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        bntKeluar = new javax.swing.JLabel();
+        bntMasuk = new javax.swing.JLabel();
+        bntStok = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        bntKeluar1 = new javax.swing.JLabel();
+        bntMasuk1 = new javax.swing.JLabel();
+        bntStok1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -64,6 +101,9 @@ public class BarangForm extends javax.swing.JPanel {
         jPanel2.setBackground(new Color(0,0,0,0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD barang.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 450, 50));
+
         btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTambahMouseClicked(evt);
@@ -71,28 +111,78 @@ public class BarangForm extends javax.swing.JPanel {
         });
         jPanel2.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 60));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button tambah.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 160, 50));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(bntKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 130, 30));
+        jPanel3.add(bntMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 130, 30));
+        jPanel3.add(bntStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu stok.png"))); // NOI18N
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu stok.png"))); // NOI18N
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 60, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bntStok1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(130, 130, 130)
+                                        .addComponent(bntMasuk1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(270, 270, 270)
+                                        .addComponent(bntKeluar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(443, 443, 443))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                        .addGap(528, 528, 528))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bntStok1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bntMasuk1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bntKeluar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))))
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -104,10 +194,21 @@ public class BarangForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bntKeluar;
+    private javax.swing.JLabel bntKeluar1;
+    private javax.swing.JLabel bntMasuk;
+    private javax.swing.JLabel bntMasuk1;
+    private javax.swing.JLabel bntStok;
+    private javax.swing.JLabel bntStok1;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

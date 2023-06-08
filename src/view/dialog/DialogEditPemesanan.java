@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import repository.JamaahRepository;
 import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
+import util.DateUtil;
 import view.panel.PemesananForm;
 
 /**
@@ -29,7 +30,7 @@ public class DialogEditPemesanan extends Dialog {
     PemesananRepository pemesananRepo = new PemesananRepository();
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     JamaahRepository jamaahRepo = new JamaahRepository();
-    
+    DateUtil dateUtil = new DateUtil();
     /**
      * Creates new form DialogEditPemesanan
      */
@@ -151,7 +152,7 @@ public class DialogEditPemesanan extends Dialog {
                 btnTambahMouseClicked(evt);
             }
         });
-        getContentPane().add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 630, 170, 40));
+        getContentPane().add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 640, 170, 40));
 
         lblTotalHarga.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblTotalHarga.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,7 +175,7 @@ public class DialogEditPemesanan extends Dialog {
                 btnBatalMouseClicked(evt);
             }
         });
-        getContentPane().add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 630, 170, 40));
+        getContentPane().add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 640, 170, 40));
 
         cmbJamaah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +207,12 @@ public class DialogEditPemesanan extends Dialog {
         lblHarga.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 435, 320, 50));
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "lunas", "belum lunas" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "lunas", "belum lunas", "batal" }));
+        cmbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbStatusActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 280, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/edit pemesanan.png"))); // NOI18N
@@ -216,9 +222,7 @@ public class DialogEditPemesanan extends Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPembayaranActionPerformed
-        if(cmbPembayaran.getSelectedItem().equals("cash")){
-            cmbStatus.setEnabled(false);
-        }
+
     }//GEN-LAST:event_cmbPembayaranActionPerformed
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
@@ -309,6 +313,36 @@ public class DialogEditPemesanan extends Dialog {
         }
 
     }//GEN-LAST:event_cmbKeberangkatanActionPerformed
+
+    private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
+        try {
+             String status = String.valueOf(cmbStatus.getSelectedItem());
+        
+        if(status.equals("batal")){
+            long ttlBayar = 0;
+             long hargaPaket = Integer.parseInt(lblHarga.getText());
+             String tanggalBerangkat = lblBerangkat.getText();
+             String tanggalSekarang = dateUtil.dateNow();
+             int rentangWaktu = dateUtil.daysBetweenDates(tanggalSekarang, tanggalBerangkat);
+             if(rentangWaktu >= 0 && rentangWaktu <= 7){
+                 ttlBayar = hargaPaket * 100 / 100;
+             }else if(rentangWaktu >= 8 && rentangWaktu <= 14){
+                 ttlBayar = hargaPaket * 75 / 100;
+                 System.out.println("75%");
+             }else if(rentangWaktu >= 15  && rentangWaktu <= 21){
+                 ttlBayar = hargaPaket * 50 / 100;
+             }else if(rentangWaktu >= 22){
+                 ttlBayar = hargaPaket * 15 / 100;
+             };
+
+        lblTotalTagihan.setText(String.valueOf(ttlBayar));
+        lblDiskon.setText("0");
+        }
+        } catch (Exception e) {
+            System.out.println("e.getMessage()");
+        }
+        
+    }//GEN-LAST:event_cmbStatusActionPerformed
 
 
 

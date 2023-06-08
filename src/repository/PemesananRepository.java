@@ -191,6 +191,20 @@ public class PemesananRepository implements Repository<Pemesanan>{
             return false;
         }
     }
+    public int getIdLast(){
+         int total = 0;
+        String queryCek = "SELECT id FROM pemesanan ORDER BY id DESC";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            total = res.getInt("id");
+        }
+        } catch (Exception e) {
+        }
+        return total;
+    }
     private Pemesanan mapToEntity(ResultSet result) throws SQLException {
          Pemesanan pemesanan = new Pemesanan(
                  new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),

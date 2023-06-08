@@ -203,7 +203,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="870" y="630" width="170" height="40"/>
+          <AbsoluteConstraints x="870" y="640" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -266,7 +266,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="650" y="630" width="170" height="40"/>
+          <AbsoluteConstraints x="650" y="640" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -366,13 +366,17 @@
     <Component class="javax.swing.JComboBox" name="cmbStatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="--Pilih--"/>
             <StringItem index="1" value="lunas"/>
             <StringItem index="2" value="belum lunas"/>
+            <StringItem index="3" value="batal"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbStatusActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

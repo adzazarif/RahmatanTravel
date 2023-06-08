@@ -13,6 +13,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import service.Auth;
 import view.component.Menu1;
 import view.event.EventMenuSelected;
 import view.model.ModelMenu1;
@@ -27,7 +28,8 @@ import view.panel.PemesananForm;
 import view.panel.PengeluaranForm;
 
 public class maindasboard extends javax.swing.JFrame {
-
+//    Auth auth = new Auth();
+    private String role = Auth.level;
     private Menu1 menu = new Menu1();
     private JPanel main = new JPanel();
     private MigLayout layout;
@@ -45,7 +47,8 @@ public class maindasboard extends javax.swing.JFrame {
         main.setOpaque(false);
         main.setLayout(new BorderLayout());
         menu.setBorder(BorderFactory.createEmptyBorder(0, 5, 30, 30));
-        menu.setEvent(new EventMenuSelected() {
+        if(role.equals("owner")){
+            menu.setEvent(new EventMenuSelected() {
             @Override
             
             
@@ -71,7 +74,7 @@ public class maindasboard extends javax.swing.JFrame {
                 }
             }
         });
-        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")), new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
+             menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")), new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")), new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")), new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")), new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
@@ -80,6 +83,33 @@ public class maindasboard extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
+        }else if(role.equals("employee")){
+             menu.setEvent(new EventMenuSelected() {
+            @Override
+            
+            
+            public void selected(int index) {
+                if (index == 0) {
+                    showform(new Dasboard());
+                } else if (index == 1) {
+                    showform(new JamaahForm());
+                } else if (index == 2) {
+                    showform(new PaketForm());
+                } 
+            }
+        });
+             menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")), new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")), new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")), new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")), new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/barang2.png")), new ImageIcon(getClass().getResource("/view/icon/barang1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")), new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
+//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
+        }
+        
+       
         menu.addEventMenu(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

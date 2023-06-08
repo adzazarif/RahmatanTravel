@@ -70,6 +70,9 @@ private void loadTable(){
             lblKurangBayar.setText(String.valueOf(kurang));
             
         }
+        if(lblStatus.getText().equals("lunas")){
+                txtBayarCicilan.setEnabled(false);
+            }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +89,7 @@ private void loadTable(){
         lblTotalPembelian = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
+        lblKembalian = new javax.swing.JLabel();
         lblKurangBayarAfter = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtBayarCicilan = new javax.swing.JTextField();
@@ -121,6 +125,10 @@ private void loadTable(){
         lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblNama.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 220, 40));
+
+        lblKembalian.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        lblKembalian.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(lblKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 220, 40));
 
         lblKurangBayarAfter.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblKurangBayarAfter.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,8 +192,15 @@ private void loadTable(){
             String dates = date.dateNow();
         Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(dates);
         Pemesanan pemesanan = new PemesananRepository().get(id);
-        int cicilan = Integer.parseInt(txtBayarCicilan.getText());
+        int kurang = Integer.parseInt(lblKurangBayar.getText());
+        int cicilan;
+        int inputCicilan = Integer.parseInt(txtBayarCicilan.getText());
         int kurangBayar = Integer.parseInt(lblKurangBayarAfter.getText());
+        if(inputCicilan <= kurangBayar){
+            cicilan = Integer.parseInt(txtBayarCicilan.getText());
+        }else{
+            cicilan = kurang;
+        }
         DetailPemesanan detailPemesanan = new DetailPemesanan(pemesanan, tanggal, cicilan);
         boolean tambah = detailPemesananRepo.add(detailPemesanan);
       
@@ -213,7 +228,15 @@ private void loadTable(){
         int cicilan = Integer.parseInt(txtBayarCicilan.getText());
         int kurang = Integer.valueOf(lblKurangBayar.getText());
         int sesudahCicil = kurang - cicilan;
-        lblKurangBayarAfter.setText(String.valueOf(sesudahCicil));
+        int kembalian = cicilan - kurang;
+        if(sesudahCicil >= 0){
+            lblKurangBayarAfter.setText(String.valueOf(sesudahCicil));
+            lblKembalian.setText("0");
+        }else{
+            lblKurangBayarAfter.setText("0");
+            lblKembalian.setText(String.valueOf(kembalian));
+        }
+        
     }//GEN-LAST:event_txtBayarCicilanKeyReleased
 
 
@@ -224,6 +247,7 @@ private void loadTable(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblKembalian;
     private javax.swing.JLabel lblKurangBayar;
     private javax.swing.JLabel lblKurangBayarAfter;
     private javax.swing.JLabel lblNama;

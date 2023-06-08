@@ -7,6 +7,7 @@ package util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -31,4 +32,18 @@ public class DateUtil {
         String formattedDate = myDateObj.format(myFormatObj);  
         return formattedDate;
     } 
+     
+      public String getDateMinus(String Keberangkatan, int lamaHari){
+        LocalDate thirtyDaysAgo = LocalDate.parse(Keberangkatan).minusDays(lamaHari);
+        return String.valueOf(thirtyDaysAgo);
+    }
+      
+    public int daysBetweenDates(String date1, String date2) {
+        LocalDate dt1 = LocalDate.parse(date1);
+        LocalDate dt2= LocalDate.parse(date2);
+
+        long diffDays = ChronoUnit.DAYS.between(dt1, dt2);
+
+        return Math.abs((int)diffDays);
+    }
 }

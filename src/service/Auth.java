@@ -14,6 +14,9 @@ import util.Conn;
  */
 public class Auth {
     public static String username ;
+    public static String level;
+    
+    
   public boolean login(String username, String pass){
         try {
             String query = "SELECT * FROM user WHERE username ='"+ username +"' AND password ='" + pass + "'";
@@ -21,7 +24,7 @@ public class Auth {
             PreparedStatement pst = koneksi.prepareStatement(query);
             ResultSet res = pst.executeQuery();
             if(res.next()){
-
+                level = res.getString("role");
                 return true;
             }else{
                   return false;

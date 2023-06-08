@@ -15,9 +15,11 @@ import repository.PaketRepository;
 import repository.PemesananRepository;
 import repository.UserRepository;
 import service.Auth;
+import util.DateUtil;
 
 public class Test {
     public static void main(String[] args) {
+        
         
 //  ---------testing untuk CRUD User------------
 
@@ -90,10 +92,22 @@ PaketRepository paketRepo = new PaketRepository();
         LaporanRepository laporanRepo = new LaporanRepository();
 //        int totalUmrah = laporanRepo.getCountJamaahByMenu("umrah");
 //        System.out.println(totalUmrah);
-    for(DataChartLine r:laporanRepo.getChartLine()){
-        System.out.println(r.getMonth());
-        System.out.println(r.getAmounthHaji());
-        System.out.println(r.getAmounthUmrah());
-    }
+//    for(DataChartLine r:laporanRepo.getChartLine()){
+//        System.out.println(r.getMonth());
+//        System.out.println(r.getAmounthHaji());
+//        System.out.println(r.getAmounthUmrah());
+//    }
+//    }
+//DateUtil dateUtil = new DateUtil();
+//    KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
+//    for(Keberangkatan s:keberangkatanRepo.getById(12)){
+//        System.out.println(s.getTanggal());
+//        String tanggalMinus = dateUtil.getDateMinus(s.getTanggal().toString(), 2);
+//        System.out.println(tanggalMinus);
+//    }
+
+int a = 31500000;
+long total = a * 100 / 100;
+        System.out.println(total);
     }
 }
