@@ -9,7 +9,9 @@ import entity.Keberangkatan;
 import entity.Pemesanan;
 import entity.Pengeluaran;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -33,11 +35,11 @@ public class DialogEditPengeluaranProduksi extends Dialog {
     private int StokB = 0;
     private int banyakOrang = 0;
     private int totalPemasukan = 0;
-    private int grandTotal = 0;
-    private int subHargaLainLain = 0;
-    private int subHargaHotel = 0;
-    private int subHargaPesawat = 0;
-    private  int totalPengeluaranProduksi = PengeluaranForm.totalPengeluaran;
+    private int grandTotal ;
+    private int subHargaLainLain ;
+    private int subHargaHotel ;
+    private int subHargaPesawat ;
+    private  int totalPengeluaranProduksi;
     private int hargaBarangDelete;
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     PemesananRepository pemesananRepo = new PemesananRepository();
@@ -51,8 +53,31 @@ public class DialogEditPengeluaranProduksi extends Dialog {
         super(fram);
         initComponents();
         setValue();
+        setListBarang();
         loadTable();
         setTotalPengeluaran();
+        
+        setComboBoxBarang();
+    }
+    private void setListBarang(){
+        try {
+            int inputStok = Integer.parseInt(txtStok.getText());
+            for(DetailPengeluaran br:detailPengeluaranRepo.getById(idPengeluaran)){
+                
+                int subTotal = br.getHarga() * Integer.valueOf(txtStok.getText());
+
+                listBarang.add(new Barang(br.getId(), br.getBarang().getNama(), inputStok, br.getHarga(),subTotal));
+            }
+        } catch (Exception e) {
+        }
+    }
+    private void setComboBoxBarang(){
+          try {
+             for(Barang jm:barangRepo.get()){
+           cmbBarang.addItem(jm.getId()+","+jm.getNama()+", Stok = "+jm.getStok());
+        }
+        } catch (Exception e) {
+        }
     }
     
     private void setValue(){
@@ -60,34 +85,31 @@ public class DialogEditPengeluaranProduksi extends Dialog {
         
         int banyakOrg = 0;
         int ttlPemasukan = 0;
+        int subTotalBarang = 0;
         for(Pemesanan pm:pemesananRepo.getByIdKeberangkatan(idKeberangkatan)){
             banyakOrg += 1;
             ttlPemasukan += pm.getJumlahBayar();
         }
+        
+        for(DetailPengeluaran d:detailPengeluaranRepo.getById(idPengeluaran)){
+            subTotalBarang = subTotalBarang + d.getHarga();
+        }
+        grandTotal = subTotalBarang;
        
         totalPemasukan = ttlPemasukan;
         banyakOrang = banyakOrg;
          for(Pengeluaran p:pengeluaranRepo.getById(idPengeluaran)){
-             totalPengeluaranProduksi = p.getTotalPengeluaran();
-            int hargaHotel = p.getHargaHotel();
-            int hargaLain = p.getHargaLainLain();
-            int hargaPesawat = p.getHargaPesawat();
-            int satuanHotel = hargaHotel / banyakOrang;
-            int satuanPesawat = hargaPesawat / banyakOrang;
-            int satuanLain = hargaLain / banyakOrang;
-            lblPengeluaranHotel.setText(String.valueOf(hargaHotel));
-            lblpengeluaranLainLain.setText(String.valueOf(hargaLain));
-            lblHargaPesawat.setText(String.valueOf(hargaPesawat));
-            txtHargaHotel.setText(String.valueOf(satuanHotel));
-            txtPesawat.setText(String.valueOf(satuanPesawat));
-            txtLainLain.setText(String.valueOf(satuanLain));
+//             totalPengeluaranProduksi = p.getTotalPengeluaran();
+            subHargaHotel = p.getHargaHotel();
+            subHargaLainLain = p.getHargaLainLain();
+            subHargaPesawat = p.getHargaPesawat();
+            txtHargaHotel.setText(String.valueOf(subHargaHotel));
+            txtPesawat.setText(String.valueOf(subHargaPesawat));
+            txtLainLain.setText(String.valueOf(subHargaLainLain));
                lblNama.setText(p.getKeberangkatan().getPaket().getNama());
            lblTanggal.setText(p.getKeberangkatan().getTanggal().toString());
         }
         
-        lblBanyakOrang.setText(String.valueOf(banyakOrang));
-        lblBanyakOrang1.setText(String.valueOf(banyakOrang));
-        lblBanyakOrang2.setText(String.valueOf(banyakOrang));
         txtStok.setText(String.valueOf(banyakOrang));
         lblTotalPemasukan.setText(String.valueOf(totalPemasukan));
            System.out.println(totalPengeluaranProduksi);
@@ -104,14 +126,14 @@ private void loadTable(){
             model.addColumn("Jumlah");
             model.addColumn("Sub total");
 
-           
-           for(DetailPengeluaran res:detailPengeluaranRepo.getById(idPengeluaran)){
+           int no = 1;
+             for(Barang res:listBarang){
                 model.addRow(new Object[]{
-                    res.getId(),
-                    res.getBarang().getNama(),
-                    res.getBarang().getHarga(),
-                    res.getBanyak(),
+                    no++,
+                    res.getNama(),
                     res.getHarga(),
+                    res.getStok(),
+                    res.getSubTotal(),
                     
            });
             
@@ -148,14 +170,8 @@ private void setTotalPengeluaran(){
         lblTotalPemasukan = new javax.swing.JLabel();
         lblTotalPengeluaran = new javax.swing.JLabel();
         txtLainLain = new javax.swing.JTextField();
-        lblBanyakOrang2 = new javax.swing.JLabel();
-        lblpengeluaranLainLain = new javax.swing.JLabel();
-        lblPengeluaranHotel = new javax.swing.JLabel();
-        lblBanyakOrang1 = new javax.swing.JLabel();
         txtHargaHotel = new javax.swing.JTextField();
         txtPesawat = new javax.swing.JTextField();
-        lblBanyakOrang = new javax.swing.JLabel();
-        lblHargaPesawat = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
         lblTanggal = new javax.swing.JLabel();
         btnBatal = new javax.swing.JLabel();
@@ -231,24 +247,7 @@ private void setTotalPengeluaran(){
                 txtLainLainKeyReleased(evt);
             }
         });
-        getContentPane().add(txtLainLain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 220, 40));
-
-        lblBanyakOrang2.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblBanyakOrang2.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblBanyakOrang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 50, 40));
-
-        lblpengeluaranLainLain.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblpengeluaranLainLain.setForeground(new java.awt.Color(0, 0, 0));
-        lblpengeluaranLainLain.setText("asd");
-        getContentPane().add(lblpengeluaranLainLain, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 270, 40));
-
-        lblPengeluaranHotel.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblPengeluaranHotel.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblPengeluaranHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 270, 50));
-
-        lblBanyakOrang1.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblBanyakOrang1.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblBanyakOrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 50, 40));
+        getContentPane().add(txtLainLain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 290, 40));
 
         txtHargaHotel.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtHargaHotel.setBorder(null);
@@ -257,7 +256,7 @@ private void setTotalPengeluaran(){
                 txtHargaHotelKeyReleased(evt);
             }
         });
-        getContentPane().add(txtHargaHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 220, 40));
+        getContentPane().add(txtHargaHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 300, 40));
 
         txtPesawat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtPesawat.setBorder(null);
@@ -266,15 +265,7 @@ private void setTotalPengeluaran(){
                 txtPesawatKeyReleased(evt);
             }
         });
-        getContentPane().add(txtPesawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 220, 40));
-
-        lblBanyakOrang.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblBanyakOrang.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblBanyakOrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 50, 50));
-
-        lblHargaPesawat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblHargaPesawat.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblHargaPesawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 270, 50));
+        getContentPane().add(txtPesawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 300, 40));
 
         lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblNama.setForeground(new java.awt.Color(0, 0, 0));
@@ -290,6 +281,12 @@ private void setTotalPengeluaran(){
             }
         });
         getContentPane().add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 600, 180, 40));
+
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 600, 150, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/edit pengeluaran produksi.png"))); // NOI18N
@@ -304,6 +301,7 @@ private void setTotalPengeluaran(){
             if(hapusDetail){
                 System.out.println("Berhasil");
                 totalPengeluaranProduksi -= hargaBarangDelete;
+                setTotalPengeluaran();
             }else{
                 System.out.println("gagal");
             }
@@ -363,22 +361,19 @@ private void setTotalPengeluaran(){
 
     private void txtLainLainKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLainLainKeyReleased
         int harga = Integer.parseInt(txtLainLain.getText());
-        subHargaLainLain = harga * banyakOrang;
-        lblpengeluaranLainLain.setText(String.valueOf(subHargaLainLain));
+        subHargaLainLain = harga;
         setTotalPengeluaran();
     }//GEN-LAST:event_txtLainLainKeyReleased
 
     private void txtHargaHotelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHargaHotelKeyReleased
         int harga = Integer.parseInt(txtHargaHotel.getText());
-        subHargaHotel = harga * banyakOrang;
-        lblPengeluaranHotel.setText(String.valueOf(subHargaHotel));
+        subHargaHotel = harga;
         setTotalPengeluaran();
     }//GEN-LAST:event_txtHargaHotelKeyReleased
 
     private void txtPesawatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesawatKeyReleased
         int harga = Integer.parseInt(txtPesawat.getText());
-        subHargaPesawat = harga * banyakOrang;
-        lblHargaPesawat.setText(String.valueOf(subHargaPesawat));
+        subHargaPesawat = harga;
         setTotalPengeluaran();
     }//GEN-LAST:event_txtPesawatKeyReleased
 
@@ -394,6 +389,16 @@ private void setTotalPengeluaran(){
         closeMessage();
     }//GEN-LAST:event_btnBatalMouseClicked
 
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        try {
+            Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
+            Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(lblTanggal.getText());
+            Pengeluaran pengeluaran = new Pengeluaran(keberangkatan, tanggal, subHargaPesawat, subHargaHotel, subHargaLainLain, idPengeluaran);
+//            boolean editPengeluaran
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnEditMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -404,16 +409,10 @@ private void setTotalPengeluaran(){
     private javax.swing.JComboBox<String> cmbBarang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblBanyakOrang;
-    private javax.swing.JLabel lblBanyakOrang1;
-    private javax.swing.JLabel lblBanyakOrang2;
-    private javax.swing.JLabel lblHargaPesawat;
     private javax.swing.JLabel lblNama;
-    private javax.swing.JLabel lblPengeluaranHotel;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JLabel lblTotalPemasukan;
     private javax.swing.JLabel lblTotalPengeluaran;
-    private javax.swing.JLabel lblpengeluaranLainLain;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtHargaHotel;
     private javax.swing.JTextField txtLainLain;

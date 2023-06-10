@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null"  pageWidth="300" pageHeight="842" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f2c3eea-a555-4b62-b579-94055e1ab250">
-	<property name="ireport.zoom" value="2.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="228" pageHeight="802" columnWidth="228" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3f2c3eea-a555-4b62-b579-94055e1ab250">
+	<property name="ireport.zoom" value="2.000000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="274"/>
+	<property name="ireport.y" value="112"/>
 	<queryString>
 		<![CDATA[SELECT * FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik]]>
 	</queryString>
@@ -70,59 +70,111 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
-			<textField>
-				<reportElement x="36" y="23" width="100" height="20" uuid="dd3a5e6a-fb37-46c2-83f6-c582e8d061ce"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="36" y="43" width="100" height="20" uuid="344b0010-4c82-431c-b9aa-af02caffaf51"/>
-				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
-			</textField>
+		<band height="143" splitType="Stretch">
+			<image>
+				<reportElement x="20" y="22" width="208" height="75" uuid="48eca55e-03f7-4756-92b6-8b717467181a"/>
+				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\image\\Group 449title.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="57" y="97" width="123" height="20" uuid="5650126b-7f68-4659-a06b-14469c9f7264"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Rahmatan & Tour Travel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="117" width="103" height="20" uuid="10493f48-2022-4465-b3aa-c52fa5edf121"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Jl Bengawan solo No 3 gang 7]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<textField>
-				<reportElement x="28" y="12" width="100" height="20" uuid="b5e103a4-a8d6-4ffc-9a5f-c8990608a610"/>
+				<reportElement x="121" y="0" width="100" height="20" uuid="dd3a5e6a-fb37-46c2-83f6-c582e8d061ce"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="121" y="20" width="100" height="20" uuid="344b0010-4c82-431c-b9aa-af02caffaf51"/>
+				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="22" y="2" width="100" height="20" uuid="9a4bd063-0fce-4e18-9d3d-1382e10b2f21"/>
-				<text><![CDATA[nama]]></text>
+				<reportElement x="26" y="0" width="100" height="20" uuid="a4c6150b-6882-41f7-9175-c22c6009b729"/>
+				<text><![CDATA[Id Pemesanan :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="2" width="100" height="20" uuid="a38b543d-5ea9-42d6-99b7-8bfda55d01a1"/>
-				<text><![CDATA[harga]]></text>
+				<reportElement x="26" y="20" width="100" height="20" uuid="ead92775-dddd-4e3d-a089-1a9a81b0cb58"/>
+				<text><![CDATA[Tanggal :]]></text>
 			</staticText>
 		</band>
-	</columnHeader>
+	</pageHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="212" splitType="Stretch">
 			<textField>
-				<reportElement x="22" y="0" width="100" height="20" uuid="f9332167-fa1a-4bcb-bcf2-fc6fe040cfcd"/>
+				<reportElement x="126" y="0" width="100" height="20" uuid="f9332167-fa1a-4bcb-bcf2-fc6fe040cfcd"/>
 				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="0" width="100" height="20" uuid="003a88f8-562f-410e-ac7a-c31b8ed4f613"/>
+				<reportElement x="126" y="40" width="100" height="20" uuid="003a88f8-562f-410e-ac7a-c31b8ed4f613"/>
 				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="22" y="20" width="231" height="91" uuid="23a94abf-cf50-4739-ab6f-a82ec5efae11"/>
+				<reportElement x="10" y="121" width="205" height="91" uuid="23a94abf-cf50-4739-ab6f-a82ec5efae11"/>
 				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\UploadBarcode\\pms"+$F{id}+".png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="26" y="0" width="85" height="20" uuid="9a4bd063-0fce-4e18-9d3d-1382e10b2f21"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="40" width="85" height="20" uuid="a38b543d-5ea9-42d6-99b7-8bfda55d01a1"/>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="60" width="100" height="20" uuid="680aea14-c625-4a60-9e15-daa2b5265fc0"/>
+				<textFieldExpression><![CDATA[$F{diskon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="26" y="60" width="85" height="20" uuid="90e0d668-5bb1-4f60-9d40-5414da22a26d"/>
+				<text><![CDATA[Diskon]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="20" width="100" height="20" uuid="51df66f5-338f-4cdc-8914-defbfac9f481"/>
+				<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="26" y="20" width="85" height="20" uuid="f60d86a6-cabe-40cb-bd34-ccc0fd680e5d"/>
+				<text><![CDATA[Jenis Pembayaran]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="80" width="100" height="20" uuid="67cecad7-9f07-4640-87a8-d96e18da688b"/>
+				<textFieldExpression><![CDATA[$F{jumlah_bayar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="26" y="80" width="85" height="20" uuid="e30fbe78-78a3-4736-b7bf-be35be6bd3e9"/>
+				<text><![CDATA[Jumlah Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="15" height="20" uuid="8df65f84-84d5-4fcd-a46a-1e9b92f43b1b"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="20" width="15" height="20" uuid="5a6931be-d13b-446f-b439-fafcedca7f4a"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="40" width="15" height="20" uuid="a8bdd941-c1b6-454b-9365-4935aa0bf708"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="60" width="15" height="20" uuid="910016a4-e769-4c44-844e-7d8e8c7d7766"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="80" width="15" height="20" uuid="648b09a1-46b5-4aaa-9055-528c9b3a99f2"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

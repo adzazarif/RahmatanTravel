@@ -26,6 +26,7 @@ public class DialogEditPemesanan extends Dialog {
     private int id = PemesananForm.id;
     private int idKeberangkatan;
     private String menu;
+    private long TotalBayar;
     private List<Keberangkatan> keberangkatanList = new ArrayList<>();
     PemesananRepository pemesananRepo = new PemesananRepository();
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
@@ -42,8 +43,9 @@ public class DialogEditPemesanan extends Dialog {
 
     private void setValue (){
         for(Pemesanan pm:pemesananRepo.getById(id)){
+            TotalBayar = pm.getJumlahBayar();
             lblId.setText(String.valueOf(id));
-            lblTotalBayar.setText(String.valueOf(pm.getJumlahBayar()));
+            lblTotalBayar.setText(String.valueOf(TotalBayar));
             cmbMenu.setSelectedItem(pm.getKeberangkatan().getPaket().getMenu());
             cmbPembayaran.setSelectedItem(pm.getJenisPembayaran());
             cmbJamaah.setSelectedItem(pm.getJamaah().getNama()+ " ,"+pm.getJamaah().getNik());
@@ -334,8 +336,8 @@ public class DialogEditPemesanan extends Dialog {
              }else if(rentangWaktu >= 22){
                  ttlBayar = hargaPaket * 15 / 100;
              };
-
-        lblTotalTagihan.setText(String.valueOf(ttlBayar));
+             TotalBayar = ttlBayar;
+             lblTotalTagihan.setText(String.valueOf(TotalBayar));
         lblDiskon.setText("0");
         }
         } catch (Exception e) {

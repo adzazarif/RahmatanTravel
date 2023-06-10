@@ -133,6 +133,19 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
         }
     }
     
+      public boolean deleteAllById(int id) {
+           String sql = "DELETE FROM "+ tableName +" WHERE pengeluaran_id = ?";
+           try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     private DetailPengeluaran mapToEntity(ResultSet result) throws SQLException {
         DetailPengeluaran detailPengeluaran = new DetailPengeluaran(
                 new PengeluaranRepository().get(result.getInt("pengeluaran_id")),
