@@ -85,16 +85,20 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nama_paket = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         bgitem2 = new javax.swing.JLabel();
         bgitem1 = new javax.swing.JLabel();
 
         setBackground(new Color(0,0,0,0));
         setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button detail.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/iconkberangkatan1.png"))); // NOI18N
+        add(jLabel2);
+        jLabel2.setBounds(430, 40, 90, 50);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/button detail.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel1MouseEntered(evt);
@@ -104,31 +108,27 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(850, 55, 90, 30);
+        jLabel1.setBounds(810, 60, 90, 30);
 
         nama_paket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(nama_paket);
         nama_paket.setBounds(60, 30, 170, 40);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icon keberangkatan.png"))); // NOI18N
-        add(jLabel2);
-        jLabel2.setBounds(430, 40, 90, 47);
-
-        bgitem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/item keberangkatan2.png"))); // NOI18N
+        bgitem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bgitemkeberangkatan1.png"))); // NOI18N
         add(bgitem2);
-        bgitem2.setBounds(0, 2, 997, 130);
+        bgitem2.setBounds(0, 2, 1000, 130);
 
-        bgitem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/item keberangkatan1.png"))); // NOI18N
+        bgitem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bgitemkeberangkatan.png"))); // NOI18N
         add(bgitem1);
-        bgitem1.setBounds(6, 0, 991, 129);
+        bgitem1.setBounds(0, 0, 990, 129);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
-    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button detail1.png")));
+    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/button detail1.png")));
     }//GEN-LAST:event_jLabel1MouseEntered
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
-    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button detail.png")));
+    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/button detail.png")));
     }//GEN-LAST:event_jLabel1MouseExited
 
 

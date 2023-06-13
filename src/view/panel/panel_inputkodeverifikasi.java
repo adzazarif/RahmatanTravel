@@ -84,8 +84,8 @@ private String apa1;
     public void kirim()throws AddressException, MessagingException {
            String host = "smtp.gmail.com";
     int port = 587;
-    String username = "restuimamsafii04@gmail.com";
-    String password = "syxstfevakapdhnd";
+    String username = "travelrahmatan@gmail.com";
+    String password = "adifmmdndqeehmwq";
     
     Properties props = new Properties();
     props.put("mail.smtp.auth","true");
@@ -99,7 +99,7 @@ private String apa1;
                 return new PasswordAuthentication(username, password);
             }
             });
-    String from    = "restuimamsafii04@gmail.com";
+    String from    = "travelrahmatan@gmail.com";
     String to      = email ;
     String subject = "KOde verifikasi rahmatan app";
     String body = randomNumber();
@@ -109,78 +109,74 @@ private String apa1;
     message.setRecipients(Message.RecipientType.TO,
         InternetAddress.parse(to));
     message.setSubject(subject);
-    message.setText(body);
-//    String html = "<html>\n" +
-//"  <head>\n" +
-//"    <meta charset=\"UTF-8\">\n" +
-//"    <title>Persegi Panjang Verifikasi</title>\n" +
-//"    <style>\n" +
-//".verification-box {\n" +
-//"      	margin-left: 30px;\n" +
-//"        background-color: #4d90fe;\n" +
-//"        border: 3px solid #4d90fe;\n" +
-//"        border-radius: 25px;\n" +
-//"        box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3);\n" +
-//"        display: inline-block;\n" +
-//"        padding: 10px;\n" +
-//"        text-align: center;\n" +
-//"        width: 180px; /* menambahkan lebar */\n" +
-//"        height:10px; /* menambahkan tinggi */\n" +
-//"        display: flex; /* menggunakan flexbox */\n" +
-//"        align-items: center; /* align items ke tengah */\n" +
-//"        justify-content: space-evenly;\n" +
-//"      }\n" +
-//"      .verification-code {\n" +
-//"      	\n" +
-//"        font-size: 32px;\n" +
-//"        font-weight: bold;\n" +
-//"        color: #ffffff;\n" +
-//"        line-height: 1;\n" +
-//"        letter-spacing: 20px;\n" +
-//"      }\n" +
-//"      .verification-heading {\n" +
-//"      	font-weight: bold;\n" +
-//"        font-family: \"Quicksand\", sans-serif;\n" +
-//"        font-size: 15px;\n" +
-//"        color: #ff0000;\n" +
-//"        margin-left: 20px;\n" +
-//"        line-height: 1;\n" +
-//"      }\n" +
-//"      .verification-heading22 {\n" +
-//"      	font-weight: bold;\n" +
-//"        font-family: \"Quicksand\", sans-serif;\n" +
-//"        font-size: 20px;\n" +
-//"        margin-left: 45px;\n" +
-//"        line-height: 1;\n" +
-//"      }\n" +
-//"      .verification-heading23 {\n" +
-//"      	font-weight: medium;\n" +
-//"        font-family: \"Quicksand\", sans-serif;\n" +
-//"        font-size: 20px;\n" +
-//"        margin-left: 10px;\n" +
-////"        line-height: 1;\n" +
-//"      }\n" +
-//"      .verification-heading24 {\n" +
-//"      	font-weight: BOLD;\n" +
-//"        font-family: \"Quicksand\", sans-serif;\n" +
-//"        font-size: 30px;\n" +
-//"        color: #be1600;\n" +
-//"        margin-left: 23px;\n" +
-//"        line-height: 1;\n" +
-//"      }\n" +
-//"    </style>\n" +
-//"  </head>\n" +
-//"  <body>\n" +
-//"  <p class=\"verification-heading\">JANGAN BERIKAN KODE OTP INI</p>\n" +
-//"  <p class=\"verification-heading22\">KEPADA SIAPAPUN</p>\n" +
-//"  <p class=\"verification-heading24\">TERMASUK DIA</p>\n" +
-//"    <div class=\"verification-box\">\n" +
-//"      <p class=\"verification-code\">"+body+"</p>\n" +
-//"    </div>\n" +
-//"    <p class=\"verification-heading23\">Tolong Inputkan Kode Beerikut</p>\n" +
-//"  </body>\n" +
-//"</html>";
-//    message.setContent(html, "text/html");
+//    message.setText(body);
+    String html = "<html>\n" +
+"<div style=\"background:#f9f9f9;background-color:#f9f9f9;Margin:0px auto;max-width:600px;\">\n" +
+"    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#f9f9f9;background-color:#f9f9f9;width:100%;\">\n" +
+"        <tbody>\n" +
+"            <tr>\n" +
+"                <td style=\"border-bottom:#333957 solid 5px;direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;\"></td>\n" +
+"            </tr>\n" +
+"        </tbody>\n" +
+"    </table>\n" +
+"</div>\n" +
+"\n" +
+"<div style=\"background:#fff;background-color:#fff;Margin:0px auto;max-width:600px;\">\n" +
+"    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background:#fff;background-color:#fff;width:100%;\">\n" +
+"        <tbody>\n" +
+"            <tr>\n" +
+"                <td style=\"border:#dddddd solid 1px;border-top:0px;direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;\">\n" +
+"                    <div class=\"mj-column-per-100 outlook-group-fix\" style=\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%;\">\n" +
+"                        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"vertical-align:bottom;\" width=\"100%\">\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n" +
+"                                    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:collapse;border-spacing:0px;\">\n" +
+"                                        <tbody>\n" +
+"                                            <tr>\n" +
+"                                                <td style=\"width:64px;\">\n" +
+"                                                    <!-- <img height=\"auto\" src=\"https://i.imgur.com/KO1vcE9.png\" style=\"border:0;display:block;outline:none;text-decoration:none;width:100%;\" width=\"64\" /> -->\n" +
+"                                                </td>\n" +
+"                                            </tr>\n" +
+"                                        </tbody>\n" +
+"                                    </table>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:40px;word-break:break-word;\">\n" +
+"                                    <div style=\"font-family:'Helvetica Neue',Arial,sans-serif;font-size:32px;font-weight:bold;line-height:1;text-align:center;color:#555;\">Kode Verifikasi</div>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-bottom:20px;word-break:break-word;\">\n" +
+"                                    <div style=\"font-family:'Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:22px;text-align:center;color:#555;\">Gunakan kode di bawah untuk mereset password anda</div>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;padding-top:30px;padding-bottom:40px;word-break:break-word;\">\n" +
+"                                    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"border-collapse:separate;line-height:100%;\">\n" +
+"                                        <tr>\n" +
+"                                            <td align=\"center\" bgcolor=\"#2F67F6\" role=\"presentation\" style=\"border:none;border-radius:3px;color:#ffffff;cursor:auto;padding:10px 20px;\" valign=\"middle\">\n" +
+"                                                <p style=\"background:#2F67F6;color:#ffffff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:30px;letter-spacing:4px;font-weight:bold;line-height:120%;Margin:0;text-decoration:none;text-transform:none;\" id=\"code\">"+body+"</p>\n" +
+"                                            </td>\n" +
+"                                        </tr>\n" +
+"                                    </table>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\" style=\"font-size:0px;padding:10px 25px;word-break:break-word;\">\n" +
+"                                    <div style=\"font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;\">Rahmatan Transaction System<br> <a href=\"mailto:info@example.com\" style=\"color:#2F67F6\">travelrahmatan@gmail.com</a>\n" +
+"                                    </div>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                        </table>\n" +
+"                    </div>\n" +
+"                </td>\n" +
+"            </tr>\n" +
+"        </tbody>\n" +
+"    </table>\n" +
+"</div>" +
+"</html>";
+    message.setContent(html, "text/html");
     Transport.send(message);
     }
     /**

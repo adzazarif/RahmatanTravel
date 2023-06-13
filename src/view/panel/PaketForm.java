@@ -324,7 +324,7 @@ public class PaketForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        loadTableSearch(txtSearch.getText());
+//        loadTableSearch(txtSearch.getText());
     }//GEN-LAST:event_txtSearchKeyReleased
 
 
