@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -39,6 +40,8 @@ public class maindasboard extends javax.swing.JFrame {
     public maindasboard() {
         initComponents();
         init();
+//        Main apa = (Main)SwingUtilities.getWindowAncestor(this);
+//        apa.dispose();
     }
 
     private void init() {
@@ -83,6 +86,7 @@ public class maindasboard extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
+        
         }else if(role.equals("employee")){
              menu.setEvent(new EventMenuSelected() {
             @Override
@@ -107,6 +111,7 @@ public class maindasboard extends javax.swing.JFrame {
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));
+        
         }
         
        
@@ -144,6 +149,7 @@ public class maindasboard extends javax.swing.JFrame {
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
         showform(new Dasboard());
+        
     }
 
     public void showform(Component com) {

@@ -92,20 +92,28 @@
 	<pageHeader>
 		<band height="45" splitType="Stretch">
 			<textField>
-				<reportElement x="121" y="0" width="100" height="20" uuid="dd3a5e6a-fb37-46c2-83f6-c582e8d061ce"/>
+				<reportElement x="126" y="0" width="95" height="20" uuid="dd3a5e6a-fb37-46c2-83f6-c582e8d061ce"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="121" y="20" width="100" height="20" uuid="344b0010-4c82-431c-b9aa-af02caffaf51"/>
+				<reportElement x="126" y="20" width="95" height="20" uuid="344b0010-4c82-431c-b9aa-af02caffaf51"/>
 				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="26" y="0" width="100" height="20" uuid="a4c6150b-6882-41f7-9175-c22c6009b729"/>
-				<text><![CDATA[Id Pemesanan :]]></text>
+				<reportElement x="26" y="0" width="85" height="20" uuid="a4c6150b-6882-41f7-9175-c22c6009b729"/>
+				<text><![CDATA[Id Pemesanan     ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="26" y="20" width="100" height="20" uuid="ead92775-dddd-4e3d-a089-1a9a81b0cb58"/>
-				<text><![CDATA[Tanggal :]]></text>
+				<reportElement x="26" y="20" width="85" height="20" uuid="ead92775-dddd-4e3d-a089-1a9a81b0cb58"/>
+				<text><![CDATA[Tanggal              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="20" width="15" height="20" uuid="92459b9d-d573-4234-895c-9b5069f6f0ce"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="15" height="20" uuid="8a064314-1456-4854-ba37-6fc1afc58a05"/>
+				<text><![CDATA[:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

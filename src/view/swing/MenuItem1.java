@@ -45,7 +45,8 @@ public class MenuItem1 extends javax.swing.JPanel {
     private int index;
     private boolean selected;
     private boolean mouseOver;
-
+    private boolean pressed;
+    private Color pressedColor = new Color(255, 255, 255, 100);
     public MenuItem1(Icon icon, Icon name, int index) {
         initComponents();
         lbName.setVisible(false);
@@ -53,6 +54,19 @@ public class MenuItem1 extends javax.swing.JPanel {
         this.index = index;
         lbIcon.setIcon(icon);
         lbName.setIcon(name);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                pressed = true;
+                repaint();
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                pressed = false;
+                repaint();
+            }
+        });
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
@@ -79,6 +93,14 @@ public class MenuItem1 extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics grphcs) {
+        if (pressed) {
+            Graphics2D g2 = (Graphics2D) grphcs.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(pressedColor);
+            g2.setComposite(AlphaComposite.SrcOver);
+            g2.fillRect(0, 0, getWidth(), getHeight());
+            g2.dispose();
+        }
         if (selected) {
             Graphics2D g2 = (Graphics2D) grphcs;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
