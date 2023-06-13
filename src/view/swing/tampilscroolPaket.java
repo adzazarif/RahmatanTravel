@@ -2,6 +2,7 @@
 package view.swing;
 
 //import 
+import entity.Paket;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import view.event.EventMenuSelected;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import repository.PaketRepository;
+import view.panel.PaketForm;
 
 public class tampilscroolPaket extends javax.swing.JPanel {
 
@@ -22,6 +25,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
     private String nomorpanel1;
     private JPanel container;
     private List<JPanel> panellist;
+    PaketRepository paketRepo = new PaketRepository();
     
     public tampilscroolPaket() {
         initComponents();
@@ -41,8 +45,8 @@ public class tampilscroolPaket extends javax.swing.JPanel {
             int dimensi = baris + 1;
             container = new JPanel();
                 
-            while(res.next()){
-                final String id_barang = res.getString(1);
+            for(Paket p:paketRepo.get()){
+                   final String id_barang = String.valueOf(p.getId());
                 ItemPaket pnn = new ItemPaket();
                 int index = panellist.size() + 1;
                 pnn.setIndex(index);
@@ -71,7 +75,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     @Override
                     public void mouseEntered(MouseEvent e){
                         super.mouseEntered(e);
-                        nomorpanel = id_barang;                   
+                                        
                         
                     }
                 });
@@ -79,12 +83,55 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     @Override
                     public void selected(int index) {
                         clearMenu(index);
-                        nomorpanel1 = id_barang;
-                    
+                        PaketForm.id = Integer.valueOf(id_barang);   
                     }
                 });
-                panellist.add(pnn);
+                panellist.add(pnn); 
             }
+//            while(res.next()){
+//                final String id_barang = res.getString(1);
+//                ItemPaket pnn = new ItemPaket();
+//                int index = panellist.size() + 1;
+//                pnn.setIndex(index);
+//                container.setLayout(null);
+//                pnn.setSize(290, 188);
+//                container.add(pnn);
+//                container.setPreferredSize(new Dimension(920, 250 + (250 * baris)));
+//                container.setBackground(Color.WHITE);
+////                container.setBorder(null);
+//                jScrollPane1.setPreferredSize(new Dimension(1000, 300 * dimensi));
+//                
+//                jScrollPane1.setViewportView(container);
+//                jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+//                if (kolom <= 2) {
+//                pnn.setLocation(kolom * 290, baris * 200);
+//                    } else {
+//                baris++;
+//                kolom = 0;
+//                pnn.setLocation(kolom * 290, baris * 200);
+//                
+//                    }
+//                kolom ++;
+//                container.revalidate();
+//                container.repaint();
+//                pnn.addMouseListener(new MouseAdapter(){
+//                    @Override
+//                    public void mouseEntered(MouseEvent e){
+//                        super.mouseEntered(e);
+//                        nomorpanel = id_barang;                   
+//                        
+//                    }
+//                });
+//                pnn.addEvent(new EventMenuSelected() {
+//                    @Override
+//                    public void selected(int index) {
+//                        clearMenu(index);
+//                        nomorpanel1 = id_barang;
+//                        System.out.println(nomorpanel);
+//                    }
+//                });
+//                panellist.add(pnn);
+//            }
             
         }catch( Exception e ){
             e.printStackTrace();
