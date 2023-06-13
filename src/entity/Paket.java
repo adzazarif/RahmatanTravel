@@ -11,23 +11,14 @@ import java.util.Date;
  * @author WINDOWS 10
  */
 public class Paket implements Entity{
-    public int id;
-    private int paketId;
-    private String start;
-    private String namaPaket;
-    private String rentangWaktu;
-    private String deskripsi;
-    private int minimDp;
-    private int harga;
-    private int diskon;
-    private String menu;
-    private int totalMasuk;
+    private String start,namaPaket,rentangWaktu,deskripsi,menu;
+    private int id, minimDp,harga,diskon,totalMasuk, lamaPaket;
     public static String tableName = "master_paket";
     
     public Paket(){
         
     }
-        public Paket(String menu, String start, String namaPaket,String deskripsi,int minimDp, int harga, int diskon){
+        public Paket(String menu, String start, String namaPaket,String deskripsi,int minimDp, int harga, int diskon, int lamaPaket){
         this.menu = menu;
         this.start = start;
         this.namaPaket = namaPaket;
@@ -35,9 +26,10 @@ public class Paket implements Entity{
         this.minimDp = minimDp;
         this.harga = harga;
         this.diskon = diskon;
+        this.lamaPaket = lamaPaket;
     }
     public Paket(int paketId,String menu ,String start, String namaPaket,String deskripsi,int minimDp, int harga, int diskon){
-        this.paketId = paketId;
+        this.id = paketId;
         this.menu = menu;
         this.start = start;
         this.namaPaket = namaPaket;
@@ -48,10 +40,10 @@ public class Paket implements Entity{
     }
     
     public void setId(int id){
-        this.paketId = id;
+        this.id = id;
     }
     public int getId(){
-        return this.paketId;
+        return this.id;
     }
     
     public void setMenu(String menu){
@@ -121,5 +113,12 @@ public class Paket implements Entity{
     }
     public int getTotalMasuk(){
         return totalMasuk;
+    }
+    
+     public void setLamaPaket(int lamaPaket){
+        this.lamaPaket = lamaPaket;
+    }
+    public int getLamaPaket(){
+        return lamaPaket;
     }
 }

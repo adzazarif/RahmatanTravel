@@ -183,7 +183,7 @@ public class DialogEditPaket extends Dialog {
             System.out.println("Berhasil");
             closeMessage();
             pf.load_table();
-            pf.test();
+    
             
             
         }else{

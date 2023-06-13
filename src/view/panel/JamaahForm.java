@@ -134,6 +134,32 @@ public class JamaahForm extends javax.swing.JPanel {
         table.getColumnModel().getColumn(6).setCellEditor(render1);
         
      }
+      public void loadSearch(String search){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");      
+            model.addColumn("NIK");
+            model.addColumn("Alamat");
+            model.addColumn("Jenis Kelamin");
+            model.addColumn("Alamat");
+            model.addColumn("No Telp");
+            
+
+            int no = 1;
+           
+           for(Jamaah res:jamaahRepo.getSearch(search)){
+                model.addRow(new Object[]{
+                    no++,
+                    res.getNik(),
+                    res.getNama(),
+                    res.getJenisKelamin(),
+                    res.getAlamat(), 
+                    res.getNoTelp(),      
+                });
+           }
+            table.setModel(model);
+       
+        
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,7 +196,7 @@ public class JamaahForm extends javax.swing.JPanel {
         });
 
         setBackground(new java.awt.Color(255, 249, 243));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setPreferredSize(new java.awt.Dimension(1219, 768));
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttoneditt.png"))); // NOI18N
         btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -401,6 +427,10 @@ public class JamaahForm extends javax.swing.JPanel {
         idJamaah = Integer.valueOf(idd);
     }//GEN-LAST:event_tableMouseClicked
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        loadSearch(txtSearch.getText());
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDelete;
@@ -415,7 +445,6 @@ public class JamaahForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblJumlahLaki;
     private javax.swing.JLabel lblJumlahPr;
     private javax.swing.JLabel lblJumlahSemua;

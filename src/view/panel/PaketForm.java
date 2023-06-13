@@ -29,9 +29,7 @@ public class PaketForm extends javax.swing.JPanel {
         initComponents();
         load_table();
     }
-    public void test(){
-        System.out.println("reload");
-    }
+   
      public void load_table(){
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("No");      
@@ -65,9 +63,41 @@ public class PaketForm extends javax.swing.JPanel {
          } catch (Exception e) {
              e.printStackTrace();
          }
+     }
+     
+     public void loadTableSearch(String search){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");      
+            model.addColumn("id");      
+            model.addColumn("Menu");
+            model.addColumn("Start");
+            model.addColumn("Nama");
+            model.addColumn("Deskripsi");
+            model.addColumn("Minim DP");
+            model.addColumn("Harga");
+            model.addColumn("Diskon");
             
-       
-        
+
+            int no = 1;
+           
+           try {
+             for(Paket res:paketRepo.getSearch(search)){
+                model.addRow(new Object[]{
+                    no++,
+                    res.getId(),
+                    res.getMenu(),
+                    res.getStart(),
+                    res.getNama(),
+                    res.getDeskripsi(), 
+                    res.getMinimDp(),
+                    res.getHarga(),
+                    res.getDiskon(),
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +139,7 @@ public class PaketForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.setRowHeight(30);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
@@ -212,6 +243,12 @@ public class PaketForm extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(198, 198, 198)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                .addGap(104, 104, 104)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addGap(93, 93, 93))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -286,6 +323,10 @@ public class PaketForm extends javax.swing.JPanel {
         System.out.println(id);
     }//GEN-LAST:event_tableMouseClicked
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        loadTableSearch(txtSearch.getText());
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEdit;
@@ -293,6 +334,7 @@ public class PaketForm extends javax.swing.JPanel {
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

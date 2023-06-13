@@ -106,8 +106,8 @@ PaketRepository paketRepo = new PaketRepository();
 //        System.out.println(tanggalMinus);
 //    }
 
-int a = 31500000;
-long total = a * 100 / 100;
-        System.out.println(total);
+//int a = 31500000;
+//long total = a * 100 / 100;
+//        System.out.println(total);
     }
 }

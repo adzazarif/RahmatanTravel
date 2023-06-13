@@ -137,7 +137,7 @@ public class DialogEditPegawai extends Dialog {
         String username = txtUsername.getText();
         String email = txtEmail.getText();
         String jenisKelamin = String.valueOf(cmbJenisKelamin.getSelectedItem());
-        int idCard = Integer.valueOf(txtIdCard.getText());
+        String idCard = txtIdCard.getText();
         int id = Integer.valueOf(lblId.getText());
         if(newPath.equals("")){
             User user = new User(nama, username, role, pass, email, alamat, noTelp, Path, jenisKelamin, idCard);

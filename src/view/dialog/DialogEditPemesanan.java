@@ -39,6 +39,19 @@ public class DialogEditPemesanan extends Dialog {
         super(fram);
         initComponents();
         setValue();
+        setComboBoxStatus();
+    }
+    
+    public void setComboBoxStatus(){
+        String pembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
+        if(pembayaran.equals("cash")){
+            cmbStatus.addItem("belum lunas");
+            cmbStatus.addItem("batal");
+        }else if(pembayaran.equals("talangan")){
+            cmbStatus.addItem("lunas");
+            cmbStatus.addItem("belum lunas");
+            cmbStatus.addItem("batal");
+        }
     }
 
     private void setValue (){
@@ -209,7 +222,6 @@ public class DialogEditPemesanan extends Dialog {
         lblHarga.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 435, 320, 50));
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "lunas", "belum lunas", "batal" }));
         cmbStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStatusActionPerformed(evt);

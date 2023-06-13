@@ -14,12 +14,14 @@ public class Keberangkatan implements Entity{
     private int id;
     private Date tanggal;
     private Paket paket;
+    private String status;
     public static String tableName = "keberangkatan";
     
     public Keberangkatan(){}
-    public Keberangkatan(Paket paket, Date tanggal){
+    public Keberangkatan(Paket paket, Date tanggal, String status){
         this.paket = paket;
         this.tanggal = tanggal;
+        this.status = status;
     }
     
     public void setId(int id){
@@ -41,6 +43,13 @@ public class Keberangkatan implements Entity{
     }
     public Date getTanggal(){
         return tanggal;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public String getStatus(){
+        return status;
     }
     
     

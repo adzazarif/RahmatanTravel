@@ -59,6 +59,23 @@ public class JamaahRepository implements Repository<Jamaah>{
 
         return jamaah;
     }
+     
+     public List<Jamaah> getSearch(String search) {
+        String sql = "SELECT * FROM " + tableName + " WHERE nik = '"+search+"' || nama LIKE '%"+search+"%'";
+        List<Jamaah> jamaah = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            ResultSet res = stm.executeQuery();
+            while(res.next()) {
+                jamaah.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return jamaah;
+    }
 
     @Override
     public Jamaah get(Integer id) {

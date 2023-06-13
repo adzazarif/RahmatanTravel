@@ -4,17 +4,116 @@
  */
 package view.panel;
 
+import entity.Keberangkatan;
+import entity.Presensi;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+import repository.PresensiRepository;
+import util.DateUtil;
+import view.dialog.DialogTambahCicilan;
+import view.dialog.DialogTambahPresensi;
+import view.main.maindasboard;
+import java.awt.Color;
+import view.main.Mainpresensi;
+
 /**
  *
  * @author adzaz
  */
 public class panel_presensi extends javax.swing.JPanel {
-
+    private String startPresensi = Presensi.StartPresensi;
+    private String endPresensi = Presensi.EndPresensi;
+    private String latePresensi = Presensi.LatePresensi;
+    PresensiRepository presensiRepo = new PresensiRepository();
+    DateUtil dateUtil = new DateUtil();
     /**
      * Creates new form panel_presensi
      */
     public panel_presensi() {
         initComponents();
+        showTime();
+        showDate();
+        setValue();
+        load_table();
+        activeButton();
+    }
+    
+    public void activeButton(){
+        try {
+            String timeNow = dateUtil.timeNow();
+
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            Date dateNow = format.parse(timeNow);
+            Date dateStart = format.parse(startPresensi);
+            long differenceStart = dateNow.getTime() - dateStart.getTime(); 
+            
+            Date dateEnd = format.parse(endPresensi);
+            long differenceEnd = dateEnd.getTime() - dateNow.getTime();
+            if(differenceStart >= 0 && differenceEnd >= 0){
+               panelButton.setVisible(true);
+            }else{
+                panelButton.setVisible(false);
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+      public void load_table(){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");      
+            model.addColumn("Nama");
+            model.addColumn("Waktu Presensi");
+            model.addColumn("Keterangan");
+                       
+            int no = 1;
+           
+           try {
+             for(Presensi pr:presensiRepo.get()){
+                model.addRow(new Object[]{
+                    
+                    no++,
+                    pr.getUser().getNama(),
+                    pr.getWaktuPresensi().toString(),
+                    pr.getKeterangan()
+                });
+           }
+            table.setModel(model);
+       
+         } catch (Exception e) {
+               e.printStackTrace();
+         }
+        
+     }
+      
+    public void setValue(){
+        lblStartTime.setText(startPresensi);
+        lblEndTime.setText(endPresensi);
+        lblEndTime1.setText(latePresensi);
+    }
+    
+    public void showTime(){
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activeButton();
+                Date d = new Date();
+                SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
+                String time = s.format(d);
+                lblTime.setText(time);
+            }
+        }).start();
+    }
+    
+    public void showDate(){
+        Date d = new Date();
+                SimpleDateFormat s = new SimpleDateFormat("EEEE, MMM dd yyyy");
+                String time = s.format(d);
+                lblDate.setText(time);
     }
 
     /**
@@ -26,24 +125,88 @@ public class panel_presensi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTime = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        lblEndTime1 = new javax.swing.JLabel();
+        lblEndTime = new javax.swing.JLabel();
+        lblStartTime = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        panelButton = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
-        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg preseensi.png"))); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        lblTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 330, 70));
+        add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 270, 30));
+
+        lblEndTime1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        add(lblEndTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 360, 70));
+
+        lblEndTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        add(lblEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 360, 70));
+
+        lblStartTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 360, 70));
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 700, 500));
+
+        panelButton.setBackground(new Color(0,0,0,0));
+        panelButton.setLayout(null);
+
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        panelButton.add(jLabel2);
+        jLabel2.setBounds(0, 10, 180, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button presensi.png"))); // NOI18N
+        panelButton.add(jLabel1);
+        jLabel1.setBounds(0, 0, 190, 60);
+
+        add(panelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 90, 190, 70));
+
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg presensi.png"))); // NOI18N
+        add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         Mainpresensi main =(Mainpresensi)SwingUtilities.getWindowAncestor(this);
+        DialogTambahPresensi tambahPresensi = new DialogTambahPresensi(main);
+        tambahPresensi.showPopUp();
+        load_table();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblEndTime;
+    private javax.swing.JLabel lblEndTime1;
+    private javax.swing.JLabel lblStartTime;
+    private javax.swing.JLabel lblTime;
+    private javax.swing.JPanel panelButton;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import repository.KeberangkatanRepository;
 import repository.PaketRepository;
+import util.DateUtil;
 import view.panel.KeberangkatanForm;
 
 /**
@@ -25,6 +26,7 @@ public class DialogEditKeberangkatan extends Dialog {
     private List<Paket> pakets = new ArrayList<>();
     private String menu = "";
     private int id = KeberangkatanForm.id;
+    DateUtil dateUtil = new DateUtil();
     /**
      * Creates new form DialogEditKeberangkatan
      */
@@ -35,6 +37,7 @@ public class DialogEditKeberangkatan extends Dialog {
         fillComboBox();
         
     }
+    
     private void setValue(){
         try {
             for(Keberangkatan kb:keberangkatanRepo.getById(id)){
@@ -172,13 +175,13 @@ public class DialogEditKeberangkatan extends Dialog {
     }//GEN-LAST:event_btnDateMouseClicked
 
     private void cmbPaketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbPaketMouseClicked
-        //           String str = String.valueOf(cmbPaket.getSelectedItem());
-        //        String getId = str.substring( 0, str.indexOf(","));
-        //        int id = Integer.valueOf(getId);
-        //        System.out.println(id);
-        //        for(Paket pkt:paketRepo.getByid(id)){
-            //            System.out.println(pkt.getNama());
-            //        }
+                   String str = String.valueOf(cmbPaket.getSelectedItem());
+                String getId = str.substring( 0, str.indexOf(","));
+                int id = Integer.valueOf(getId);
+                System.out.println(id);
+                for(Paket pkt:paketRepo.getByid(id)){
+                        System.out.println(pkt.getNama());
+                    }
     }//GEN-LAST:event_cmbPaketMouseClicked
 
     private void cmbPaketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaketActionPerformed
@@ -220,15 +223,24 @@ public class DialogEditKeberangkatan extends Dialog {
             int id = Integer.valueOf(lblId.getText());
             String tgl = txtDate.getText();
             Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
+            String dateNow = dateUtil.dateNow();
+            long diferent = dateUtil.subtractionTwoDate(dateNow, tgl);
             Paket paket = new PaketRepository().get(id);
-            Keberangkatan keberangkatan = new Keberangkatan(paket, tanggal);
-            boolean tambah = keberangkatanRepo.add(keberangkatan);
-            if(tambah){
-                System.out.println("berhasil");
-                closeMessage();
+            if(diferent > 0){
+                String status = "Belum Lunas";
+                Keberangkatan keberangkatan = new Keberangkatan(paket, tanggal,status);
+                keberangkatan.setId(id);
+                boolean tambah = keberangkatanRepo.update(keberangkatan);
+                if(tambah){
+                    System.out.println("berhasil");
+                    closeMessage();
+                }else{
+                    System.out.println("gagal");
+                }
             }else{
-                System.out.println("gagal");
+                System.out.println("Tanggal tidak sudah terlewat");
             }
+            
         } catch (Exception e) {
         }
 

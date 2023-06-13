@@ -137,7 +137,7 @@ public class DialogTambahPegawai extends Dialog {
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
         String nama = txtNama.getText();
-        int idCard = Integer.valueOf(txtIdcard.getText());
+        String idCard = txtIdcard.getText();
         String role = "employee";
         String pass = "12345678";
         String noTelp = txtNotelp.getText();
