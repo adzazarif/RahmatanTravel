@@ -21,13 +21,13 @@ public class User implements Entity{
     private String noTelp;
     private String foto;
     private String jenisKelamin;
-    private int idCard;
+    private String idCard;
     
     
     public User(){
         
     }
-     public User(String nama,String username,String role,String pass,String email, String alamat, String noTelp, String foto, String jeniskelamin, int idcard){
+     public User(String nama,String username,String role,String pass,String email, String alamat, String noTelp, String foto, String jeniskelamin, String idcard){
         this.nama = nama;
         this.username = username;
         this.password = pass;
@@ -55,10 +55,10 @@ public class User implements Entity{
         return this.id;
     }
     
-      public void setIdCard(int idCard){
+      public void setIdCard(String idCard){
         this.idCard = idCard;
     }
-    public int getICard(){
+    public String getICard(){
         return idCard;
     }
     
@@ -125,3 +125,4 @@ public class User implements Entity{
         return jenisKelamin;
     }
 }
+

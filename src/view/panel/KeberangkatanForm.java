@@ -12,6 +12,7 @@ import view.main.maindasboard;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.KeberangkatanRepository;
+import util.DateUtil;
 import view.dialog.DialogDetailKeberangkatan;
 import view.dialog.DialogEditKeberangkatan;
 import view.dialog.DialogTambahKeberangkatan;
@@ -29,6 +30,50 @@ public class KeberangkatanForm extends javax.swing.JPanel {
     public KeberangkatanForm() {
         initComponents();
         load_table();
+        updateStatus();
+    }
+    
+    public void updateStatus(){
+            try {
+            DateUtil dateUtil = new DateUtil();
+            String dateNow = dateUtil.dateNow();
+            KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
+            for(Keberangkatan k:keberangkatanRepo.get()){
+                String dateStartKeberangkatan = k.getTanggal().toString();
+                int lamaPaket = k.getPaket().getLamaPaket();
+                String dateEnd = dateUtil.endPaket(dateStartKeberangkatan, lamaPaket);
+                long diferentStartKeberangkatan = dateUtil.subtractionTwoDate(dateNow, dateStartKeberangkatan);
+                long diferentEndKeberangkatan = dateUtil.subtractionTwoDate(dateEnd, dateNow);
+                String status = k.getStatus();
+                String sts = "";
+                String resultUpdated = "";
+                if(diferentStartKeberangkatan <= 0 && diferentEndKeberangkatan < 0){
+                    if(!status.equals("Sedang Berangkat")){
+                        sts = "Sedang Berangkat";
+                        boolean updated = keberangkatanRepo.updateStatus(sts, k.getId());
+                        resultUpdated = updated ? "Berhasil di updated" : "gagal di updated";
+                    }
+                }else if(diferentEndKeberangkatan >= 0){
+                    if(!status.equals("Selesai Berangkat")){
+                        sts = "Selesai Berangkat";
+                        boolean updated = keberangkatanRepo.updateStatus(sts, k.getId());
+                        resultUpdated = updated ? "Berhasil di updated" : "gagal di updated";
+                    }
+                }else if(diferentStartKeberangkatan >= 0){
+                    if(!status.equals("Belum Berangkat")){
+                        if(!status.equals("Selesai Berangkat")){
+                        sts = "Belum Berangkat";
+                        boolean updated = keberangkatanRepo.updateStatus(sts, k.getId());
+                        resultUpdated = updated ? "Berhasil di updated" : "gagal di updated";
+                        }
+                    }
+                }
+                System.out.println(resultUpdated);
+            }
+       
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     
      public void load_table(){
@@ -75,16 +120,16 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         btnEdit = new javax.swing.JLabel();
         btnDetail = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
         btnMenuWisata = new javax.swing.JLabel();
         btnMenuUmrah = new javax.swing.JLabel();
         btnMenuHaji = new javax.swing.JLabel();
         lblMenu = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 249, 243));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setPreferredSize(new java.awt.Dimension(1219, 768));
 
         jPanel1.setBackground(new Color(0,0,0,0));
 
@@ -97,7 +142,7 @@ public class KeberangkatanForm extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(459, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,6 +186,29 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 610, 50));
 
+        btnMenuWisata.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuWisataMouseClicked(evt);
+            }
+        });
+
+        btnMenuUmrah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuUmrahMouseClicked(evt);
+            }
+        });
+
+        btnMenuHaji.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuHajiMouseClicked(evt);
+            }
+        });
+
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu umrah.png"))); // NOI18N
+
+        jPanel3.setBackground(new Color(0,0,0,0));
+
+        table.setFont(new java.awt.Font("Quicksand Bold", 0, 15)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -152,6 +220,7 @@ public class KeberangkatanForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.setRowHeight(30);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
@@ -159,66 +228,67 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel3.setBackground(new Color(0,0,0,0));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnMenuWisata.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuWisataMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnMenuWisata, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 130, 30));
-
-        btnMenuUmrah.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuUmrahMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnMenuUmrah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 30));
-
-        btnMenuHaji.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuHajiMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnMenuHaji, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 130, 30));
-
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu umrah.png"))); // NOI18N
-        jPanel3.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1)
+                .addGap(91, 91, 91))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(140, 140, 140)
+                        .addComponent(btnMenuHaji, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMenuUmrah, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                        .addGap(259, 259, 259)))
-                .addGap(49, 49, 49))
+                        .addGap(280, 280, 280)
+                        .addComponent(btnMenuWisata, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMenu))
+                .addGap(582, 582, 582)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(139, 139, 139))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMenuHaji, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMenuUmrah, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMenuWisata, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMenu)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -33,7 +33,7 @@ public class PaketRepository implements Repository<Paket>{
             ResultSet res = stm.executeQuery(sql);
             
             while(res.next()) {
-                paket.add(mapToEntityGet(res));
+                paket.add(mapToEntity(res));
             }
         } catch (SQLException e) {
         e.printStackTrace();
@@ -41,6 +41,27 @@ public class PaketRepository implements Repository<Paket>{
 
         return paket;
     }
+    
+    public List<Paket> getSearch(String search) {
+         String sql = "SELECT * FROM " + tableName + " WHERE id = ? || nama LIKE '%?%' || menu LIKE '%?%'";
+        List<Paket> paket = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setString(1, search);
+            stm.setString(2, search);
+            stm.setString(3, search);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                paket.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+        return paket;
+    }
+    
        public List<Paket> getByid(Integer id) {
          String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
         List<Paket> paket = new ArrayList<>();
@@ -51,7 +72,7 @@ public class PaketRepository implements Repository<Paket>{
             ResultSet res = stm.executeQuery();
             
             while(res.next()) {
-                paket.add(mapToEntityGet(res));
+                paket.add(mapToEntity(res));
             }
         } catch (SQLException e) {
         e.printStackTrace();
@@ -70,7 +91,7 @@ public class PaketRepository implements Repository<Paket>{
             ResultSet res = stm.executeQuery();
             
             while(res.next()) {
-                paket.add(mapToEntityGet(res));
+                paket.add(mapToEntity(res));
             }
         } catch (SQLException e) {
         e.printStackTrace();
@@ -92,7 +113,7 @@ public class PaketRepository implements Repository<Paket>{
             ResultSet res = stm.executeQuery();
 
             while(res.next()) {
-                return mapToEntityGet(res); 
+                return mapToEntity(res); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +124,7 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public boolean add(Paket paket) {
-         String sql = "INSERT INTO "+ tableName +" (`menu`, `start`,`nama`,`deskripsi`,`minim_dp`,`harga`,`diskon`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+         String sql = "INSERT INTO "+ tableName +" (`menu`, `start`,`nama`,`deskripsi`,`minim_dp`,`harga`,`diskon`,`lama_paket`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
@@ -114,6 +135,7 @@ public class PaketRepository implements Repository<Paket>{
             pst.setInt(5, paket.getMinimDp()); 
             pst.setInt(6, paket.getHarga());
             pst.setInt(7, paket.getDiskon()); 
+            pst.setInt(8, paket.getDiskon()); 
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -124,7 +146,7 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public boolean update(Paket paket) {
-        String sql = "UPDATE "+ tableName +" SET start = ?, deskripsi = ?, nama= ? , menu = ?, minim_dp = ?, harga = ?, diskon = ?, menu = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET start = ?, deskripsi = ?, nama= ? , menu = ?, minim_dp = ?, harga = ?, diskon = ?, menu = ?, lama_paket = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -137,7 +159,8 @@ public class PaketRepository implements Repository<Paket>{
             pst.setInt(6, paket.getHarga());
             pst.setInt(7, paket.getDiskon());
             pst.setString(8, paket.getMenu());
-            pst.setInt(9, paket.getId());
+            pst.setInt(9, paket.getDiskon());
+            pst.setInt(10, paket.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -158,6 +181,8 @@ public class PaketRepository implements Repository<Paket>{
             return false;
         }
     }
+
+     
      private Paket mapToEntity(ResultSet result) throws SQLException {
          Paket paket = new Paket(
                  result.getString("menu"),
@@ -166,22 +191,8 @@ public class PaketRepository implements Repository<Paket>{
                  result.getString("deskripsi"),
                  result.getInt("minim_dp"),
                  result.getInt("harga"),
-                 result.getInt("diskon")
-         );
-         paket.setTotalMasuk(result.getInt("total_pemasukan"));
-        paket.setId(result.getInt("id"));
-        return paket;
-        }
-     
-     private Paket mapToEntityGet(ResultSet result) throws SQLException {
-         Paket paket = new Paket(
-                 result.getString("menu"),
-                 result.getString("start"),
-                 result.getString("nama"),
-                 result.getString("deskripsi"),
-                 result.getInt("minim_dp"),
-                 result.getInt("harga"),
-                 result.getInt("diskon")
+                 result.getInt("diskon"),
+                 result.getInt("lama_paket")
          );
         
         paket.setId(result.getInt("id"));

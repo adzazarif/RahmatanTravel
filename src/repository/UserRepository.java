@@ -61,6 +61,25 @@ public class UserRepository implements Repository<User>{
         return user;
     }
      
+      public List<User> getByIdCard(String id) {
+        String sql = "SELECT * FROM " + tableName + " WHERE id_card = ?";
+        List<User> user = new ArrayList<>();
+        try {
+                  Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                user.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return user;
+    }
+     
     @Override
     public User get(Integer id) {
        String sql = "SELECT * FROM " + tableName + " WHERE id = ?" ;
@@ -96,7 +115,7 @@ public class UserRepository implements Repository<User>{
             pst.setString(7, user.getNoTelp()); 
             pst.setString(8, user.getFoto()); 
             pst.setString(9, user.getJenisKelamin()); 
-            pst.setInt(10, user.getICard());
+            pst.setString(10, user.getICard());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -122,7 +141,7 @@ public class UserRepository implements Repository<User>{
             pst.setString(7, user.getNoTelp());
             pst.setString(8, user.getFoto());
             pst.setString(9, user.getJenisKelamin());
-            pst.setInt(10, user.getICard());
+            pst.setString(10, user.getICard());
             pst.setInt(11, user.getId());
             pst.executeUpdate();
             return true;
@@ -157,7 +176,7 @@ public class UserRepository implements Repository<User>{
             result.getString("no_telp"),
             result.getString("foto"),
             result.getString("jenis_kelamin"),
-             result.getInt("id_card")
+             result.getString("id_card")
         );
 
         user.setId(result.getInt("id"));

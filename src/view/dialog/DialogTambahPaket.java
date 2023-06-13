@@ -142,7 +142,8 @@ public class DialogTambahPaket extends Dialog {
         }else if(rdJakarta.isSelected()){
             start = "Jakarta";
         }
-        Paket paket = new Paket(menu, start, nama, desc, minimDp, harga, diskon);
+        int lamaPaket = 9;
+        Paket paket = new Paket(menu, start, nama, desc, minimDp, harga, diskon, lamaPaket);
         PaketRepository paketRepo = new PaketRepository();
         if(paketRepo.add(paket)){
             System.out.println("berhasil");

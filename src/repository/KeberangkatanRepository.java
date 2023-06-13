@@ -87,7 +87,7 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
 
             ResultSet res = stm.executeQuery();
             while(res.next()){
-                keberangkatan.add(mapToEntityJoin(res));
+                keberangkatan.add(mapToEntity(res));
                 
             }
         } catch (Exception e) {
@@ -117,12 +117,13 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
 
     @Override
     public boolean add(Keberangkatan keberangkatan) {
-           String sql = "INSERT INTO "+ tableName +" (`paket_id`, `tanggal`) VALUES (?, ?)";
+           String sql = "INSERT INTO "+ tableName +" (`paket_id`, `tanggal`, `status`) VALUES (?, ?. ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, keberangkatan.getPaket().getId());
             pst.setDate(2, new Date(keberangkatan.getTanggal().getTime()));
+            pst.setString(3, keberangkatan.getStatus());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -133,14 +134,30 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
 
     @Override
     public boolean update(Keberangkatan keberangkatan) {
-        String sql = "UPDATE "+ tableName +" SET paket_id = ?, tanggal = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET paket_id = ?, tanggal = ?, status = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, keberangkatan.getPaket().getId());
             pst.setDate(2, new Date(keberangkatan.getTanggal().getTime()));
-            pst.setInt(3, keberangkatan.getId()); 
+            pst.setString(3, keberangkatan.getStatus());
+            pst.setInt(4, keberangkatan.getId()); 
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+     public boolean updateStatus(String status, int id) {
+        String sql = "UPDATE "+ tableName +" SET status = ? WHERE id = ?";
+        
+        try {
+                 Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setString(1, status);
+            pst.setInt(2, id);
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -164,18 +181,14 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
     private Keberangkatan mapToEntity(ResultSet result)throws SQLException{
         Keberangkatan keberangkatan = new Keberangkatan(
                 new PaketRepository().get(result.getInt("paket_id")),
-                result.getDate("tanggal"));
+                result.getDate("tanggal"),
+                result.getString("status")
+            );
         keberangkatan.setId(result.getInt("id"));
         return keberangkatan;
     }
     
-     private Keberangkatan mapToEntityJoin(ResultSet result)throws SQLException{
-        Keberangkatan keberangkatan = new Keberangkatan(
-                new PaketRepository().get(result.getInt("paket_id")),
-                result.getDate("tanggal"));
-        keberangkatan.setId(result.getInt("keberangkatan.id"));
-        return keberangkatan;
-    }
+
 //    private Pemesanan MapToEntity(ResultSet result)throws SQLException{
 //        Pemesanan pemesanan = new Pemesanan(
 //                new KeberangkatanRepository().get(result.getInt("Keberangkatan_id")),

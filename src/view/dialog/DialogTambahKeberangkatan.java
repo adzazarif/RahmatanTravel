@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import repository.KeberangkatanRepository;
 import repository.PaketRepository;
 import service.ComboItem;
+import util.DateUtil;
 
 /**
  *
@@ -24,6 +25,7 @@ public class DialogTambahKeberangkatan extends Dialog {
     PaketRepository paketRepo = new PaketRepository();
     private List<Paket> pakets = new ArrayList<>();
     private String menu = "";
+    DateUtil dateUtil = new DateUtil();
     /**
      * Creates new form DialogTambahKeberangkatan
      */
@@ -212,7 +214,11 @@ cmbPaket.removeAllItems();
         String tgl = txtDate.getText();
             Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
             Paket paket = new PaketRepository().get(id);
-            Keberangkatan keberangkatan = new Keberangkatan(paket, tanggal);
+            String dateNow = dateUtil.dateNow();
+            long diferent = dateUtil.subtractionTwoDate(dateNow, tgl);
+            if(diferent > 0){
+                String status = "Belum Berangkat";
+            Keberangkatan keberangkatan = new Keberangkatan(paket, tanggal,status);
             boolean tambah = keberangkatanRepo.add(keberangkatan);
             if(tambah){
                 System.out.println("berhasil");
@@ -220,6 +226,11 @@ cmbPaket.removeAllItems();
             }else{
                 System.out.println("gagal");
             }
+                
+            }else{
+                System.out.println("tanggal sudah kelewat");
+            }
+
         } catch (Exception e) {
         }
         
