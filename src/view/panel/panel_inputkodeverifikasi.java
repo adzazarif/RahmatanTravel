@@ -198,7 +198,7 @@ private String apa1;
 
         minta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mintakod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/kirimkodeverifikasi.png"))); // NOI18N
+        mintakod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button veriv username.png"))); // NOI18N
         mintakod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mintakodMouseClicked(evt);
@@ -211,9 +211,9 @@ private String apa1;
             }
         });
         minta.add(mintakod, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 70));
-        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 340, 60));
+        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 280, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/konfirmasi email.png"))); // NOI18N
         minta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
         add(minta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));

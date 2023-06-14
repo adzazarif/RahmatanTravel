@@ -29,7 +29,7 @@ public class tampilPaketUmrohDasboard extends javax.swing.JPanel {
     
     public void getpanel(){
         try{
-            String sql = "Select * from master_paket";
+            String sql = "SELECT *, COUNT(pemesanan.jamaah_id) AS jumlah FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id GROUP BY master_paket.id ORDER BY jumlah DESC LIMIT 5";
             Connection con =(Connection)util.Conn.configDB();
             PreparedStatement psw = con.prepareStatement(sql);
             ResultSet res = psw.executeQuery();

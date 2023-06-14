@@ -4,19 +4,47 @@
  */
 package view.panel;
 
+import entity.Keberangkatan;
+import entity.Pemesanan;
 import java.awt.Color;
 import java.awt.Container;
+import java.text.NumberFormat;
+import java.util.Locale;
+import repository.DashboardRepository;
+import repository.KeberangkatanRepository;
+import repository.PemesananRepository;
 
 public class Dasboard extends javax.swing.JPanel {
-
+    DashboardRepository dashboardRepo = new DashboardRepository();
+    KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
+    PemesananRepository pemesananRepo = new PemesananRepository();
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**
      * Creates new form Dasboard1
      */
     public Dasboard() {
         initComponents();
-   
+        setValue();
     }
-
+    
+    public void setValue(){
+        lblPemasukan.setText(String.valueOf(nf.format(dashboardRepo.getIncome())));
+        lblPengeluaran.setText(String.valueOf(nf.format(dashboardRepo.getExpenditure())));
+        lblToday.setText(String.valueOf(dashboardRepo.getIncomePerDay()));
+        
+        for(Keberangkatan k:keberangkatanRepo.getOrderByDesc()){
+            lblTanggal.setText(k.getTanggal().toString());
+            lblNama.setText(k.getPaket().getNama());
+            lblHarga.setText(String.valueOf(nf.format(k.getPaket().getHarga())));
+            int orang = 0;
+            for(Pemesanan p:pemesananRepo.get()){
+                orang += 1;
+            }
+            lblBerapaOrang.setText(String.valueOf(orang));
+            
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +76,7 @@ public class Dasboard extends javax.swing.JPanel {
         jPanel1.setBackground(new Color(0,0,0,0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 24)); // NOI18N
         jPanel1.add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 200, 50));
 
         lblBerapaOrang.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
@@ -73,11 +101,13 @@ public class Dasboard extends javax.swing.JPanel {
         jPanel3.setBackground(new Color(0,0,0,0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblPengeluaran.setFont(new java.awt.Font("Quicksand Bold", 0, 24)); // NOI18N
+        lblPengeluaran.setFont(new java.awt.Font("Quicksand Bold", 0, 33)); // NOI18N
         jPanel3.add(lblPengeluaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 250, 60));
 
-        lblPemasukan.setFont(new java.awt.Font("Quicksand Bold", 0, 24)); // NOI18N
+        lblPemasukan.setFont(new java.awt.Font("Quicksand Bold", 0, 33)); // NOI18N
         jPanel3.add(lblPemasukan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 250, 60));
+
+        lblToday.setFont(new java.awt.Font("Quicksand Bold", 0, 15)); // NOI18N
         jPanel3.add(lblToday, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 70, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bg pemasukandas.png"))); // NOI18N

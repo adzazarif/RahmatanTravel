@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame {
         Login a = new Login();
         a.setSize(1024, 577);
         this.add(a, new BorderLayout());
-//        a.setComponentZOrder(a, 0);
+//        a.setComponentZOrder(a, 0);12
         this.revalidate();
         this.repaint();
 //        } catch(IOException e) {

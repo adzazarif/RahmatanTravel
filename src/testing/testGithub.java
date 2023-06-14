@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import repository.DashboardRepository;
 import repository.KeberangkatanRepository;
 import repository.PresensiRepository;
 import util.DateUtil;
@@ -132,6 +133,8 @@ import util.DateUtil;
 //        } catch (Exception e) {
 //            System.out.println(e.getMessage());
 //        }
+        DashboardRepository db = new DashboardRepository();
+        System.out.println(db.getIncome());
     }
 }
 

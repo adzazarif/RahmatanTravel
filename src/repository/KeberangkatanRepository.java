@@ -41,6 +41,22 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         return keberangkatan;
     }
     
+     public List<Keberangkatan> getOrderByDesc() {
+        String sql = "SELECT * FROM "+tableName+" ORDER BY tanggal DESC LIMIT 1";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            ResultSet res = stm.executeQuery();
+            while(res.next()){
+                keberangkatan.add(mapToEntity(res));
+            }
+        } catch (Exception e) {
+        }
+        return keberangkatan;
+    }
+    
       public List<Keberangkatan> getById(int id) {
         String sql = "SELECT * FROM "+tableName+" WHERE id = ?";
         List<Keberangkatan> keberangkatan = new ArrayList<>();

@@ -51,6 +51,37 @@ public class DashboardRepository {
         } catch (Exception e) {
         }
         return total;
+                }               
+    
+    
+    public int getIncome(){
+          int total = 0;
+        String queryCek = "SELECT SUM(jumlah_bayar) AS jml FROM pemesanan ";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            total = res.getInt("jml");
+        }
+        } catch (Exception e) {
+        }
+        return total;
+    }
+    
+    public int getExpenditure(){
+          int total = 0;
+        String queryCek = "SELECT SUM(pengeluaran.total_pengeluaran) + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional) AS pengeluaran FROM pengeluaran";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            total = res.getInt("pengeluaran");
+        }
+        } catch (Exception e) {
+        }
+        return total;
     }
     
     public int getProfitPerMonth(){
