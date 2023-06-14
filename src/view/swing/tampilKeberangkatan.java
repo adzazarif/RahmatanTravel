@@ -28,7 +28,7 @@ public class tampilKeberangkatan extends javax.swing.JPanel {
     }
 public void getpanel(){
         try{
-            String sql = "Select * from master_paket";
+            String sql = "Select * from keberangkatan";
             Connection con =(Connection)util.Conn.configDB();
             PreparedStatement psw = con.prepareStatement(sql);
             ResultSet res = psw.executeQuery();
@@ -39,7 +39,7 @@ public void getpanel(){
             container = new JPanel();
                 
             while(res.next()){
-                final String id_barang = res.getString(1);
+                final String id_barang = res.getString("id");
                 String nama_paket = res.getString(2);
                 ItemKeberangkatan pnn = new ItemKeberangkatan();
                 int index = panellist.size() + 1;
@@ -82,7 +82,7 @@ public void getpanel(){
                     public void selected(int index) {
                         clearMenu(index);
                         nomorpanel1 = id_barang;
-                    
+                        System.out.println(nomorpanel);
                     }
                 });
                 panellist.add(pnn);

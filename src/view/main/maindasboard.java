@@ -27,6 +27,8 @@ import view.panel.PaketForm;
 import view.panel.Pegawai;
 import view.panel.PemesananForm;
 import view.panel.PengeluaranForm;
+import view.panel.employee.KeberangkatanEmployee;
+import view.panel.employee.PaketEmployee;
 
 public class maindasboard extends javax.swing.JFrame {
 //    Auth auth = new Auth();
@@ -98,16 +100,20 @@ public class maindasboard extends javax.swing.JFrame {
                 } else if (index == 1) {
                     showform(new JamaahForm());
                 } else if (index == 2) {
-                    showform(new PaketForm());
-                } 
+                    showform(new PaketEmployee());
+                } else if(index == 3){
+                    showform(new KeberangkatanEmployee());
+                }else if(index == 4){
+                    showform(new PemesananForm());
+                }
             }
         });
              menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/dasboard2.png")), new ImageIcon(getClass().getResource("/view/icon/dasboard1.png"))));
         menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/jamaah2.png")), new ImageIcon(getClass().getResource("/view/icon/jamaah1.png"))));
-//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")), new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
-//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")), new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/paket2.png")), new ImageIcon(getClass().getResource("/view/icon/paket1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/berangkat2.png")), new ImageIcon(getClass().getResource("/view/icon/berangkat1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/barang2.png")), new ImageIcon(getClass().getResource("/view/icon/barang1.png"))));
-//        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")), new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
+        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pemesanan2.png")), new ImageIcon(getClass().getResource("/view/icon/pemesanan1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pegawai2.png")), new ImageIcon(getClass().getResource("/view/icon/pegawai1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/pengeluaran2.png")), new ImageIcon(getClass().getResource("/view/icon/pengeluaran1.png"))));
 //        menu.addMenu(new ModelMenu1(new ImageIcon(getClass().getResource("/view/icon/laporan2.png")), new ImageIcon(getClass().getResource("/view/icon/laporan1.png"))));

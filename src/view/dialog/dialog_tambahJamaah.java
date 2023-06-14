@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import repository.JamaahRepository;
 import view.main.maindasboard;
-import view.dialog.Validasi.validasiGagalLogin;
+
 import java.awt.Color;
 /**
  *

@@ -27,78 +27,78 @@ public class PaketForm extends javax.swing.JPanel {
      */
     public PaketForm() {
         initComponents();
-        load_table();
+//        load_table();
     }
    
-     public void load_table(){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
-            model.addColumn("id");      
-            model.addColumn("Menu");
-            model.addColumn("Start");
-            model.addColumn("Nama");
-            model.addColumn("Deskripsi");
-            model.addColumn("Minim DP");
-            model.addColumn("Harga");
-            model.addColumn("Diskon");
-            
-
-            int no = 1;
-           
-           try {
-             for(Paket res:paketRepo.get()){
-                model.addRow(new Object[]{
-                    no++,
-                    res.getId(),
-                    res.getMenu(),
-                    res.getStart(),
-                    res.getNama(),
-                    res.getDeskripsi(), 
-                    res.getMinimDp(),
-                    res.getHarga(),
-                    res.getDiskon(),
-                });
-           }
-             table.setModel(model);
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
-     
-     public void loadTableSearch(String search){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
-            model.addColumn("id");      
-            model.addColumn("Menu");
-            model.addColumn("Start");
-            model.addColumn("Nama");
-            model.addColumn("Deskripsi");
-            model.addColumn("Minim DP");
-            model.addColumn("Harga");
-            model.addColumn("Diskon");
-            
-
-            int no = 1;
-           
-           try {
-             for(Paket res:paketRepo.getSearch(search)){
-                model.addRow(new Object[]{
-                    no++,
-                    res.getId(),
-                    res.getMenu(),
-                    res.getStart(),
-                    res.getNama(),
-                    res.getDeskripsi(), 
-                    res.getMinimDp(),
-                    res.getHarga(),
-                    res.getDiskon(),
-                });
-           }
-             table.setModel(model);
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
+//     public void load_table(){
+//            DefaultTableModel model = new DefaultTableModel();
+//            model.addColumn("No");      
+//            model.addColumn("id");      
+//            model.addColumn("Menu");
+//            model.addColumn("Start");
+//            model.addColumn("Nama");
+//            model.addColumn("Deskripsi");
+//            model.addColumn("Minim DP");
+//            model.addColumn("Harga");
+//            model.addColumn("Diskon");
+//            
+//
+//            int no = 1;
+//           
+//           try {
+//             for(Paket res:paketRepo.get()){
+//                model.addRow(new Object[]{
+//                    no++,
+//                    res.getId(),
+//                    res.getMenu(),
+//                    res.getStart(),
+//                    res.getNama(),
+//                    res.getDeskripsi(), 
+//                    res.getMinimDp(),
+//                    res.getHarga(),
+//                    res.getDiskon(),
+//                });
+//           }
+//             table.setModel(model);
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         }
+//     }
+//     
+//     public void loadTableSearch(String search){
+//            DefaultTableModel model = new DefaultTableModel();
+//            model.addColumn("No");      
+//            model.addColumn("id");      
+//            model.addColumn("Menu");
+//            model.addColumn("Start");
+//            model.addColumn("Nama");
+//            model.addColumn("Deskripsi");
+//            model.addColumn("Minim DP");
+//            model.addColumn("Harga");
+//            model.addColumn("Diskon");
+//            
+//
+//            int no = 1;
+//           
+//           try {
+//             for(Paket res:paketRepo.getSearch(search)){
+//                model.addRow(new Object[]{
+//                    no++,
+//                    res.getId(),
+//                    res.getMenu(),
+//                    res.getStart(),
+//                    res.getNama(),
+//                    res.getDeskripsi(), 
+//                    res.getMinimDp(),
+//                    res.getHarga(),
+//                    res.getDiskon(),
+//                });
+//           }
+//             table.setModel(model);
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         }
+//     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,9 +110,6 @@ public class PaketForm extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         btnHapus = new javax.swing.JLabel();
         btnEdit = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
@@ -128,28 +125,6 @@ public class PaketForm extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/title paket.png"))); // NOI18N
 
-        table.setFont(new java.awt.Font("Quicksand Bold", 0, 15)); // NOI18N
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        table.setRowHeight(30);
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,14 +132,7 @@ public class PaketForm extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,12 +140,6 @@ public class PaketForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
         );
 
         btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/buttonhapus11.png"))); // NOI18N
@@ -293,32 +255,25 @@ public class PaketForm extends javax.swing.JPanel {
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       DialogTambahPaket tambahPaket = new DialogTambahPaket(main);
       tambahPaket.showPopUp();
-      load_table();
+//      load_table();
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       DialogEditPaket editPaket = new DialogEditPaket(main);
       editPaket.showPopUp();
-      load_table();
+//      load_table();
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
         boolean delete = paketRepo.delete(id);
         if(delete){
             System.out.println("berhasil");
-            load_table();
+//            load_table();
         }else{
             System.out.println("gagal");
         }
     }//GEN-LAST:event_btnHapusMouseClicked
-
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        int baris = table.rowAtPoint(evt.getPoint());
-        String idc = table.getValueAt(baris, 1).toString();
-        id = Integer.parseInt(idc); 
-        System.out.println(id);
-    }//GEN-LAST:event_tableMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
 //        loadTableSearch(txtSearch.getText());
@@ -330,13 +285,10 @@ public class PaketForm extends javax.swing.JPanel {
     private javax.swing.JLabel btnHapus;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table;
     private view.swing.tampilscroolPaket tampilscroolPaket1;
     // End of variables declaration//GEN-END:variables
 }
