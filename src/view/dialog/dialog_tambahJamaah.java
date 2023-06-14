@@ -6,8 +6,11 @@ package view.dialog;
 
 import entity.Jamaah;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.JamaahRepository;
-
+import view.main.maindasboard;
+import view.dialog.Validasi.validasiGagalLogin;
+import java.awt.Color;
 /**
  *
  * @author adzaz
@@ -20,6 +23,7 @@ public class dialog_tambahJamaah extends Dialog {
     public dialog_tambahJamaah(JFrame fram) {
         super(fram);
         initComponents();
+        jPanel1.setVisible(false);
     }
 
     /**
@@ -31,6 +35,9 @@ public class dialog_tambahJamaah extends Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
         btnBatal1 = new javax.swing.JLabel();
         txtNotelp = new javax.swing.JTextField();
@@ -41,6 +48,23 @@ public class dialog_tambahJamaah extends Dialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new Color(0,0,0,90));
+        jPanel1.setLayout(null);
+
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(330, 360, 120, 30);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imageValidasi/validasi editgagal login_1.png"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(101, 119, 568, 285);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 820, 550));
 
         btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,11 +112,15 @@ public class dialog_tambahJamaah extends Dialog {
         JamaahRepository jamaahRepo = new JamaahRepository();
         
         if(jamaahRepo.add(jamaah)){
-            System.out.println("berhasil");
+           jPanel1.setVisible(true);
         }else{
             System.out.println("gagal");
         }
     }//GEN-LAST:event_btnTambahMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        closeMessage();
+    }//GEN-LAST:event_jLabel3MouseClicked
 
 
 
@@ -101,6 +129,9 @@ public class dialog_tambahJamaah extends Dialog {
     private javax.swing.JLabel btnTambah;
     private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNotelp;

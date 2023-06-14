@@ -298,7 +298,6 @@
         </Property>
       </Properties>
 
-<<<<<<< HEAD
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
@@ -327,10 +326,6 @@
               </Group>
           </Group>
         </DimensionLayout>
-=======
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
->>>>>>> 7926e62b7716d997133bc00a6fcb02ffca174e71
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtSearch">
@@ -342,14 +337,6 @@
               <Border info="null"/>
             </Property>
           </Properties>
-<<<<<<< HEAD
-=======
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="56" y="6" width="200" height="40"/>
-            </Constraint>
-          </Constraints>
->>>>>>> 7926e62b7716d997133bc00a6fcb02ffca174e71
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -357,14 +344,6 @@
               <Image iconType="3" name="/view/imgbutton/menusearch1.png"/>
             </Property>
           </Properties>
-<<<<<<< HEAD
-=======
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="6" y="6" width="-1" height="41"/>
-            </Constraint>
-          </Constraints>
->>>>>>> 7926e62b7716d997133bc00a6fcb02ffca174e71
         </Component>
       </SubComponents>
     </Container>

@@ -239,7 +239,7 @@ parent.setComponentZOrder(this, 0);
             new maindasboard().setVisible(true);
             System.out.println("berhasil login");
         }else{
-            System.out.println("gagal login");
+            
         }
     }//GEN-LAST:event_loginMouseClicked
 

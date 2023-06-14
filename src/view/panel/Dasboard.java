@@ -27,11 +27,18 @@ public class Dasboard extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblNama = new javax.swing.JLabel();
+        lblBerapaOrang = new javax.swing.JLabel();
+        lblHarga = new javax.swing.JLabel();
+        lblTanggal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         tampilPaketUmrohDasboard1 = new view.swing.tampilPaketUmrohDasboard();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        lblPengeluaran = new javax.swing.JLabel();
+        lblPemasukan = new javax.swing.JLabel();
+        lblToday = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -40,6 +47,18 @@ public class Dasboard extends javax.swing.JPanel {
 
         jPanel1.setBackground(new Color(0,0,0,0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        jPanel1.add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 200, 50));
+
+        lblBerapaOrang.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        jPanel1.add(lblBerapaOrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 386, 170, 40));
+
+        lblHarga.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        jPanel1.add(lblHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 315, 170, 40));
+
+        lblTanggal.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        jPanel1.add(lblTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 170, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bg berangkat das.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 320, -1));
@@ -53,6 +72,13 @@ public class Dasboard extends javax.swing.JPanel {
 
         jPanel3.setBackground(new Color(0,0,0,0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPengeluaran.setFont(new java.awt.Font("Quicksand Bold", 0, 24)); // NOI18N
+        jPanel3.add(lblPengeluaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 250, 60));
+
+        lblPemasukan.setFont(new java.awt.Font("Quicksand Bold", 0, 24)); // NOI18N
+        jPanel3.add(lblPemasukan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 250, 60));
+        jPanel3.add(lblToday, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 70, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bg pemasukandas.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 430, 550));
@@ -117,6 +143,13 @@ public class Dasboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblBerapaOrang;
+    private javax.swing.JLabel lblHarga;
+    private javax.swing.JLabel lblNama;
+    private javax.swing.JLabel lblPemasukan;
+    private javax.swing.JLabel lblPengeluaran;
+    private javax.swing.JLabel lblTanggal;
+    private javax.swing.JLabel lblToday;
     private view.swing.tampilPaketUmrohDasboard tampilPaketUmrohDasboard1;
     // End of variables declaration//GEN-END:variables
 }
