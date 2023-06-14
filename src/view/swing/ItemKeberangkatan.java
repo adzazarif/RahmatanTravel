@@ -41,7 +41,9 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     public ItemKeberangkatan() {
         initComponents();
         Font font = new Font("Quicksand", Font.PLAIN, 36);
-        nama_paket.setFont(font);
+        Font font1 = new Font("Quicksand", Font.PLAIN, 18);
+        nama_paket1.setFont(font);
+        hargapaket.setFont(font1);
         bgitem2.setVisible(false);
         setOpaque(false);
         this.index = index;
@@ -87,7 +89,8 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        nama_paket = new javax.swing.JLabel();
+        hargapaket = new javax.swing.JLabel();
+        nama_paket1 = new javax.swing.JLabel();
         bgitem2 = new javax.swing.JLabel();
         bgitem1 = new javax.swing.JLabel();
 
@@ -109,10 +112,12 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
         });
         add(jLabel1);
         jLabel1.setBounds(810, 60, 90, 30);
+        add(hargapaket);
+        hargapaket.setBounds(777, 36, 150, 20);
 
-        nama_paket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(nama_paket);
-        nama_paket.setBounds(60, 30, 170, 40);
+        nama_paket1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(nama_paket1);
+        nama_paket1.setBounds(60, 30, 170, 60);
 
         bgitem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bgitemkeberangkatan1.png"))); // NOI18N
         add(bgitem2);
@@ -135,9 +140,10 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgitem1;
     private javax.swing.JLabel bgitem2;
+    public static javax.swing.JLabel hargapaket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    public static javax.swing.JLabel nama_paket;
+    public static javax.swing.JLabel nama_paket1;
     // End of variables declaration//GEN-END:variables
 
 }

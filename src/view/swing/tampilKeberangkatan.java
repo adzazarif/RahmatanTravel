@@ -1,6 +1,7 @@
 
 package view.swing;
 
+import entity.Keberangkatan;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import repository.KeberangkatanRepository;
 import view.event.EventMenuSelected;
 
 public class tampilKeberangkatan extends javax.swing.JPanel {
@@ -20,7 +22,7 @@ public class tampilKeberangkatan extends javax.swing.JPanel {
     private String nomorpanel1;
     private JPanel container;
     private List<JPanel> panellist;
-    
+    KeberangkatanRepository keberangkatanrepo = new KeberangkatanRepository();
     public tampilKeberangkatan() {
         initComponents();
         panellist = new ArrayList<>();
@@ -37,14 +39,17 @@ public void getpanel(){
             int kolom = 0;
             int dimensi = baris + 1;
             container = new JPanel();
-                
-            while(res.next()){
-                final String id_barang = res.getString("id");
-                String nama_paket = res.getString(2);
+            for(Keberangkatan p:keberangkatanrepo.get()){    
+//            while(res.next()){
+                final String id_barang = String.valueOf(p.getId());
+                String nama_paket = p.getPaket().getMenu();
+                String hargapaket123 = String.valueOf(p.getPaket().getHarga());
                 ItemKeberangkatan pnn = new ItemKeberangkatan();
+                pnn.hargapaket.setText("Rp. "+hargapaket123);
+                pnn.nama_paket1.setText(nama_paket);
                 int index = panellist.size() + 1;
                 pnn.setIndex(index);
-                pnn.nama_paket.setText(nama_paket);
+                pnn.nama_paket1.setText(nama_paket);
                 container.setLayout(null);
                 pnn.setSize(1000, 130);
                 container.add(pnn);
@@ -118,7 +123,7 @@ public void getpanel(){
 
         scrollBarCustom1.setForeground(new java.awt.Color(255, 90, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/titlekeberangkatan.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/title item keberangkatan1.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -18,7 +18,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import repository.PaketRepository;
 import view.panel.PaketForm;
-
+import static view.swing.ItemPaket.namapaket123;
+import static view.swing.ItemPaket.infopaket;
 public class tampilscroolPaket extends javax.swing.JPanel {
 
     private String nomorpanel;
@@ -47,16 +48,25 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                 
             for(Paket p:paketRepo.get()){
                    final String id_barang = String.valueOf(p.getId());
+                   String namapaket11 = p.getMenu();
+                   String lamapaket = String.valueOf(p.getNama());
+                   String hargaa = String.valueOf("Rp. "+p.getHarga());
+                   System.out.println(namapaket11);
+                   System.out.println(lamapaket);
+                   
                 ItemPaket pnn = new ItemPaket();
+                pnn.namapaket123.setText(namapaket11);
+                   pnn.infopaket.setText(lamapaket);
+                   pnn.harga.setText(lamapaket);
                 int index = panellist.size() + 1;
                 pnn.setIndex(index);
                 container.setLayout(null);
                 pnn.setSize(290, 188);
                 container.add(pnn);
-                container.setPreferredSize(new Dimension(920, 250 + (250 * baris)));
+                container.setPreferredSize(new Dimension(920, 250 + (212 * baris)));
                 container.setBackground(Color.WHITE);
 //                container.setBorder(null);
-                jScrollPane1.setPreferredSize(new Dimension(1000, 300 * dimensi));
+                jScrollPane1.setPreferredSize(new Dimension(1000, 220 * dimensi));
                 
                 jScrollPane1.setViewportView(container);
                 jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
