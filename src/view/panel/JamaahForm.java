@@ -91,7 +91,7 @@ public class JamaahForm extends javax.swing.JPanel {
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
-                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row, "apa cobak?", JOptionPane.YES_NO_OPTION);
+                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJamaah, "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 // Tindakan yang diambil jika pengguna memilih "Yes"
                 // Misalnya, menghapus data dari tabel atau melakukan tindakan lainnya

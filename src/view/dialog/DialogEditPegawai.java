@@ -195,8 +195,6 @@ public class DialogEditPegawai extends Dialog {
             ImageIcon ic = new ImageIcon(img);
             lblFoto.setIcon(ic);
             newPath = f.getAbsolutePath();
-            System.out.println(newPath);
-             System.out.println(Path);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

@@ -79,13 +79,14 @@ public class BarangRepository implements Repository<Barang>{
 
     @Override
     public boolean add(Barang barang) {
-         String sql = "INSERT INTO "+ tableName +" (`nama`, `stok`, `harga`) VALUES ( ?, ?, ?)";
+         String sql = "INSERT INTO "+ tableName +" (`nama`, `stok`, `harga`,`foto`) VALUES ( ?, ?, ?,?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setString(1, barang.getNama());
             pst.setInt(2, barang.getStok());
             pst.setInt(3, barang.getHarga());
+            pst.setString(4, barang.getFoto());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -96,7 +97,7 @@ public class BarangRepository implements Repository<Barang>{
 
     @Override
     public boolean update(Barang barang) {
-        String sql = "UPDATE "+ tableName +" SET nama = ?, stok = ?, harga = ?, password = ? WHERE id = ?";
+        String sql = "UPDATE "+ tableName +" SET nama = ?, stok = ?, harga = ?, foto = ? WHERE id = ?";
         
         try {
                  Connection koneksi = (Connection)Conn.configDB();
@@ -104,7 +105,8 @@ public class BarangRepository implements Repository<Barang>{
             pst.setString(1, barang.getNama());
             pst.setInt(2, barang.getStok());
             pst.setInt(3, barang.getHarga());
-            pst.setInt(4, barang.getId());
+            pst.setString(4, barang.getFoto());
+            pst.setInt(5, barang.getId());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -128,12 +130,12 @@ public class BarangRepository implements Repository<Barang>{
     
      private Barang mapToEntity(ResultSet result) throws SQLException {
         Barang barang = new Barang(
-            result.getInt("id"),
             result.getString("nama"),
             result.getInt("stok"),
-            result.getInt("harga")
+            result.getInt("harga"),
+                result.getString("foto")
         );
-
+        barang.setId(result.getInt("id"));
         return barang;
         }
 }

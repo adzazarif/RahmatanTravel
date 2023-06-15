@@ -33,6 +33,13 @@ public class DateUtil {
         return formattedDate;
     }
     
+     public String timeNowImage(){
+          LocalDateTime myDateObj = LocalDateTime.now();   
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HHmmss");  
+        String formattedDate = myDateObj.format(myFormatObj);  
+        return formattedDate;
+    }
+    
     public String typeDateTime(){
         LocalDateTime myDateObj = LocalDateTime.now();  
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  

@@ -12,7 +12,7 @@ package entity;
 public class Barang implements Entity{
     public static String tableName = "barang";
         private int id;
-    private String nama;
+    private String nama, foto;
     private int stok;
     private int harga;
     private int ammountBarang;
@@ -21,11 +21,12 @@ public class Barang implements Entity{
     public Barang(){
         
     }
-    public Barang(int id, String nama,int stok,int harga){
+    public Barang( String nama,int stok,int harga, String foto){
         this.id = id;
         this.nama = nama;
         this.stok = stok;
         this.harga = harga;
+        this.foto = foto;
     }
     public Barang(int id, String nama,int stok,int harga, int subTotal){
         this.id = id;
@@ -46,6 +47,13 @@ public class Barang implements Entity{
     }
     public String getNama(){
         return this.nama;
+    }
+    
+       public void setFoto(String foto){
+        this.foto = foto;
+    }
+    public String getFoto(){
+        return this.foto;
     }
     
     public void setStok(int stok){

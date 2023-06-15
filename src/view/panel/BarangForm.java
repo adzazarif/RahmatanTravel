@@ -6,6 +6,7 @@ package view.panel;
 
 import entity.Barang;
 import entity.BarangMasuk;
+import entity.DetailPengeluaran;
 import entity.PengeluaranOperasional;
 import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
@@ -14,6 +15,10 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangMasukRepository;
 import repository.BarangRepository;
+import repository.DetailPengeluaranRepository;
+import view.dialog.DIalogTambahStok;
+import view.dialog.DialogEditBarang;
+import view.dialog.DialogTambahBarang;
 /**
  *
  * @author semafie
@@ -21,6 +26,7 @@ import repository.BarangRepository;
 public class BarangForm extends javax.swing.JPanel {
     BarangRepository barangRepo = new BarangRepository();
     BarangMasukRepository barangMasukRepo = new BarangMasukRepository();
+    DetailPengeluaranRepository detailPengeluaranRepo = new DetailPengeluaranRepository();
     private String pilihan = "stok";
     public static int id;
     /**
@@ -33,6 +39,8 @@ public class BarangForm extends javax.swing.JPanel {
             loadTableStok();
         }else if(pilihan.equals("masuk")){
             loadTableMasuk();
+        }else if(pilihan.equals("keluar")){
+            loadTableKeluar();
         }
     }
     
@@ -85,6 +93,33 @@ public class BarangForm extends javax.swing.JPanel {
              e.printStackTrace();
          }
     }
+       
+          public void loadTableKeluar(){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Tanggal");
+            model.addColumn("Harga");
+            model.addColumn("Jumlah");
+            model.addColumn("Total Harga");
+            
+           try {
+             for(DetailPengeluaran res:detailPengeluaranRepo.get()){
+                 int jumlah = res.getBarang().getHarga() * res.getBanyak();
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getBarang().getNama(),
+                    res.getPengeluaran().getTanggal().toString(),
+                    res.getBarang().getHarga(),
+                    res.getBanyak(),
+                    jumlah
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,6 +142,7 @@ public class BarangForm extends javax.swing.JPanel {
         bntKeluar = new javax.swing.JLabel();
         bntStok1 = new javax.swing.JLabel();
         lblPilihan = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -155,8 +191,18 @@ public class BarangForm extends javax.swing.JPanel {
         jScrollPane2.setViewportView(table);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button barang.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button stok.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/buttonhapus11.png"))); // NOI18N
 
@@ -187,6 +233,13 @@ public class BarangForm extends javax.swing.JPanel {
         lblPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu stok.png"))); // NOI18N
         jPanel2.add(lblPilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttoneditt.png"))); // NOI18N
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,24 +247,24 @@ public class BarangForm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(40, 40, 40)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
+                        .addGap(16, 16, 16)
+                        .addComponent(btnEdit)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                        .addComponent(jLabel3)))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -224,17 +277,18 @@ public class BarangForm extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnEdit))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -246,7 +300,8 @@ public class BarangForm extends javax.swing.JPanel {
 
     private void bntKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntKeluarMouseClicked
 lblPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu keluar.png")));
-
+pilihan = "keluar";
+loadTableKeluar();
     }//GEN-LAST:event_bntKeluarMouseClicked
 
     private void bntStok1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntStok1MouseClicked
@@ -259,13 +314,35 @@ lblPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbu
         int baris = table.rowAtPoint(evt.getPoint());
         String idd = table.getValueAt(baris, 0).toString();
         id = Integer.valueOf(idd);
+        System.out.println(id);
     }//GEN-LAST:event_tableMouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DIalogTambahStok panggilTambah = new DIalogTambahStok(main);
+        panggilTambah.showPopUp();
+        loadTableStok();
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogEditBarang panggilTambah = new DialogEditBarang(main);
+        panggilTambah.showPopUp();
+        loadTableStok();
+    }//GEN-LAST:event_btnEditMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+          maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogTambahBarang panggilTambah = new DialogTambahBarang(main);
+        panggilTambah.showPopUp();
+        loadTableStok();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bntKeluar;
     private javax.swing.JLabel bntMasuk;
     private javax.swing.JLabel bntStok1;
+    private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
