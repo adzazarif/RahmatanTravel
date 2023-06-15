@@ -118,6 +118,11 @@ public class PemesananForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttontambah.png"))); // NOI18N
@@ -220,6 +225,12 @@ public class PemesananForm extends javax.swing.JPanel {
         tambahCicilan.showPopUp();
         load_table();
     }//GEN-LAST:event_btnTambahCicilanMouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+           int baris = table.rowAtPoint(evt.getPoint());
+        String idd = table.getValueAt(baris, 1).toString();
+        id = Integer.valueOf(idd);
+    }//GEN-LAST:event_tableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

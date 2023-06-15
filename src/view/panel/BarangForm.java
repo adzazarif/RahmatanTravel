@@ -22,6 +22,7 @@ public class BarangForm extends javax.swing.JPanel {
     BarangRepository barangRepo = new BarangRepository();
     BarangMasukRepository barangMasukRepo = new BarangMasukRepository();
     private String pilihan = "stok";
+    public static int id;
     /**
      * Creates new form Barang
      */
@@ -146,6 +147,11 @@ public class BarangForm extends javax.swing.JPanel {
             }
         ));
         table.setGridColor(new java.awt.Color(204, 204, 204));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button barang.png"))); // NOI18N
@@ -248,6 +254,12 @@ lblPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbu
         pilihan = "stok";
         loadTableStok();
     }//GEN-LAST:event_bntStok1MouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        int baris = table.rowAtPoint(evt.getPoint());
+        String idd = table.getValueAt(baris, 0).toString();
+        id = Integer.valueOf(idd);
+    }//GEN-LAST:event_tableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

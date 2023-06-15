@@ -153,7 +153,6 @@ public class Pegawai extends javax.swing.JPanel {
            try {
              for(Presensi res:presensiRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getId(),
                     res.getUser().getNama(),
                     res.getWaktuPresensi(),
@@ -247,6 +246,11 @@ public class Pegawai extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button hapustab.png"))); // NOI18N
@@ -357,6 +361,12 @@ public class Pegawai extends javax.swing.JPanel {
         pilihan = "presensi";
         loadTablePresensi();
     }//GEN-LAST:event_lblPresensi1MouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+           int baris = table.rowAtPoint(evt.getPoint());
+        String idd = table.getValueAt(baris, 0).toString();
+        id = Integer.valueOf(idd);
+    }//GEN-LAST:event_tableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

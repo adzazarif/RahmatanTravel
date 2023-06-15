@@ -46,8 +46,7 @@ public class PengeluaranForm extends javax.swing.JPanel {
     
         
          public void loadTableOperasional(){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+            DefaultTableModel model = new DefaultTableModel();   
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Total");
@@ -60,8 +59,6 @@ public class PengeluaranForm extends javax.swing.JPanel {
            try {
              for(PengeluaranOperasional res:pengeluaranOperasionalRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
-                    res.getId(),
                     res.getId(),
                     res.getNamaPengeluaran(),
                     res.getJumlah(),
@@ -77,7 +74,6 @@ public class PengeluaranForm extends javax.swing.JPanel {
 
          public void loadTableProduksi(){
              DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
             model.addColumn("id");
             model.addColumn("Nama");
             model.addColumn("Tanggal Keberangkatan");
@@ -88,7 +84,6 @@ public class PengeluaranForm extends javax.swing.JPanel {
            try {
              for(Pengeluaran res:pengeluaranRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getId(),
                     res.getKeberangkatan().getPaket().getNama(),
                     res.getKeberangkatan().getTanggal(),
@@ -183,6 +178,11 @@ public class PengeluaranForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttontambah.png"))); // NOI18N
@@ -234,9 +234,8 @@ public class PengeluaranForm extends javax.swing.JPanel {
                         .addComponent(btnOperasional1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPilihan1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnProduksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -291,6 +290,12 @@ public class PengeluaranForm extends javax.swing.JPanel {
         id = 0;
         loadTableOperasional();
     }//GEN-LAST:event_btnOperasional1MouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        int baris = table.rowAtPoint(evt.getPoint());
+        String idd = table.getValueAt(baris, 0).toString();
+        id = Integer.valueOf(idd);
+    }//GEN-LAST:event_tableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

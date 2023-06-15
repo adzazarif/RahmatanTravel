@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import repository.KeberangkatanRepository;
 import view.event.EventMenuSelected;
+import view.panel.KeberangkatanForm;
 
 public class tampilKeberangkatan extends javax.swing.JPanel {
 
@@ -87,7 +88,7 @@ public void getpanel(){
                     public void selected(int index) {
                         clearMenu(index);
                         nomorpanel1 = id_barang;
-                        System.out.println(nomorpanel);
+                        KeberangkatanForm.id = Integer.parseInt(nomorpanel);
                     }
                 });
                 panellist.add(pnn);
