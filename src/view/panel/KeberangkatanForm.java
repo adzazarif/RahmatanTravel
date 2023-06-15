@@ -68,7 +68,6 @@ public class KeberangkatanForm extends javax.swing.JPanel {
                         }
                     }
                 }
-                System.out.println(resultUpdated);
             }
        
         } catch (Exception e) {

@@ -56,7 +56,7 @@ public class DialogTambahPemesanan extends Dialog {
     }
      public void generate() {
         int kd_transaksi = pemesananRepo.getIdLast();
-        String query = "SELECT * FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik WHERE pemesanan.id = "+kd_transaksi;
+        String query = "SELECT *, jamaah.nama AS namaJamaah, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik WHERE pemesanan.id = "+kd_transaksi;
         String path = "D:/RahmatanTravel/src/report/NotaPemesanan.jrxml";
 
         try {
@@ -318,7 +318,7 @@ public class DialogTambahPemesanan extends Dialog {
             if(!directory.exists()){
                 directory.mkdir();
             }
-             Linear barcode = new Linear();
+            Linear barcode = new Linear();
             barcode.setType(Linear.CODE128B);
             barcode.setData(String.valueOf(idLast));
             barcode.setI(11.0f);

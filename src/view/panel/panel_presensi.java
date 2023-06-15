@@ -130,11 +130,11 @@ public class panel_presensi extends javax.swing.JPanel {
         lblEndTime1 = new javax.swing.JLabel();
         lblEndTime = new javax.swing.JLabel();
         lblStartTime = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
         panelButton = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new view.pallet.Table();
         bg = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,21 +151,6 @@ public class panel_presensi extends javax.swing.JPanel {
 
         lblStartTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 360, 70));
-
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(table);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 700, 500));
 
         panelButton.setBackground(new Color(0,0,0,0));
         panelButton.setLayout(null);
@@ -184,6 +169,21 @@ public class panel_presensi extends javax.swing.JPanel {
 
         add(panelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 90, 190, 70));
 
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(table);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 710, 510));
+
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg presensi.png"))); // NOI18N
         add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -200,13 +200,13 @@ public class panel_presensi extends javax.swing.JPanel {
     private javax.swing.JLabel bg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblEndTime;
     private javax.swing.JLabel lblEndTime1;
     private javax.swing.JLabel lblStartTime;
     private javax.swing.JLabel lblTime;
     private javax.swing.JPanel panelButton;
-    private javax.swing.JTable table;
+    private view.pallet.Table table;
     // End of variables declaration//GEN-END:variables
 }
