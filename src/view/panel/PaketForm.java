@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import repository.PaketRepository;
 import view.dialog.DialogEditPaket;
+import view.swing.tampilscroolPaket;
 
 /**
  *
@@ -22,12 +23,17 @@ public class PaketForm extends javax.swing.JPanel {
     public static int id;
     PaketRepository paketRepo = new PaketRepository();
     Paket paket = new Paket();
+    tampilscroolPaket t = new tampilscroolPaket();
     /**
      * Creates new form Paket
      */
     public PaketForm() {
         initComponents();
+        setvalue();
 //        load_table();
+    }
+    public void setvalue(){
+        t.getpanel();
     }
    
 //     public void load_table(){
@@ -246,13 +252,14 @@ public class PaketForm extends javax.swing.JPanel {
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       DialogTambahPaket tambahPaket = new DialogTambahPaket(main);
       tambahPaket.showPopUp();
-//      load_table();
+     setvalue();
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       DialogEditPaket editPaket = new DialogEditPaket(main);
       editPaket.showPopUp();
+      setvalue();
 //      load_table();
     }//GEN-LAST:event_btnEditMouseClicked
 

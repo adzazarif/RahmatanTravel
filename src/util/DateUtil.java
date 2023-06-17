@@ -52,6 +52,11 @@ public class DateUtil {
         return String.valueOf(thirtyDaysAgo);
     }
      
+     public String dateMInusDay(String keberangkatan,int lama){
+        LocalDate getMinus = LocalDate.parse(keberangkatan).minusDays(lama);
+        return String.valueOf(getMinus);
+    }
+     
      public String dateFormatFull(){
         LocalDateTime myDateObj = LocalDateTime.now();  
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("E, MMM dd yyyy ");  

@@ -23,7 +23,7 @@ import static view.swing.ItemPaket.infopaket;
 public class tampilscroolPaket extends javax.swing.JPanel {
 
     private String nomorpanel;
-    private String nomorpanel1;
+    public String nomorpanel1;
     private JPanel container;
     private List<JPanel> panellist;
     PaketRepository paketRepo = new PaketRepository();
@@ -47,7 +47,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
             container = new JPanel();
                 
             for(Paket p:paketRepo.get()){
-                   final String id_barang = String.valueOf(p.getId());
+                    String id_barang = String.valueOf(p.getId());
                    String namapaket11 = p.getMenu();
                    String lamapaket = String.valueOf(p.getNama());
                    String hargaa = String.valueOf("Rp. "+p.getHarga());
@@ -85,7 +85,8 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     @Override
                     public void mouseEntered(MouseEvent e){
                         super.mouseEntered(e);
-                                        
+                        
+                        PaketForm.id = p.getId();  
                         
                     }
                 });

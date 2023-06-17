@@ -91,10 +91,11 @@ public class JamaahForm extends javax.swing.JPanel {
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
-                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJamaah, "apa cobak?", JOptionPane.YES_NO_OPTION);
+                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
+                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                // Tindakan yang diambil jika pengguna memilih "Yes"
-                // Misalnya, menghapus data dari tabel atau melakukan tindakan lainnya
+                boolean delete = jamaahRepo.delete(idJ);
+                load_table();
             } else {
                 // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
                 // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
@@ -326,6 +327,11 @@ public class JamaahForm extends javax.swing.JPanel {
 
         txtSearch.setBackground(new Color(0,0,0,0));
         txtSearch.setBorder(null);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 10, 170, 34));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menusearch1.png"))); // NOI18N
@@ -444,7 +450,7 @@ public class JamaahForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-//        loadSearch(txtSearch.getText());
+        loadSearch(txtSearch.getText());
     }//GEN-LAST:event_txtSearchKeyReleased
 
 

@@ -10,6 +10,10 @@ import javax.swing.SwingUtilities;
 import view.event.EventMenuSelected;
 import java.awt.Color;
 import java.awt.Font;
+import view.dialog.DialogDetailPaket;
+import view.dialog.DialogDetailPemesanan;
+import view.dialog.DialogTambahCicilan;
+import view.main.maindasboard;
 import static view.swing.ItemKeberangkatan.nama_paket1;
 
 public class ItemPaket extends javax.swing.JPanel {
@@ -110,6 +114,9 @@ public class ItemPaket extends javax.swing.JPanel {
 
         selengkapnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/selengkapnyapaket.jpg"))); // NOI18N
         selengkapnya.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selengkapnyaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 selengkapnyaMouseEntered(evt);
             }
@@ -150,6 +157,12 @@ public class ItemPaket extends javax.swing.JPanel {
     private void selengkapnyaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selengkapnyaMouseReleased
     selengkapnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/selengkapnyapaket.jpg")));
     }//GEN-LAST:event_selengkapnyaMouseReleased
+
+    private void selengkapnyaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selengkapnyaMouseClicked
+         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogDetailPaket tambahCicilan = new DialogDetailPaket(main);
+        tambahCicilan.showPopUp();
+    }//GEN-LAST:event_selengkapnyaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

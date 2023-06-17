@@ -73,6 +73,23 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         }
         return keberangkatan;
     }
+      
+            public List<Keberangkatan> getByPaketId(int id) {
+        String sql = "SELECT * FROM "+tableName+" WHERE paket_id = ?";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet res = stm.executeQuery();
+            while(res.next()){
+                keberangkatan.add(mapToEntity(res));
+            }
+        } catch (Exception e) {
+        }
+        return keberangkatan;
+    }
 
     public List<Keberangkatan> getByMenu(String menu) {
         String sql = "SELECT * FROM "+tableName+" LEFT JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE menu = ? ORDER BY tanggal DESC";

@@ -78,7 +78,7 @@ public void getpanel(){
                     @Override
                     public void mouseEntered(MouseEvent e){
                         super.mouseEntered(e);
-                        nomorpanel = id_barang;                   
+                        KeberangkatanForm.id = p.getId();
                         
                     }
                 }

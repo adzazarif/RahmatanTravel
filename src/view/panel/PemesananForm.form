@@ -32,7 +32,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="1204" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="1179" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -41,7 +41,9 @@
                               <Component id="jPanel3" max="32767" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnTambahCicilan" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnDetail" min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnEdit" min="-2" pref="130" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="btnTambah" min="-2" pref="130" max="-2" attributes="0"/>
@@ -66,6 +68,7 @@
                       <Component id="btnTambah" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnEdit" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnTambahCicilan" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnDetail" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel3" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -149,6 +152,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="btnDetail">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/view/imgbutton/buttondetaill.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDetailMouseClicked"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="btnTambah">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
