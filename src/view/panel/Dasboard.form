@@ -171,7 +171,7 @@
         <Component class="javax.swing.JLabel" name="lblPengeluaran">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Quicksand Bold" size="33" style="0"/>
+              <Font name="Quicksand Bold" size="33" style="1"/>
             </Property>
           </Properties>
           <Constraints>
@@ -183,7 +183,7 @@
         <Component class="javax.swing.JLabel" name="lblPemasukan">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Quicksand Bold" size="33" style="0"/>
+              <Font name="Quicksand Bold" size="33" style="1"/>
             </Property>
           </Properties>
           <Constraints>

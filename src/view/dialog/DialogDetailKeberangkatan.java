@@ -7,6 +7,8 @@ package view.dialog;
 
 import entity.Keberangkatan;
 import entity.Pemesanan;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import repository.KeberangkatanRepository;
@@ -23,6 +25,7 @@ public class DialogDetailKeberangkatan extends Dialog {
     PaketRepository paketRepo = new PaketRepository();
     PemesananRepository pemesananRepo = new PemesananRepository();
     private int id = KeberangkatanForm.id;
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**
      * Creates new form DialogDetailKeberangkatan
      */
@@ -65,7 +68,7 @@ public class DialogDetailKeberangkatan extends Dialog {
                     res.getJamaah().getNama(),
                     res.getJenisPembayaran(),
                     res.getStatus(),
-                    res.getJumlahBayar(), 
+                    nf.format(res.getJumlahBayar()), 
                 });
            }
             table.setModel(model);

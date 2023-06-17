@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import repository.LaporanRepository;
 import repository.PemesananRepository;
@@ -27,6 +29,7 @@ import util.Conn;
  * @author adzaz
  */
 public class LaporanForm extends javax.swing.JPanel {
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private String pilihan;
     PengeluaranOperasionalRepository pengeluaranOperasionalRepo = new PengeluaranOperasionalRepository();
     PengeluaranRepository pengeluaranRepo = new PengeluaranRepository();
@@ -111,7 +114,7 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getId(),
                     res.getId(),
                     res.getNamaPengeluaran(),
-                    res.getJumlah(),
+                    nf.format(res.getJumlah()),
                     res.getTanggal(),
                     res.getDeskripsi(),
                 });
@@ -140,7 +143,7 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getKeberangkatan().getPaket().getNama(),
                     res.getKeberangkatan().getTanggal(),
                     res.getTanggal(),
-                    res.getTotalPengeluaran()
+                    nf.format(res.getTotalPengeluaran())
                    
                 });
            }
@@ -173,9 +176,9 @@ public class LaporanForm extends javax.swing.JPanel {
               no++,
                     res.getString("nama"), 
                     res.getString("tanggal"),
-                    res.getString("pemasukann"), 
-                    res.getString("pengeluarann"),
-                    res.getString("laba_kotor")
+                    nf.format(res.getInt("pemasukann")), 
+                    nf.format(res.getInt("pengeluarann")),
+                    nf.format(res.getInt("laba_kotor"))
                     
                 });
             }
@@ -206,9 +209,9 @@ public class LaporanForm extends javax.swing.JPanel {
                 model.addRow(new Object[]{
               no++,
                     res.getString("month"),
-                    res.getString("pemasukann"), 
-                    res.getString("pengeluarann"),
-                    res.getString("laba_bersih")
+                    nf.format(res.getInt("pemasukann")), 
+                    nf.format(res.getInt("pengeluarann")),
+                    nf.format(res.getInt("laba_bersih"))
                     
                 });
             }
@@ -224,7 +227,6 @@ public class LaporanForm extends javax.swing.JPanel {
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Paket");
-            model.addColumn("Menu");
             model.addColumn("Tanggal");
             model.addColumn("Jenis Pembayaran");
             model.addColumn("status");
@@ -239,11 +241,10 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getId(),
                     res.getJamaah().getNama(),
                     res.getKeberangkatan().getPaket().getNama(),
-                    res.getKeberangkatan().getPaket().getMenu(),
                     res.getTanggal(),
                     res.getJenisPembayaran(),
                     res.getStatus(),
-                    res.getJumlahBayar(),
+                    nf.format(res.getJumlahBayar()),
                 });
            }
              table.setModel(model);

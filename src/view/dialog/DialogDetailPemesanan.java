@@ -6,6 +6,8 @@ package view.dialog;
 
 import entity.DetailPemesanan;
 import entity.Pemesanan;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import repository.DetailPemesananRepository;
@@ -19,6 +21,7 @@ import view.panel.PemesananForm;
  */
 public class DialogDetailPemesanan extends Dialog {
     private int id = PemesananForm.id;
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     PemesananRepository pemesananRepo = new PemesananRepository();
     DetailPemesananRepository detailPemesananRepo = new DetailPemesananRepository();
     DateUtil dateUtil = new DateUtil();
@@ -45,7 +48,7 @@ private void loadTable(){
                 model.addRow(new Object[]{
                     no++,
                     res.getTanggal().toString(),
-                    res.getCicilan()
+                    nf.format(res.getCicilan())
                     
            });
     }
@@ -65,11 +68,11 @@ private void loadTable(){
             lblNamaJamaah.setText(String.valueOf(pm.getJamaah().getNama()));
             lblJenisPembayaran.setText(pm.getJenisPembayaran());
             lblStatus.setText(pm.getStatus());
-            lblTotalPembelian.setText(String.valueOf(totalPembelian));
-            lblTotalBayar.setText(String.valueOf(jumlahBayar));
+            lblTotalPembelian.setText(String.valueOf(nf.format(totalPembelian)));
+            lblTotalBayar.setText(String.valueOf(nf.format(jumlahBayar)));
             lblTglTerakhir.setText(tglAkhirBayar);
-            lblKurangBayar.setText(String.valueOf(kurangBayar));
-            lblDiskon.setText(String.valueOf(pm.getKeberangkatan().getPaket().getDiskon()));
+            lblKurangBayar.setText(String.valueOf(nf.format(kurangBayar)));
+            lblDiskon.setText(String.valueOf(nf.format(pm.getKeberangkatan().getPaket().getDiskon())));
             
         }
     }

@@ -33,6 +33,7 @@ public class DialogDetailPaket extends Dialog {
     PemesananRepository pemesananRepo = new PemesananRepository();
     PengeluaranRepository pengeluaranRepo = new PengeluaranRepository();
     private int id = PaketForm.id;
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**
      * Creates new form DialogDetailPaket
      */
@@ -67,9 +68,9 @@ public class DialogDetailPaket extends Dialog {
                     res.getString("keberangkatan.tanggal"),
                     res.getString("keberangkatan.status"),
                     res.getString("jml_jamaah"),
-                    pemasukan, 
-                    pengeluaran, 
-                    labaKotor, 
+                    nf.format(pemasukan), 
+                    nf.format(pengeluaran), 
+                    nf.format(labaKotor), 
                 });
             }
             table.setModel(model);

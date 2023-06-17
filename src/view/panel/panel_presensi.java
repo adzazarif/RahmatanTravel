@@ -139,17 +139,19 @@ public class panel_presensi extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTime.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 330, 70));
+
+        lblDate.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 270, 30));
 
-        lblEndTime1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblEndTime1.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
         add(lblEndTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 360, 70));
 
-        lblEndTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblEndTime.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
         add(lblEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 360, 70));
 
-        lblStartTime.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblStartTime.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
         add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 360, 70));
 
         panelButton.setBackground(new Color(0,0,0,0));

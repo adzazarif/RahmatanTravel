@@ -12,6 +12,8 @@ import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import repository.KeberangkatanRepository;
 import repository.PengeluaranOperasionalRepository;
@@ -25,6 +27,7 @@ import view.dialog.DialogTambahPengeluaranOperasional;
  * @author adzaz
  */
 public class PengeluaranForm extends javax.swing.JPanel {
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private String pilihan = "operasional";
     public static int totalPengeluaran;
     public static int id;
@@ -49,9 +52,10 @@ public class PengeluaranForm extends javax.swing.JPanel {
             DefaultTableModel model = new DefaultTableModel();   
             model.addColumn("Id");      
             model.addColumn("Nama");
-            model.addColumn("Total");
+            
             model.addColumn("Tanggal");
             model.addColumn("Deskripsi");
+            model.addColumn("Total");
          
             
             int no = 1;
@@ -61,9 +65,9 @@ public class PengeluaranForm extends javax.swing.JPanel {
                 model.addRow(new Object[]{
                     res.getId(),
                     res.getNamaPengeluaran(),
-                    res.getJumlah(),
                     res.getTanggal(),
                     res.getDeskripsi(),
+                    nf.format(res.getJumlah())
                 });
            }
              table.setModel(model);
@@ -88,7 +92,7 @@ public class PengeluaranForm extends javax.swing.JPanel {
                     res.getKeberangkatan().getPaket().getNama(),
                     res.getKeberangkatan().getTanggal(),
                     res.getTanggal(),
-                    res.getTotalPengeluaran()
+                    nf.format(res.getTotalPengeluaran())
                    
                 });
            }

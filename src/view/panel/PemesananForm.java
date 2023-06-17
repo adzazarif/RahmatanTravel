@@ -9,6 +9,8 @@ import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import repository.PemesananRepository;
 import view.dialog.DialogDetailPemesanan;
@@ -22,6 +24,7 @@ import static view.panel.KeberangkatanForm.id;
  */
 public class PemesananForm extends javax.swing.JPanel {
     PemesananRepository pemesananRepo = new PemesananRepository();
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));   
     public static int id;
     /**
      * Creates new form Pemesanan
@@ -52,7 +55,7 @@ public class PemesananForm extends javax.swing.JPanel {
                     res.getTanggal(),
                     res.getJenisPembayaran(),
                     res.getStatus(),
-                    res.getJumlahBayar(),
+                    nf.format(res.getJumlahBayar()),
                 });
            }
              table.setModel(model);
