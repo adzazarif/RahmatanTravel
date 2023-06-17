@@ -262,6 +262,7 @@ public class LaporanForm extends javax.swing.JPanel {
     private void initComponents() {
 
         panelTable = new javax.swing.JPanel();
+        panelShadow1 = new view.swing.PanelShadow();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new view.pallet.Table();
         scrollBarCustom1 = new view.swing.ScrollBarCustom();
@@ -291,6 +292,8 @@ public class LaporanForm extends javax.swing.JPanel {
         panelTable.setBackground(new Color(0,0,0,0));
         panelTable.setPreferredSize(new java.awt.Dimension(1200, 500));
 
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
+
         jScrollPane1.setBackground(new Color(0,0,0,0));
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
@@ -308,27 +311,44 @@ public class LaporanForm extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
-        scrollBarCustom1.setBackground(new java.awt.Color(255, 90, 0));
+        scrollBarCustom1.setForeground(new java.awt.Color(255, 90, 0));
+
+        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
+        panelShadow1.setLayout(panelShadow1Layout);
+        panelShadow1Layout.setHorizontalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        panelShadow1Layout.setVerticalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelTableLayout = new javax.swing.GroupLayout(panelTable);
         panelTable.setLayout(panelTableLayout);
         panelTableLayout.setHorizontalGroup(
             panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTableLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelTableLayout.setVerticalGroup(
             panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTableLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
-                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         panelGrafik.setBackground(new Color(0,0,0,0));
@@ -618,6 +638,7 @@ public class LaporanForm extends javax.swing.JPanel {
     private javax.swing.JPanel panelGrafik;
     private javax.swing.JPanel panelKeuntungan;
     private javax.swing.JPanel panelPengeluaran;
+    private view.swing.PanelShadow panelShadow1;
     private raven.panel.PanelShadow panelShadow3;
     private javax.swing.JPanel panelTable;
     private view.swing.ScrollBarCustom scrollBarCustom1;

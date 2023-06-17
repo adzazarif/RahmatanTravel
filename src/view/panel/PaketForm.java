@@ -253,6 +253,8 @@ public class PaketForm extends javax.swing.JPanel {
       DialogTambahPaket tambahPaket = new DialogTambahPaket(main);
       tambahPaket.showPopUp();
      setvalue();
+//     maindasboard apa = (maindasboard)SwingUtilities.getWindowAncestor(this);
+//     apa.showform(new PaketForm());
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked

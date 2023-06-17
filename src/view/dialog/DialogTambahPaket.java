@@ -6,7 +6,10 @@ package view.dialog;
 
 import entity.Paket;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.PaketRepository;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -146,10 +149,14 @@ public class DialogTambahPaket extends Dialog {
         Paket paket = new Paket(menu, start, nama, desc, minimDp, harga, diskon, lamaPaket);
         PaketRepository paketRepo = new PaketRepository();
         if(paketRepo.add(paket)){
-            System.out.println("berhasil");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Berhasil di Paket");
+        panel.showNotification();
             closeMessage();
         }else{
-            System.out.println("gagal");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal di Tambah");
+        panel.showNotification();
         }
     }//GEN-LAST:event_btnTambahMouseClicked
 

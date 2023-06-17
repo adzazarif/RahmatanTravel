@@ -15,6 +15,7 @@ import view.main.maindasboard;
 //import view.dialog.hayolo;
 import view.panel.panel_aboutversi;
 import view.main.Main;
+import view.swing.Notification;
 public class Login extends javax.swing.JPanel {
 
     public Login() {
@@ -235,11 +236,17 @@ parent.setComponentZOrder(this, 0);
         
         Auth a = new Auth();
         if(a.login(username, pass)){
-            this.setVisible(false);
+            Main main =(Main)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Berhasil Login");
+        panel.showNotification();
+            main.setVisible(false);
             new maindasboard().setVisible(true);
             System.out.println("berhasil login");
+              
         }else{
-            
+            Main main =(Main)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal Login");
+        panel.showNotification();
         }
     }//GEN-LAST:event_loginMouseClicked
 
