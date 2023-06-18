@@ -12,11 +12,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.JamaahRepository;
 import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
 import util.DateUtil;
+import view.main.maindasboard;
 import view.panel.PemesananForm;
+import view.swing.Notification;
 
 /**
  *
@@ -241,6 +244,7 @@ public class DialogEditPemesanan extends Dialog {
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         try {
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
             String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
             int id = Integer.parseInt(lblId.getText());
             int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
@@ -256,10 +260,14 @@ public class DialogEditPemesanan extends Dialog {
             pemesanan.setId(id);
             boolean tambah = pemesananRepo.update(pemesanan);
             if(tambah){
-                System.out.println("Berhasil");
+                
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
+        panel.showNotification();
                 closeMessage();
             }else{
-                System.out.println("Gagal");
+                 
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal di edit");
+        panel.showNotification();
             }
         } catch (Exception e) {
         }

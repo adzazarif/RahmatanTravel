@@ -42,6 +42,24 @@ public class DetailPengeluaranRepository implements Repository<DetailPengeluaran
         return detailpengeluaran;
     }
     
+    public List<DetailPengeluaran> getSearch(String search) {
+        String sql = "SELECT * FROM " + tableName +" WHERE id = '"+search+"'";
+        List<DetailPengeluaran> detailpengeluaran = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()) {
+                detailpengeluaran.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return detailpengeluaran;
+    }
+    
     public List<DetailPengeluaran> getById(Integer id) {
         String sql = "SELECT * FROM " + tableName + " WHERE pengeluaran_id = ?";
         List<DetailPengeluaran> detailpengeluaran = new ArrayList<>();

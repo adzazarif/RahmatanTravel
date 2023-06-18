@@ -36,7 +36,7 @@ public class DetailPemesananRepository implements Repository<DetailPemesanan>{
         return detailpemesanan;
     }
     
-    public List<DetailPemesanan> getById(Integer id) {
+    public List<DetailPemesanan> getByPemesananId(Integer id) {
          String sql = "SELECT * FROM " + tableName + " WHERE pemesanan_id = ?";
         List<DetailPemesanan> detailpemesanan = new ArrayList<>();
         try {

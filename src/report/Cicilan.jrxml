@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="586" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fa61e78a-034c-43a0-ac71-ad6a6943a781">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="218"/>
+	<parameter name="parameter1" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM detail_pemesanan WHERE pemesanan_id = $P{parameter1}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pemesanan_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cicilan" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="-2" y="108" width="226" height="13" uuid="79459864-6569-4647-8f9d-f1ced3fd8e4f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="8"/>
+				</textElement>
+				<text><![CDATA[Jl Brawijaya No.22, Jubung Lor, Jubung ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="18" y="13" width="208" height="75" uuid="a1585a6b-9f4b-4559-bbdb-fc7e0ec95b35"/>
+				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\image\\Group 449title.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="55" y="88" width="134" height="20" uuid="577c55d5-29e2-482c-9bd0-17d25f30fe1f"/>
+				<textElement>
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rahmatan & Tour Travel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-2" y="121" width="226" height="13" uuid="7faffde6-d490-4aea-935c-90d9d7cf59df"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="8"/>
+				</textElement>
+				<text><![CDATA[ Kec Sukorambi, Kab Jember 68151]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="95" y="56" width="4" height="13" uuid="d4c1b66d-e075-4ebc-b8cc-898c54e88f3b"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="108" width="4" height="14" uuid="880d356c-ca5c-42a5-89f6-b3cfbbd458b8"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="95" width="4" height="13" uuid="08a9c41e-f070-4ae0-b2ba-41920745d595"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="44" width="4" height="13" uuid="de398c64-87ef-4277-91ce-b2cccbc0cfc2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="29" width="85" height="15" uuid="95053472-406d-481d-ad0b-d74bb61917e6"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Tanggal              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="69" width="4" height="13" uuid="b4fc6a3d-32f9-4d37-8bf0-d49bd15238cc"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="109" width="85" height="13" uuid="7d508924-fd8f-4efd-8698-19ac0764559d"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Jumlah Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="14" width="4" height="15" uuid="050d0e17-32c2-44f4-a756-b2699760001d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="95" width="85" height="13" uuid="db0c1513-2123-4c94-956b-bbc645c241cc"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Diskon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="56" width="85" height="13" uuid="148da649-7186-44d1-9419-89b77d1e616e"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama Paket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="29" width="4" height="13" uuid="bc48d981-7aa7-4892-a812-2635ced8fdad"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="82" width="85" height="13" uuid="4c95234f-7a97-4f8b-b837-a501c8bb5071"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Jenis Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="69" width="85" height="13" uuid="d80356d1-45ff-45a9-b55c-1012d5e64d79"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="82" width="4" height="13" uuid="2274a445-e2f6-4e7e-9929-59d6164a3a36"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="44" width="85" height="10" uuid="1ed00f92-fe29-47b1-b312-9d440a403dea"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama Jamaah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="14" width="85" height="15" uuid="3a2ea9e9-bf9a-45e3-b440-f708198875b6"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[ID Pesanan]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="1" width="100" height="20" uuid="3deff6c3-11f4-465f-b997-e2c932ff1274"/>
+				<text><![CDATA[cicilan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="118" y="41" width="100" height="20" uuid="918698fc-8872-496b-91c6-773e7564c2a0"/>
+				<textFieldExpression><![CDATA[$F{cicilan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+</jasperReport>

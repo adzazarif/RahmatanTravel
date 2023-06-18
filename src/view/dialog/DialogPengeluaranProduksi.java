@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangRepository;
 import repository.DetailPengeluaranRepository;
@@ -22,7 +23,9 @@ import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
 import repository.PengeluaranRepository;
 import util.DateUtil;
+import view.main.maindasboard;
 import view.panel.PengeluaranForm;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
@@ -332,7 +335,9 @@ public class DialogPengeluaranProduksi extends Dialog {
             int inputStok = Integer.parseInt(txtStok.getText());
             for(Barang br:barangRepo.getById(idBarang)){
                 if(br.getStok() < inputStok){
-                    System.out.println("stok tidak cukup");
+                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Stok tidak cukup");
+        panel.showNotification();
                     return;
                 }
                 
@@ -391,7 +396,9 @@ public class DialogPengeluaranProduksi extends Dialog {
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         try {
         if(totalPengeluaranOpersional >= totalPemasukan){
-            System.out.println("bangkrut Cook!!!!");
+             maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Pengeluaran tidak boleh lebih besar dari pada pemasukan");
+        panel.showNotification();
         }else{
             String tgl = lblDate.getText();
         Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
@@ -400,7 +407,6 @@ public class DialogPengeluaranProduksi extends Dialog {
         boolean tambah = pengeluaranRepo.add(pengeluaran);
         
         if(tambah){
-            System.out.println("Alhamdulillah iso");
             int idPengeluaran = 0;
             for(Pengeluaran p:pengeluaranRepo.getLastId()){
                 idPengeluaran = p.getId();
@@ -412,17 +418,26 @@ public class DialogPengeluaranProduksi extends Dialog {
                         p, b, i.getStok(), i.getSubTotal());
                 boolean tambahDetail = detailPengeluaranRepo.add(detailPengeluran);
                 if(tambahDetail){
-                    System.out.println("Allhamdulillah sukses");
+                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
+        panel.showNotification();
+        closeMessage();
                 }else{
-                    System.out.println("Gagal Teros marine kapan");
+                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
                 }
             }
         }else{
-            System.out.println("Eror terus Asuuuuu!!");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
         }
         }
         } catch (Exception e) {
-            System.out.println("Ojo eror teros babiii");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnTambahMouseClicked

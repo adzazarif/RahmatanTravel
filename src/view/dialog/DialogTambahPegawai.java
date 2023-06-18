@@ -12,7 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import repository.UserRepository;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -136,6 +139,7 @@ public class DialogTambahPegawai extends Dialog {
     }//GEN-LAST:event_btnTambahFotoMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         String nama = txtNama.getText();
         String idCard = txtIdcard.getText();
         String role = "employee";
@@ -160,11 +164,13 @@ public class DialogTambahPegawai extends Dialog {
             
             User user = new User(nama, username, role, pass, email, alamat, noTelp, fileAkhir.toString(), jenisKelamin, idCard);
             if(userRepo.add(user)){
-                System.out.println("Berhasil");
+               Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
                 Files.copy(fileAwal.toPath(), fileAkhir.toPath());
                 closeMessage();
             }else{
-                System.out.println("gagal");
+                Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
             }
         } catch (Exception e) {
         }

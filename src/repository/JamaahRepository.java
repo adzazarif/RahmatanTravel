@@ -151,43 +151,52 @@ public class JamaahRepository implements Repository<Jamaah>{
             return false;
         }
     }
-    public void getAmountJamaah(Jamaah jamaah){
+    public int getAmountJamaah(){
+        int jamaah = 0;
         try {
         String queryCek = "SELECT COUNT(*) AS jml FROM jamaah";
         Connection koneksi = (Connection) Conn.configDB();
         Statement pstCek = koneksi.createStatement();
         ResultSet res = pstCek.executeQuery(queryCek);
         if(res.next()){
-            jamaah.setAmountJamaah(res.getInt("jml"));
+            jamaah=res.getInt("jml");
         }
+        return jamaah;
         } catch (Exception e) {
         }
+        return jamaah;
     }
     
-     public void getAmountJamaahMale(Jamaah jamaah){
+     public int getAmountJamaahMale(){
+         int jamaah = 0;
         try {
         String queryCek = "SELECT COUNT(*) AS jml FROM jamaah WHERE jenis_kelamin = 'laki-laki'";
         Connection koneksi = (Connection) Conn.configDB();
         Statement pstCek = koneksi.createStatement();
         ResultSet res = pstCek.executeQuery(queryCek);
         if(res.next()){
-            jamaah.setAmountJamaahMale(res.getInt("jml"));
+            jamaah = res.getInt("jml");
         }
+        return jamaah;
         } catch (Exception e) {
         }
+        return jamaah;
     }
      
-      public void getAmountJamaahFemale(Jamaah jamaah){
+      public int getAmountJamaahFemale(){
+          int jamaah = 0;
         try {
         String queryCek = "SELECT COUNT(*) AS jml FROM jamaah WHERE jenis_kelamin = 'perempuan'";
         Connection koneksi = (Connection) Conn.configDB();
         Statement pstCek = koneksi.createStatement();
         ResultSet res = pstCek.executeQuery(queryCek);
         if(res.next()){
-            jamaah.setAmountJamaahFemale(res.getInt("jml"));
+            jamaah = res.getInt("jml");
         }
+        return jamaah;
         } catch (Exception e) {
         }
+        return jamaah;
     }
      private Jamaah mapToEntity(ResultSet result) throws SQLException {
         Jamaah jamaah = new Jamaah(

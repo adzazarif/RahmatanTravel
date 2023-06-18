@@ -14,7 +14,7 @@ import util.Conn;
  */
 public class Auth {
     public static String username ;
-    public static String level;
+    public static String level; 
     
     
   public boolean login(String username, String pass){

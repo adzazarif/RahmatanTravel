@@ -33,6 +33,13 @@ public class DateUtil {
         return formattedDate;
     }
     
+     public String timeNowImage(){
+          LocalDateTime myDateObj = LocalDateTime.now();   
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HHmmss");  
+        String formattedDate = myDateObj.format(myFormatObj);  
+        return formattedDate;
+    }
+    
     public String typeDateTime(){
         LocalDateTime myDateObj = LocalDateTime.now();  
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
@@ -43,6 +50,11 @@ public class DateUtil {
      public String dateMonthAgo(){
         LocalDate thirtyDaysAgo = LocalDate.parse(dateNow()).minusDays(30);
         return String.valueOf(thirtyDaysAgo);
+    }
+     
+     public String dateMInusDay(String keberangkatan,int lama){
+        LocalDate getMinus = LocalDate.parse(keberangkatan).minusDays(lama);
+        return String.valueOf(getMinus);
     }
      
      public String dateFormatFull(){

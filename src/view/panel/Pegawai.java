@@ -20,9 +20,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import repository.PresensiRepository;
 import repository.UserRepository;
+import view.dialog.DialogDetailPegawai;
 import view.dialog.DialogEditPaket;
 import view.dialog.DialogEditPegawai;
 import view.dialog.DialogTambahPegawai;
+import view.swing.Notification;
 import view.swing.PanelTabelAction;
 import view.swing.TableActionEvent;
 /**
@@ -81,15 +83,24 @@ public class Pegawai extends javax.swing.JPanel {
     }
 
     }
-
+ maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
     public void loadTableAkun(){
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
+                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
                 int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row, "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                // Tindakan yang diambil jika pengguna memilih "Yes"
-                // Misalnya, menghapus data dari tabel atau melakukan tindakan lainnya
+                 boolean delete = userRepo.delete(idJ);
+        if(delete){
+             
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di hapus");
+        panel.showNotification();
+            loadTableAkun();
+        }else {
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di hapus");
+        panel.showNotification();
+        }
             } else {
                 // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
                 // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
@@ -98,8 +109,7 @@ public class Pegawai extends javax.swing.JPanel {
         };
         ImageRenderr render = new ImageRenderr();
         apacobak render1 = new apacobak(event); 
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+            DefaultTableModel model = new DefaultTableModel();   
             model.addColumn("id");      
             model.addColumn("Nama");
             model.addColumn("Username");
@@ -110,7 +120,6 @@ public class Pegawai extends javax.swing.JPanel {
            try {
              for(User res:userRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getId(),
                     res.getNama(),
                     res.getUsername(),
@@ -118,21 +127,21 @@ public class Pegawai extends javax.swing.JPanel {
                 });
            }
              table.setModel(model);
-               table.getColumnModel().getColumn(5).setCellRenderer(render);
-        table.getColumnModel().getColumn(5).setCellEditor(render1);
+               table.getColumnModel().getColumn(4).setCellRenderer(render);
+        table.getColumnModel().getColumn(4).setCellEditor(render1);
          } catch (Exception e) {
              e.printStackTrace();
          }
     }
-    
+   
     public void loadTablePresensi(){
             TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
+                
                 int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row, "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                // Tindakan yang diambil jika pengguna memilih "Yes"
-                // Misalnya, menghapus data dari tabel atau melakukan tindakan lainnya
+                
             } else {
                 // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
                 // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
@@ -183,11 +192,13 @@ public class Pegawai extends javax.swing.JPanel {
         lblAkun1 = new javax.swing.JLabel();
         lblPresensi1 = new javax.swing.JLabel();
         lblPilihan = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        table = new view.pallet.Table();
-        btnHapus = new javax.swing.JLabel();
+        btnDetail = new javax.swing.JLabel();
         btnEdit = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
+        panelShadow1 = new view.swing.PanelShadow();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new view.pallet.Table();
+        scrollBarCustom1 = new view.swing.ScrollBarCustom();
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
 
@@ -232,8 +243,32 @@ public class Pegawai extends javax.swing.JPanel {
 
         lblPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu akun.png"))); // NOI18N
 
+        btnDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttondetaill.png"))); // NOI18N
+        btnDetail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDetailMouseClicked(evt);
+            }
+        });
+
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttoneditt.png"))); // NOI18N
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditMouseClicked(evt);
+            }
+        });
+
+        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttontambah.png"))); // NOI18N
+        btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTambahMouseClicked(evt);
+            }
+        });
+
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
+
         jScrollPane2.setBackground(new Color(0,0,0,0));
         jScrollPane2.setBorder(null);
+        jScrollPane2.setVerticalScrollBar(scrollBarCustom1);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,54 +288,55 @@ public class Pegawai extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(table);
 
-        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button hapustab.png"))); // NOI18N
-        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHapusMouseClicked(evt);
-            }
-        });
+        scrollBarCustom1.setForeground(new java.awt.Color(255, 90, 0));
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttoneditt.png"))); // NOI18N
-        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditMouseClicked(evt);
-            }
-        });
-
-        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttontambah.png"))); // NOI18N
-        btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTambahMouseClicked(evt);
-            }
-        });
+        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
+        panelShadow1.setLayout(panelShadow1Layout);
+        panelShadow1Layout.setHorizontalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        panelShadow1Layout.setVerticalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(150, 150, 150)
-                                .addComponent(lblPresensi1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblAkun1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
-                        .addComponent(btnHapus)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
+                        .addGap(150, 150, 150)
+                        .addComponent(lblPresensi1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAkun1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+                .addComponent(btnDetail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,17 +348,16 @@ public class Pegawai extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPresensi1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAkun1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))
+                            .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -333,15 +368,11 @@ public class Pegawai extends javax.swing.JPanel {
       loadTableAkun();
     }//GEN-LAST:event_btnTambahMouseClicked
 
-    private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
-        boolean delete = userRepo.delete(id);
-        if(delete){
-            System.out.println("berhasil");
-            loadTableAkun();
-        }else {
-            System.out.println("gagal");
-        }
-    }//GEN-LAST:event_btnHapusMouseClicked
+    private void btnDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailMouseClicked
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogDetailPegawai detailPegawai = new DialogDetailPegawai(main);
+      detailPegawai.showPopUp();
+    }//GEN-LAST:event_btnDetailMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
@@ -370,8 +401,8 @@ public class Pegawai extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnDetail;
     private javax.swing.JLabel btnEdit;
-    private javax.swing.JLabel btnHapus;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -381,6 +412,8 @@ public class Pegawai extends javax.swing.JPanel {
     private javax.swing.JLabel lblAkun1;
     private javax.swing.JLabel lblPilihan;
     private javax.swing.JLabel lblPresensi1;
+    private view.swing.PanelShadow panelShadow1;
+    private view.swing.ScrollBarCustom scrollBarCustom1;
     private view.pallet.Table table;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import view.dialog.DialogDetailKeberangkatan;
+import view.dialog.DialogDetailPaket;
 import view.event.EventMenuSelected;
+import view.main.maindasboard;
 
 public class ItemKeberangkatan extends javax.swing.JPanel {
     private final List<EventMenuSelected> events = new ArrayList<>();
@@ -103,6 +106,9 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/button detail.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel1MouseEntered(evt);
             }
@@ -135,6 +141,12 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/button detail.png")));
     }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogDetailKeberangkatan tambahCicilan = new DialogDetailKeberangkatan(main);
+        tambahCicilan.showPopUp();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

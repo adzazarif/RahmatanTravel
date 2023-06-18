@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -33,6 +34,8 @@ import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
 import util.Conn;
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -77,18 +80,34 @@ public class DialogTambahPemesanan extends Dialog {
         lblDate.setText(date.dateNow());
     }
     private void fillComboBoxJamaah(){
-        for(Jamaah jm:jamaahRepo.get()){
+        try {
+              for(Jamaah jm:jamaahRepo.get()){
            cmbJamaah.addItem(jm.getNama()+","+jm.getNik());
+        }
+        } catch (Exception e) {
+        }
+    }
+    private void fillComboBoxPembayaran(){
+            if(!menu.equals("")){
+            if(menu.equals("umrah")){
+                cmbPembayaran.addItem("cash");
+                cmbPembayaran.addItem("talangan");
+            }else{
+                cmbPembayaran.addItem("cash");
+            }
         }
     }
     private void fillComboBoxKeberangkatan(){
-            if(!menu.equals("")){
+        try {
+                   if(!menu.equals("")){
             keberangkatanList = keberngkatanRepo.getByMenu(menu);
         }
         int a = keberangkatanList.size();
         for (int i = 0; i < a; i++) {
             Keberangkatan keberankatanEntity = keberangkatanList.get(i);
             cmbKeberangkatan.addItem(keberankatanEntity.getId()+", "+keberankatanEntity.getPaket().getNama());
+        }
+        } catch (Exception e) {
         }
     }
     /**
@@ -133,7 +152,6 @@ public class DialogTambahPemesanan extends Dialog {
         });
         getContentPane().add(cmbJamaah, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 220, 500, -1));
 
-        cmbPembayaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilih--", "Cash", "Talangan" }));
         cmbPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPembayaranActionPerformed(evt);
@@ -241,7 +259,7 @@ public class DialogTambahPemesanan extends Dialog {
 
         cmbKeberangkatan.removeAllItems();
         keberangkatanList.clear();
-
+        fillComboBoxPembayaran();
         fillComboBoxKeberangkatan();
     }//GEN-LAST:event_cmbMenuActionPerformed
 
@@ -286,9 +304,16 @@ public class DialogTambahPemesanan extends Dialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         try {
+            
         String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
         int bayar = Integer.valueOf(txtBayar.getText());
+        int minimDp = Integer.parseInt(lblMinimDp.getText());
+        if(bayar <= minimDp){
+            System.out.println("bayar kurang");
+            return;
+        }
             int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
         String status = "";
         if(jenisPembayaran.equals("Cash")){
@@ -311,7 +336,8 @@ public class DialogTambahPemesanan extends Dialog {
         
         boolean tambah = pemesananRepo.add(pemesanan);
         if(tambah){
-            System.out.println("Berhasil");
+              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
             int idLast = pemesananRepo.getIdLast();
             String newpath = "src/UploadBarcode";
             File directory = new File(newpath);
@@ -324,14 +350,16 @@ public class DialogTambahPemesanan extends Dialog {
             barcode.setI(11.0f);
             String name = "pms"+idLast;
             barcode.renderBarcode("D:/RahmatanTravel/src/UploadBarcode/"+name+".png");
-            System.out.println("berhasil cetak barcode");
+            
             generate();
             closeMessage();
         }else{
-            System.out.println("Gagal");
+              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
         }
         } catch (Exception e) {
-            System.out.println(e);
+                         Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
         }
         
     }//GEN-LAST:event_btnTambahMouseClicked

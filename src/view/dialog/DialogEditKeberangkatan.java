@@ -6,15 +6,20 @@ package view.dialog;
 
 import entity.Keberangkatan;
 import entity.Paket;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.KeberangkatanRepository;
 import repository.PaketRepository;
 import util.DateUtil;
+import view.main.maindasboard;
 import view.panel.KeberangkatanForm;
+import view.swing.Notification;
 
 /**
  *
@@ -27,6 +32,7 @@ public class DialogEditKeberangkatan extends Dialog {
     private String menu = "";
     private int id = KeberangkatanForm.id;
     DateUtil dateUtil = new DateUtil();
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**
      * Creates new form DialogEditKeberangkatan
      */
@@ -232,13 +238,19 @@ public class DialogEditKeberangkatan extends Dialog {
                 keberangkatan.setId(id);
                 boolean tambah = keberangkatanRepo.update(keberangkatan);
                 if(tambah){
-                    System.out.println("berhasil");
+                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
+        panel.showNotification();
                     closeMessage();
                 }else{
-                    System.out.println("gagal");
+                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal di edit");
+        panel.showNotification();
                 }
             }else{
-                System.out.println("Tanggal tidak sudah terlewat");
+                 maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Tanggal sudah terlewat");
+        panel.showNotification();
             }
             
         } catch (Exception e) {

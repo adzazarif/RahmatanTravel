@@ -103,10 +103,10 @@ public class Dasboard extends javax.swing.JPanel {
         jPanel3.setBackground(new Color(0,0,0,0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblPengeluaran.setFont(new java.awt.Font("Quicksand Bold", 0, 33)); // NOI18N
+        lblPengeluaran.setFont(new java.awt.Font("Quicksand Bold", 1, 33)); // NOI18N
         jPanel3.add(lblPengeluaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 250, 60));
 
-        lblPemasukan.setFont(new java.awt.Font("Quicksand Bold", 0, 33)); // NOI18N
+        lblPemasukan.setFont(new java.awt.Font("Quicksand Bold", 1, 33)); // NOI18N
         jPanel3.add(lblPemasukan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 250, 60));
 
         lblToday.setFont(new java.awt.Font("Quicksand Bold", 0, 15)); // NOI18N

@@ -6,16 +6,32 @@ package view.dialog;
 
 import entity.DetailPemesanan;
 import entity.Pemesanan;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import repository.DetailPemesananRepository;
 import repository.PemesananRepository;
+import util.Conn;
 import view.panel.PemesananForm;
 
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
@@ -35,6 +51,24 @@ public class DialogTambahCicilan extends Dialog {
         setValue();
         loadTable();
     }
+    
+     public void generate() {
+        String query = "SELECT *, jamaah.nama AS namaJamaah, detail_pemesanan.tanggal AS tanggalCicilan FROM pemesanan JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE pemesanan.id = "+Integer.parseInt(lblId.getText());
+        String path = "D:/RahmatanTravel/src/report/NotaCicilan.jrxml";
+
+        try {
+              Connection koneksi = (Connection) Conn.configDB();
+            Statement pstCek = koneksi.createStatement();
+            ResultSet res = pstCek.executeQuery(query);
+            JasperDesign design = JRXmlLoader.load(path);
+            JasperReport jr = JasperCompileManager.compileReport(design);
+            JRResultSetDataSource rsDataSource = new JRResultSetDataSource(res);
+            JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap<>(), rsDataSource);
+
+            JasperViewer.viewReport(jp);
+        } catch(Exception e) { e.printStackTrace(); }
+    }
+     
 private void loadTable(){
        DefaultTableModel model = new DefaultTableModel();
             model.addColumn("No");      
@@ -44,15 +78,15 @@ private void loadTable(){
 
             int no = 1;
            
-           for(DetailPemesanan res:detailPemesananRepo.getById(id)){
+           for(DetailPemesanan res:detailPemesananRepo.getByPemesananId(id)){
                 model.addRow(new Object[]{
                     no++,
                     res.getTanggal().toString(),
                     res.getCicilan()
                     
            });
-            table.setModel(model);
     }
+             table.setModel(model);
 }
     private void setValue(){
         for(Pemesanan pm:pemesananRepo.getById(id)){
@@ -187,6 +221,7 @@ private void loadTable(){
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+                    maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         try {
             
             String dates = date.dateNow();
@@ -205,19 +240,19 @@ private void loadTable(){
         boolean tambah = detailPemesananRepo.add(detailPemesanan);
       
         if(tambah){
-            System.out.println("Berhasil");
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
+        panel.showNotification();
+            generate();
             loadTable();
             setValue();
               if(kurangBayar <= 0){
             boolean editStatus = pemesananRepo.updateStatus("lunas",id);
-            if(editStatus){
-                System.out.println("berhasil update status");
-            }else{
-                System.out.println("gagal update status");
-            }
+
         }
         }else{
-            System.out.println("gagal");
+ 
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
         }
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ import repository.JamaahRepository;
 import view.main.maindasboard;
 
 import java.awt.Color;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
@@ -23,7 +24,6 @@ public class dialog_tambahJamaah extends Dialog {
     public dialog_tambahJamaah(JFrame fram) {
         super(fram);
         initComponents();
-        jPanel1.setVisible(false);
     }
 
     /**
@@ -104,6 +104,7 @@ public class dialog_tambahJamaah extends Dialog {
     }//GEN-LAST:event_btnBatal1MouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+              maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         String nama = txtNama.getText();
         String jenisKelamin = String.valueOf(cmbJenisKelamin.getSelectedItem());
         String alamat = txtAlamat.getText();
@@ -112,9 +113,11 @@ public class dialog_tambahJamaah extends Dialog {
         JamaahRepository jamaahRepo = new JamaahRepository();
         
         if(jamaahRepo.add(jamaah)){
-           jPanel1.setVisible(true);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
         }else{
-            System.out.println("gagal");
+           Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di tambahkan");
+        panel.showNotification();
         }
     }//GEN-LAST:event_btnTambahMouseClicked
 

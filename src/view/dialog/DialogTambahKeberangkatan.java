@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.KeberangkatanRepository;
 import repository.PaketRepository;
 import service.ComboItem;
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -208,7 +211,7 @@ cmbPaket.removeAllItems();
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
-        
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         try {
             int id = Integer.valueOf(lblId.getText());
         String tgl = txtDate.getText();
@@ -221,14 +224,17 @@ cmbPaket.removeAllItems();
             Keberangkatan keberangkatan = new Keberangkatan(paket, tanggal,status);
             boolean tambah = keberangkatanRepo.add(keberangkatan);
             if(tambah){
-                System.out.println("berhasil");
+                
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
                 closeMessage();
             }else{
-                System.out.println("gagal");
-            }
-                
-            }else{
-                System.out.println("tanggal sudah kelewat");
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
+            }    
+            }else{   
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Tanggal sudah terlewat");
+        panel.showNotification();
             }
 
         } catch (Exception e) {

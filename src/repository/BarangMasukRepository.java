@@ -40,6 +40,24 @@ private String tableName = BarangMasuk.tableName;
 
         return barang;
     }
+    
+      public List<BarangMasuk> getSearch(String search) {
+              String sql = "SELECT * FROM " + tableName + " WHERE id = '"+search+"'";
+        List<BarangMasuk> barang = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()) {
+                barang.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return barang;
+    }
 
     @Override
     public BarangMasuk get(Integer id) {

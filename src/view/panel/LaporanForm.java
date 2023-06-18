@@ -15,18 +15,25 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import repository.LaporanRepository;
 import repository.PemesananRepository;
 import repository.PengeluaranOperasionalRepository;
 import repository.PengeluaranRepository;
 import util.Conn;
+import view.dialog.DialogDetailPemesanan;
+import view.dialog.DialogRekapLaporan;
+import view.main.maindasboard;
 
 /**
  *
  * @author adzaz
  */
 public class LaporanForm extends javax.swing.JPanel {
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private String pilihan;
     PengeluaranOperasionalRepository pengeluaranOperasionalRepo = new PengeluaranOperasionalRepository();
     PengeluaranRepository pengeluaranRepo = new PengeluaranRepository();
@@ -111,7 +118,7 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getId(),
                     res.getId(),
                     res.getNamaPengeluaran(),
-                    res.getJumlah(),
+                    nf.format(res.getJumlah()),
                     res.getTanggal(),
                     res.getDeskripsi(),
                 });
@@ -140,7 +147,7 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getKeberangkatan().getPaket().getNama(),
                     res.getKeberangkatan().getTanggal(),
                     res.getTanggal(),
-                    res.getTotalPengeluaran()
+                    nf.format(res.getTotalPengeluaran())
                    
                 });
            }
@@ -173,9 +180,9 @@ public class LaporanForm extends javax.swing.JPanel {
               no++,
                     res.getString("nama"), 
                     res.getString("tanggal"),
-                    res.getString("pemasukann"), 
-                    res.getString("pengeluarann"),
-                    res.getString("laba_kotor")
+                    nf.format(res.getInt("pemasukann")), 
+                    nf.format(res.getInt("pengeluarann")),
+                    nf.format(res.getInt("laba_kotor"))
                     
                 });
             }
@@ -206,9 +213,9 @@ public class LaporanForm extends javax.swing.JPanel {
                 model.addRow(new Object[]{
               no++,
                     res.getString("month"),
-                    res.getString("pemasukann"), 
-                    res.getString("pengeluarann"),
-                    res.getString("laba_bersih")
+                    nf.format(res.getInt("pemasukann")), 
+                    nf.format(res.getInt("pengeluarann")),
+                    nf.format(res.getInt("laba_bersih"))
                     
                 });
             }
@@ -224,7 +231,6 @@ public class LaporanForm extends javax.swing.JPanel {
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Paket");
-            model.addColumn("Menu");
             model.addColumn("Tanggal");
             model.addColumn("Jenis Pembayaran");
             model.addColumn("status");
@@ -239,11 +245,10 @@ public class LaporanForm extends javax.swing.JPanel {
                     res.getId(),
                     res.getJamaah().getNama(),
                     res.getKeberangkatan().getPaket().getNama(),
-                    res.getKeberangkatan().getPaket().getMenu(),
                     res.getTanggal(),
                     res.getJenisPembayaran(),
                     res.getStatus(),
-                    res.getJumlahBayar(),
+                    nf.format(res.getJumlahBayar()),
                 });
            }
              table.setModel(model);
@@ -260,7 +265,9 @@ public class LaporanForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         panelTable = new javax.swing.JPanel();
+        panelShadow1 = new view.swing.PanelShadow();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new view.pallet.Table();
         scrollBarCustom1 = new view.swing.ScrollBarCustom();
@@ -287,8 +294,17 @@ public class LaporanForm extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 249, 243));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttondetaill.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
         panelTable.setBackground(new Color(0,0,0,0));
         panelTable.setPreferredSize(new java.awt.Dimension(1200, 500));
+
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
 
         jScrollPane1.setBackground(new Color(0,0,0,0));
         jScrollPane1.setBorder(null);
@@ -307,27 +323,44 @@ public class LaporanForm extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
-        scrollBarCustom1.setBackground(new java.awt.Color(255, 90, 0));
+        scrollBarCustom1.setForeground(new java.awt.Color(255, 90, 0));
+
+        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
+        panelShadow1.setLayout(panelShadow1Layout);
+        panelShadow1Layout.setHorizontalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        panelShadow1Layout.setVerticalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelTableLayout = new javax.swing.GroupLayout(panelTable);
         panelTable.setLayout(panelTableLayout);
         panelTableLayout.setHorizontalGroup(
             panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTableLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelTableLayout.setVerticalGroup(
             panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTableLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(panelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
-                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         panelGrafik.setBackground(new Color(0,0,0,0));
@@ -478,6 +511,11 @@ public class LaporanForm extends javax.swing.JPanel {
                             .addComponent(panelGrafik, javax.swing.GroupLayout.DEFAULT_SIZE, 1340, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 1050, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(300, 300, 300)
                                         .addComponent(btnPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -488,30 +526,34 @@ public class LaporanForm extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(450, 450, 450)
                                         .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(iconPilihan)
-                                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 750, Short.MAX_VALUE))))
+                                    .addComponent(iconPilihan))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(60, 60, 60))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1354, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iconPilihan))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iconPilihan)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -595,6 +637,12 @@ public class LaporanForm extends javax.swing.JPanel {
         panelTable.setVisible(true);
     }//GEN-LAST:event_btnProduksiMouseClicked
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogRekapLaporan tambahCicilan = new DialogRekapLaporan(main);
+        tambahCicilan.showPopUp();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnGrafik;
@@ -609,6 +657,7 @@ public class LaporanForm extends javax.swing.JPanel {
     private raven.chart.CurveLineChart chartLine;
     private javax.swing.JLabel iconPilihan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -617,6 +666,7 @@ public class LaporanForm extends javax.swing.JPanel {
     private javax.swing.JPanel panelGrafik;
     private javax.swing.JPanel panelKeuntungan;
     private javax.swing.JPanel panelPengeluaran;
+    private view.swing.PanelShadow panelShadow1;
     private raven.panel.PanelShadow panelShadow3;
     private javax.swing.JPanel panelTable;
     private view.swing.ScrollBarCustom scrollBarCustom1;

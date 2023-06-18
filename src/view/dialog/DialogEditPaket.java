@@ -6,8 +6,11 @@ package view.dialog;
 
 import entity.Paket;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.PaketRepository;
+import view.main.maindasboard;
 import view.panel.PaketForm;
+import view.swing.Notification;
 
 /**
  *
@@ -70,6 +73,7 @@ public class DialogEditPaket extends Dialog {
         MenuGroup = new javax.swing.ButtonGroup();
         MenuStart = new javax.swing.ButtonGroup();
         lblId = new javax.swing.JLabel();
+        txtLama = new javax.swing.JTextField();
         txtMinimDp = new javax.swing.JTextField();
         txtDiskon = new javax.swing.JTextField();
         txtHarga = new javax.swing.JTextField();
@@ -91,19 +95,28 @@ public class DialogEditPaket extends Dialog {
         lblId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 260, 40));
 
+        txtLama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtLama.setBorder(null);
+        getContentPane().add(txtLama, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 423, 280, 40));
+
+        txtMinimDp.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtMinimDp.setBorder(null);
         getContentPane().add(txtMinimDp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 345, 240, 40));
 
+        txtDiskon.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtDiskon.setBorder(null);
         getContentPane().add(txtDiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 240, 40));
 
+        txtHarga.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtHarga.setBorder(null);
         getContentPane().add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 240, 40));
 
+        txtNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNama.setBorder(null);
         getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 300, 40));
 
         txtDesc.setColumns(20);
+        txtDesc.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtDesc.setRows(5);
         txtDesc.setBorder(null);
         jScrollPane1.setViewportView(txtDesc);
@@ -153,6 +166,7 @@ public class DialogEditPaket extends Dialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         int id = Integer.valueOf(lblId.getText());
         String nama = txtNama.getText();
         String start = "";
@@ -175,19 +189,20 @@ public class DialogEditPaket extends Dialog {
         }else if(rdJakarta.isSelected()){
             start = "Jakarta";
         }
-        
-        Paket paket = new Paket(id, menu, start, nama, desc, minimDp, harga, diskon);
+        int lama = Integer.valueOf(txtLama.getText());
+        Paket paket = new Paket(menu, start, nama, desc, minimDp, harga, diskon, lama);
+        paket.setId(id);
         boolean edit = paketRepo.update(paket);
         
         if(edit){
-            System.out.println("Berhasil");
+             
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
+        panel.showNotification();
             closeMessage();
-     
-    
-            
             
         }else{
-            System.out.println("gagal");
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di edit");
+        panel.showNotification();
         }
         
     }//GEN-LAST:event_btnEditMouseClicked
@@ -210,6 +225,7 @@ public class DialogEditPaket extends Dialog {
     private javax.swing.JTextArea txtDesc;
     private javax.swing.JTextField txtDiskon;
     private javax.swing.JTextField txtHarga;
+    private javax.swing.JTextField txtLama;
     private javax.swing.JTextField txtMinimDp;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
