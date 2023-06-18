@@ -57,6 +57,25 @@ public class BarangRepository implements Repository<Barang>{
 
         return barang;
     }
+     
+      public List<Barang> getSearch(String search) {
+            String sql = "SELECT * FROM " + tableName + " WHERE id = '"+search+"' || nama LIKE '%"+search+"%'";
+        List<Barang> barang = new ArrayList<>();
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                barang.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+            System.out.println("salah");
+        e.printStackTrace();
+        }
+
+        return barang;
+    }
 
     @Override
     public Barang get(Integer id) {

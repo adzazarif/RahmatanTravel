@@ -51,8 +51,8 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                    String namapaket11 = p.getMenu();
                    String lamapaket = String.valueOf(p.getNama());
                    String hargaa = String.valueOf("Rp. "+p.getHarga());
-                   System.out.println(namapaket11);
-                   System.out.println(lamapaket);
+//                   System.out.println(namapaket11);
+//                   System.out.println(lamapaket);
                    
                 ItemPaket pnn = new ItemPaket();
                 pnn.namapaket123.setText(namapaket11);
@@ -94,7 +94,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     @Override
                     public void selected(int index) {
                         clearMenu(index);
-                        PaketForm.id = Integer.valueOf(id_barang);   
+                        PaketForm.id = p.getId();   
                     }
                 });
                 panellist.add(pnn); 

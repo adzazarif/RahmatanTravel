@@ -12,10 +12,19 @@ import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangMasukRepository;
 import repository.BarangRepository;
 import repository.DetailPengeluaranRepository;
+import service.NotificationStokBarang;
+import util.Conn;
 import view.dialog.DIalogTambahStok;
 import view.dialog.DialogEditBarang;
 import view.dialog.DialogTambahBarang;
@@ -42,8 +51,23 @@ public class BarangForm extends javax.swing.JPanel {
         }else if(pilihan.equals("keluar")){
             loadTableKeluar();
         }
+//        notification();
+             ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        
+        service.schedule(BarangForm::notification, 1, TimeUnit.SECONDS);
     }
     
+    public static void notification(){
+        try {
+             boolean status = NotificationStokBarang.status;
+        if(status){
+            JOptionPane.showMessageDialog(null, "barang menipis");
+            NotificationStokBarang.status = false;
+        }
+        } catch (Exception e) {
+        }
+    }
+        
      public void loadTableStok(){
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Id");      
@@ -54,6 +78,29 @@ public class BarangForm extends javax.swing.JPanel {
         
            try {
              for(Barang res:barangRepo.get()){
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getNama(),
+                    res.getStok(),
+                    res.getHarga(),
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
+     
+      public void loadTableStok(String search){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Stok");
+            model.addColumn("Harga");
+         
+        
+           try {
+             for(Barang res:barangRepo.getSearch(search)){
                 model.addRow(new Object[]{
                     res.getId(),
                     res.getNama(),
@@ -78,6 +125,32 @@ public class BarangForm extends javax.swing.JPanel {
             
            try {
              for(BarangMasuk res:barangMasukRepo.get()){
+                 int jumlah = res.getJumlah() * res.getBarang().getHarga();
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getBarang().getNama(),
+                    res.getTanggal().toString(),
+                    res.getBarang().getHarga(),
+                    res.getJumlah(),
+                    jumlah
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
+        public void loadTableMasuk(String Search){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Tanggal");
+            model.addColumn("Harga");
+            model.addColumn("Jumlah");
+            model.addColumn("Total Harga");
+            
+           try {
+             for(BarangMasuk res:barangMasukRepo.getSearch(Search)){
                  int jumlah = res.getJumlah() * res.getBarang().getHarga();
                 model.addRow(new Object[]{
                     res.getId(),
@@ -120,6 +193,33 @@ public class BarangForm extends javax.swing.JPanel {
              e.printStackTrace();
          }
     }
+          
+              public void loadTableKeluar(String search){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Tanggal");
+            model.addColumn("Harga");
+            model.addColumn("Jumlah");
+            model.addColumn("Total Harga");
+            
+           try {
+             for(DetailPengeluaran res:detailPengeluaranRepo.getSearch(search)){
+                 int jumlah = res.getBarang().getHarga() * res.getBanyak();
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getBarang().getNama(),
+                    res.getPengeluaran().getTanggal().toString(),
+                    res.getBarang().getHarga(),
+                    res.getBanyak(),
+                    jumlah
+                });
+           }
+             table.setModel(model);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,6 +245,9 @@ public class BarangForm extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new view.pallet.Table();
         scrollBarCustom1 = new view.swing.ScrollBarCustom();
+        jPanel3 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -268,6 +371,21 @@ public class BarangForm extends javax.swing.JPanel {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new Color(0,0,0,0));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtSearch.setBorder(null);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 160, 30));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menusearch1.png"))); // NOI18N
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 231, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,7 +396,9 @@ public class BarangForm extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
@@ -303,17 +423,19 @@ public class BarangForm extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnEdit))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnEdit))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)))
                 .addGap(28, 28, 28)
                 .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -366,6 +488,16 @@ loadTableKeluar();
         loadTableStok();
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        if(pilihan.equals("stok")){
+            loadTableStok(txtSearch.getText());
+        }else if(pilihan.equals("masuk")){
+            loadTableMasuk(txtSearch.getText());
+        }else if(pilihan.equals("keluar")){
+            loadTableKeluar(txtSearch.getText());
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bntKeluar;
     private javax.swing.JLabel bntMasuk;
@@ -374,14 +506,17 @@ loadTableKeluar();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPilihan;
     private view.swing.PanelShadow panelShadow1;
     private view.swing.ScrollBarCustom scrollBarCustom1;
     private view.pallet.Table table;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

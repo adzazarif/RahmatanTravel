@@ -6,8 +6,11 @@ package view.dialog;
 
 import entity.Jamaah;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.JamaahRepository;
+import view.main.maindasboard;
 import view.panel.JamaahForm;
+import view.swing.Notification;
 
 /**
  *
@@ -102,6 +105,7 @@ public class dialog_editjamaah extends Dialog {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         int nik = Integer.valueOf(txtNIK.getText());
         String nama = txtNama.getText();
         String alamat = txtAlamat.getText();
@@ -111,9 +115,12 @@ public class dialog_editjamaah extends Dialog {
         jamaah.setNik(nik);
         JamaahRepository jamaahRepo = new JamaahRepository();
         if(jamaahRepo.update(jamaah)){
-            System.out.println("berhasil");
+             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
+        panel.showNotification();
+            closeMessage();
         }else{
-            System.out.println("gagal");
+             Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal diedit");
+        panel.showNotification();
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 

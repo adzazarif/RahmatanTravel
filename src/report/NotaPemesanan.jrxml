@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="228" pageHeight="540" columnWidth="228" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3f2c3eea-a555-4b62-b579-94055e1ab250">
 	<property name="ireport.zoom" value="1.652892561983477"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="59"/>
+	<property name="ireport.y" value="161"/>
 	<queryString>
 		<![CDATA[SELECT *, jamaah.nama AS namaJamaah, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik]]>
 	</queryString>

@@ -8,7 +8,10 @@ import entity.PengeluaranOperasional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.PengeluaranOperasionalRepository;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -95,6 +98,8 @@ PengeluaranOperasionalRepository pengeluaranOpRepo = new PengeluaranOperasionalR
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         try {
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+
             String nama = txtNama.getText();
             String desc = txtDesc.getText();
             int jumlah = Integer.parseInt(txtTotal.getText());
@@ -103,10 +108,12 @@ PengeluaranOperasionalRepository pengeluaranOpRepo = new PengeluaranOperasionalR
             PengeluaranOperasional pengeluaranRepo = new PengeluaranOperasional(nama, jumlah, tanggal, desc);
             boolean tambah = pengeluaranOpRepo.add(pengeluaranRepo);
             if(tambah){
-                System.out.println("Berhasil di tambah");
+                Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Berhasil di tambahkan");
+        panel.showNotification();
                 closeMessage();
             }else{
-                System.out.println("gagal di tambah");
+                Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "gagal ditambahkan");
+        panel.showNotification();
             }
         } catch (Exception e) {
             e.printStackTrace();

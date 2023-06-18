@@ -29,24 +29,31 @@
                           <Component id="panelGrafik" pref="1340" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="300" pref="300" max="-2" attributes="0"/>
-                                      <Component id="btnPengeluaran" min="-2" pref="150" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
-                                      <Component id="btnPemasukan" min="-2" pref="150" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="btnGrafik" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                                      <Component id="btnKeuntungan" min="-2" pref="140" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="iconPilihan" min="-2" max="-2" attributes="0"/>
                                   <Component id="panelKeuntungan" min="-2" pref="290" max="-2" attributes="0"/>
                                   <Component id="panelPengeluaran" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="750" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1050" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="300" pref="300" max="-2" attributes="0"/>
+                                      <Component id="btnPengeluaran" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
+                                      <Component id="btnPemasukan" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="btnGrafik" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
+                                      <Component id="btnKeuntungan" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="iconPilihan" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -54,10 +61,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelTable" pref="1354" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -66,15 +70,24 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnPengeluaran" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnPemasukan" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnGrafik" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnKeuntungan" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="iconPilihan" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnPengeluaran" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnPemasukan" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnGrafik" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnKeuntungan" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="iconPilihan" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -96,6 +109,16 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/view/imgbutton/buttondetaill.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
+      </Events>
+    </Component>
     <Container class="javax.swing.JPanel" name="panelTable">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -121,7 +144,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Component id="panelShadow1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,7 +177,7 @@
                           <Component id="scrollBarCustom1" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" pref="427" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

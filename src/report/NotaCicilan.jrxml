@@ -2,10 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="540" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6ad779d3-eb16-41c7-86cf-1da7b9930e86">
 	<property name="ireport.zoom" value="3.138428376721005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="238"/>
+	<property name="ireport.y" value="716"/>
 	<parameter name="parameter1" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT *, jamaah.nama AS namaJamaah, detail_pemesanan.tanggal AS tanggalCicilan, master_paket.nama AS namaPaket FROM pemesanan JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE pemesanan.id = $P{parameter1}]]>
+		<![CDATA[SELECT *, jamaah.nama AS namaJamaah, detail_pemesanan.tanggal AS tanggalCicilan,detail_pemesanan.cicilan AS ccl, master_paket.nama AS namaPaket FROM pemesanan JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE pemesanan.id = $P{parameter1}]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -78,6 +78,7 @@
 	</field>
 	<field name="namaJamaah" class="java.lang.String"/>
 	<field name="tanggalCicilan" class="java.sql.Date"/>
+	<field name="ccl" class="java.lang.Integer"/>
 	<field name="namaPaket" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -319,14 +320,18 @@
 	</columnHeader>
 	<detail>
 		<band height="50">
-			<textField>
-				<reportElement x="18" y="0" width="100" height="20" uuid="a69788d8-87c0-48a4-b8c8-4050cfb58bfa"/>
-				<textFieldExpression><![CDATA[$F{cicilan}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="118" y="0" width="100" height="20" uuid="78289250-8add-4196-ad9d-3c655312bc42"/>
 				<text><![CDATA[cicilan]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="18" y="18" width="100" height="20" uuid="c5765da6-185b-4a70-9720-322a8b77d027"/>
+				<text><![CDATA[ccl]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="20" width="100" height="20" uuid="b752f8ad-3dba-4d90-b1c7-d97a98c806d2"/>
+				<textFieldExpression><![CDATA[$F{ccl}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
@@ -376,10 +381,6 @@
 				</textElement>
 				<text><![CDATA[Terima Kasih]]></text>
 			</staticText>
-			<image>
-				<reportElement x="4" y="19" width="222" height="91" uuid="d3ef03c4-c6bf-4044-ac0a-9c77bae925e5"/>
-				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\UploadBarcode\\pms"+$F{id}+".png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="4" y="1" width="226" height="13" uuid="9e33ee9b-2507-46e1-b10a-49ded2bf260b"/>
 				<textElement textAlignment="Center"/>

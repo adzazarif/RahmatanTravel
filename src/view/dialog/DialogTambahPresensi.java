@@ -10,9 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.PresensiRepository;
 import repository.UserRepository;
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -73,6 +76,7 @@ public class DialogTambahPresensi extends Dialog {
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         String idCard = txtID.getText();
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         try {
             String timeNow = dateUtil.timeNow();
             String dateTime = dateUtil.typeDateTime();
@@ -94,7 +98,8 @@ public class DialogTambahPresensi extends Dialog {
                 idUser = u.getId();
             }
            if(idUser == 0){
-               System.out.println("Kartu tidak terdaftar");
+                             Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Kartu tidak terdaftar");
+        panel.showNotification();
            }else{
                 boolean checkData = presensiRepo.checkData(idUser,dateUtil.dateStart(),dateUtil.dateEnd());
             if(checkData){
@@ -104,10 +109,12 @@ public class DialogTambahPresensi extends Dialog {
             Presensi presensi = new Presensi(user, date, keterangan);
             boolean tambah = presensiRepo.add(presensi);
             if(tambah){
-                System.out.println("Berhasil");
+                   Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Berhasil presensi");
+        panel.showNotification();
                 closeMessage();
             }else{
-                System.out.println("Gagal");
+                   Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal presensi");
+        panel.showNotification();
             }
             }
            }

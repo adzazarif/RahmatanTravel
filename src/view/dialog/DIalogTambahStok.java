@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangMasukRepository;
 import repository.BarangRepository;
 import repository.PengeluaranRepository;
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -189,6 +192,8 @@ public class DIalogTambahStok extends Dialog {
     }//GEN-LAST:event_lblBatalMouseClicked
 
     private void lblTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTambahMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+          
         try {
             for(Barang i:listBarang){
                 Barang b = new BarangRepository().get(i.getId());
@@ -196,9 +201,12 @@ public class DIalogTambahStok extends Dialog {
                 BarangMasuk barangMasuk = new BarangMasuk(b, tanggal, i.getStok());
                 boolean tambahDetail = barangMasukRepo.add(barangMasuk);
                 if(tambahDetail){
-                    System.out.println("Allhamdulillah sukses");
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Stok berhasil di tambahkan");
+        panel.showNotification();
                 }else{
-                    System.out.println("Gagal Teros marine kapan");
+                    
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal menambahkan Stok");
+        panel.showNotification();
                 }
             }
             closeMessage();

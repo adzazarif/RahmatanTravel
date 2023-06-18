@@ -36,6 +36,7 @@ public class DialogTambahPaket extends Dialog {
 
         Menu = new javax.swing.ButtonGroup();
         Start = new javax.swing.ButtonGroup();
+        txtLama = new javax.swing.JTextField();
         txtDiskon = new javax.swing.JTextField();
         txtHarga = new javax.swing.JTextField();
         txtMinimDP = new javax.swing.JTextField();
@@ -54,15 +55,23 @@ public class DialogTambahPaket extends Dialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtDiskon.setBorder(null);
-        getContentPane().add(txtDiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 240, 40));
+        txtLama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtLama.setBorder(null);
+        getContentPane().add(txtLama, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 300, 40));
 
+        txtDiskon.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        txtDiskon.setBorder(null);
+        getContentPane().add(txtDiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 277, 240, 40));
+
+        txtHarga.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtHarga.setBorder(null);
         getContentPane().add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 240, 40));
 
+        txtMinimDP.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtMinimDP.setBorder(null);
         getContentPane().add(txtMinimDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 240, 40));
 
+        txtNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNama.setBorder(null);
         getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 290, 40));
 
@@ -71,7 +80,7 @@ public class DialogTambahPaket extends Dialog {
         txtDesk.setBorder(null);
         jScrollPane1.setViewportView(txtDesk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 690, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 290, 100));
 
         Menu.add(rdUmroh);
         rdUmroh.setText("umrah");
@@ -82,9 +91,11 @@ public class DialogTambahPaket extends Dialog {
         });
         getContentPane().add(rdUmroh, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 130, 20, 20));
 
+        Menu.add(rdHaji);
         rdHaji.setText("haji");
         getContentPane().add(rdHaji, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 20, -1));
 
+        Menu.add(rdWisataHalal);
         rdWisataHalal.setText("wisata halal");
         getContentPane().add(rdWisataHalal, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 128, 20, -1));
 
@@ -125,6 +136,7 @@ public class DialogTambahPaket extends Dialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+       maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         String nama = txtNama.getText();
         String desc = txtDesk.getText();
         int harga = Integer.valueOf(txtHarga.getText());
@@ -145,17 +157,17 @@ public class DialogTambahPaket extends Dialog {
         }else if(rdJakarta.isSelected()){
             start = "Jakarta";
         }
-        int lamaPaket = 9;
+        int lamaPaket = Integer.valueOf(txtLama.getText());
         Paket paket = new Paket(menu, start, nama, desc, minimDp, harga, diskon, lamaPaket);
         PaketRepository paketRepo = new PaketRepository();
         if(paketRepo.add(paket)){
-            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Berhasil di Paket");
+            
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
         panel.showNotification();
             closeMessage();
         }else{
-            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal di Tambah");
+           
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di Tambah");
         panel.showNotification();
         }
     }//GEN-LAST:event_btnTambahMouseClicked
@@ -176,6 +188,7 @@ public class DialogTambahPaket extends Dialog {
     private javax.swing.JTextArea txtDesk;
     private javax.swing.JTextField txtDiskon;
     private javax.swing.JTextField txtHarga;
+    private javax.swing.JTextField txtLama;
     private javax.swing.JTextField txtMinimDP;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables

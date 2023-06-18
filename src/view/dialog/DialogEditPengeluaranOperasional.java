@@ -8,8 +8,11 @@ import entity.PengeluaranOperasional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import repository.PengeluaranOperasionalRepository;
+import view.main.maindasboard;
 import view.panel.PengeluaranForm;
+import view.swing.Notification;
 
 /**
  *
@@ -119,10 +122,14 @@ public class DialogEditPengeluaranOperasional extends Dialog {
             pengeluaranRepo.setId(Integer.parseInt(lblId.getText()));
             boolean tambah = pengeluraeanOperasionalRepo.update(pengeluaranRepo);
             if(tambah){
-                System.out.println("Berhasil di tambah");
+                 maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
+        panel.showNotification();
                 closeMessage();
             }else{
-                System.out.println("gagal di tambah");
+                 maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di edit");
+        panel.showNotification();
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -12,8 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import repository.BarangRepository;
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 
 /**
  *
@@ -110,11 +113,15 @@ public class DialogTambahBarang extends Dialog {
             Barang barang = new Barang( nama, 0, harga, fileAkhir.toString());
             
             if(BarangRepo.add(barang)){
-                System.out.println("Berhasil");
+                maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
+        panel.showNotification();
                  Files.copy(fileAwal.toPath(), fileAkhir.toPath());
                 closeMessage();
             }else{
-                System.out.println("gagal");
+                 maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
             }
         } catch (Exception e) {
             e.getMessage();

@@ -30,6 +30,7 @@ public class PaketForm extends javax.swing.JPanel {
     public PaketForm() {
         initComponents();
         setvalue();
+        System.out.println(id);
 //        load_table();
     }
     public void setvalue(){
@@ -269,7 +270,7 @@ public class PaketForm extends javax.swing.JPanel {
         boolean delete = paketRepo.delete(id);
         if(delete){
             System.out.println("berhasil");
-//            load_table();
+            setvalue();
         }else{
             System.out.println("gagal");
         }

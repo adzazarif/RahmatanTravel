@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Container;
 import javax.swing.SwingUtilities;
 import service.Auth;
+import service.NotificationStokBarang;
 import view.component.GlassPanePopup;
 import view.main.maindasboard;
 
@@ -17,7 +18,7 @@ import view.panel.panel_aboutversi;
 import view.main.Main;
 import view.swing.Notification;
 public class Login extends javax.swing.JPanel {
-
+    NotificationStokBarang notifBarang = new NotificationStokBarang();
     public Login() {
         initComponents();
         
@@ -242,7 +243,7 @@ parent.setComponentZOrder(this, 0);
             main.setVisible(false);
             new maindasboard().setVisible(true);
             System.out.println("berhasil login");
-              
+              notifBarang.notifBarang();
         }else{
             Main main =(Main)SwingUtilities.getWindowAncestor(this);
             Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Gagal Login");

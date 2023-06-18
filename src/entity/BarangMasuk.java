@@ -23,8 +23,8 @@ public class BarangMasuk implements Entity{
         this.barang = barang;
     }
     
-    public void setId(int jumlah){
-        this.jumlah = jumlah;
+    public void setId(int id){
+        this.id = id;
     }
     public int getId(){
         return id;

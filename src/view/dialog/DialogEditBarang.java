@@ -12,9 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import repository.BarangRepository;
 import util.DateUtil;
+import view.main.maindasboard;
 import view.panel.BarangForm;
+import view.swing.Notification;
 
 /**
  *
@@ -136,6 +139,7 @@ private int id = BarangForm.id;
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         String nama = String.valueOf(txtNama.getText());
         int harga = Integer.valueOf(txtHarga.getText());
         int stok = Integer.valueOf(txtStok.getText());
@@ -162,7 +166,7 @@ private int id = BarangForm.id;
                     System.out.println("foto gagal di hapus");
                 }
             }
-            String pathFolder = "src/upload";
+            String pathFolder = "src/foto";
             File fileAwal = null;
             File fileAkhir = null;
             String ext = newPath.substring(newPath.lastIndexOf('.')+1);
@@ -173,13 +177,19 @@ private int id = BarangForm.id;
             barang.setId(id);
             boolean update = barengRepo.update(barang);
             if(update){
-                System.out.println("Berhasil di update");
+                 
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Barang berhasil di edit");
+        panel.showNotification();
                 Files.copy(fileAwal.toPath(), fileAkhir.toPath());
                 closeMessage();
             }else{
-                System.out.println("gagal di update");
+                
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Barang gagal di edit");
+        panel.showNotification();
             }
             }catch(Exception e){
+                Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Barang gagal di edit");
+        panel.showNotification();
                     System.out.println(e);
              }
         }

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -29,6 +30,8 @@ import util.Conn;
 import view.panel.PemesananForm;
 
 import util.DateUtil;
+import view.main.maindasboard;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
@@ -218,6 +221,7 @@ private void loadTable(){
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
+                    maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         try {
             
             String dates = date.dateNow();
@@ -236,20 +240,19 @@ private void loadTable(){
         boolean tambah = detailPemesananRepo.add(detailPemesanan);
       
         if(tambah){
-            System.out.println("Berhasil");
+            Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
+        panel.showNotification();
             generate();
             loadTable();
             setValue();
               if(kurangBayar <= 0){
             boolean editStatus = pemesananRepo.updateStatus("lunas",id);
-            if(editStatus){
-                System.out.println("berhasil update status");
-            }else{
-                System.out.println("gagal update status");
-            }
+
         }
         }else{
-            System.out.println("gagal");
+ 
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+        panel.showNotification();
         }
         } catch (Exception e) {
             e.printStackTrace();

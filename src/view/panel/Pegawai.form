@@ -58,11 +58,11 @@
                   <Component id="lblAkun1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="lblPilihan" alignment="0" min="-2" pref="293" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="520" max="32767" attributes="0"/>
-              <Component id="btnHapus" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="btnEdit" min="-2" pref="130" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace pref="503" max="32767" attributes="0"/>
+              <Component id="btnDetail" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnEdit" min="-2" pref="124" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnTambah" min="-2" pref="126" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -89,7 +89,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnHapus" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnDetail" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="btnEdit" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="btnTambah" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
@@ -157,14 +157,14 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="btnHapus">
+    <Component class="javax.swing.JLabel" name="btnDetail">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imgbutton/button hapustab.png"/>
+          <Image iconType="3" name="/view/imgbutton/buttondetaill.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHapusMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDetailMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="btnEdit">
