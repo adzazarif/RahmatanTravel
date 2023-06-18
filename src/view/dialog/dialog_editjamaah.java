@@ -106,13 +106,13 @@ public class dialog_editjamaah extends Dialog {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-        int nik = Integer.valueOf(txtNIK.getText());
+
         String nama = txtNama.getText();
         String alamat = txtAlamat.getText();
         String noTelp = txtNotelp.getText();
         String jenisKelamin = String.valueOf(cmbJenisKelamin.getSelectedItem());
         Jamaah jamaah = new Jamaah(nama,jenisKelamin,alamat,noTelp);
-        jamaah.setNik(nik);
+        jamaah.setNik(txtNIK.getText());
         JamaahRepository jamaahRepo = new JamaahRepository();
         if(jamaahRepo.update(jamaah)){
              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");

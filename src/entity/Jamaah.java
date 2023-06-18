@@ -10,7 +10,7 @@ package entity;
  * @author WINDOWS 10
  */
 public class Jamaah implements Entity{
-     private int nik;
+     private String nik;
     private String nama;
     private String jenisKelamin;
     private String alamat;
@@ -31,10 +31,10 @@ public class Jamaah implements Entity{
         this.noTelp = noTelp;
     }
     
-    public void setNik(int nik){
+    public void setNik(String nik){
         this.nik = nik;
     }
-    public int getNik(){
+    public String getNik(){
         return this.nik;
     }
     

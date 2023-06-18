@@ -41,6 +41,24 @@ public class PengeluaranOperasionalRepository implements Repository<PengeluaranO
         return pengeluaranOperasional;
     }
     
+    public List<PengeluaranOperasional> getSearch(String search) {
+             String sql = "SELECT * FROM " + tableName + " WHERE id = '"+search+"' || nama_pengeluaran LIKE '%"+search+"%'";
+        List<PengeluaranOperasional> pengeluaranOperasional = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()) {
+                pengeluaranOperasional.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pengeluaranOperasional;
+    }
+    
       public List<PengeluaranOperasional> getById(Integer id) {
              String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
         List<PengeluaranOperasional> pengeluaranOperasional = new ArrayList<>();

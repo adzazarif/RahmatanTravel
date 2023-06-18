@@ -101,7 +101,7 @@ public class JamaahRepository implements Repository<Jamaah>{
 
     @Override
     public boolean add(Jamaah jamaah) {
-         String sql = "INSERT INTO "+ tableName +" (`nama`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES (?, ?, ?, ?)";
+         String sql = "INSERT INTO "+ tableName +" (`nama`, `jenis_kelamin`, `alamat`, `no_telp`,`nik`) VALUES (?, ?, ?, ? ,?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
@@ -109,6 +109,7 @@ public class JamaahRepository implements Repository<Jamaah>{
             pst.setString(2, jamaah.getJenisKelamin());
             pst.setString(3, jamaah.getAlamat());
             pst.setString(4, jamaah.getNoTelp()); 
+            pst.setString(5, jamaah.getNik());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -129,7 +130,7 @@ public class JamaahRepository implements Repository<Jamaah>{
             pst.setString(2, jamaah.getJenisKelamin());
             pst.setString(3, jamaah.getAlamat());
             pst.setString(4, jamaah.getNoTelp()); 
-            pst.setInt(5, jamaah.getNik());
+            pst.setString(5, jamaah.getNik());
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -206,7 +207,7 @@ public class JamaahRepository implements Repository<Jamaah>{
                 result.getString("alamat"),
                 result.getString("no_telp")
         );
-        jamaah.setNik(     result.getInt("nik"));
+        jamaah.setNik(     result.getString("nik"));
         return jamaah;
         }
      

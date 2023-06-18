@@ -124,7 +124,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, pemesanan.getKeberangkatan().getId());
-            pst.setInt(2, pemesanan.getJamaah().getNik());
+            pst.setString(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
             pst.setString(4, pemesanan.getStatus());
             pst.setDate(5, new Date(pemesanan.getTanggal().getTime()));
@@ -147,7 +147,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
                  Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);
             pst.setInt(1, pemesanan.getKeberangkatan().getId());
-            pst.setInt(2, pemesanan.getJamaah().getNik());
+            pst.setString(2, pemesanan.getJamaah().getNik());
             pst.setString(3, pemesanan.getJenisPembayaran());
             pst.setString(4, pemesanan.getStatus());
             pst.setDate(5, new Date(pemesanan.getTanggal().getTime()));

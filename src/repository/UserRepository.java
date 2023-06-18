@@ -42,6 +42,24 @@ public class UserRepository implements Repository<User>{
         return user;
     }
 
+    public List<User> getSearch(String search) {
+        String sql = "SELECT * FROM " + tableName +" WHERE id = '"+search+"' || nama LIKE '%"+search+"%'";
+        List<User> user = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()) {
+                user.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return user;
+    }
+    
      public List<User> getById(Integer id) {
         String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
         List<User> user = new ArrayList<>();

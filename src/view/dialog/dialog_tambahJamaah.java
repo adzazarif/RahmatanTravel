@@ -35,36 +35,17 @@ public class dialog_tambahJamaah extends Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
         btnBatal1 = new javax.swing.JLabel();
         txtNotelp = new javax.swing.JTextField();
         txtAlamat = new javax.swing.JTextField();
+        txtNIK = new javax.swing.JTextField();
         txtNama = new javax.swing.JTextField();
         cmbJenisKelamin = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new Color(0,0,0,90));
-        jPanel1.setLayout(null);
-
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(330, 360, 120, 30);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imageValidasi/validasi editgagal login_1.png"))); // NOI18N
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(101, 119, 568, 285);
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 820, 550));
 
         btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -85,6 +66,9 @@ public class dialog_tambahJamaah extends Dialog {
 
         txtAlamat.setBorder(null);
         getContentPane().add(txtAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 300, 40));
+
+        txtNIK.setBorder(null);
+        getContentPane().add(txtNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 300, 40));
 
         txtNama.setBorder(null);
         getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 300, 40));
@@ -110,6 +94,7 @@ public class dialog_tambahJamaah extends Dialog {
         String alamat = txtAlamat.getText();
         String noTelp = txtNotelp.getText();
         Jamaah jamaah = new Jamaah(nama,jenisKelamin,alamat,noTelp);
+        jamaah.setNik(txtNIK.getText());
         JamaahRepository jamaahRepo = new JamaahRepository();
         
         if(jamaahRepo.add(jamaah)){
@@ -121,10 +106,6 @@ public class dialog_tambahJamaah extends Dialog {
         }
     }//GEN-LAST:event_btnTambahMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        closeMessage();
-    }//GEN-LAST:event_jLabel3MouseClicked
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -132,10 +113,8 @@ public class dialog_tambahJamaah extends Dialog {
     private javax.swing.JLabel btnTambah;
     private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtNIK;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNotelp;
     // End of variables declaration//GEN-END:variables

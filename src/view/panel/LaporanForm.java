@@ -100,8 +100,7 @@ public class LaporanForm extends javax.swing.JPanel {
     
 
      public void loadTableOperasional(){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+            DefaultTableModel model = new DefaultTableModel();     
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Total");
@@ -109,13 +108,11 @@ public class LaporanForm extends javax.swing.JPanel {
             model.addColumn("Deskripsi");
          
             
-            int no = 1;
+          
            
            try {
              for(PengeluaranOperasional res:pengeluaranOperasionalRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
-                    res.getId(),
                     res.getId(),
                     res.getNamaPengeluaran(),
                     nf.format(res.getJumlah()),
@@ -130,8 +127,7 @@ public class LaporanForm extends javax.swing.JPanel {
     }
      
       public void loadTableProduksi(){
-             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+             DefaultTableModel model = new DefaultTableModel();     
             model.addColumn("id");
             model.addColumn("Nama");
             model.addColumn("Tanggal Keberangkatan");
@@ -142,7 +138,6 @@ public class LaporanForm extends javax.swing.JPanel {
            try {
              for(Pengeluaran res:pengeluaranRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getId(),
                     res.getKeberangkatan().getPaket().getNama(),
                     res.getKeberangkatan().getTanggal(),
@@ -226,22 +221,20 @@ public class LaporanForm extends javax.swing.JPanel {
      }
      
      public void loadTablePemasukan(){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+            DefaultTableModel model = new DefaultTableModel();   
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Paket");
             model.addColumn("Tanggal");
             model.addColumn("Jenis Pembayaran");
             model.addColumn("status");
-            model.addColumn("Jumlah Bayar");
+            model.addColumn("Pemasukan");
             
             int no = 1;
            
            try {
              for(Pemesanan res:pemesananRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getId(),
                     res.getJamaah().getNama(),
                     res.getKeberangkatan().getPaket().getNama(),
@@ -291,6 +284,12 @@ public class LaporanForm extends javax.swing.JPanel {
         btnPemasukan = new javax.swing.JLabel();
         btnGrafik = new javax.swing.JLabel();
         iconPilihan = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
 
@@ -499,6 +498,17 @@ public class LaporanForm extends javax.swing.JPanel {
 
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan grafik.png"))); // NOI18N
 
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu_ujung.png"))); // NOI18N
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 26, -1, 130));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png"))); // NOI18N
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -528,8 +538,11 @@ public class LaporanForm extends javax.swing.JPanel {
                                         .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(iconPilihan))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addGap(60, 60, 60))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(55, 55, 55))
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1354, Short.MAX_VALUE))
@@ -550,21 +563,19 @@ public class LaporanForm extends javax.swing.JPanel {
                             .addComponent(btnGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iconPilihan)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addGap(26, 26, 26)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(26, 26, 26)
                         .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(558, 558, 558))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -657,9 +668,15 @@ public class LaporanForm extends javax.swing.JPanel {
     private raven.chart.CurveLineChart chartLine;
     private javax.swing.JLabel iconPilihan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblIconOpsiKeuntungan;
     private javax.swing.JLabel lblIconOpsiPengeluaran;
