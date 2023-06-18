@@ -46,14 +46,14 @@ public class dialog_mintakode extends Dialog {
     private void initComponents() {
 
         bg1 = new javax.swing.JLabel();
-        validasiBerhasil = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         verifikasi1 = new javax.swing.JPanel();
         verifikasi = new javax.swing.JLabel();
         keluar2 = new javax.swing.JLabel();
         txtKode = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
+        validasiBerhasil = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         validasiSalah = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,21 +67,6 @@ public class dialog_mintakode extends Dialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        validasiBerhasil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        validasiBerhasil.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi berhasil.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        validasiBerhasil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
-
-        getContentPane().add(validasiBerhasil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
 
         verifikasi1.setBackground(new Color(0,0,0,0));
         verifikasi1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,6 +106,8 @@ public class dialog_mintakode extends Dialog {
             }
         });
         verifikasi1.add(keluar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+
+        txtKode.setBorder(null);
         verifikasi1.add(txtKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 330, 60));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg kodeverifikasi.png"))); // NOI18N
@@ -128,6 +115,23 @@ public class dialog_mintakode extends Dialog {
 
         getContentPane().add(verifikasi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 450, 480));
 
+        validasiBerhasil.setBackground(new Color(0,0,0,0));
+        validasiBerhasil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        validasiBerhasil.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi berhasil.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        validasiBerhasil.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
+
+        getContentPane().add(validasiBerhasil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
+
+        validasiSalah.setBackground(new Color(0,0,0,0));
         validasiSalah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/validasi salah token.png"))); // NOI18N
@@ -143,6 +147,7 @@ public class dialog_mintakode extends Dialog {
 
         getContentPane().add(validasiSalah, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 570, 330));
 
+        changePass.setBackground(new Color(0,0,0,0));
         changePass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtRepeatPass.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N

@@ -101,7 +101,7 @@ private String apa1;
             });
     String from    = "travelrahmatan@gmail.com";
     String to      = email ;
-    String subject = "KOde verifikasi rahmatan app";
+    String subject = "Kode Verifikasi Ganti Password Rahmatan App";
     String body = randomNumber();
 
         Message message = new MimeMessage(session);
@@ -189,16 +189,18 @@ private String apa1;
     private void initComponents() {
 
         minta = new javax.swing.JPanel();
+        txtUsername = new view.pallet.JTextfieldminta();
         mintakod = new javax.swing.JLabel();
-        txtUsername = new view.pallet.JTextfield();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new Color(0,0,0,0));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        minta.setBackground(new Color(0,0,0,0));
         minta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 280, -1));
 
-        mintakod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button veriv username.png"))); // NOI18N
+        mintakod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/kirimkodeverifikasi.png"))); // NOI18N
         mintakod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mintakodMouseClicked(evt);
@@ -211,9 +213,8 @@ private String apa1;
             }
         });
         minta.add(mintakod, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 70));
-        minta.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 280, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/konfirmasi email.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg konfirmasi.png"))); // NOI18N
         minta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
         add(minta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 480));
@@ -271,6 +272,6 @@ private String apa1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel minta;
     private javax.swing.JLabel mintakod;
-    private view.pallet.JTextfield txtUsername;
+    private view.pallet.JTextfieldminta txtUsername;
     // End of variables declaration//GEN-END:variables
 }

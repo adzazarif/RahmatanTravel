@@ -43,6 +43,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 90, 0));
         setUndecorated(true);
         getContentPane().setLayout(null);
 

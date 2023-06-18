@@ -38,7 +38,7 @@ public class Login extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         txtUsername = new view.pallet.JTextfield();
-        txtPassword = new view.pallet.JPasswordfield1();
+        txtPassword = new view.pallet.PasswordField();
         login = new javax.swing.JLabel();
         keluar = new javax.swing.JLabel();
         aboutversi = new javax.swing.JLabel();
@@ -50,6 +50,8 @@ public class Login extends javax.swing.JPanel {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 190, 50));
+
+        txtPassword.setShowAndHide(true);
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 190, -1));
 
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/login.png"))); // NOI18N
@@ -169,9 +171,7 @@ public class Login extends javax.swing.JPanel {
     private void aboutversiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutversiMouseClicked
     Main apa1 = (Main) SwingUtilities.getWindowAncestor(this);
         dialog_aboutversi apa = new dialog_aboutversi(apa1);
-        apa.showGlass();
-    
-        apa.showPopUpNonGlass();
+        apa.showPopUp();
     
     
     }//GEN-LAST:event_aboutversiMouseClicked
@@ -252,7 +252,7 @@ parent.setComponentZOrder(this, 0);
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel login;
     private javax.swing.JLabel lupapassword;
-    private view.pallet.JPasswordfield1 txtPassword;
+    private view.pallet.PasswordField txtPassword;
     private view.pallet.JTextfield txtUsername;
     // End of variables declaration//GEN-END:variables
 }

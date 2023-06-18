@@ -141,9 +141,9 @@ public class JTextfieldminta extends JTextField {
         int width = getWidth();
         int height = getHeight();
         if (mouseOver) {
-            g2.setColor(Color.WHITE);
+            g2.setColor(Color.GRAY);
         }else{
-            g2.setColor(Color.WHITE);
+            g2.setColor(Color.GRAY);
         }
         g2.fillRect(2, height -1 , width - 4, 1);
         createHintText(g2);
@@ -152,7 +152,7 @@ public class JTextfieldminta extends JTextField {
     }
     private void createHintText(Graphics2D g2) {
         Insets in = getInsets();
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.GRAY);
         FontMetrics ft = g2.getFontMetrics();
         Rectangle2D r2 = ft.getStringBounds(labelText, g2);
         double height = r2.getHeight() -  in.top ;

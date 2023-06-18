@@ -172,7 +172,7 @@ public class JTextfield extends JTextField {
         if(isFocusOwner()) {
             double width = getWidth() -4;
             int heigth = getHeight();
-            g2.setColor(Color.ORANGE);
+            g2.setColor(new Color(255,90,0));
             double size;
             if(show){
                 size = width * (1 - location);
