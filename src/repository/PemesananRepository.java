@@ -78,13 +78,13 @@ public class PemesananRepository implements Repository<Pemesanan>{
         return pemesanan;  
     }
     
-     public List<Pemesanan> getByIdJamaah(int idJamaah){
+     public List<Pemesanan> getByIdJamaah(String idJamaah){
          String sql = "SELECT * FROM " + tableName + " WHERE jamaah_id = ?";
         List<Pemesanan> pemesanan = new ArrayList<>();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
-            stm.setInt(1, idJamaah);
+            stm.setString(1, idJamaah);
             ResultSet res = stm.executeQuery();
             
             while(res.next()) {
@@ -208,7 +208,7 @@ public class PemesananRepository implements Repository<Pemesanan>{
     private Pemesanan mapToEntity(ResultSet result) throws SQLException {
          Pemesanan pemesanan = new Pemesanan(
                  new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
-                 new JamaahRepository().get(result.getInt("jamaah_id")),
+                 new JamaahRepository().get(result.getString("jamaah_id")),
                  result.getString("jenis_pembayaran"),
                  result.getString("status"),
                  result.getDate("tanggal"),

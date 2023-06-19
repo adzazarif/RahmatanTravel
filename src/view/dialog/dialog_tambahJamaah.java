@@ -61,18 +61,24 @@ public class dialog_tambahJamaah extends Dialog {
         });
         getContentPane().add(btnBatal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 170, 30));
 
+        txtNotelp.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNotelp.setBorder(null);
         getContentPane().add(txtNotelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 300, 40));
 
+        txtAlamat.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtAlamat.setBorder(null);
         getContentPane().add(txtAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 300, 40));
 
+        txtNIK.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNIK.setBorder(null);
         getContentPane().add(txtNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 300, 40));
 
+        txtNama.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         txtNama.setBorder(null);
         getContentPane().add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 300, 40));
 
+        cmbJenisKelamin.setBackground(new Color(0,0,0,0));
+        cmbJenisKelamin.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         cmbJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "laki-laki", "perempuan" }));
         cmbJenisKelamin.setBorder(null);
         getContentPane().add(cmbJenisKelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 290, 40));
@@ -100,6 +106,7 @@ public class dialog_tambahJamaah extends Dialog {
         if(jamaahRepo.add(jamaah)){
             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
         panel.showNotification();
+        closeMessage();
         }else{
            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di tambahkan");
         panel.showNotification();

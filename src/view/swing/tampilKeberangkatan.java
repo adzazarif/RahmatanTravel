@@ -46,6 +46,9 @@ public void getpanel(){
                 String nama_paket = p.getPaket().getMenu();
                 String hargapaket123 = String.valueOf(p.getPaket().getHarga());
                 ItemKeberangkatan pnn = new ItemKeberangkatan();
+                pnn.lblStatus.setText(String.valueOf(p.getStatus()));
+                pnn.lblNama.setText(p.getPaket().getNama());
+                pnn.lblTanggal.setText(p.getTanggal().toString());
                 pnn.hargapaket.setText("Rp. "+hargapaket123);
                 pnn.nama_paket1.setText(nama_paket);
                 int index = panellist.size() + 1;

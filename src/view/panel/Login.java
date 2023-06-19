@@ -16,6 +16,7 @@ import view.main.maindasboard;
 //import view.dialog.hayolo;
 import view.panel.panel_aboutversi;
 import view.main.Main;
+import view.main.Mainpresensi;
 import view.swing.Notification;
 public class Login extends javax.swing.JPanel {
     NotificationStokBarang notifBarang = new NotificationStokBarang();
@@ -46,6 +47,7 @@ public class Login extends javax.swing.JPanel {
         aboutversi = new javax.swing.JLabel();
         lupapassword = new javax.swing.JLabel();
         gif1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
         setLayout(null);
@@ -138,6 +140,14 @@ public class Login extends javax.swing.JPanel {
 
         gif1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/KaabahAnimation.gif"))); // NOI18N
         jPanel1.add(gif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 520, 450));
+
+        jLabel1.setText("Presensi");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg login1.png"))); // NOI18N
         jPanel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -251,11 +261,18 @@ parent.setComponentZOrder(this, 0);
         }
     }//GEN-LAST:event_loginMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+         Main main =(Main)SwingUtilities.getWindowAncestor(this);
+         main.setVisible(false);
+            new Mainpresensi().setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aboutversi;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel gif1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel login;

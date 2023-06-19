@@ -19,6 +19,7 @@ import view.dialog.DialogTambahCicilan;
 import view.dialog.DialogTambahPresensi;
 import view.main.maindasboard;
 import java.awt.Color;
+import view.main.Main;
 import view.main.Mainpresensi;
 
 /**
@@ -135,6 +136,7 @@ public class panel_presensi extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new view.pallet.Table();
+        jLabel3 = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -186,6 +188,15 @@ public class panel_presensi extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 710, 510));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("mbalek");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 140, 60));
+
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg presensi.png"))); // NOI18N
         add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -197,11 +208,18 @@ public class panel_presensi extends javax.swing.JPanel {
         load_table();
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+                Mainpresensi main =(Mainpresensi)SwingUtilities.getWindowAncestor(this);
+         main.setVisible(false);
+            new Main().setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblEndTime;

@@ -253,7 +253,7 @@ public class DialogEditPemesanan extends Dialog {
             String date = lblDate.getText();
             String tgl = String.valueOf(cmbStatus.getSelectedItem());            
             Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
-            int idJamaah = Integer.parseInt(lblNik.getText());
+            String idJamaah = lblNik.getText();
             Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
             Jamaah jamaah = new JamaahRepository().get(idJamaah);
             Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihan, bayar);
@@ -263,6 +263,7 @@ public class DialogEditPemesanan extends Dialog {
                 
             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di edit");
         panel.showNotification();
+        PemesananForm.id = 0;
                 closeMessage();
             }else{
                  
@@ -291,8 +292,7 @@ public class DialogEditPemesanan extends Dialog {
         String strJamaah = String.valueOf(cmbJamaah.getSelectedItem());
         try {
             String [] getJamaah = strJamaah.split(",",2);
-            int NIK = Integer.valueOf(getJamaah[1]);
-            System.out.println(NIK);
+            String NIK = getJamaah[1];
             int jumlahPesanan = 0;
             for(Pemesanan pm:pemesananRepo.getByIdJamaah(NIK)){
                 jumlahPesanan += 1;

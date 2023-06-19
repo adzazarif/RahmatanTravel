@@ -42,13 +42,13 @@ public class JamaahRepository implements Repository<Jamaah>{
         return jamaah;
     }
     
-     public List<Jamaah> getById(Integer id) {
+     public List<Jamaah> getById(String id) {
         String sql = "SELECT * FROM " + tableName + " WHERE nik = ?";
         List<Jamaah> jamaah = new ArrayList<>();
         try {
              Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
-            stm.setInt(1, id);
+            stm.setString(1, id);
             ResultSet res = stm.executeQuery();
             while(res.next()) {
                 jamaah.add(mapToEntity(res));
@@ -77,6 +77,27 @@ public class JamaahRepository implements Repository<Jamaah>{
         return jamaah;
     }
 
+     public Jamaah get(String id) {
+         String sql = "SELECT * FROM " + tableName + " WHERE nik = ?" ;
+         
+         Jamaah jamaah = new Jamaah();
+         
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet res = stm.executeQuery();
+
+            while(res.next()) {
+                return mapToEntity(res); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return jamaah;
+    }
+     
     @Override
     public Jamaah get(Integer id) {
          String sql = "SELECT * FROM " + tableName + " WHERE nik = ?" ;

@@ -240,6 +240,7 @@ private void loadTable(){
         boolean tambah = detailPemesananRepo.add(detailPemesanan);
       
         if(tambah){
+            PemesananForm.id = 0;
             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
         panel.showNotification();
             generate();

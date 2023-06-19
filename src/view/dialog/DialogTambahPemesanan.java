@@ -59,8 +59,8 @@ public class DialogTambahPemesanan extends Dialog {
     }
      public void generate() {
         int kd_transaksi = pemesananRepo.getIdLast();
-        String query = "SELECT *, jamaah.nama AS namaJamaah, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik WHERE pemesanan.id = "+kd_transaksi;
-        String path = "D:/RahmatanTravel/src/report/NotaPemesanan.jrxml";
+        String query = "SELECT pemesanan.id AS id, pemesanan.tanggal AS tanggal, jamaah.nama AS namaJamaah, master_paket.nama AS nama, master_paket.harga AS harga, pemesanan.jenis_pembayaran AS jenis_pembayaran, master_paket.diskon AS diskon, pemesanan.jumlah_bayar AS jumlah_bayar, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik WHERE pemesanan.id = "+kd_transaksi;
+        String path = "D:/RahmatanTravel/src/report/Nota.jrxml";
 
         try {
               Connection koneksi = (Connection) Conn.configDB();
@@ -304,7 +304,7 @@ public class DialogTambahPemesanan extends Dialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        
         try {
             
         String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
@@ -316,28 +316,27 @@ public class DialogTambahPemesanan extends Dialog {
         }
             int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
         String status = "";
-        if(jenisPembayaran.equals("Cash")){
+        if(jenisPembayaran.equals("cash")){
             
             if(bayar >= totalTagihan){
                 status = "lunas";
             }else{
                 status = "belum lunas";
             }    
-        }else if(jenisPembayaran.equals("Talangan")){
+        }else if(jenisPembayaran.equals("talangan")){
             status = "belum lunas";
         }
-        
+            System.out.println(status);
         String date = lblDate.getText();
         Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        int idJamaah = Integer.parseInt(lblNik.getText());
+        String idJamaah = lblNik.getText();
         Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
         Jamaah jamaah = new JamaahRepository().get(idJamaah);
         Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihan, bayar);
         
         boolean tambah = pemesananRepo.add(pemesanan);
         if(tambah){
-              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
-        panel.showNotification();
+            
             int idLast = pemesananRepo.getIdLast();
             String newpath = "src/UploadBarcode";
             File directory = new File(newpath);
@@ -350,15 +349,20 @@ public class DialogTambahPemesanan extends Dialog {
             barcode.setI(11.0f);
             String name = "pms"+idLast;
             barcode.renderBarcode("D:/RahmatanTravel/src/UploadBarcode/"+name+".png");
-            
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+              
+              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
             generate();
             closeMessage();
         }else{
-              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+              Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
         panel.showNotification();
         }
         } catch (Exception e) {
-                         Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+                         Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
         panel.showNotification();
         }
         
@@ -368,8 +372,7 @@ public class DialogTambahPemesanan extends Dialog {
        String strJamaah = String.valueOf(cmbJamaah.getSelectedItem());
         try {
             String [] getJamaah = strJamaah.split(",",2);
-            int NIK = Integer.valueOf(getJamaah[1]);
-            System.out.println(NIK);
+            String NIK = getJamaah[1];
             int jumlahPesanan = 0;
             for(Pemesanan pm:pemesananRepo.getByIdJamaah(NIK)){
                 jumlahPesanan += 1;

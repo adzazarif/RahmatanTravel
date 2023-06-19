@@ -92,7 +92,7 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
     }
 
     public List<Keberangkatan> getByMenu(String menu) {
-        String sql = "SELECT * FROM "+tableName+" LEFT JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE menu = ? ORDER BY tanggal DESC";
+        String sql = "SELECT * FROM "+tableName+" LEFT JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE menu = ? && keberangkatan.status = 'Belum Berangkat' ORDER BY tanggal DESC";
         List<Keberangkatan> keberangkatan = new ArrayList<>();
         
         try {

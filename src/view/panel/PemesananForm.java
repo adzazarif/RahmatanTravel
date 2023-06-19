@@ -19,6 +19,7 @@ import repository.PemesananRepository;
 import util.Conn;
 import view.dialog.DialogDetailPemesanan;
 import view.dialog.DialogEditPemesanan;
+import view.dialog.DialogScanBarcode;
 import view.dialog.DialogTambahCicilan;
 import view.dialog.DialogTambahPemesanan;
 import static view.panel.KeberangkatanForm.id;
@@ -29,7 +30,7 @@ import static view.panel.KeberangkatanForm.id;
 public class PemesananForm extends javax.swing.JPanel {
     PemesananRepository pemesananRepo = new PemesananRepository();
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));   
-    public static int id;
+    public static int id = 0;
     /**
      * Creates new form Pemesanan
      */
@@ -127,6 +128,7 @@ public class PemesananForm extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        btnTambahCicilan1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1219, 768));
@@ -252,6 +254,13 @@ public class PemesananForm extends javax.swing.JPanel {
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 20));
 
+        btnTambahCicilan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttondetaill.png"))); // NOI18N
+        btnTambahCicilan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTambahCicilan1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,7 +272,9 @@ public class PemesananForm extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 407, Short.MAX_VALUE)
+                                .addGap(0, 184, Short.MAX_VALUE)
+                                .addComponent(btnTambahCicilan1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(93, 93, 93)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnTambahCicilan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,7 +304,8 @@ public class PemesananForm extends javax.swing.JPanel {
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambahCicilan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambahCicilan1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -308,17 +320,37 @@ public class PemesananForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTambahMouseClicked
 
     private void btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseClicked
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-        DialogEditPemesanan editPemesanan = new DialogEditPemesanan(main);
-        editPemesanan.showPopUp();
+        if(id == 0){
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            DialogScanBarcode barcode = new DialogScanBarcode(main);
+        barcode.showPopUp();
+        DialogEditPemesanan tambahCicilan = new DialogEditPemesanan(main);
+        tambahCicilan.showPopUp();
         load_table();
+        }else{
+                        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+
+             DialogEditPemesanan tambahCicilan = new DialogEditPemesanan(main);
+        tambahCicilan.showPopUp();
+        load_table();
+        }
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnTambahCicilanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahCicilanMouseClicked
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        if(id == 0){
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            DialogScanBarcode barcode = new DialogScanBarcode(main);
+        barcode.showPopUp();
         DialogTambahCicilan tambahCicilan = new DialogTambahCicilan(main);
         tambahCicilan.showPopUp();
         load_table();
+        }else{
+                        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+
+            DialogTambahCicilan tambahCicilan = new DialogTambahCicilan(main);
+        tambahCicilan.showPopUp();
+         load_table();
+        }
     }//GEN-LAST:event_btnTambahCicilanMouseClicked
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -328,15 +360,33 @@ public class PemesananForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableMouseClicked
 
     private void btnDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailMouseClicked
-      maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+     if(id == 0){
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+            DialogScanBarcode barcode = new DialogScanBarcode(main);
+        barcode.showPopUp();
         DialogDetailPemesanan tambahCicilan = new DialogDetailPemesanan(main);
         tambahCicilan.showPopUp();
         load_table();
+        }else{
+                        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+
+            DialogDetailPemesanan tambahCicilan = new DialogDetailPemesanan(main);
+        tambahCicilan.showPopUp();
+         load_table();
+        }
     }//GEN-LAST:event_btnDetailMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         load_table(txtSearch.getText());
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void btnTambahCicilan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahCicilan1MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogScanBarcode tambahCicilan = new DialogScanBarcode(main);
+        tambahCicilan.showPopUp();
+        DialogDetailPemesanan s = new DialogDetailPemesanan(main);
+        s.showPopUp();
+    }//GEN-LAST:event_btnTambahCicilan1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -345,6 +395,7 @@ public class PemesananForm extends javax.swing.JPanel {
     private javax.swing.JLabel btnHapus;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel btnTambahCicilan;
+    private javax.swing.JLabel btnTambahCicilan1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="578" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ca3ee3fc-beef-432a-aee8-c125e9a518d8">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT pemesanan.id AS id, pemesanan.tanggal AS tanggal, jamaah.nama AS namaJamaah, master_paket.nama AS nama, master_paket.harga AS harga, pemesanan.jenis_pembayaran AS jenis_pembayaran, master_paket.diskon AS diskon, pemesanan.jumlah_bayar AS jumlah_bayar, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik ]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="namaJamaah" class="java.lang.String"/>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenis_pembayaran" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diskon" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jumlah_bayar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="namaPaket" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<image>
+				<reportElement x="18" y="0" width="208" height="75" uuid="b6144797-0bcf-4caf-80eb-e7f814d42d80"/>
+				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\image\\Group 449title.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-2" y="95" width="226" height="13" uuid="b964469a-308e-40f4-b773-d264ed43a7f5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="8"/>
+				</textElement>
+				<text><![CDATA[Jl Brawijaya No.22, Jubung Lor, Jubung ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="75" width="134" height="20" uuid="42326fd1-b693-48e5-a5a7-ba23f9f8fbb8"/>
+				<textElement>
+					<font fontName="Bookman Old Style" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rahmatan & Tour Travel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-2" y="108" width="226" height="13" uuid="c3a3d981-0f80-4357-82a4-654978163080"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="8"/>
+				</textElement>
+				<text><![CDATA[ Kec Sukorambi, Kab Jember 68151]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="20" width="85" height="15" uuid="40378712-1101-4ca1-a38b-6ec43920a007"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[ID Pesanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="50" width="15" height="13" uuid="dbdf5286-cb42-4b6d-bea1-d01e05f19198"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="20" width="15" height="15" uuid="29d7f62f-714c-481e-8a4a-416be6a7d378"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="50" width="85" height="10" uuid="45218666-25ee-4490-88d8-bf428a148a9d"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama Jamaah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="35" width="15" height="13" uuid="6b45ab73-5f76-4b41-8450-2187173e4770"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="35" width="85" height="15" uuid="480c0bdb-5322-4282-973b-c9cb1dbb4b4c"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Tanggal              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="0" width="224" height="20" uuid="734ef0d3-5c96-4cde-9368-ae8dd081f5a2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[=================================================]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="226" height="22" uuid="3b7099d6-532c-4835-b3f9-d61fb0789a2c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[=================================================]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="20" width="100" height="15" uuid="691bd675-dabe-4d4d-be37-1d557ab9980e"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="35" width="100" height="13" uuid="58695de3-3616-4eac-ab0b-aad97b3c3590"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="50" width="100" height="10" uuid="3f9d30d6-b338-4ff9-8262-8d253ed3c5d1"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namaJamaah}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="173" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="85" height="13" uuid="2e6d9f07-4609-4ba1-8ed1-af31e6b22c6b"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama Paket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="39" width="4" height="13" uuid="671a3f1b-0177-44f2-9415-d3868bf6f8f2"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="0" width="4" height="13" uuid="42ecf9eb-0e91-4ad3-820c-2f59c3931503"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="26" width="4" height="13" uuid="f77da6d6-b67b-425e-b7e0-62e0d57556ec"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="13" width="4" height="13" uuid="1a812ea3-9639-4c4d-b67f-6d777ebde3d3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="53" width="85" height="13" uuid="370f4e63-32dd-47f4-b309-955d33474c3a"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Jumlah Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="13" width="85" height="13" uuid="deadab4a-be26-4ef1-baa6-52e0c69fe4c7"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="52" width="4" height="14" uuid="55f89e19-860d-42cc-9bd9-d3605ecca8be"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="26" width="85" height="13" uuid="2183588d-3109-4a8d-a97d-80b447cf335a"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Jenis Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="39" width="85" height="13" uuid="716319b9-08ef-44b8-bc80-d3ca9593468a"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<text><![CDATA[Diskon]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="13" width="100" height="13" uuid="c2e47da1-b317-4126-9982-ebf58ff196e6"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="26" width="100" height="13" uuid="e944a4d2-c352-4924-a23d-8d0be5517578"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="100" height="13" uuid="d00d97ce-2cc2-4871-8381-30619ab5319a"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namaPaket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="53" width="100" height="13" uuid="e005184b-e5f5-42e8-8750-51a59ab5f5ea"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_bayar}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="-2" y="81" width="222" height="75" uuid="498f690a-c16b-4ff7-9fe5-a046318d622c"/>
+				<imageExpression><![CDATA["D:\\RahmatanTravel\\src\\UploadBarcode\\pms"+$F{id}+".png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="91" y="39" width="100" height="13" uuid="7eb538d2-f35b-43c2-a89c-0c3feb9da4f3"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diskon}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="59" width="224" height="16" uuid="00375aeb-cca6-42ef-9345-263e27e9e131"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[2. Pembatalan < 3 Minggu Sebelum Keberangkatan Dikenakan Biaya Administrasi Sebesar 50% Dari Harga Paket
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="224" height="16" uuid="12eb3db6-518f-4d1e-bde2-a9e7bb86a035"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[3. Pembatalan < 2 Minggu Sebelum Keberangkatan Dikenakan Biaya Administrasi Sebesar 75% Dari Harga Paket
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="224" height="10" uuid="dac3b14d-239d-4557-b622-2262c99a4dea"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[4. Pembatalan < 1 Minggu Sebelum Keberangkatan Dikenakan Biaya Sebesar 100%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="55" height="10" uuid="d02a7394-9042-4a2b-a0d3-8f89f8804908"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Catatan :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="224" height="16" uuid="6894bf31-1eef-4b91-8a69-810dce9ee949"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[1. Pembatalan atau Mengundurkan Diri Dikenakan Biaya Sebesar 15% Dari Harga   Paket
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="224" height="20" uuid="38c67ca7-577a-45ee-b84c-8fb8eee3fce0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bookman Old Style" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Terima Kasih]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-2" y="0" width="226" height="22" uuid="31be6fe7-624b-4cf8-89e3-b0c044b5463c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[=================================================]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

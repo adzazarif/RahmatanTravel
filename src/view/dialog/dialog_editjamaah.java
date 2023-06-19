@@ -29,7 +29,7 @@ public class dialog_editjamaah extends Dialog {
     }
     
     public void setValue(){
-        for(Jamaah jm:jamaahRepo.getById(NIK)){
+        for(Jamaah jm:jamaahRepo.getById(String.valueOf(NIK))){
             txtAlamat.setText(jm.getAlamat());
             txtNIK.setText(String.valueOf(jm.getNik()));
             txtNama.setText(jm.getNama());

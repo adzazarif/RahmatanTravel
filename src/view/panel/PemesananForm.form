@@ -35,7 +35,9 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="panelShadow1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="407" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="184" max="32767" attributes="0"/>
+                              <Component id="btnTambahCicilan1" min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                               <Component id="jPanel2" min="-2" pref="244" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnTambahCicilan" min="-2" pref="130" max="-2" attributes="0"/>
@@ -74,6 +76,7 @@
                   <Component id="btnTambahCicilan" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="btnDetail" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTambahCicilan1" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="panelShadow1" min="-2" max="-2" attributes="0"/>
@@ -330,5 +333,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="btnTambahCicilan1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/view/imgbutton/buttondetaill.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTambahCicilan1MouseClicked"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

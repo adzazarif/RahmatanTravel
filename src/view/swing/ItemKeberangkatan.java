@@ -43,10 +43,10 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     
     public ItemKeberangkatan() {
         initComponents();
-        Font font = new Font("Quicksand", Font.PLAIN, 36);
-        Font font1 = new Font("Quicksand", Font.PLAIN, 18);
-        nama_paket1.setFont(font);
-        hargapaket.setFont(font1);
+//        Font font = new Font("Quicksand", Font.PLAIN, 36);
+//        Font font1 = new Font("Quicksand", Font.PLAIN, 18);
+//        nama_paket1.setFont(font);
+//        hargapaket.setFont(font1);
         bgitem2.setVisible(false);
         setOpaque(false);
         this.index = index;
@@ -94,6 +94,9 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         hargapaket = new javax.swing.JLabel();
         nama_paket1 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblNama = new javax.swing.JLabel();
+        lblTanggal = new javax.swing.JLabel();
         bgitem2 = new javax.swing.JLabel();
         bgitem1 = new javax.swing.JLabel();
 
@@ -118,12 +121,27 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
         });
         add(jLabel1);
         jLabel1.setBounds(810, 60, 90, 30);
-        add(hargapaket);
-        hargapaket.setBounds(777, 36, 150, 20);
 
+        hargapaket.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        add(hargapaket);
+        hargapaket.setBounds(797, 36, 130, 20);
+
+        nama_paket1.setFont(new java.awt.Font("Quicksand Bold", 0, 28)); // NOI18N
         nama_paket1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(nama_paket1);
-        nama_paket1.setBounds(60, 30, 170, 60);
+        nama_paket1.setBounds(30, 20, 170, 50);
+
+        lblStatus.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        add(lblStatus);
+        lblStatus.setBounds(550, 40, 140, 40);
+
+        lblNama.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        add(lblNama);
+        lblNama.setBounds(70, 60, 140, 30);
+
+        lblTanggal.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        add(lblTanggal);
+        lblTanggal.setBounds(250, 50, 140, 40);
 
         bgitem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/bgitemkeberangkatan1.png"))); // NOI18N
         add(bgitem2);
@@ -155,6 +173,9 @@ public class ItemKeberangkatan extends javax.swing.JPanel {
     public static javax.swing.JLabel hargapaket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel lblNama;
+    public javax.swing.JLabel lblStatus;
+    public javax.swing.JLabel lblTanggal;
     public static javax.swing.JLabel nama_paket1;
     // End of variables declaration//GEN-END:variables
 
