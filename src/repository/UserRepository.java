@@ -23,6 +23,23 @@ import entity.User;
  */
 public class UserRepository implements Repository<User>{
     private static String tableName = User.tableName;
+    public int getLastId(){
+        int id = 0;
+        String sql = "SELECT * FROM " + tableName + " ORDER BY id DESC LIMIT 1";
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            if(res.next()) {
+                id = res.getInt("id");
+            }
+            return id;
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+        return id;
+    }
     @Override
     public List<User> get() {
         String sql = "SELECT * FROM " + tableName;
@@ -187,8 +204,8 @@ public class UserRepository implements Repository<User>{
         User user = new User(
             result.getString("nama"),
             result.getString("username"),
-            result.getString("password"),
             result.getString("role"),
+            result.getString("password"),
             result.getString("email"),
             result.getString("alamat"),
             result.getString("no_telp"),

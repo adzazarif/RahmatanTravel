@@ -135,7 +135,7 @@ public class PaketRepository implements Repository<Paket>{
             pst.setInt(5, paket.getMinimDp()); 
             pst.setInt(6, paket.getHarga());
             pst.setInt(7, paket.getDiskon()); 
-            pst.setInt(8, paket.getDiskon()); 
+            pst.setInt(8, paket.getLamaPaket()); 
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -170,17 +170,56 @@ public class PaketRepository implements Repository<Paket>{
 
     @Override
     public boolean delete(int id) {
-       String sql = "DELETE FROM "+ tableName +" WHERE id = ?";
+        String cekId = "SELECT keberangkatan.id AS idKeberangkatan, pemesanan.id AS idPemesanan, pengeluaran.id AS idPengeluaran, detail_pengeluaran.id AS idDetailPengeluaran, detail_pemesanan.id AS idDetailPemesanan FROM master_paket JOIN keberangkatan ON master_paket.id = keberangkatan.paket_id JOIN pemesanan ON keberangkatan.id = pemesanan.keberangkatan_id JOIN pengeluaran ON keberangkatan.id = pengeluaran.keberangkatan_id JOIN detail_pengeluaran ON pengeluaran.id = detail_pengeluaran.pengeluaran_id JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id WHERE master_paket.id = "+id;
+//        
+//        
+//      
            try {
                  Connection koneksi = (Connection)Conn.configDB();
-            PreparedStatement pst = koneksi.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.executeUpdate();
+                 Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(cekId);
+            if(res.next()){
+                int idKeberangkatan = res.getInt("idKeberangkatan");
+                int idPemesanan = res.getInt("idPemesanan");
+                int idPengeluaran = res.getInt("idPengeluaran");
+                int idDetailPengeluaran = res.getInt("idDetailPengeluaran");
+                int idDetailPemesanan = res.getInt("idDetailPemesanan");
+                String sqlDelDetailPemesanan = "DELETE FROM detail_pemesanan WHERE id = "+idDetailPemesanan;
+                String sqlDelDetailPengeluaran = "DELETE FROM detail_pengeluaran WHERE id = "+idDetailPengeluaran;
+                String sqlDelPengeluaran = "DELETE FROM pengeluaran WHERE id = "+idPengeluaran;
+                String sqlDelPemesanan = "DELETE FROM pemesanan WHERE id = "+idPemesanan;
+                String sqldelKeberangkatan = "DELETE FROM keberangkatan WHERE id = "+idKeberangkatan;
+                 String sqlDelPaket = "DELETE FROM "+ tableName +" WHERE id = "+id;
+                 PreparedStatement pstDelDetailPengeluaran = koneksi.prepareStatement(sqlDelDetailPengeluaran);    
+            pstDelDetailPengeluaran.executeUpdate();
+            PreparedStatement pstDelDetailPemesanan = koneksi.prepareStatement(sqlDelDetailPemesanan);    
+            pstDelDetailPemesanan.executeUpdate();
+                PreparedStatement pstDelPengeluaran = koneksi.prepareStatement(sqlDelPengeluaran);    
+            pstDelPengeluaran.executeUpdate();
+            PreparedStatement pstDelPemesanan = koneksi.prepareStatement(sqlDelPemesanan);    
+            pstDelPemesanan.executeUpdate();
+                PreparedStatement pstDelKeberangkatan = koneksi.prepareStatement(sqldelKeberangkatan);    
+            pstDelKeberangkatan.executeUpdate();
+            PreparedStatement pstDelPaket = koneksi.prepareStatement(sqlDelPaket);    
+            pstDelPaket.executeUpdate();
             return true;
+            }
+
+
+
+            
+    
+//            
+//            PreparedStatement pstDel = koneksi.prepareStatement(sqldelKeberangkatan);    
+//            pstDel.executeUpdate();
+//            PreparedStatement pst = koneksi.prepareStatement(sql);
+//            pst.executeUpdate();
+            
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+           return true;
     }
 
      

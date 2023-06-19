@@ -758,20 +758,20 @@ jPanel5.setOpaque(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
-        jLabel6.setVisible(true);
-        btn_logout.setVisible(true);
+        jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel8MouseEntered
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
-    jLabel6.setVisible(true);
-        btn_logout.setVisible(true);
+    jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
-    jLabel6.setVisible(true);
-        btn_logout.setVisible(true);
+    jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel10MouseEntered
 

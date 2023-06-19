@@ -159,7 +159,18 @@ public class JamaahRepository implements Repository<Jamaah>{
         
         }
     }
-
+public boolean delete(String id) {
+        String sql = "DELETE FROM "+ tableName +" WHERE nik = ?";
+           try {
+            Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement pst = koneksi.prepareStatement(sql);
+            pst.setString(1, id);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     @Override
     public boolean delete(int id) {
         String sql = "DELETE FROM "+ tableName +" WHERE nik = ?";

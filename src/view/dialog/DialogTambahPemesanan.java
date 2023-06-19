@@ -13,13 +13,16 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -44,6 +47,7 @@ import view.swing.Notification;
  */
 public class DialogTambahPemesanan extends Dialog {
     private String menu = "";
+    NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private int idKeberangkatan;
     private List<Keberangkatan> keberangkatanList = new ArrayList<>();
     PemesananRepository pemesananRepo = new PemesananRepository();
@@ -56,7 +60,7 @@ public class DialogTambahPemesanan extends Dialog {
         super(fram);
         initComponents();
         fillComboBoxJamaah();
-        setDate();
+        setId();
     }
      public void generate() {
         int kd_transaksi = pemesananRepo.getIdLast();
@@ -76,9 +80,12 @@ public class DialogTambahPemesanan extends Dialog {
         } catch(Exception e) { e.printStackTrace(); }
     }
 
-    private void setDate(){
-        DateUtil date = new DateUtil();
-        lblDate.setText(date.dateNow());
+    private void setId(){
+        DateUtil dateUtil = new DateUtil();
+        lblDate.setText(dateUtil.dateNow());
+        int id = pemesananRepo.getIdLast() +1;
+        
+        lblId.setText(String.valueOf(id));
     }
     private void fillComboBoxJamaah(){
         try {
@@ -135,13 +142,14 @@ public class DialogTambahPemesanan extends Dialog {
         lblNoHp = new javax.swing.JLabel();
         lblAlamat = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
-        lblDate = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         lblNik = new javax.swing.JLabel();
         lblPaket = new javax.swing.JLabel();
         txtBayar = new javax.swing.JTextField();
         btnTambah = new javax.swing.JLabel();
         btnBatal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -219,9 +227,9 @@ public class DialogTambahPemesanan extends Dialog {
         lblNama.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 363, 320, 50));
 
-        lblDate.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        lblDate.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 320, 50));
+        lblId.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+        lblId.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, 50));
 
         lblNik.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblNik.setForeground(new java.awt.Color(0, 0, 0));
@@ -253,12 +261,15 @@ public class DialogTambahPemesanan extends Dialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/tambah pemesanan.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 710));
 
+        lblDate.setText("jLabel2");
+        getContentPane().add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMenuActionPerformed
         menu = String.valueOf(cmbMenu.getSelectedItem());
-
+        cmbPembayaran.removeAllItems();
         cmbKeberangkatan.removeAllItems();
         keberangkatanList.clear();
         fillComboBoxPembayaran();
@@ -279,12 +290,12 @@ public class DialogTambahPemesanan extends Dialog {
           lblPaket.setText(kb.getPaket().getNama());
           lblBerangkat.setText(kb.getTanggal().toString());
           lblTotalOrang.setText(String.valueOf(jumlahJamaah));
-          lblHarga.setText(String.valueOf(kb.getPaket().getHarga()));
-          lblMinimDp.setText(String.valueOf(kb.getPaket().getMinimDp()));
-          lblTotalHarga.setText(String.valueOf(kb.getPaket().getHarga()));
-          lblDiskon.setText(String.valueOf(kb.getPaket().getDiskon()));
+          lblHarga.setText(String.valueOf(nf.format(kb.getPaket().getHarga())));
+          lblMinimDp.setText(String.valueOf(nf.format(kb.getPaket().getMinimDp())));
+          lblTotalHarga.setText(String.valueOf(nf.format(kb.getPaket().getHarga())));
+          lblDiskon.setText(String.valueOf(nf.format(kb.getPaket().getDiskon())));
           int totalTagihan = kb.getPaket().getHarga() - kb.getPaket().getDiskon();
-          lblTotalTagihan.setText(String.valueOf(totalTagihan));
+          lblTotalTagihan.setText(String.valueOf(nf.format(totalTagihan)));
         }
         } catch (Exception e) {
             
@@ -294,7 +305,7 @@ public class DialogTambahPemesanan extends Dialog {
 
     private void cmbPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPembayaranActionPerformed
         String pilihanPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
-        if(pilihanPembayaran.equals("Talangan")){
+        if(pilihanPembayaran.equals("talangan")){
             txtBayar.setEnabled(false);
         }else{
             txtBayar.setEnabled(true);
@@ -311,16 +322,17 @@ public class DialogTambahPemesanan extends Dialog {
         try {
             
         String jenisPembayaran = String.valueOf(cmbPembayaran.getSelectedItem());
-        int bayar = Integer.valueOf(txtBayar.getText());
+        int bayar =0;
         int minimDp = Integer.parseInt(lblMinimDp.getText());
-        if(bayar <= minimDp){
-            System.out.println("bayar kurang");
-            return;
-        }
+        
             int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
         String status = "";
         if(jenisPembayaran.equals("cash")){
-            
+            bayar = Integer.valueOf(txtBayar.getText());
+           if(bayar <= minimDp){
+               JOptionPane.showMessageDialog(rootPane, "Uang tidak memenuhi minimal DP");
+            return;
+        }
             if(bayar >= totalTagihan){
                 status = "lunas";
             }else{
@@ -328,7 +340,9 @@ public class DialogTambahPemesanan extends Dialog {
             }    
         }else if(jenisPembayaran.equals("talangan")){
             status = "belum lunas";
+            bayar = 0;
         }
+         
             System.out.println(status);
         String date = lblDate.getText();
         Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(date);
@@ -410,6 +424,7 @@ public class DialogTambahPemesanan extends Dialog {
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDiskon;
     private javax.swing.JLabel lblHarga;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblMinimDp;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblNik;

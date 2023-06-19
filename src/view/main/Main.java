@@ -32,7 +32,7 @@ public class Main extends javax.swing.JFrame {
         this.repaint();
 //        } catch(IOException e) {
 //    e.printStackTrace();
-//    // penanganan kesalahan lainnya
+//    // penanganan kesalahan lainnyaon
 //}
     }
     

@@ -30,6 +30,7 @@ public class DialogTambahPegawai extends Dialog {
     public DialogTambahPegawai(JFrame fram) {
         super(fram);
         initComponents();
+        lblId.setText(String.valueOf(userRepo.getLastId()+1));
     }
 
     /**
@@ -125,6 +126,9 @@ public class DialogTambahPegawai extends Dialog {
 
         btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png"))); // NOI18N
         btn_batal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_batalMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_batalMouseEntered(evt);
             }
@@ -224,6 +228,10 @@ public class DialogTambahPegawai extends Dialog {
     private void btn_batalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMousePressed
     btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal3.png")));
     }//GEN-LAST:event_btn_batalMousePressed
+
+    private void btn_batalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMouseClicked
+        closeMessage();
+    }//GEN-LAST:event_btn_batalMouseClicked
 
 
 

@@ -8,6 +8,9 @@ import entity.Pemesanan;
 import entity.Presensi;
 import javax.swing.JFrame;
 import java.awt.Color;
+import javax.swing.SwingUtilities;
+import view.main.maindasboard;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
@@ -162,6 +165,9 @@ public class DialogAturPresensi extends Dialog {
         Presensi.StartPresensi = start;
         Presensi.EndPresensi = end;
         Presensi.LatePresensi = late;
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Waktu berhasil diterapkan");
+        panel.showNotification();
         closeMessage();
     }//GEN-LAST:event_jLabel3MouseClicked
 

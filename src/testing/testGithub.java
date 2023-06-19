@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import repository.DashboardRepository;
 import repository.KeberangkatanRepository;
+import repository.PaketRepository;
 import repository.PresensiRepository;
 import util.DateUtil;
 /**
@@ -133,8 +134,16 @@ import util.DateUtil;
 //        } catch (Exception e) {
 //            System.out.println(e.getMessage());
 //        }
-        DashboardRepository db = new DashboardRepository();
-        System.out.println(db.getIncome());
+//        DashboardRepository db = new DashboardRepository();
+//        System.out.println(db.getIncome());
+
+        PaketRepository paketRepo = new PaketRepository();
+        boolean a = paketRepo.delete(21);
+        if(a){
+            System.out.println("asd");
+        }else{
+            System.out.println("a");
+        }
     }
 }
 

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangRepository;
@@ -335,9 +336,7 @@ public class DialogPengeluaranProduksi extends Dialog {
             int inputStok = Integer.parseInt(txtStok.getText());
             for(Barang br:barangRepo.getById(idBarang)){
                 if(br.getStok() < inputStok){
-                     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
-            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Stok tidak cukup");
-        panel.showNotification();
+                     JOptionPane.showMessageDialog(null, "Stok tidak cukup");
                     return;
                 }
                 

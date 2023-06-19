@@ -29,6 +29,7 @@ public class DialogEditPemesanan extends Dialog {
     private int id = PemesananForm.id;
     private int idKeberangkatan;
     private String menu;
+    private long TotalBayar1;
     private long TotalBayar;
     private List<Keberangkatan> keberangkatanList = new ArrayList<>();
     PemesananRepository pemesananRepo = new PemesananRepository();
@@ -43,6 +44,7 @@ public class DialogEditPemesanan extends Dialog {
         initComponents();
         setValue();
         setComboBoxStatus();
+        settotal();
     }
     
     public void setComboBoxStatus(){
@@ -57,11 +59,17 @@ public class DialogEditPemesanan extends Dialog {
         }
     }
 
+    public void settotal(){
+         lblTotalBayar.setText(String.valueOf(TotalBayar1));
+       
+    }
     private void setValue (){
+        DateUtil dateUtil = new DateUtil();
+        lblDate.setText(dateUtil.dateNow().toString());
         for(Pemesanan pm:pemesananRepo.getById(id)){
             TotalBayar = pm.getJumlahBayar();
             lblId.setText(String.valueOf(id));
-            lblTotalBayar.setText(String.valueOf(TotalBayar));
+            TotalBayar1 = pm.getJumlahBayar();
             cmbMenu.setSelectedItem(pm.getKeberangkatan().getPaket().getMenu());
             cmbPembayaran.setSelectedItem(pm.getJenisPembayaran());
             cmbJamaah.setSelectedItem(pm.getJamaah().getNama()+ " ,"+pm.getJamaah().getNik());
@@ -249,9 +257,16 @@ public class DialogEditPemesanan extends Dialog {
             int id = Integer.parseInt(lblId.getText());
             int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
             String status = String.valueOf(cmbStatus.getSelectedItem());
-            int bayar = Integer.valueOf(lblTotalBayar.getText());
-            String date = lblDate.getText();
-            String tgl = String.valueOf(cmbStatus.getSelectedItem());            
+            int bayar = 0;
+            if(status.equals("lunas")){
+                bayar = Integer.parseInt(lblTotalHarga.getText());
+            }else if(status.equals("batal")){
+                bayar = Integer.valueOf(lblTotalTagihan.getText());
+            }else if(status.equals("belum lubas")){
+                bayar = Integer.valueOf(lblTotalBayar.getText());
+            }
+            
+            String tgl = lblDate.getText();       
             Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(tgl);
             String idJamaah = lblNik.getText();
             Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
@@ -271,6 +286,7 @@ public class DialogEditPemesanan extends Dialog {
         panel.showNotification();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }//GEN-LAST:event_btnTambahMouseClicked
@@ -343,6 +359,7 @@ public class DialogEditPemesanan extends Dialog {
         
         if(status.equals("batal")){
             long ttlBayar = 0;
+            
              long hargaPaket = Integer.parseInt(lblHarga.getText());
              String tanggalBerangkat = lblBerangkat.getText();
              String tanggalSekarang = dateUtil.dateNow();
@@ -357,10 +374,16 @@ public class DialogEditPemesanan extends Dialog {
              }else if(rentangWaktu >= 22){
                  ttlBayar = hargaPaket * 15 / 100;
              };
+             settotal();
              TotalBayar = ttlBayar;
              lblTotalTagihan.setText(String.valueOf(TotalBayar));
         lblDiskon.setText("0");
         }
+//        else if(status.equals("lunas")){
+//            String bayar = lblTotalBayar.getText();
+//            TotalBayar1 = Integer.parseInt(bayar);
+//            lblTotalBayar.setText(String.valueOf(TotalBayar1));
+//        }
         } catch (Exception e) {
             System.out.println("e.getMessage()");
         }

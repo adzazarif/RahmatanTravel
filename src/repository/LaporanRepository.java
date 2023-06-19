@@ -57,21 +57,29 @@ public class LaporanRepository {
         
     public List<DataChartBar> getChartStats() {
         List<DataChartBar> data = new ArrayList<>();
-        String sql = "SELECT DATE_FORMAT(pemesanan.tanggal, '%M') AS months,SUM(pemesanan.jumlah_bayar) as pemasukann, SUM(pengeluaran.total_pengeluaran) + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional WHERE MONTH('2023-06-02') = 6) AS pengeluarann, (SUM(pemesanan.jumlah_bayar) - pengeluaran.total_pengeluaran - (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional WHERE MONTH('2023-06-02') = 6)) AS laba_bersih, (SUM(pemesanan.jumlah_bayar) - pengeluaran.total_pengeluaran) AS laba_kotor FROM `keberangkatan` JOIN pemesanan ON keberangkatan.id = pemesanan.keberangkatan_id JOIN pengeluaran ON keberangkatan.id = pengeluaran.keberangkatan_id JOIN master_paket ON keberangkatan.paket_id = master_paket.id GROUP BY YEAR(pemesanan.tanggal), MONTH(pemesanan.tanggal) LIMIT 5";
-
+        String sqlPemasukan = "SELECT DATE_FORMAT(pemesanan.tanggal, '%M') AS bulan, SUM(pemesanan.jumlah_bayar) AS pemasukan FROM pemesanan GROUP BY YEAR(pemesanan.tanggal), MONTH(pemesanan.tanggal) LIMIT 5";
+        String sqlPengeluaran = "SELECT DATE_FORMAT(pengeluaran.tanggal, '%M') AS bulan, SUM(pengeluaran.total_pengeluaran) AS pengeluaran FROM pengeluaran GROUP BY YEAR(pengeluaran.tanggal), MONTH(pengeluaran.tanggal) LIMIT 5";
+        String sqlPengeluaranOperasional = "SELECT DATE_FORMAT(pengeluaran_operasional.tanggal, '%M') AS bulan, SUM(pengeluaran_operasional.jumlah) AS pengeluaranOperasional FROM pengeluaran_operasional GROUP BY YEAR(pengeluaran_operasional.tanggal), MONTH(pengeluaran_operasional.tanggal) LIMIT 5";
         try {
             
             Connection koneksi = (Connection) Conn.configDB();
-        Statement pstCek = koneksi.createStatement();
-        ResultSet res = pstCek.executeQuery(sql);
+        Statement pstPemasukan = koneksi.createStatement();
+        ResultSet resPemasukan = pstPemasukan.executeQuery(sqlPemasukan);
+         Statement pstPengeluaran = koneksi.createStatement();
+        ResultSet resPengeluaran = pstPengeluaran.executeQuery(sqlPengeluaran);
+         Statement pstPengeluaranOpe = koneksi.createStatement();
+        ResultSet resPengeluaranOpe = pstPengeluaranOpe.executeQuery(sqlPengeluaranOperasional);
+        
 
-            while(res.next()) {
+            while(resPemasukan.next() && resPengeluaran.next() && resPengeluaranOpe.next()) {
+                int labaKotor = resPemasukan.getInt("pemasukan") - resPengeluaran.getInt("pengeluaran");
+                int labaBersih = resPemasukan.getInt("pemasukan") - resPengeluaran.getInt("pengeluaran") - resPengeluaranOpe.getInt("pengeluaranOperasional");
                 data.add(new DataChartBar(
-                    res.getString("months"),
-                    res.getInt("pemasukann"),
-                    res.getInt("pengeluarann"),
-                    res.getInt("laba_bersih"),
-                    res.getInt("laba_kotor")
+                    resPemasukan.getString("bulan"),
+                    resPemasukan.getInt("pemasukan"),
+                    resPengeluaran.getInt("pengeluaran"),
+                    labaBersih,
+                    labaKotor
                 ));}
         }catch(Exception e) { e.printStackTrace(); }
 

@@ -30,6 +30,7 @@ import view.dialog.dialog_mintakode;
 import view.main.Main;
 import java.awt.Color;
 import service.Auth;
+import view.swing.Notification;
 
 
 
@@ -243,20 +244,24 @@ private String apa1;
                                
                                kirim();
                                at.username = txtUsername.getText();
-                               
+                               System.out.println(txtUsername.getText());
                                String token = getapa();
                                at.kirimTokenDB(txtUsername.getText(), token);
                                 System.out.println(token);      
-                               
-                            }
+                               Main main =(Main)SwingUtilities.getWindowAncestor(this);
+                dialog_mintakode a = new dialog_mintakode(main);
+                a.showPopUp();
+                            }else{
+                             Main main =(Main)SwingUtilities.getWindowAncestor(this);
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "username tidak ditemukan");
+        panel.showNotification();
+                            return;
+                        }
                         
                     } catch (Exception e) {
                          e.printStackTrace();
                     }
-                Main main =(Main)SwingUtilities.getWindowAncestor(this);
-                dialog_mintakode a = new dialog_mintakode(main);
-                a.showGlass();
-                a.showPopUp();
+                
     }//GEN-LAST:event_mintakodMouseClicked
 
     private void mintakodMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mintakodMouseEntered

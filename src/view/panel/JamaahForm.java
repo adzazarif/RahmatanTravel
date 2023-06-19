@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import repository.JamaahRepository;
 import view.main.Main;
+import view.swing.Notification;
 import view.swing.PanelTabelAction;
 import view.swing.TableActionEvent;
 
@@ -87,20 +88,23 @@ public class JamaahForm extends javax.swing.JPanel {
     }
     
     
-    
+     maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
     
      public void load_table(){
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
-                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
-                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
+                String idJ = table.getValueAt(row, 0).toString();
+                int response = JOptionPane.showConfirmDialog(null, "Jika anda menghapus data paket maka semua data yang berelasi akan terhapus", "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 boolean delete = jamaahRepo.delete(idJ);
+               
+              Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data Berhasil di hapu");
+        panel.showNotification();
+        setAmount();
                 load_table();
             } else {
-                // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
-                // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
+                
             } 
             }
         };
@@ -139,10 +143,11 @@ public class JamaahForm extends javax.swing.JPanel {
           TableActionEvent event = new TableActionEvent() {
             @Override
             public void delete(int row) {
-                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
+                String idJ = table.getValueAt(row, 0).toString();
                 int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 boolean delete = jamaahRepo.delete(idJ);
+                setAmount();
                 load_table();
             } else {
                 // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
@@ -159,6 +164,7 @@ public class JamaahForm extends javax.swing.JPanel {
             model.addColumn("Jenis Kelamin");
             model.addColumn("Alamat");
             model.addColumn("No Telp");
+            model.addColumn("Aksi");
             
 
             int no = 1;
@@ -197,7 +203,6 @@ public class JamaahForm extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnEdit = new javax.swing.JLabel();
         btnTambah = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
@@ -264,13 +269,6 @@ public class JamaahForm extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/buttonhapus11.png"))); // NOI18N
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseClicked(evt);
-            }
-        });
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Model Tabel.png"))); // NOI18N
 
         jPanel1.setBackground(new Color(0,0,0,0)
@@ -331,8 +329,8 @@ public class JamaahForm extends javax.swing.JPanel {
             .addGroup(panelShadow1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollBarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -413,9 +411,7 @@ public class JamaahForm extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTambah)
@@ -457,8 +453,7 @@ public class JamaahForm extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnTambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,18 +479,9 @@ public class JamaahForm extends javax.swing.JPanel {
         maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
       dialog_tambahJamaah panggilTambah = new dialog_tambahJamaah(main);
       panggilTambah.showPopUp();
+      setAmount();
       load_table();
     }//GEN-LAST:event_btnTambahMouseClicked
-
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        if(jamaahRepo.delete(idJamaah)){
-            System.out.println("Berhasil di delete");
-            load_table();
-            setAmount();
-        }else{
-            System.out.println("gagal");
-        }
-    }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseEntered
     btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttoneditt1.png")));
@@ -568,7 +554,6 @@ public class JamaahForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnDelete;
     private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnTambah;
     private javax.swing.JLabel btn_logout;

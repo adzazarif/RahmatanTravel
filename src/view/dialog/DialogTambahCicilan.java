@@ -52,22 +52,22 @@ public class DialogTambahCicilan extends Dialog {
         loadTable();
     }
     
-     public void generate() {
-        String query = "SELECT *, jamaah.nama AS namaJamaah, detail_pemesanan.tanggal AS tanggalCicilan FROM pemesanan JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE pemesanan.id = "+Integer.parseInt(lblId.getText());
-        String path = "D:/RahmatanTravel/src/report/NotaCicilan.jrxml";
-
-        try {
-              Connection koneksi = (Connection) Conn.configDB();
-            Statement pstCek = koneksi.createStatement();
-            ResultSet res = pstCek.executeQuery(query);
-            JasperDesign design = JRXmlLoader.load(path);
-            JasperReport jr = JasperCompileManager.compileReport(design);
-            JRResultSetDataSource rsDataSource = new JRResultSetDataSource(res);
-            JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap<>(), rsDataSource);
-
-            JasperViewer.viewReport(jp);
-        } catch(Exception e) { e.printStackTrace(); }
-    }
+//     public void generate() {
+//        String query = "SELECT *, jamaah.nama AS namaJamaah, detail_pemesanan.tanggal AS tanggalCicilan FROM pemesanan JOIN detail_pemesanan ON pemesanan.id = detail_pemesanan.pemesanan_id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id WHERE pemesanan.id = "+Integer.parseInt(lblId.getText());
+//        String path = "D:/RahmatanTravel/src/report/NotaCicilan.jrxml";
+//
+//        try {
+//              Connection koneksi = (Connection) Conn.configDB();
+//            Statement pstCek = koneksi.createStatement();
+//            ResultSet res = pstCek.executeQuery(query);
+//            JasperDesign design = JRXmlLoader.load(path);
+//            JasperReport jr = JasperCompileManager.compileReport(design);
+//            JRResultSetDataSource rsDataSource = new JRResultSetDataSource(res);
+//            JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap<>(), rsDataSource);
+//
+//            JasperViewer.viewReport(jp);
+//        } catch(Exception e) { e.printStackTrace(); }
+//    }
      
 private void loadTable(){
        DefaultTableModel model = new DefaultTableModel();
@@ -244,7 +244,7 @@ private void loadTable(){
             PemesananForm.id = 0;
             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil ditambahkan");
         panel.showNotification();
-            generate();
+//            generate();
             loadTable();
             setValue();
               if(kurangBayar <= 0){

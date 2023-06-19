@@ -51,6 +51,7 @@ public class BarangForm extends javax.swing.JPanel {
      */
     public BarangForm() {
         initComponents();
+        jPanel5.setOpaque(false);
         jLabel6.setVisible(false);
         btn_logout.setVisible(false);
         jScrollPane2.setOpaque(false);
@@ -670,19 +671,19 @@ loadTableKeluar();
     private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
         jLabel6.setVisible(false);
         btn_logout.setVisible(false);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel8MouseEntered
 
     private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
         jLabel6.setVisible(false);
         btn_logout.setVisible(false);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel9MouseEntered
 
     private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
         jLabel6.setVisible(false);
         btn_logout.setVisible(false);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel10MouseEntered
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
