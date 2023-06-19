@@ -178,6 +178,7 @@ public class PaketRepository implements Repository<Paket>{
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

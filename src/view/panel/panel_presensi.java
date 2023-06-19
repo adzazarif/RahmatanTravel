@@ -19,6 +19,7 @@ import view.dialog.DialogTambahCicilan;
 import view.dialog.DialogTambahPresensi;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.awt.Font;
 import view.main.Main;
 import view.main.Mainpresensi;
 
@@ -92,6 +93,11 @@ public class panel_presensi extends javax.swing.JPanel {
      }
       
     public void setValue(){
+        Font font = new Font("Quicksand", Font.BOLD, 42);
+        lblStartTime.setFont(font);
+        lblEndTime.setFont(font);
+        lblEndTime1.setFont(font);
+    
         lblStartTime.setText(startPresensi);
         lblEndTime.setText(endPresensi);
         lblEndTime1.setText(latePresensi);
@@ -133,7 +139,6 @@ public class panel_presensi extends javax.swing.JPanel {
         lblStartTime = new javax.swing.JLabel();
         panelButton = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new view.pallet.Table();
         jLabel3 = new javax.swing.JLabel();
@@ -145,33 +150,44 @@ public class panel_presensi extends javax.swing.JPanel {
         add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 330, 70));
 
         lblDate.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
-        add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 270, 30));
+        add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 270, 30));
 
         lblEndTime1.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        add(lblEndTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 360, 70));
+        lblEndTime1.setForeground(new java.awt.Color(255, 255, 255));
+        add(lblEndTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, 280, 70));
 
         lblEndTime.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        add(lblEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 360, 70));
+        lblEndTime.setForeground(new java.awt.Color(255, 255, 255));
+        add(lblEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 650, 270, 70));
 
         lblStartTime.setFont(new java.awt.Font("Segoe UI", 0, 40)); // NOI18N
-        add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 360, 70));
+        lblStartTime.setForeground(new java.awt.Color(255, 255, 255));
+        add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 280, 70));
 
         panelButton.setBackground(new Color(0,0,0,0));
         panelButton.setLayout(null);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_presensi1.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
         });
         panelButton.add(jLabel2);
-        jLabel2.setBounds(0, 10, 180, 40);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button presensi.png"))); // NOI18N
-        panelButton.add(jLabel1);
-        jLabel1.setBounds(0, 0, 190, 60);
+        jLabel2.setBounds(0, 0, 180, 60);
 
         add(panelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 90, 190, 70));
+
+        jScrollPane2.setBorder(null);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,13 +205,22 @@ public class panel_presensi extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 710, 510));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("mbalek");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_kembali11.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
         });
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 140, 60));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 90, 180, 60));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg presensi.png"))); // NOI18N
         add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -214,10 +239,33 @@ public class panel_presensi extends javax.swing.JPanel {
             new Main().setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_kembali22.png")));
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_kembali11.png")));
+    }//GEN-LAST:event_jLabel3MouseExited
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_kembali33.png")));
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_presensi2.png")));
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_presensi1.png")));
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_presensi3.png")));
+    }//GEN-LAST:event_jLabel2MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;

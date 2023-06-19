@@ -35,6 +35,7 @@ import repository.PemesananRepository;
 import util.Conn;
 import util.DateUtil;
 import view.main.maindasboard;
+import view.panel.PemesananForm;
 import view.swing.Notification;
 
 /**
@@ -239,8 +240,9 @@ public class DialogTambahPemesanan extends Dialog {
                 btnTambahMouseClicked(evt);
             }
         });
-        getContentPane().add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 630, 170, 40));
+        getContentPane().add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 630, 170, 40));
 
+        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png"))); // NOI18N
         btnBatal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBatalMouseClicked(evt);
@@ -300,7 +302,8 @@ public class DialogTambahPemesanan extends Dialog {
     }//GEN-LAST:event_cmbPembayaranActionPerformed
 
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
-       closeMessage();
+       PemesananForm.id = 0;
+        closeMessage();
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked

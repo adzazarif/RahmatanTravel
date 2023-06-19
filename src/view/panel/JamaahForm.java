@@ -111,10 +111,9 @@ public class JamaahForm extends javax.swing.JPanel {
          
          
          
-         DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+         DefaultTableModel model = new DefaultTableModel();    
             model.addColumn("NIK");
-            model.addColumn("Alamat");
+            model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
             model.addColumn("Alamat");
             model.addColumn("No Telp");
@@ -124,7 +123,6 @@ public class JamaahForm extends javax.swing.JPanel {
            
            for(Jamaah res:jamaahRepo.get()){
                 model.addRow(new Object[]{
-                    no++,
                     res.getNik(),
                     res.getNama(),
                     res.getJenisKelamin(),
@@ -133,15 +131,31 @@ public class JamaahForm extends javax.swing.JPanel {
                 });
            }
             table.setModel(model);
-       table.getColumnModel().getColumn(6).setCellRenderer(render);
-        table.getColumnModel().getColumn(6).setCellEditor(render1);
+       table.getColumnModel().getColumn(5).setCellRenderer(render);
+        table.getColumnModel().getColumn(5).setCellEditor(render1);
         
      }
       public void loadSearch(String search){
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("No");      
+          TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void delete(int row) {
+                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
+                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                boolean delete = jamaahRepo.delete(idJ);
+                load_table();
+            } else {
+                // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
+                // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
+            } 
+            }
+        };
+        ImageRenderr render = new ImageRenderr();
+        apacobak render1 = new apacobak(event);   
+        
+            DefaultTableModel model = new DefaultTableModel();      
             model.addColumn("NIK");
-            model.addColumn("Alamat");
+            model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
             model.addColumn("Alamat");
             model.addColumn("No Telp");
@@ -151,7 +165,6 @@ public class JamaahForm extends javax.swing.JPanel {
            
            for(Jamaah res:jamaahRepo.getSearch(search)){
                 model.addRow(new Object[]{
-                    no++,
                     res.getNik(),
                     res.getNama(),
                     res.getJenisKelamin(),
@@ -160,7 +173,9 @@ public class JamaahForm extends javax.swing.JPanel {
                 });
            }
             table.setModel(model);
-       
+        table.setModel(model);
+       table.getColumnModel().getColumn(5).setCellRenderer(render);
+        table.getColumnModel().getColumn(5).setCellEditor(render1);
         
      }
 
@@ -361,8 +376,26 @@ public class JamaahForm extends javax.swing.JPanel {
             }
         });
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
+
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
+
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
+
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -482,7 +515,7 @@ public class JamaahForm extends javax.swing.JPanel {
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
               int baris = table.rowAtPoint(evt.getPoint());
-        String idd = table.getValueAt(baris, 1).toString();
+        String idd = table.getValueAt(baris, 0).toString();
         idJamaah = Integer.valueOf(idd);
     }//GEN-LAST:event_tableMouseClicked
 
@@ -512,8 +545,26 @@ public class JamaahForm extends javax.swing.JPanel {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
     jLabel6.setVisible(true);
     btn_logout.setVisible(true);
-    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+    jLabel6.setVisible(false);
+    btn_logout.setVisible(false);
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+    jLabel6.setVisible(false);
+    btn_logout.setVisible(false);
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+    jLabel6.setVisible(false);
+    btn_logout.setVisible(false);
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel10MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

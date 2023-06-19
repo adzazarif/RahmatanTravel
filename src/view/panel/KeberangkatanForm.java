@@ -240,8 +240,26 @@ public class KeberangkatanForm extends javax.swing.JPanel {
             }
         });
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
+
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
+
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
+
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -299,7 +317,7 @@ public class KeberangkatanForm extends javax.swing.JPanel {
          maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         DialogTambahKeberangkatan tambahKeberangkatan = new DialogTambahKeberangkatan(main);
         tambahKeberangkatan.showPopUp();
-        
+        main.showform(new KeberangkatanForm());
         load_table();
     }//GEN-LAST:event_btnTambahMouseClicked
 
@@ -316,6 +334,7 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         DialogEditKeberangkatan editKeberangkatan= new DialogEditKeberangkatan(main);
         editKeberangkatan.showPopUp();
         load_table();
+        main.showform(new KeberangkatanForm());
     }//GEN-LAST:event_btnEditMouseClicked
 
     private void btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseEntered
@@ -336,9 +355,11 @@ public class KeberangkatanForm extends javax.swing.JPanel {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
              boolean delete = keberangkatanRepo.delete(id);
+             maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         if(delete){
+            main.showform(new KeberangkatanForm());
             System.out.println("berhasil");
-            load_table();
+//            load_table();
         }else{
             System.out.println("Berhasil");
         }
@@ -375,6 +396,24 @@ public class KeberangkatanForm extends javax.swing.JPanel {
     btn_logout.setVisible(true);
     jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+    jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+    jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+    jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel10MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

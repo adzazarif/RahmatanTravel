@@ -217,6 +217,7 @@ private void loadTable(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
+        PemesananForm.id = 0;
         closeMessage();
     }//GEN-LAST:event_btnBatalMouseClicked
 

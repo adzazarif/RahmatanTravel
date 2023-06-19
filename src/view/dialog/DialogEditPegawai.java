@@ -79,6 +79,7 @@ public class DialogEditPegawai extends Dialog {
         jLabel2 = new javax.swing.JLabel();
         btnEdit = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        btn_batal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,13 +115,37 @@ public class DialogEditPegawai extends Dialog {
         getContentPane().add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 445, 150, 30));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 90, 40));
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_edit1.png"))); // NOI18N
         btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEditMousePressed(evt);
+            }
         });
-        getContentPane().add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 140, 30));
+        getContentPane().add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 530, 160, 40));
         getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 280, 40));
+
+        btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png"))); // NOI18N
+        btn_batal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_batalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_batalMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_batalMousePressed(evt);
+            }
+        });
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 170, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/edit pegawai.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 590));
@@ -200,9 +225,34 @@ public class DialogEditPegawai extends Dialog {
         }
     }//GEN-LAST:event_btnTambahMouseClicked
 
+    private void btn_batalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMouseEntered
+        btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal2.png")));
+    }//GEN-LAST:event_btn_batalMouseEntered
+
+    private void btn_batalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMouseExited
+        btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png")));
+    }//GEN-LAST:event_btn_batalMouseExited
+
+    private void btn_batalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMousePressed
+        btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal3.png")));
+    }//GEN-LAST:event_btn_batalMousePressed
+
+    private void btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseEntered
+    btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_edit2.png")));
+    }//GEN-LAST:event_btnEditMouseEntered
+
+    private void btnEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseExited
+    btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_edit1.png")));
+    }//GEN-LAST:event_btnEditMouseExited
+
+    private void btnEditMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMousePressed
+    btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_edit3.png")));
+    }//GEN-LAST:event_btnEditMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnTambah;
+    private javax.swing.JLabel btn_batal;
     private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

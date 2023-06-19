@@ -95,6 +95,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     public void selected(int index) {
                         clearMenu(index);
                         PaketForm.id = p.getId();   
+                        System.out.println(p.getId());
                     }
                 });
                 panellist.add(pnn); 

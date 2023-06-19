@@ -52,6 +52,7 @@ public class DialogTambahPegawai extends Dialog {
         btnSimpan = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         lblFoto = new javax.swing.JLabel();
+        btn_batal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,17 +101,41 @@ public class DialogTambahPegawai extends Dialog {
         });
         getContentPane().add(btnTambahFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 150, 30));
 
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_tambah1.png"))); // NOI18N
         btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSimpanMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSimpanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSimpanMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSimpanMousePressed(evt);
+            }
         });
-        getContentPane().add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 610, 140, 30));
+        getContentPane().add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 607, 160, 40));
 
         lblId.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
         lblId.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 290, 50));
         getContentPane().add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 135, 240, 305));
+
+        btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png"))); // NOI18N
+        btn_batal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_batalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_batalMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_batalMousePressed(evt);
+            }
+        });
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 607, 170, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/tambah pegawai.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 657));
@@ -176,11 +201,36 @@ public class DialogTambahPegawai extends Dialog {
         }
     }//GEN-LAST:event_btnSimpanMouseClicked
 
+    private void btnSimpanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseEntered
+    btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_tambah2.png")));
+    }//GEN-LAST:event_btnSimpanMouseEntered
+
+    private void btnSimpanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseExited
+    btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_tambah1.png")));
+    }//GEN-LAST:event_btnSimpanMouseExited
+
+    private void btnSimpanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMousePressed
+    btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_tambah3.png")));
+    }//GEN-LAST:event_btnSimpanMousePressed
+
+    private void btn_batalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMouseEntered
+    btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal2.png")));
+    }//GEN-LAST:event_btn_batalMouseEntered
+
+    private void btn_batalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMouseExited
+    btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal1.png")));
+    }//GEN-LAST:event_btn_batalMouseExited
+
+    private void btn_batalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_batalMousePressed
+    btn_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_batal3.png")));
+    }//GEN-LAST:event_btn_batalMousePressed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnSimpan;
     private javax.swing.JLabel btnTambahFoto;
+    private javax.swing.JLabel btn_batal;
     private javax.swing.JComboBox<String> cmbJenisKelamin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblFoto;

@@ -539,8 +539,26 @@ jPanel5.setOpaque(false);
             }
         });
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
+
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
+
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
+
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+        });
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button cetak.png"))); // NOI18N
@@ -736,8 +754,26 @@ jPanel5.setOpaque(false);
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
     jLabel6.setVisible(true);
     btn_logout.setVisible(true);
-    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
+    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+        jLabel6.setVisible(true);
+        btn_logout.setVisible(true);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+    jLabel6.setVisible(true);
+        btn_logout.setVisible(true);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+    jLabel6.setVisible(true);
+        btn_logout.setVisible(true);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
+    }//GEN-LAST:event_jLabel10MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

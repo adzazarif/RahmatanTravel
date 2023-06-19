@@ -285,6 +285,7 @@ public class DialogEditPemesanan extends Dialog {
     }//GEN-LAST:event_cmbMenuActionPerformed
 
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
+        PemesananForm.id = 0;
         closeMessage();
     }//GEN-LAST:event_btnBatalMouseClicked
 
