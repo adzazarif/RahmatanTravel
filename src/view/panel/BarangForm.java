@@ -12,13 +12,18 @@ import javax.swing.SwingUtilities;
 import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import repository.BarangMasukRepository;
 import repository.BarangRepository;
@@ -28,6 +33,8 @@ import util.Conn;
 import view.dialog.DIalogTambahStok;
 import view.dialog.DialogEditBarang;
 import view.dialog.DialogTambahBarang;
+import view.swing.PanelTabelAction;
+import view.swing.TableActionEvent;
 /**
  *
  * @author semafie
@@ -57,6 +64,42 @@ public class BarangForm extends javax.swing.JPanel {
         service.schedule(BarangForm::notification, 1, TimeUnit.SECONDS);
     }
     
+    private class apacobak extends DefaultCellEditor{
+        
+    private TableActionEvent event;
+    
+    public apacobak(TableActionEvent event){
+        super(new JCheckBox());
+        this.event = event;
+        
+    }
+    
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+    PanelTabelAction action = new PanelTabelAction();
+    action.initEvent(event, row);
+    action.setBackground(table.getSelectionBackground());
+    return action;
+    }
+    }
+    
+    private class ImageRenderr extends DefaultTableCellRenderer {
+
+        @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        PanelTabelAction action = new PanelTabelAction();
+        if(isSelected == false && row % 2 == 0){
+            action.setBackground(Color.WHITE);
+        } else {
+            action.setBackground(com.getBackground());
+        }
+        return action;
+    }
+
+    }
+    
     public static void notification(){
         try {
              boolean status = NotificationStokBarang.status;
@@ -69,11 +112,29 @@ public class BarangForm extends javax.swing.JPanel {
     }
         
      public void loadTableStok(){
+         TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void delete(int row) {
+                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
+                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                boolean delete = barangRepo.delete(idJ);
+                loadTableStok();
+            } else {
+                // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
+                // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
+            } 
+            }
+        };
+         
+        ImageRenderr render = new ImageRenderr();
+        apacobak render1 = new apacobak(event);   
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Stok");
             model.addColumn("Harga");
+            model.addColumn("Aksi");
          
         
            try {
@@ -86,17 +147,38 @@ public class BarangForm extends javax.swing.JPanel {
                 });
            }
              table.setModel(model);
+       table.getColumnModel().getColumn(4).setCellRenderer(render);
+        table.getColumnModel().getColumn(4).setCellEditor(render1);
          } catch (Exception e) {
              e.printStackTrace();
          }
     }
      
       public void loadTableStok(String search){
+           TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void delete(int row) {
+                int idJ = Integer.valueOf(table.getValueAt(row, 0).toString());
+                int response = JOptionPane.showConfirmDialog(null, "Yakin menghapus data pada row = "+ row+", id"+idJ, "apa cobak?", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                boolean delete = barangRepo.delete(idJ);
+                loadTableStok();
+            } else {
+                // Tindakan yang diambil jika pengguna memilih "No" atau menutup dialog
+                // Misalnya, tidak melakukan apa pun atau membatalkan tindakan
+            } 
+            }
+        };
+         
+        ImageRenderr render = new ImageRenderr();
+        apacobak render1 = new apacobak(event); 
+        
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Id");      
             model.addColumn("Nama");
             model.addColumn("Stok");
             model.addColumn("Harga");
+            model.addColumn("Aksi");
          
         
            try {
@@ -109,6 +191,9 @@ public class BarangForm extends javax.swing.JPanel {
                 });
            }
              table.setModel(model);
+
+       table.getColumnModel().getColumn(4).setCellRenderer(render);
+        table.getColumnModel().getColumn(4).setCellEditor(render1);
          } catch (Exception e) {
              e.printStackTrace();
          }
@@ -233,8 +318,6 @@ public class BarangForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         bntMasuk = new javax.swing.JLabel();
         bntKeluar = new javax.swing.JLabel();
@@ -286,8 +369,6 @@ public class BarangForm extends javax.swing.JPanel {
                 jLabel3MouseClicked(evt);
             }
         });
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/buttonhapus11.png"))); // NOI18N
 
         jPanel2.setBackground(new Color(0,0,0,0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -381,10 +462,10 @@ public class BarangForm extends javax.swing.JPanel {
                 txtSearchKeyReleased(evt);
             }
         });
-        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 160, 30));
+        jPanel3.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 160, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menusearch1.png"))); // NOI18N
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 231, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 231, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -394,22 +475,18 @@ public class BarangForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(16, 16, 16)
                 .addComponent(btnEdit)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(17, 17, 17))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -422,21 +499,18 @@ public class BarangForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(71, 71, 71))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnEdit))
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11)))
-                .addGap(28, 28, 28)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel3))
+                            .addComponent(btnEdit)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -507,8 +581,6 @@ loadTableKeluar();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

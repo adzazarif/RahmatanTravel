@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import view.event.EventMenuSelected;
+import view.panel.PaketForm;
 
 public class tampilPaketUmrohDasboard extends javax.swing.JPanel {
 
@@ -41,7 +42,12 @@ public class tampilPaketUmrohDasboard extends javax.swing.JPanel {
                 
             while(res.next()){
                 final String id_barang = res.getString(1);
+                int id = res.getInt("master_paket.id");
                 ItemPaket pnn = new ItemPaket();
+                pnn.harga.setText(res.getString("master_paket.harga"));
+                pnn.namapaket123.setText(res.getString("master_paket.nama"));
+                pnn.infopaket.setText(res.getString("master_paket.menu"));
+                
                 int index = panellist.size() + 1;
                 pnn.setIndex(index);
                 container.setLayout(null);
@@ -69,7 +75,8 @@ public class tampilPaketUmrohDasboard extends javax.swing.JPanel {
                     @Override
                     public void mouseEntered(MouseEvent e){
                         super.mouseEntered(e);
-                        nomorpanel = id_barang;                   
+                        
+                        PaketForm.id = id;                    
                         
                     }
                 });
@@ -77,7 +84,7 @@ public class tampilPaketUmrohDasboard extends javax.swing.JPanel {
                     @Override
                     public void selected(int index) {
                         clearMenu(index);
-                        nomorpanel1 = id_barang;
+                        PaketForm.id = id; 
                     
                     }
                 });

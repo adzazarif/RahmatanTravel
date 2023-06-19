@@ -46,9 +46,9 @@ public class ItemPaket extends javax.swing.JPanel {
     
     public ItemPaket() {
         initComponents();
-        Font font = new Font("Quicksand", Font.BOLD, 17);
-        namapaket123.setFont(font);
-        infopaket.setFont(font);
+//        Font font = new Font("Quicksand", Font.BOLD, 17);
+//        namapaket123.setFont(font);
+//        infopaket.setFont(font);
         
         paketitemselect.setVisible(false);
         setOpaque(false);
@@ -105,12 +105,18 @@ public class ItemPaket extends javax.swing.JPanel {
 
         setBackground(new Color(0,0,0,0));
         setLayout(null);
+
+        namapaket123.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
         add(namapaket123);
-        namapaket123.setBounds(130, 40, 150, 20);
+        namapaket123.setBounds(150, 40, 130, 20);
+
+        harga.setFont(new java.awt.Font("Quicksand Bold", 0, 12)); // NOI18N
         add(harga);
-        harga.setBounds(130, 80, 150, 20);
+        harga.setBounds(150, 80, 130, 20);
+
+        infopaket.setFont(new java.awt.Font("Quicksand Bold", 0, 12)); // NOI18N
         add(infopaket);
-        infopaket.setBounds(130, 60, 150, 20);
+        infopaket.setBounds(150, 60, 130, 20);
 
         selengkapnya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/selengkapnyapaket.jpg"))); // NOI18N
         selengkapnya.addMouseListener(new java.awt.event.MouseAdapter() {

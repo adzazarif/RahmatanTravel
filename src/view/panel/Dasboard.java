@@ -28,6 +28,7 @@ public class Dasboard extends javax.swing.JPanel {
      */
     public Dasboard() {
         initComponents();
+        
         btn_logout.setVisible(false);
         jPanel5.setOpaque(false);
         jLabel6.setVisible(false);
@@ -36,7 +37,7 @@ public class Dasboard extends javax.swing.JPanel {
     }
     
     public void setValue(){
-        lblPemasukan.setText(String.valueOf(nf.format(dashboardRepo.getIncome())));
+        lblPemasukan.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getIncome())));
         lblPengeluaran.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getExpenditure())));
         lblToday.setText(String.valueOf(dashboardRepo.getIncomePerDay()));
         

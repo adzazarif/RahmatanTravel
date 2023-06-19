@@ -12,6 +12,8 @@ import view.dialog.DialogTambahPaket;
 import view.main.maindasboard;
 import java.awt.Color;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ import view.dialog.DialogDetailPegawai;
 import view.dialog.DialogEditPaket;
 import view.dialog.DialogEditPegawai;
 import view.dialog.DialogTambahPegawai;
+import view.main.Main;
 import view.swing.Notification;
 import view.swing.PanelTabelAction;
 import view.swing.TableActionEvent;
@@ -42,11 +45,32 @@ public class Pegawai extends javax.swing.JPanel {
      */
     public Pegawai() {
         initComponents();
+        jPanel2.setOpaque(false);
+        jPanel4.setOpaque(false);
+        jPanel5.setOpaque(false);
+        jPanel6.setOpaque(false);
+        jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
         if(pilihan.equals("akun")){
             loadTableAkun();
         }else if(pilihan.equals("presensi")){
             loadTablePresensi();
         }
+        setValueTime();
+        fillComboBoxJamaah();
+    }
+    private void fillComboBoxJamaah(){
+        try {
+              for(User jm:userRepo.get()){
+           cmbNama.addItem(jm.getNama()+","+jm.getId());
+        }
+        } catch (Exception e) {
+        }
+    }
+    public void setValueTime(){
+        lbl_presensimulai.setText(Presensi.StartPresensi);
+        lbl_presensiterlambat.setText(Presensi.LatePresensi);
+        lbl_presensitutup.setText(Presensi.EndPresensi);
     }
     
     private class apacobak extends DefaultCellEditor{
@@ -237,6 +261,7 @@ public class Pegawai extends javax.swing.JPanel {
 
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        date = new com.raven.datechooser.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblAkun1 = new javax.swing.JLabel();
@@ -253,17 +278,34 @@ public class Pegawai extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        btn_logout = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lbl_presensitutup = new javax.swing.JLabel();
+        lbl_presensimulai = new javax.swing.JLabel();
+        lbl_presensiterlambat = new javax.swing.JLabel();
+        btn_pengaturan = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        btn_terapkan = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
+        cmbNama = new view.pallet.ComboBoxSuggestion();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button CRUD.png"))); // NOI18N
 
         jPanel3.setBackground(new Color(0,0,0,0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        date.setDateFormat("yyyy-MM-dd");
+        date.setTextRefernce(txtDate);
 
         setBackground(new java.awt.Color(255, 249, 243));
         setPreferredSize(new java.awt.Dimension(1247, 768));
@@ -371,7 +413,7 @@ public class Pegawai extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
         );
 
-        jPanel2.setBackground(new Color(0,0,0,0));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtSearch.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
@@ -388,36 +430,121 @@ public class Pegawai extends javax.swing.JPanel {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout3.png"))); // NOI18N
+        btn_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_logoutMousePressed(evt);
+            }
+        });
+        jPanel5.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 190, -1));
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu_ujung.png"))); // NOI18N
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 26, -1, 130));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png"))); // NOI18N
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
-
-        jLabel5.setText("atur presensi");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jLabel4MouseClicked(evt);
             }
         });
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 160));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 10));
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_presensitutup.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        jPanel4.add(lbl_presensitutup, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 110, 30));
+
+        lbl_presensimulai.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        jPanel4.add(lbl_presensimulai, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 110, 30));
+
+        lbl_presensiterlambat.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        jPanel4.add(lbl_presensiterlambat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 110, 30));
+
+        btn_pengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/button_pengaturan1.png"))); // NOI18N
+        btn_pengaturan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_pengaturanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_pengaturanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_pengaturanMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_pengaturanMousePressed(evt);
+            }
+        });
+        jPanel4.add(btn_pengaturan, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 30, 36));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/atur_presensi.png"))); // NOI18N
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 180));
+
+        jLabel5.setText("jLabel5");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+
+        jPanel6.setBackground(new Color(0,0,0,0));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_terapkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/btn_terapkan1.png"))); // NOI18N
+        btn_terapkan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_terapkanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_terapkanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_terapkanMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_terapkanMousePressed(evt);
+            }
+        });
+        jPanel6.add(btn_terapkan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 150, 40));
+
+        txtDate.setFont(new java.awt.Font("Quicksand Bold", 0, 14)); // NOI18N
+        txtDate.setBorder(null);
+        jPanel6.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 230, 40));
+        jPanel6.add(cmbNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 320, 40));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hadir", "Terlambat", "Izin", "Sakit" }));
+        jComboBox1.setBorder(null);
+        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 320, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button date.png"))); // NOI18N
+        jLabel11.setText("jLabel11");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 60, 50));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg_presensimanual.png"))); // NOI18N
+        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 435, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,20 +553,31 @@ public class Pegawai extends javax.swing.JPanel {
                                 .addComponent(lblPresensi1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblAkun1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 19, 19)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(38, 38, 38)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnDetail)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDetail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,10 +586,8 @@ public class Pegawai extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -459,18 +595,17 @@ public class Pegawai extends javax.swing.JPanel {
                             .addComponent(lblPresensi1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAkun1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20)
-                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -520,37 +655,129 @@ public class Pegawai extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void btn_pengaturanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pengaturanMouseClicked
             maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         DialogAturPresensi editPegawai = new DialogAturPresensi(main);
       editPegawai.showPopUp();
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_btn_pengaturanMouseClicked
+
+    private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
+
+        maindasboard main1 = (maindasboard)SwingUtilities.getWindowAncestor(this);
+        main1.dispose();
+        new Main().setVisible(true);
+    }//GEN-LAST:event_btn_logoutMouseClicked
+
+    private void btn_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseEntered
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout1.png")));
+    }//GEN-LAST:event_btn_logoutMouseEntered
+
+    private void btn_logoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseExited
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout3.png")));
+    }//GEN-LAST:event_btn_logoutMouseExited
+
+    private void btn_logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMousePressed
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout2.png")));
+    }//GEN-LAST:event_btn_logoutMousePressed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    jLabel6.setVisible(true);
+    btn_logout.setVisible(true);
+    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void btn_pengaturanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pengaturanMouseEntered
+    btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout2.png")));
+    }//GEN-LAST:event_btn_pengaturanMouseEntered
+
+    private void btn_pengaturanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pengaturanMouseExited
+    btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout1.png")));
+    }//GEN-LAST:event_btn_pengaturanMouseExited
+
+    private void btn_pengaturanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pengaturanMousePressed
+    btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout3.png")));
+    }//GEN-LAST:event_btn_pengaturanMousePressed
+
+    private void btn_terapkanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_terapkanMouseEntered
+    btn_terapkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/btn_terapkan2.png")));
+    }//GEN-LAST:event_btn_terapkanMouseEntered
+
+    private void btn_terapkanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_terapkanMouseExited
+    btn_terapkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/btn_terapkan1.png")));
+    }//GEN-LAST:event_btn_terapkanMouseExited
+
+    private void btn_terapkanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_terapkanMousePressed
+    btn_terapkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/btn_terapkan3.png")));
+    }//GEN-LAST:event_btn_terapkanMousePressed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        date.showPopup();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void btn_terapkanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_terapkanMouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        try {
+            
+            String str = String.valueOf(cmbNama.getSelectedItem());
+            String [] getId= str.split(",", 2);
+            User user = new UserRepository().get(Integer.valueOf(getId[1]));
+            String date = txtDate.getText();
+            Date waktuPresensi = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            Presensi presensi = new Presensi(user, waktuPresensi, pilihan);
+            boolean tambah = presensiRepo.add(presensi);
+            if(tambah){
+                Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
+        panel.showNotification();
+            }else{
+               Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di tambahkan");
+        panel.showNotification(); 
+            }
+        } catch (Exception e) {
+            Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal di tambahkan");
+        panel.showNotification(); 
+        }
+    }//GEN-LAST:event_btn_terapkanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDetail;
     private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnTambah;
+    private javax.swing.JLabel btn_logout;
+    private javax.swing.JLabel btn_pengaturan;
+    private javax.swing.JLabel btn_terapkan;
+    private view.pallet.ComboBoxSuggestion cmbNama;
+    private com.raven.datechooser.DateChooser date;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAkun1;
     private javax.swing.JLabel lblPilihan;
     private javax.swing.JLabel lblPresensi1;
+    private javax.swing.JLabel lbl_presensimulai;
+    private javax.swing.JLabel lbl_presensiterlambat;
+    private javax.swing.JLabel lbl_presensitutup;
     private view.swing.PanelShadow panelShadow1;
     private view.swing.ScrollBarCustom scrollBarCustom1;
     private view.pallet.Table table;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

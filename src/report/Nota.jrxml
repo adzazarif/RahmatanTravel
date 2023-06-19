@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="578" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ca3ee3fc-beef-432a-aee8-c125e9a518d8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="226" pageHeight="491" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ca3ee3fc-beef-432a-aee8-c125e9a518d8">
 	<property name="ireport.zoom" value="1.9487171000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="510"/>
 	<queryString>
 		<![CDATA[SELECT pemesanan.id AS id, pemesanan.tanggal AS tanggal, jamaah.nama AS namaJamaah, master_paket.nama AS nama, master_paket.harga AS harga, pemesanan.jenis_pembayaran AS jenis_pembayaran, master_paket.diskon AS diskon, pemesanan.jumlah_bayar AS jumlah_bayar, master_paket.nama AS namaPaket FROM pemesanan JOIN keberangkatan ON pemesanan.keberangkatan_id = keberangkatan.id JOIN master_paket ON keberangkatan.paket_id = master_paket.id JOIN jamaah ON pemesanan.jamaah_id = jamaah.nik ]]>
 	</queryString>

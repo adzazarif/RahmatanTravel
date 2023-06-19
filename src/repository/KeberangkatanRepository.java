@@ -150,7 +150,7 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
 
     @Override
     public boolean add(Keberangkatan keberangkatan) {
-           String sql = "INSERT INTO "+ tableName +" (`paket_id`, `tanggal`, `status`) VALUES (?, ?. ?)";
+           String sql = "INSERT INTO "+ tableName +" (`paket_id`, `tanggal`, `status`) VALUES (?, ?, ?)";
          try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement pst = koneksi.prepareStatement(sql);

@@ -16,6 +16,7 @@ import util.DateUtil;
 import view.dialog.DialogDetailKeberangkatan;
 import view.dialog.DialogEditKeberangkatan;
 import view.dialog.DialogTambahKeberangkatan;
+import view.main.Main;
 /**
  *
  * @author adzaz
@@ -29,6 +30,9 @@ public class KeberangkatanForm extends javax.swing.JPanel {
      */
     public KeberangkatanForm() {
         initComponents();
+        jPanel5.setOpaque(false);
+        jLabel6.setVisible(false);
+        btn_logout.setVisible(false);
         load_table();
         updateStatus();
     }
@@ -120,6 +124,7 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         tampilKeberangkatan2 = new view.swing.tampilKeberangkatan();
         jPanel5 = new javax.swing.JPanel();
+        btn_logout = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -208,10 +213,32 @@ public class KeberangkatanForm extends javax.swing.JPanel {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout3.png"))); // NOI18N
+        btn_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_logoutMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_logoutMousePressed(evt);
+            }
+        });
+        jPanel5.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 190, 50));
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/menu_ujung.png"))); // NOI18N
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 26, -1, 130));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 0, -1, 30));
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 24));
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 30, 170));
@@ -324,11 +351,37 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         load_table();
     }//GEN-LAST:event_btnDetailMouseClicked
 
+    private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
+
+        maindasboard main1 = (maindasboard)SwingUtilities.getWindowAncestor(this);
+        main1.dispose();
+        new Main().setVisible(true);
+    }//GEN-LAST:event_btn_logoutMouseClicked
+
+    private void btn_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseEntered
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout1.png")));
+    }//GEN-LAST:event_btn_logoutMouseEntered
+
+    private void btn_logoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseExited
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout3.png")));
+    }//GEN-LAST:event_btn_logoutMouseExited
+
+    private void btn_logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMousePressed
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout2.png")));
+    }//GEN-LAST:event_btn_logoutMousePressed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    jLabel6.setVisible(true);
+    btn_logout.setVisible(true);
+    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu.png")));
+    }//GEN-LAST:event_jLabel5MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDetail;
     private javax.swing.JLabel btnEdit;
     private javax.swing.JLabel btnTambah;
+    private javax.swing.JLabel btn_logout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;

@@ -141,13 +141,13 @@ public class Login extends javax.swing.JPanel {
         gif1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/KaabahAnimation.gif"))); // NOI18N
         jPanel1.add(gif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 520, 450));
 
-        jLabel1.setText("Presensi");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/clock_button presensi.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 5, -1, 30));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/bg login1.png"))); // NOI18N
         jPanel1.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
