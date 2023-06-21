@@ -31,6 +31,7 @@ import repository.PengeluaranOperasionalRepository;
 import repository.PengeluaranRepository;
 import util.Conn;
 import view.dialog.DialogDetailPemesanan;
+import view.dialog.DialogFilterLaporan;
 import view.dialog.DialogRekapLaporan;
 import view.main.Main;
 import view.main.maindasboard;
@@ -42,6 +43,8 @@ import view.main.maindasboard;
 public class LaporanForm extends javax.swing.JPanel {
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private String pilihan;
+        public static String dateStart = "";
+    public static String dateEnd = "";
     PengeluaranOperasionalRepository pengeluaranOperasionalRepo = new PengeluaranOperasionalRepository();
     PengeluaranRepository pengeluaranRepo = new PengeluaranRepository();
     PemesananRepository pemesananRepo = new PemesananRepository();
@@ -57,10 +60,22 @@ jPanel5.setOpaque(false);
         btn_logout.setVisible(false);
         setChartBar();
         setChartLine();
+        setValueDate();
+        System.out.println(dateEnd);
+        panelFilter.setVisible(false);
         panelTable.setVisible(false);
         panelKeuntungan.setVisible(false);
         panelPengeluaran.setVisible(false);
     }
+    
+    public void setValueDate(){
+        lblStart.setText(dateStart);
+        lblEnd.setText(dateEnd);
+//        if(pilihan.equals("pemasukan")){
+//            loadTablePemasukan();
+//        }else if(pilihan.equals(pengeluaran))
+    }
+    
  public void setChartBar(){
         chartBar.addLegend("pemasukan", new Color(245, 189, 135));
         chartBar.addLegend("pengeluaran", new Color(135, 189, 245));
@@ -117,8 +132,6 @@ jPanel5.setOpaque(false);
             model.addColumn("Tanggal");
             model.addColumn("Deskripsi");
          
-            
-          
            
            try {
              for(PengeluaranOperasional res:pengeluaranOperasionalRepo.get()){
@@ -240,10 +253,8 @@ jPanel5.setOpaque(false);
             model.addColumn("status");
             model.addColumn("Pemasukan");
             
-            int no = 1;
-           
-           try {
-             for(Pemesanan res:pemesananRepo.get()){
+                   try {
+                       for(Pemesanan res:pemesananRepo.get()){
                 model.addRow(new Object[]{
                     res.getId(),
                     res.getJamaah().getNama(),
@@ -253,12 +264,43 @@ jPanel5.setOpaque(false);
                     res.getStatus(),
                     nf.format(res.getJumlahBayar()),
                 });
-           }
-             table.setModel(model);
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
+                }
+                table.setModel(model);
+                   } catch (Exception e) {
+                   }
+      
+
     }
+         public void loadTablePemasukanFilter(){
+            DefaultTableModel model = new DefaultTableModel();   
+            model.addColumn("Id");      
+            model.addColumn("Nama");
+            model.addColumn("Paket");
+            model.addColumn("Tanggal");
+            model.addColumn("Jenis Pembayaran");
+            model.addColumn("status");
+            model.addColumn("Pemasukan");
+            
+                    try {
+                         for(Pemesanan res:pemesananRepo.getPemesananFilter(dateStart, dateEnd)){
+                model.addRow(new Object[]{
+                    res.getId(),
+                    res.getJamaah().getNama(),
+                    res.getKeberangkatan().getPaket().getNama(),
+                    res.getTanggal(),
+                    res.getJenisPembayaran(),
+                    res.getStatus(),
+                    nf.format(res.getJumlahBayar()),
+                });
+                } 
+                   table.setModel(model);
+                   } catch (Exception e) {
+                      e.printStackTrace();
+                   }
+      
+
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,6 +310,12 @@ jPanel5.setOpaque(false);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelFilter = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblStart = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lblEnd = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         panelTable = new javax.swing.JPanel();
         panelShadow1 = new view.swing.PanelShadow();
@@ -304,6 +352,52 @@ jPanel5.setOpaque(false);
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
+
+        panelFilter.setBackground(new Color(0,0,0,0));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button filter.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icon tanggal.png"))); // NOI18N
+
+        lblStart.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel13.setText("-");
+
+        lblEnd.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout panelFilterLayout = new javax.swing.GroupLayout(panelFilter);
+        panelFilter.setLayout(panelFilterLayout);
+        panelFilterLayout.setHorizontalGroup(
+            panelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFilterLayout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(lblStart, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel13)
+                .addGap(21, 21, 21)
+                .addComponent(lblEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelFilterLayout.setVerticalGroup(
+            panelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFilterLayout.createSequentialGroup()
+                .addGroup(panelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblStart, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13))
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttondetaill.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -407,9 +501,9 @@ jPanel5.setOpaque(false);
             panelGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrafikLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chartBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(chartBar, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(panelShadow3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(9, 9, 9))
         );
         panelGrafikLayout.setVerticalGroup(
@@ -420,7 +514,7 @@ jPanel5.setOpaque(false);
             .addGroup(panelGrafikLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(chartBar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelPengeluaran.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -577,12 +671,10 @@ jPanel5.setOpaque(false);
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelGrafik, javax.swing.GroupLayout.DEFAULT_SIZE, 1340, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 1050, Short.MAX_VALUE))
+                            .addComponent(panelGrafik, javax.swing.GroupLayout.DEFAULT_SIZE, 1345, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -597,16 +689,20 @@ jPanel5.setOpaque(false);
                                         .addComponent(btnKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(iconPilihan))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addGap(55, 55, 55))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel4)
-                                        .addGap(55, 55, 55))
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addComponent(panelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(panelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1354, Short.MAX_VALUE))
+                        .addComponent(panelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1359, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -616,7 +712,7 @@ jPanel5.setOpaque(false);
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -632,12 +728,20 @@ jPanel5.setOpaque(false);
                             .addComponent(iconPilihan))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(panelKeuntungan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panelPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(panelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(panelGrafik, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(558, 558, 558))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -647,6 +751,7 @@ jPanel5.setOpaque(false);
         pilihan = "keuntungan";
         panelGrafik.setVisible(false);
         loadTableKeuntunganBersih();
+        panelFilter.setVisible(false);
         panelTable.setVisible(true);
         panelKeuntungan.setVisible(true);
         panelPengeluaran.setVisible(false);
@@ -658,6 +763,7 @@ jPanel5.setOpaque(false);
         pilihan = "pengeluaran";
         panelGrafik.setVisible(false);
         loadTableOperasional();
+        panelFilter.setVisible(false);
         panelTable.setVisible(true);
         panelPengeluaran.setVisible(true);
         panelKeuntungan.setVisible(false);
@@ -666,9 +772,14 @@ jPanel5.setOpaque(false);
 
     private void btnPemasukanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPemasukanMouseClicked
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan pemasukan.png")));
-        pilihan = "masukan";
+        pilihan = "pemasukan";
         panelGrafik.setVisible(false);
-        loadTablePemasukan();
+         if(dateEnd.equals("")&&dateStart.equals("")){
+            loadTablePemasukan();
+        }else{
+            loadTablePemasukanFilter();
+        }
+        panelFilter.setVisible(true);
         panelTable.setVisible(true);
         panelPengeluaran.setVisible(false);
         panelKeuntungan.setVisible(false);
@@ -678,6 +789,7 @@ jPanel5.setOpaque(false);
         iconPilihan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/laporan grafik.png")));
         pilihan = "grafik";
         panelTable.setVisible(false);
+        panelFilter.setVisible(false);
         panelGrafik.setVisible(true);
         panelPengeluaran.setVisible(false);
         panelKeuntungan.setVisible(false);
@@ -775,6 +887,19 @@ jPanel5.setOpaque(false);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button_menu2.png")));
     }//GEN-LAST:event_jLabel10MouseEntered
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogFilterLaporan filter = new DialogFilterLaporan(main);
+        filter.showPopUp();
+        setValueDate();
+        if(dateEnd.equals("")&&dateStart.equals("")){
+            loadTablePemasukan();
+        }else{
+            loadTablePemasukanFilter();
+        }
+        
+    }//GEN-LAST:event_jLabel7MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnGrafik;
@@ -791,18 +916,24 @@ jPanel5.setOpaque(false);
     private javax.swing.JLabel iconPilihan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEnd;
     private javax.swing.JLabel lblIconOpsiKeuntungan;
     private javax.swing.JLabel lblIconOpsiPengeluaran;
+    private javax.swing.JLabel lblStart;
+    private javax.swing.JPanel panelFilter;
     private javax.swing.JPanel panelGrafik;
     private javax.swing.JPanel panelKeuntungan;
     private javax.swing.JPanel panelPengeluaran;

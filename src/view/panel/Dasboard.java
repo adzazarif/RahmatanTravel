@@ -15,14 +15,20 @@ import javax.swing.SwingUtilities;
 import repository.DashboardRepository;
 import repository.KeberangkatanRepository;
 import repository.PemesananRepository;
+import util.DateUtil;
+import view.dialog.DialogFilterDashboard;
+import view.dialog.DialogTambahBarang;
 import view.main.Main;
 import view.main.maindasboard;
 
 public class Dasboard extends javax.swing.JPanel {
+    DateUtil dateUtil = new DateUtil();
     DashboardRepository dashboardRepo = new DashboardRepository();
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     PemesananRepository pemesananRepo = new PemesananRepository();
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
+    public static String dateStart = "";
+    public static String dateEnd = "";
     /**
      * Creates new form Dasboard1
      */
@@ -36,9 +42,25 @@ public class Dasboard extends javax.swing.JPanel {
         setValue();
     }
     
-    public void setValue(){
+    public void getAll(){
         lblPemasukan.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getIncome())));
         lblPengeluaran.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getExpenditure())));
+        lblEnd.setText(dateUtil.dateNow());
+        lblStart.setText(pemesananRepo.getFirstDate());
+    }
+    public void getFilter(){
+        lblPemasukan.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getIncomeFilter(dateStart, dateEnd))));
+                lblPengeluaran.setText("Rp. "+String.valueOf(nf.format(dashboardRepo.getExpenditureFilter(dateStart, dateEnd))));
+                       lblEnd.setText(dateEnd);
+        lblStart.setText(dateStart);
+    }
+    public void setValue(){
+        
+        if(dateEnd.equals("") && dateStart.equals("")){
+            getAll();
+        }else{
+            getFilter();
+        }
         lblToday.setText(String.valueOf(dashboardRepo.getIncomePerDay()));
         
         for(Keberangkatan k:keberangkatanRepo.getOrderByDesc()){
@@ -86,6 +108,11 @@ public class Dasboard extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblStart = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblEnd = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 249, 243));
 
@@ -146,7 +173,7 @@ public class Dasboard extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -212,6 +239,22 @@ public class Dasboard extends javax.swing.JPanel {
         });
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, 30));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button filter.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        lblStart.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icon tanggal.png"))); // NOI18N
+
+        lblEnd.setFont(new java.awt.Font("Quicksand Bold", 0, 18)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel13.setText("-");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,7 +268,19 @@ public class Dasboard extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblStart, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13)
+                        .addGap(21, 21, 21)
+                        .addComponent(lblEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -233,9 +288,17 @@ public class Dasboard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
@@ -300,16 +363,26 @@ public class Dasboard extends javax.swing.JPanel {
         btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttonlogout2.png")));
     }//GEN-LAST:event_btn_logoutMousePressed
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        DialogFilterDashboard filter = new DialogFilterDashboard(main);
+        filter.showPopUp();
+        setValue();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_logout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -318,10 +391,12 @@ public class Dasboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblBerapaOrang;
+    private javax.swing.JLabel lblEnd;
     private javax.swing.JLabel lblHarga;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblPemasukan;
     private javax.swing.JLabel lblPengeluaran;
+    private javax.swing.JLabel lblStart;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JLabel lblToday;
     private view.swing.tampilPaketUmrohDasboard tampilPaketUmrohDasboard1;

@@ -69,9 +69,39 @@ public class DashboardRepository {
         return total;
     }
     
+    public int getIncomeFilter(String dateStart, String dateEnd){
+          int total = 0;
+        String queryCek = "SELECT SUM(jumlah_bayar) AS jml FROM pemesanan WHERE tanggal BETWEEN '"+dateStart+"' AND '"+dateEnd+"'";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            total = res.getInt("jml");
+        }
+        } catch (Exception e) {
+        }
+        return total;
+    }
+    
     public int getExpenditure(){
           int total = 0;
         String queryCek = "SELECT SUM(pengeluaran.total_pengeluaran) + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional) AS pengeluaran FROM pengeluaran";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            total = res.getInt("pengeluaran");
+        }
+        } catch (Exception e) {
+        }
+        return total;
+    }
+    
+    public int getExpenditureFilter(String dateStart, String dateEnd){
+          int total = 0;
+        String queryCek = "SELECT SUM(pengeluaran.total_pengeluaran) + (SELECT SUM(pengeluaran_operasional.jumlah) AS pengeluaran_op FROM pengeluaran_operasional WHERE tanggal BETWEEN '"+dateStart+"' AND '"+dateEnd+"') AS pengeluaran FROM pengeluaran WHERE tanggal BETWEEN '"+dateStart+"' AND '"+dateEnd+"'";
         try {
         Connection koneksi = (Connection) Conn.configDB();
         PreparedStatement pst = koneksi.prepareStatement(queryCek);

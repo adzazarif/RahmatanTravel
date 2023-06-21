@@ -78,6 +78,24 @@ public class PemesananRepository implements Repository<Pemesanan>{
         return pemesanan;  
     }
     
+       public List<Pemesanan> getPemesananFilter(String dateStart,String dateEnd){
+         String sql = "SELECT * FROM " + tableName + " WHERE tanggal BETWEEN '"+dateStart+"' AND '"+dateEnd+"'";
+        List<Pemesanan> pemesanan = new ArrayList<>();
+        try {
+             Connection koneksi = (Connection)Conn.configDB();
+            PreparedStatement stm = koneksi.prepareStatement(sql);
+            ResultSet res = stm.executeQuery();
+            
+            while(res.next()) {
+                pemesanan.add(mapToEntity(res));
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+
+        return pemesanan;  
+    }
+    
      public List<Pemesanan> getByIdJamaah(String idJamaah){
          String sql = "SELECT * FROM " + tableName + " WHERE jamaah_id = ?";
         List<Pemesanan> pemesanan = new ArrayList<>();
@@ -205,6 +223,22 @@ public class PemesananRepository implements Repository<Pemesanan>{
         }
         return total;
     }
+    
+    public String getFirstDate(){
+         String date = "";
+        String queryCek = "SELECT tanggal FROM pemesanan ORDER BY tanggal ASC";
+        try {
+        Connection koneksi = (Connection) Conn.configDB();
+        PreparedStatement pst = koneksi.prepareStatement(queryCek);
+        ResultSet res = pst.executeQuery();
+        if(res.next()){
+            date = res.getString("tanggal");
+        }
+        } catch (Exception e) {
+        }
+        return date;
+    }
+    
     private Pemesanan mapToEntity(ResultSet result) throws SQLException {
          Pemesanan pemesanan = new Pemesanan(
                  new KeberangkatanRepository().get(result.getInt("keberangkatan_id")),
