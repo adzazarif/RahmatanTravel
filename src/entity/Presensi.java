@@ -17,8 +17,8 @@ public class Presensi implements Entity{
     private Date waktuPresensi;
     public static String tableName = "absensi";
     public static String StartPresensi = "11:04:00";
-    public static String EndPresensi = "11:06:30";
-    public static String LatePresensi = "11:05:00";
+    public static String EndPresensi = "14:06:30";
+    public static String LatePresensi = "12:05:00";
     public Presensi(){}
     
     public Presensi(User user, Date waktuPresensi, String keterangan){

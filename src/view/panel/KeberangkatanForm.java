@@ -17,13 +17,14 @@ import view.dialog.DialogDetailKeberangkatan;
 import view.dialog.DialogEditKeberangkatan;
 import view.dialog.DialogTambahKeberangkatan;
 import view.main.Main;
+import view.swing.Notification;
 /**
  *
  * @author adzaz
  */
 public class KeberangkatanForm extends javax.swing.JPanel {
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
-    public static int id;
+    public static int idK;
     private String menuActive = "umrah";
     /**
      * Creates new form Keberangkatan
@@ -33,8 +34,9 @@ public class KeberangkatanForm extends javax.swing.JPanel {
         jPanel5.setOpaque(false);
         jLabel6.setVisible(false);
         btn_logout.setVisible(false);
-        load_table();
+//        load_table();
         updateStatus();
+        System.out.println(idK);
     }
     
     public void updateStatus(){
@@ -354,10 +356,13 @@ public class KeberangkatanForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-             boolean delete = keberangkatanRepo.delete(id);
+             boolean delete = keberangkatanRepo.delete(idK);
              maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
         if(delete){
-            main.showform(new KeberangkatanForm());
+//            
+
+             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di Hapus");
+        panel.showNotification();
             System.out.println("berhasil");
 //            load_table();
         }else{

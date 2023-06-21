@@ -47,6 +47,7 @@ import view.swing.Notification;
  */
 public class DialogTambahPemesanan extends Dialog {
     private String menu = "";
+    private int totalTagihan;
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     private int idKeberangkatan;
     private List<Keberangkatan> keberangkatanList = new ArrayList<>();
@@ -291,10 +292,10 @@ public class DialogTambahPemesanan extends Dialog {
           lblBerangkat.setText(kb.getTanggal().toString());
           lblTotalOrang.setText(String.valueOf(jumlahJamaah));
           lblHarga.setText(String.valueOf(nf.format(kb.getPaket().getHarga())));
-          lblMinimDp.setText(String.valueOf(nf.format(kb.getPaket().getMinimDp())));
+          lblMinimDp.setText(String.valueOf(kb.getPaket().getMinimDp()));
           lblTotalHarga.setText(String.valueOf(nf.format(kb.getPaket().getHarga())));
           lblDiskon.setText(String.valueOf(nf.format(kb.getPaket().getDiskon())));
-          int totalTagihan = kb.getPaket().getHarga() - kb.getPaket().getDiskon();
+          totalTagihan = kb.getPaket().getHarga() - kb.getPaket().getDiskon();
           lblTotalTagihan.setText(String.valueOf(nf.format(totalTagihan)));
         }
         } catch (Exception e) {
@@ -325,7 +326,7 @@ public class DialogTambahPemesanan extends Dialog {
         int bayar =0;
         int minimDp = Integer.parseInt(lblMinimDp.getText());
         
-            int totalTagihan = Integer.parseInt(lblTotalTagihan.getText());
+            int totalTagihanw = totalTagihan;
         String status = "";
         if(jenisPembayaran.equals("cash")){
             bayar = Integer.valueOf(txtBayar.getText());
@@ -349,7 +350,7 @@ public class DialogTambahPemesanan extends Dialog {
         String idJamaah = lblNik.getText();
         Keberangkatan keberangkatan = new KeberangkatanRepository().get(idKeberangkatan);
         Jamaah jamaah = new JamaahRepository().get(idJamaah);
-        Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihan, bayar);
+        Pemesanan pemesanan = new Pemesanan(keberangkatan, jamaah, jenisPembayaran, status, tanggal, totalTagihanw, bayar);
         
         boolean tambah = pemesananRepo.add(pemesanan);
         if(tambah){
@@ -378,6 +379,7 @@ public class DialogTambahPemesanan extends Dialog {
         panel.showNotification();
         }
         } catch (Exception e) {
+            e.printStackTrace();
             maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
                          Notification panel = new Notification(main, Notification.Type.WARNING, Notification.Location.BOTTOM_RIGHT, "Data gagal ditambahkan");
         panel.showNotification();

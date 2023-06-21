@@ -20,7 +20,7 @@ public class DialogEditPaket extends Dialog {
     PaketRepository paketRepo = new PaketRepository();
     Paket pkt = new Paket();
     PaketForm pf = new PaketForm();
-    private int id = PaketForm.id;
+    public static int idPak ;
     /**
      * Creates new form DialogEditPaket
      */
@@ -28,11 +28,12 @@ public class DialogEditPaket extends Dialog {
         super(fram);
         initComponents();
         setValue();
+        System.out.println(idPak);
     }
     public void setValue(){
     
    
-    for(Paket paket:paketRepo.getByid(id)){
+    for(Paket paket:paketRepo.getByid(idPak)){
          String menu = paket.getMenu();
         String start = paket.getStart();
         String harga = String.valueOf(paket.getHarga());

@@ -95,7 +95,7 @@ public class JamaahForm extends javax.swing.JPanel {
             @Override
             public void delete(int row) {
                 String idJ = table.getValueAt(row, 0).toString();
-                int response = JOptionPane.showConfirmDialog(null, "Jika anda menghapus data paket maka semua data yang berelasi akan terhapus", "apa cobak?", JOptionPane.YES_NO_OPTION);
+                int response = JOptionPane.showConfirmDialog(null, "Apakah yakin menghapus", "apa cobak?", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 boolean delete = jamaahRepo.delete(idJ);
                

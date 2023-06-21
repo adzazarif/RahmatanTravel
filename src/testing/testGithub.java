@@ -138,7 +138,7 @@ import util.DateUtil;
 //        System.out.println(db.getIncome());
 
         PaketRepository paketRepo = new PaketRepository();
-        boolean a = paketRepo.delete(21);
+        boolean a = paketRepo.delete(5);
         if(a){
             System.out.println("asd");
         }else{

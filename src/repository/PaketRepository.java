@@ -179,7 +179,8 @@ public class PaketRepository implements Repository<Paket>{
                  Statement stm = koneksi.createStatement();
             ResultSet res = stm.executeQuery(cekId);
             if(res.next()){
-                int idKeberangkatan = res.getInt("idKeberangkatan");
+                try {
+                    int idKeberangkatan = res.getInt("idKeberangkatan");
                 int idPemesanan = res.getInt("idPemesanan");
                 int idPengeluaran = res.getInt("idPengeluaran");
                 int idDetailPengeluaran = res.getInt("idDetailPengeluaran");
@@ -191,18 +192,21 @@ public class PaketRepository implements Repository<Paket>{
                 String sqldelKeberangkatan = "DELETE FROM keberangkatan WHERE id = "+idKeberangkatan;
                  String sqlDelPaket = "DELETE FROM "+ tableName +" WHERE id = "+id;
                  PreparedStatement pstDelDetailPengeluaran = koneksi.prepareStatement(sqlDelDetailPengeluaran);    
-            pstDelDetailPengeluaran.executeUpdate();
+            pstDelDetailPengeluaran.execute();
             PreparedStatement pstDelDetailPemesanan = koneksi.prepareStatement(sqlDelDetailPemesanan);    
-            pstDelDetailPemesanan.executeUpdate();
+            pstDelDetailPemesanan.execute();
                 PreparedStatement pstDelPengeluaran = koneksi.prepareStatement(sqlDelPengeluaran);    
-            pstDelPengeluaran.executeUpdate();
+            pstDelPengeluaran.execute();
             PreparedStatement pstDelPemesanan = koneksi.prepareStatement(sqlDelPemesanan);    
-            pstDelPemesanan.executeUpdate();
+            pstDelPemesanan.execute();
                 PreparedStatement pstDelKeberangkatan = koneksi.prepareStatement(sqldelKeberangkatan);    
-            pstDelKeberangkatan.executeUpdate();
+            pstDelKeberangkatan.execute();
             PreparedStatement pstDelPaket = koneksi.prepareStatement(sqlDelPaket);    
-            pstDelPaket.executeUpdate();
+            pstDelPaket.execute();
             return true;
+                } catch (Exception e) {
+                }
+                
             }
 
 

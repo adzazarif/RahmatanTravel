@@ -23,7 +23,7 @@ import view.dialog.DialogScanBarcode;
 import view.dialog.DialogTambahCicilan;
 import view.dialog.DialogTambahPemesanan;
 import view.main.Main;
-import static view.panel.KeberangkatanForm.id;
+//import static view.panel.KeberangkatanForm.id;
 /**
  *
  * @author adzaz
@@ -179,7 +179,7 @@ public class PemesananForm extends javax.swing.JPanel {
             }
         });
 
-        btnTambahCicilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/buttondetaill.png"))); // NOI18N
+        btnTambahCicilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button cicilan (2).png"))); // NOI18N
         btnTambahCicilan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTambahCicilanMouseClicked(evt);

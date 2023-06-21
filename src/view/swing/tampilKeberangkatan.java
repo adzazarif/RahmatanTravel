@@ -31,7 +31,7 @@ public class tampilKeberangkatan extends javax.swing.JPanel {
     }
 public void getpanel(){
         try{
-            String sql = "Select * from keberangkatan";
+            String sql = "Select * from keberangkatan order by tanggal desc";
             Connection con =(Connection)util.Conn.configDB();
             PreparedStatement psw = con.prepareStatement(sql);
             ResultSet res = psw.executeQuery();
@@ -42,7 +42,7 @@ public void getpanel(){
             container = new JPanel();
             for(Keberangkatan p:keberangkatanrepo.get()){    
 //            while(res.next()){
-                final String id_barang = String.valueOf(p.getId());
+//                final String id_barang = String.valueOf(p.getId());
                 String nama_paket = p.getPaket().getMenu();
                 String hargapaket123 = String.valueOf(p.getPaket().getHarga());
                 ItemKeberangkatan pnn = new ItemKeberangkatan();
@@ -81,7 +81,7 @@ public void getpanel(){
                     @Override
                     public void mouseEntered(MouseEvent e){
                         super.mouseEntered(e);
-                        KeberangkatanForm.id = p.getId();
+                        KeberangkatanForm.idK = p.getId();
                         
                     }
                 }
@@ -90,8 +90,8 @@ public void getpanel(){
                     @Override
                     public void selected(int index) {
                         clearMenu(index);
-                        nomorpanel1 = id_barang;
-                        KeberangkatanForm.id = Integer.parseInt(nomorpanel);
+                        KeberangkatanForm.idK = p.getId();
+                        System.out.println(p.getId());
                     }
                 });
                 panellist.add(pnn);

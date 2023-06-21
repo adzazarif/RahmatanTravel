@@ -17,6 +17,7 @@ import view.event.EventMenuSelected;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import repository.PaketRepository;
+import view.dialog.DialogEditPaket;
 import view.panel.PaketForm;
 import static view.swing.ItemPaket.namapaket123;
 import static view.swing.ItemPaket.infopaket;
@@ -95,6 +96,7 @@ public class tampilscroolPaket extends javax.swing.JPanel {
                     public void selected(int index) {
                         clearMenu(index);
                         PaketForm.id = p.getId();   
+                        DialogEditPaket.idPak = p.getId();
                         System.out.println(p.getId());
                     }
                 });

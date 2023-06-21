@@ -40,16 +40,32 @@ public class KeberangkatanRepository implements Repository<Keberangkatan>{
         }
         return keberangkatan;
     }
+    public List<Keberangkatan> getOrderDes() {
+        String sql = "SELECT * FROM "+tableName+" ORDER BY tanggal DESC";
+        List<Keberangkatan> keberangkatan = new ArrayList<>();
+        
+        try {
+            Connection koneksi = (Connection)Conn.configDB();
+            Statement stm = koneksi.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+            
+            while(res.next()){
+                keberangkatan.add(mapToEntity(res));
+            }
+        } catch (Exception e) {
+        }
+        return keberangkatan;
+    }
     
      public List<Keberangkatan> getOrderByDesc() {
-        String sql = "SELECT * FROM "+tableName+" ORDER BY tanggal DESC LIMIT 1";
+        String sql = "SELECT * FROM "+tableName+" WHERE status = 'Belum Berangkat' ORDER BY tanggal DESC";
         List<Keberangkatan> keberangkatan = new ArrayList<>();
         
         try {
             Connection koneksi = (Connection)Conn.configDB();
             PreparedStatement stm = koneksi.prepareStatement(sql);
             ResultSet res = stm.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 keberangkatan.add(mapToEntity(res));
             }
         } catch (Exception e) {

@@ -153,7 +153,7 @@
     <Component class="javax.swing.JLabel" name="btnTambahCicilan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imgbutton/buttondetaill.png"/>
+          <Image iconType="3" name="/view/imgbutton/button cicilan (2).png"/>
         </Property>
       </Properties>
       <Events>

@@ -295,7 +295,7 @@ public class Pegawai extends javax.swing.JPanel {
         btn_terapkan = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
         cmbNama = new view.pallet.ComboBoxSuggestion();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbStatus = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -538,9 +538,9 @@ public class Pegawai extends javax.swing.JPanel {
         jPanel6.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 230, 40));
         jPanel6.add(cmbNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 320, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hadir", "Terlambat", "Izin", "Sakit" }));
-        jComboBox1.setBorder(null);
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 320, 50));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hadir", "Terlambat", "Izin", "Sakit" }));
+        cmbStatus.setBorder(null);
+        jPanel6.add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 320, 50));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imgbutton/button date.png"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -743,8 +743,9 @@ public class Pegawai extends javax.swing.JPanel {
             String [] getId= str.split(",", 2);
             User user = new UserRepository().get(Integer.valueOf(getId[1]));
             String date = txtDate.getText();
+            String Ket = String.valueOf(cmbStatus.getSelectedItem());
             Date waktuPresensi = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            Presensi presensi = new Presensi(user, waktuPresensi, pilihan);
+            Presensi presensi = new Presensi(user, waktuPresensi, Ket);
             boolean tambah = presensiRepo.add(presensi);
             if(tambah){
                 Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di tambahkan");
@@ -786,8 +787,8 @@ public class Pegawai extends javax.swing.JPanel {
     private javax.swing.JLabel btn_pengaturan;
     private javax.swing.JLabel btn_terapkan;
     private view.pallet.ComboBoxSuggestion cmbNama;
+    private javax.swing.JComboBox<String> cmbStatus;
     private com.raven.datechooser.DateChooser date;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

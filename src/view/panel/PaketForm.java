@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import repository.PaketRepository;
 import view.dialog.DialogEditPaket;
 import view.main.Main;
+import view.swing.Notification;
 import view.swing.tampilscroolPaket;
 
 /**
@@ -313,8 +314,11 @@ public class PaketForm extends javax.swing.JPanel {
     private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
         boolean delete = paketRepo.delete(id);
         if(delete){
-            System.out.println("berhasil");
+            maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+             Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Data berhasil di Hapus");
+        panel.showNotification();
             setvalue();
+            main.showform(new PaketForm());
         }else{
             System.out.println("gagal");
         }

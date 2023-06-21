@@ -24,7 +24,7 @@ public class DialogDetailKeberangkatan extends Dialog {
     KeberangkatanRepository keberangkatanRepo = new KeberangkatanRepository();
     PaketRepository paketRepo = new PaketRepository();
     PemesananRepository pemesananRepo = new PemesananRepository();
-    private int id = KeberangkatanForm.id;
+    private int id = KeberangkatanForm.idK;
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**
      * Creates new form DialogDetailKeberangkatan

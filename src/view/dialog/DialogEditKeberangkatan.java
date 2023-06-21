@@ -30,7 +30,7 @@ public class DialogEditKeberangkatan extends Dialog {
     PaketRepository paketRepo = new PaketRepository();
     private List<Paket> pakets = new ArrayList<>();
     private String menu = "";
-    private int id = KeberangkatanForm.id;
+    private int id = KeberangkatanForm.idK;
     DateUtil dateUtil = new DateUtil();
     NumberFormat nf = NumberFormat.getNumberInstance(new Locale("in", "ID"));
     /**

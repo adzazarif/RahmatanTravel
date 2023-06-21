@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 import repository.PresensiRepository;
 import repository.UserRepository;
 import util.DateUtil;
+import view.main.Mainpresensi;
 import view.main.maindasboard;
 import view.swing.Notification;
 
@@ -62,7 +63,7 @@ public class DialogTambahPresensi extends Dialog {
                 txtIDActionPerformed(evt);
             }
         });
-        getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 90, -1));
+        getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 90, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/tambah presensi.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -76,7 +77,7 @@ public class DialogTambahPresensi extends Dialog {
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         String idCard = txtID.getText();
-        maindasboard main =(maindasboard)SwingUtilities.getWindowAncestor(this);
+        Mainpresensi main =(Mainpresensi)SwingUtilities.getWindowAncestor(this);
         try {
             String timeNow = dateUtil.timeNow();
             String dateTime = dateUtil.typeDateTime();
@@ -103,7 +104,9 @@ public class DialogTambahPresensi extends Dialog {
            }else{
                 boolean checkData = presensiRepo.checkData(idUser,dateUtil.dateStart(),dateUtil.dateEnd());
             if(checkData){
-                System.out.println("Sudah absen");
+                Notification panel = new Notification(main, Notification.Type.SUCCESS, Notification.Location.BOTTOM_RIGHT, "Sudah presensi");
+        panel.showNotification();
+        closeMessage();
             }else{
                 User user = new UserRepository().get(idUser);
             Presensi presensi = new Presensi(user, date, keterangan);
